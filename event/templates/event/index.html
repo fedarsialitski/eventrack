@@ -1,0 +1,153 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Eventrack – Track Upcoming Live Concerts, Tour Dates and Festivals</title>
+  <meta name="description" content="Artist, Event, Festivals, Live Concerts, Music, Musician, Tour Dates, Venue" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+  <link rel="apple-touch-icon" href="{% static 'event/images/icon.png' %}">
+  <meta name="apple-mobile-web-app-title" content="Flatkit">
+  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" sizes="96x96" href="{% static 'event/images/icon.png' %}">
+
+  <!-- style -->
+  <link rel="stylesheet" href="{% static 'event/css/animate.css/animate.min.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'event/css/glyphicons/glyphicons.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'event/css/font-awesome/css/font-awesome.min.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'event/css/material-design-icons/material-design-icons.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'event/css/bootstrap/dist/css/bootstrap.min.css' %}" type="text/css" />
+
+  <!-- build:css css/styles/app.min.css -->
+  <link rel="stylesheet" href="{% static 'event/css/styles/app.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'event/css/styles/style.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'event/css/styles/font.css' %}" type="text/css" />
+
+  <!-- endbuild -->
+</head>
+<body>
+  <div class="app dk" id="app">
+
+<!-- ############ LAYOUT START-->
+
+  <!-- aside -->
+  <div id="aside" class="app-aside modal fade nav-dropdown">
+    <!-- fluid app aside -->
+    <div class="left navside white dk" data-layout="column">
+      <div class="navbar no-radius">
+        <!-- brand -->
+        <a href="{% url 'event:index' %}" class="navbar-brand md ">
+        	<img src="{% static 'event/images/logo.png' %}" alt=".">
+        </a>
+        <!-- / brand -->
+      </div>
+      <div data-flex class="hide-scroll">
+          <nav class="scroll nav-stacked nav-active-primary">
+
+            <ul class="nav" data-ui-nav>
+              <li class="nav-header hidden-folded">
+                <span class="text-xs text-muted">Main</span>
+              </li>
+              <li>
+                <a href="{% url 'event:index' %}">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      home
+                    </i>
+                  </span>
+                  <span class="nav-text">Home</span>
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'event:artist' %}">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      portrait
+                    </i>
+                  </span>
+                  <span class="nav-text">Artist</span>
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'event:event' %}">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      event_note
+                    </i>
+                  </span>
+                  <span class="nav-text">Event</span>
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'event:venue' %}">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      place
+                    </i>
+                  </span>
+                  <span class="nav-text">Venue</span>
+                </a>
+              </li>
+              <li>
+                <a data-toggle="modal" data-target="#search-modal">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      search
+                    </i>
+                  </span>
+                  <span class="nav-text">Search</span>
+                </a>
+              </li>
+
+
+              <li class="nav-header hidden-folded m-t">
+                <span class="text-xs text-muted">Profile</span>
+              </li>
+              <li>
+                <a href="{% url 'event:profile' %}">
+                  <span class="nav-label">
+                    <b class="label">8</b>
+                  </span>
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      event_available
+                    </i>
+                  </span>
+                  <span class="nav-text">Events</span>
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'event:profile' %}">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      queue_music
+                    </i>
+                  </span>
+                  <span class="nav-text">Artists</span>
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'event:profile' %}">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      star
+                    </i>
+                  </span>
+                  <span class="nav-text">Favorites</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+      </div>
+    </div>
+  </div>
+ </div>
+</body>
+</html>
