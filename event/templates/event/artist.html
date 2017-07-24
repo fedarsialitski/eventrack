@@ -1,0 +1,57 @@
+{% extends 'event/index.html' %}
+
+{% block content %}
+
+<div class="app-body light" id="view">
+
+<!-- ############ PAGE START-->
+<div class="page-content">
+  <div class="row-col">
+    <div class="col-lg-9 b-r no-border-md">
+      <div class="padding">
+
+
+        <div class="page-title m-b">
+          <h1 class="inline m-a-0">Artists</h1>
+          <div class="dropdown inline">
+            <button class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">By name</button>
+            <div class="dropdown-menu">
+              <a href="#" class="dropdown-item active">
+                By name
+              </a>
+              <a href="#" class="dropdown-item">
+                Events
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="row row-lg">
+              {% for artist in artists %}
+                <div class="col-xs-4 col-sm-4 col-md-3">
+                  <div class="item">
+                  <div class="item-media rounded ">
+                    <a href="artist.detail.html" class="item-media-content" style="background-image: url('images/a3.jpg');"></a>
+                  </div>
+                  <div class="item-info text-center">
+                    <div class="item-title text-ellipsis">
+                      <a href="artist.detail.html">{{artist.name}}</a>
+                      <div class="text-sm text-muted">
+                        {% if artist.events.count %}
+                          {{ artist.events.count }} events
+                        {% else %}
+                          No upcoming events
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock content %}

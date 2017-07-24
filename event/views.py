@@ -21,6 +21,13 @@ class IndexView(generic.ListView):
 class ArtistView(generic.ListView):
     model = Artist
     template_name = 'event/artist.html'
+    context_object_name = 'artists'
+
+    def get_queryset(self):
+        """
+        Return the artists
+        """
+        return Artist.objects.all()
 
 
 class EventView(generic.ListView):
