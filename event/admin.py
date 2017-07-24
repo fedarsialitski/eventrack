@@ -20,10 +20,8 @@ class EventInline(admin.StackedInline):
 
 
 class ArtistAdmin(admin.ModelAdmin):
-    fieldsets = [
-        ('Name', {'fields': ['name']}),
-    ]
     inlines = [ArtistEventsInline]
+    exclude = ('events',)
     search_fields = ['name']
 
 
