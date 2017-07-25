@@ -4210,7 +4210,7 @@ a.text-primary:hover {
 .text-primary,
 .text-primary-hover a:hover,
 .text-primary-hover .active > a {
-  color: #02b875 !important; }
+  color: #f06d35 !important; }
 
 a.warn:hover {
   background-color: #efb700; }

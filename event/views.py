@@ -25,9 +25,9 @@ class ArtistView(generic.ListView):
 
     def get_queryset(self):
         """
-        Return the artists
+        Return the first twelve artists
         """
-        return Artist.objects.all()
+        return Artist.objects.all()[:12]
 
 
 class EventView(generic.ListView):
