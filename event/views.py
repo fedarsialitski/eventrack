@@ -30,6 +30,17 @@ class ArtistView(generic.ListView):
         return Artist.objects.all()[:12]
 
 
+class ArtistDetailView(generic.DetailView):
+    model = Artist
+
+    def get_object(self):
+        """
+        Return the arist detail information
+        """
+        object = super(ArtistDetailView, self).get_object()
+        return object
+
+
 class EventView(generic.ListView):
     model = Event
     template_name = 'event/event.html'

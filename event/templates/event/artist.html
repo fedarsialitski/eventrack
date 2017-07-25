@@ -31,11 +31,11 @@
                 <div class="col-xs-4 col-sm-4 col-md-3">
                   <div class="item">
                   <div class="item-media rounded ">
-                    <a href="artist.detail.html" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                    <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
                   </div>
                   <div class="item-info text-center">
                     <div class="item-title text-ellipsis">
-                      <a href="artist.detail.html">{{artist.name}}</a>
+                      <a href="{% url 'event:artist_detail' artist.id %}">{{artist.name}}</a>
                       <div class="text-sm text-muted">
                         {% if artist.events.count %}
                           {{ artist.events.count }}

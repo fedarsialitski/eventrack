@@ -1,0 +1,49 @@
+{% extends 'event/index.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="app-body light" id="view">
+
+<!-- ############ PAGE START-->
+<div class="pos-rlt">
+  <div class="page-bg" data-stellar-ratio="2" style="background-image:url('{% if artist.image_url %}{{ artist.image_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></div>
+</div>
+<div class="page-content">
+  <div class="padding b-b">
+    <div class="row-col">
+        <div class="col-sm w w-auto-xs m-b">
+          <div class="item w rounded">
+            <div class="item-media">
+              <div class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="p-l-md no-padding-xs">
+            <div class="page-title">
+              <h1 class="inline">{{ artist.name }}</h1>
+              <label class="fa fa-star text-primary text-lg m-b v-m m-l-xs" title="Pro"></label>
+            </div>
+            <div class="item-action m-b">
+              <a class="btn btn-icon white rounded btn-share pull-right" data-toggle="modal" data-target="#share-modal"><i class="fa fa-share-alt"></i></a>
+              <span>
+                {% if artist.events.count %}
+                  {{ artist.events.count }}
+                  {% if artist.events.count == 1 %}
+                    event
+                  {% else %}
+                    events
+                  {% endif %}
+                {% else %}
+                  No upcoming events
+                {% endif %}
+              </span>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock content %}
