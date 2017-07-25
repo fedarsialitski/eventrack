@@ -1,4 +1,5 @@
 {% extends 'event/index.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -30,7 +31,7 @@
                 <div class="col-xs-4 col-sm-4 col-md-3">
                   <div class="item">
                   <div class="item-media rounded ">
-                    <a href="artist.detail.html" class="item-media-content" style="background-image: url('{{ artist.thumb_url }}');"></a>
+                    <a href="artist.detail.html" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
                   </div>
                   <div class="item-info text-center">
                     <div class="item-title text-ellipsis">
