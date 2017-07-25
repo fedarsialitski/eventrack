@@ -44,6 +44,64 @@
         </div>
     </div>
   </div>
+  <div class="row-col">
+    <div class="col-lg-9 b-r no-border-md">
+      <div class="padding">
+        <div class="nav-active-border b-primary bottom m-b-md">
+          <ul class="nav l-h-2x">
+            <li class="nav-item m-r inline">
+              <a class="nav-link active" href="#" data-toggle="tab" data-target="#tab_1">Overview</a>
+            </li>
+            <li class="nav-item m-r inline">
+              <a class="nav-link" href="#" data-toggle="tab" data-target="#tab_2">Upcoming</a>
+            </li>
+            <li class="nav-item m-r inline">
+              <a class="nav-link" href="#" data-toggle="tab" data-target="#tab_3">All</a>
+            </li>
+            <li class="nav-item m-r inline">
+              <a class="nav-link" href="#" data-toggle="tab" data-target="#tab_4">Profile</a>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content">
+          <div class="tab-pane active" id="tab_1">
+            <h5 class="m-b">Upcoming events</h5>
+            {% if artist.events.all %}
+              <div class="row item-list item-list-md item-list-li m-b" id="events">
+                {% for event in artist.events.all|slice:":4" %}
+                  {% if event.datetime|date:"c" >= now|date:"c" %}
+                    <div class="col-md-12 col-lg-6">
+                      <div class="item r" data-id="item-2" data-src="">
+                        <div class="item-media ">
+                          <a href="track.detail.html" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                        </div>
+                        <div class="item-info">
+                          <div class="item-overlay bottom text-right">
+                            <a href="#" class="btn-favorite"><i class="fa fa-star-o"></i></a>
+                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                            <div class="dropdown-menu pull-right black lt"></div>
+                          </div>
+                          <h6>{{ event.datetime|date:"l, d M Y – g:i A" }}</h6>
+                          <div class="item-title text-ellipsis">
+                            <a href="track.detail.html">{{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}</a>
+                          </div>
+                          <div class="item-author text-sm text-ellipsis hide">
+                            <a href="artist.detail.html" class="text-muted">{{ artist.name }}</a>
+                          </div>
+                          <div class="item-meta text-sm text-muted">
+                            <span class="item-meta-stats text-xs  item-meta-right">
+                              <i class="fa fa-star m-l-sm text-muted"></i> 10
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+          {% else %}
+              No upcoming events
+          {% endif %}
 </div>
 </div>
 {% endblock content %}
