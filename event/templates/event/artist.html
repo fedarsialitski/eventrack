@@ -38,7 +38,12 @@
                       <a href="artist.detail.html">{{artist.name}}</a>
                       <div class="text-sm text-muted">
                         {% if artist.events.count %}
-                          {{ artist.events.count }} events
+                          {{ artist.events.count }}
+                          {% if artist.events.count == 1 %}
+                            event
+                          {% else %}
+                            events
+                          {% endif %}
                         {% else %}
                           No upcoming events
                         {% endif %}
