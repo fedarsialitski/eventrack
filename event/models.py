@@ -3,6 +3,8 @@ from django.db import models
 
 class Artist(models.Model):
     name = models.CharField(max_length=100)
+    image_url = models.URLField(blank=True)
+    thumb_url = models.URLField(blank=True)
 
     events = models.ManyToManyField(
         'event.Event',
