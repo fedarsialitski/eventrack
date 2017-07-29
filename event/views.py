@@ -58,7 +58,7 @@ class EventView(generic.ListView):
         """
         return Event.objects.filter(
             datetime__gte=timezone.now()
-        ).order_by('datetime')
+        ).order_by('datetime')[:10]
 
 
 class VenueView(generic.ListView):
