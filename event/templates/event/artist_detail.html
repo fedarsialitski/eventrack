@@ -67,7 +67,7 @@
           <div class="tab-pane active" id="tab_1">
             <h5 class="m-b">Upcoming events</h5>
             {% if upcoming_events %}
-              <div class="row item-list item-list-md item-list-li m-b" id="events">
+              <div class="row item-list item-list-md item-list-li m-b" id="upcoming_events">
                 {% for upcoming_event in upcoming_events|slice:":4" %}
                   <div class="col-md-12 col-lg-6">
                     <div class="item r" data-id="item-2" data-src="">
@@ -98,11 +98,13 @@
                 {% endfor %}
               </div>
           {% else %}
+            <div class="item-list item-list-md item-list-li m-b" id="upcoming_events">
               No upcoming events
+            </div>
           {% endif %}
           <h5 class="m-b">Past events</h5>
           {% if past_events %}
-            <div class="row item-list item-list-md item-list-li m-b" id="events">
+            <div class="row item-list item-list-md item-list-li m-b" id="past_events">
               {% for past_event in past_events|slice:":4" %}
                 <div class="col-md-12 col-lg-6">
                   <div class="item r" data-id="item-2" data-src="">
@@ -133,7 +135,9 @@
               {% endfor %}
             </div>
           {% else %}
-            No past events
+            <div class="item-list item-list-md item-list-li m-b" id="past_events">
+              No past events
+            </div>
           {% endif %}
         </div>
 </div>
