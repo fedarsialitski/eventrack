@@ -66,13 +66,13 @@
         <div class="tab-content">
           <div class="tab-pane active" id="tab_1">
             <h5 class="m-b">Upcoming events</h5>
-            {% if artist.events.all %}
+            {% if upcoming_events %}
               <div class="row item-list item-list-md item-list-li m-b" id="events">
-                {% for event in artist.events.all|slice:":4" %}
+                {% for upcoming_event in upcoming_events|slice:":4" %}
                   <div class="col-md-12 col-lg-6">
                     <div class="item r" data-id="item-2" data-src="">
                       <div class="item-media ">
-                        <a href="track.detail.html" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                        <a href="event.detail.html" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
                       </div>
                       <div class="item-info">
                         <div class="item-overlay bottom text-right">
@@ -80,9 +80,9 @@
                           <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                           <div class="dropdown-menu pull-right black lt"></div>
                         </div>
-                        <h6>{{ event.datetime|date:"l, d M Y – g:i A" }}</h6>
+                        <h6>{{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}</h6>
                         <div class="item-title text-ellipsis">
-                          <a href="track.detail.html">{{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}</a>
+                          <a href="event.detail.html">{{ upcoming_event.title }} @ {{ upcoming_event.venue.name }}, {{ upcoming_event.venue.city }}, {{ upcoming_event.venue.country }}</a>
                         </div>
                         <div class="item-author text-sm text-ellipsis hide">
                           <a href="artist.detail.html" class="text-muted">{{ artist.name }}</a>
@@ -100,6 +100,41 @@
           {% else %}
               No upcoming events
           {% endif %}
-</div>
+          <h5 class="m-b">Past events</h5>
+          {% if past_events %}
+            <div class="row item-list item-list-md item-list-li m-b" id="events">
+              {% for past_event in past_events|slice:":4" %}
+                <div class="col-md-12 col-lg-6">
+                  <div class="item r" data-id="item-2" data-src="">
+                    <div class="item-media ">
+                      <a href="event.detail.html" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                    </div>
+                    <div class="item-info">
+                      <div class="item-overlay bottom text-right">
+                        <a href="#" class="btn-favorite"><i class="fa fa-star-o"></i></a>
+                        <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                        <div class="dropdown-menu pull-right black lt"></div>
+                      </div>
+                      <h6>{{ past_event.datetime|date:"l, d M Y – g:i A" }}</h6>
+                      <div class="item-title text-ellipsis">
+                        <a href="event.detail.html">{{ past_event.title }} @ {{ past_event.venue.name }}, {{ past_event.venue.city }}, {{ past_event.venue.country }}</a>
+                      </div>
+                      <div class="item-author text-sm text-ellipsis hide">
+                        <a href="artist.detail.html" class="text-muted">{{ artist.name }}</a>
+                      </div>
+                      <div class="item-meta text-sm text-muted">
+                        <span class="item-meta-stats text-xs  item-meta-right">
+                          <i class="fa fa-star m-l-sm text-muted"></i> 10
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            No past events
+          {% endif %}
+        </div>
 </div>
 {% endblock content %}
