@@ -80,7 +80,7 @@
                           <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                           <div class="dropdown-menu pull-right black lt"></div>
                         </div>
-                        <h6>{{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}</h6>
+                        <h6><a href="event.detail.html">{{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
                         <div class="item-title text-ellipsis">
                           <a href="event.detail.html">{{ upcoming_event.title }} @ {{ upcoming_event.venue.name }}, {{ upcoming_event.venue.city }}, {{ upcoming_event.venue.country }}</a>
                         </div>
@@ -117,7 +117,7 @@
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>
-                      <h6>{{ past_event.datetime|date:"l, d M Y – g:i A" }}</h6>
+                      <h6><a href="event.detail.html">{{ past_event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
                       <div class="item-title text-ellipsis">
                         <a href="event.detail.html">{{ past_event.title }} @ {{ past_event.venue.name }}, {{ past_event.venue.city }}, {{ past_event.venue.country }}</a>
                       </div>
@@ -144,7 +144,7 @@
           <div class="page-title m-b">
             <h5 class="inline m-a-0">Upcoming</h5>
             <div class="dropdown inline">
-              <button class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">Last week</button>
+              <button class="btn btn-sm no-bg h5 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">Last week</button>
               <div class="dropdown-menu">
                 <a href="#" class="dropdown-item active">
                   Last week
@@ -175,7 +175,7 @@
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>
-                      <h6>{{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}</h6>
+                      <h6><a href="event.detail.html">{{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
                       <div class="item-title text-ellipsis">
                         <a href="event.detail.html">{{ upcoming_event.title }} @ {{ upcoming_event.venue.name }}, {{ upcoming_event.venue.city }}, {{ upcoming_event.venue.country }}</a>
                       </div>
@@ -200,7 +200,7 @@
           <div class="page-title m-b">
             <h5 class="inline m-a-0">All</h5>
             <div class="dropdown inline">
-              <button class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">Last week</button>
+              <button class="btn btn-sm no-bg h5 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">Last week</button>
               <div class="dropdown-menu">
                 <a href="#" class="dropdown-item active">
                   Last week
@@ -231,7 +231,7 @@
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>
-                      <h6>{{ event.datetime|date:"l, d M Y – g:i A" }}</h6>
+                      <h6><a href="event.detail.html">{{ event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
                       <div class="item-title text-ellipsis">
                         <a href="event.detail.html">{{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}</a>
                       </div>
