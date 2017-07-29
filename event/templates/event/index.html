@@ -69,7 +69,7 @@
                 <a href="{% url 'event:artist' %}">
                   <span class="nav-icon">
                     <i class="material-icons">
-                      portrait
+                      account_box
                     </i>
                   </span>
                   <span class="nav-text">Artist</span>
@@ -127,7 +127,7 @@
                 <a href="{% url 'event:profile' %}">
                   <span class="nav-icon">
                     <i class="material-icons">
-                      queue_music
+                      recent_actors
                     </i>
                   </span>
                   <span class="nav-text">Artists</span>
@@ -140,7 +140,7 @@
                       star
                     </i>
                   </span>
-                  <span class="nav-text">Favorites</span>
+                  <span class="nav-text">Bookmarks</span>
                 </a>
               </li>
             </ul>
@@ -180,5 +180,37 @@
 
     {% block content %}
     {% endblock content %}
+    </div>
+  </div>
+
+<!-- build:js scripts/app.min.js -->
+<!-- jQuery -->
+  <script src="{% static 'event/libs/jquery/dist/jquery.js' %}"></script>
+<!-- Bootstrap -->
+  <script src="{% static 'event/libs/tether/dist/js/tether.min.js' %}"></script>
+  <script src="{% static 'event/libs/bootstrap/dist/js/bootstrap.js' %}"></script>
+<!-- core -->
+  <script src="{% static 'event/libs/jQuery-Storage-API/jquery.storageapi.min.js' %}"></script>
+  <script src="{% static 'event/libs/jquery.stellar/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'event/libs/owl.carousel/dist/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'event/libs/jscroll/jquery.jscroll.min.js' %}"></script>
+  <script src="{% static 'event/libs/PACE/pace.min.js' %}"></script>
+  <script src="{% static 'event/libs/jquery-pjax/jquery.pjax.js' %}"></script>
+
+  <script src="{% static 'event/scripts/config.lazyload.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-load.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-jp.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-include.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-device.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-form.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-nav.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-screenfull.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-scroll-to.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-toggle-class.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-taburl.js' %}"></script>
+  <script src="{% static 'event/scripts/app.js' %}"></script>
+  <script src="{% static 'event/scripts/site.js' %}"></script>
+  <script src="{% static 'event/scripts/ajax.js' %}"></script>
+<!-- endbuild -->
 </body>
 </html>
