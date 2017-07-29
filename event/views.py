@@ -34,6 +34,9 @@ class ArtistDetailView(generic.DetailView):
     model = Artist
 
     def get_context_data(self, **kwargs):
+        """
+        Return the arist detail information
+        """
         context = super(ArtistDetailView, self).get_context_data(**kwargs)
         context['upcoming_events'] = self.object.events.filter(
             datetime__gte=timezone.now()
@@ -47,6 +50,15 @@ class ArtistDetailView(generic.DetailView):
 class EventView(generic.ListView):
     model = Event
     template_name = 'event/event.html'
+    context_object_name = 'events'
+
+    def get_queryset(self):
+        """
+        Return the upcoming events
+        """
+        return Event.objects.filter(
+            datetime__gte=timezone.now()
+        ).order_by('datetime')
 
 
 class VenueView(generic.ListView):
