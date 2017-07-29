@@ -29,6 +29,9 @@ class Event(models.Model):
         on_delete=models.CASCADE,
     )
 
+    class Meta:
+        ordering = ['datetime']
+
     def __str__(self):
         return self.title
 
