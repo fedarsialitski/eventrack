@@ -70,7 +70,7 @@
               <div class="row item-list item-list-md item-list-li m-b" id="upcoming_events">
                 {% for upcoming_event in upcoming_events|slice:":4" %}
                   <div class="col-md-12 col-lg-6">
-                    <div class="item r" data-id="item-2" data-src="">
+                    <div class="item r" data-id="item-2">
                       <div class="item-media ">
                         <a href="event.detail.html" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
                       </div>
@@ -107,8 +107,8 @@
             <div class="row item-list item-list-md item-list-li m-b" id="past_events">
               {% for past_event in past_events|slice:":4" %}
                 <div class="col-md-12 col-lg-6">
-                  <div class="item r" data-id="item-2" data-src="">
-                    <div class="item-media ">
+                  <div class="item r" data-id="item-2">
+                    <div class="item-media">
                       <a href="event.detail.html" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
                     </div>
                     <div class="item-info">
@@ -140,5 +140,144 @@
             </div>
           {% endif %}
         </div>
-</div>
+        <div class="tab-pane" id="tab_2">
+          <div class="page-title m-b">
+            <h5 class="inline m-a-0">Upcoming</h5>
+            <div class="dropdown inline">
+              <button class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">Last week</button>
+              <div class="dropdown-menu">
+                <a href="#" class="dropdown-item active">
+                  Last week
+                </a>
+                <a href="#" class="dropdown-item">
+                  Last month
+                </a>
+                <a href="#" class="dropdown-item">
+                  Last year
+                </a>
+                <a href="#" class="dropdown-item">
+                  All the time
+                </a>
+              </div>
+            </div>
+          </div>
+          {% if upcoming_events %}
+              <div class="row item-list item-list-md item-list-li m-b">
+                {% for upcoming_event in upcoming_events %}
+                  <div class="col-xs-12">
+                    <div class="item r" data-id="item-12">
+                    <div class="item-media ">
+                      <a href="event.detail.html" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                    </div>
+                    <div class="item-info">
+                      <div class="item-overlay bottom text-right">
+                        <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                        <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                        <div class="dropdown-menu pull-right black lt"></div>
+                      </div>
+                      <h6>{{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}</h6>
+                      <div class="item-title text-ellipsis">
+                        <a href="event.detail.html">{{ upcoming_event.title }} @ {{ upcoming_event.venue.name }}, {{ upcoming_event.venue.city }}, {{ upcoming_event.venue.country }}</a>
+                      </div>
+                      <div class="item-meta text-sm text-muted">
+                        <span class="item-meta-stats text-xs  item-meta-right">
+                          <i class="fa fa-play text-muted"></i> 860
+                          <i class="fa fa-heart m-l-sm text-muted"></i> 240
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="col-xs-12">
+              No upcoming events
+            </div>
+          {% endif %}
+        </div>
+        <div class="tab-pane" id="tab_3">
+          <div class="page-title m-b">
+            <h5 class="inline m-a-0">All</h5>
+            <div class="dropdown inline">
+              <button class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">Last week</button>
+              <div class="dropdown-menu">
+                <a href="#" class="dropdown-item active">
+                  Last week
+                </a>
+                <a href="#" class="dropdown-item">
+                  Last month
+                </a>
+                <a href="#" class="dropdown-item">
+                  Last year
+                </a>
+                <a href="#" class="dropdown-item">
+                  All the time
+                </a>
+              </div>
+            </div>
+          </div>
+          {% if artist.events.all %}
+              <div class="row item-list item-list-md item-list-li m-b">
+                {% for event in artist.events.all %}
+                  <div class="col-xs-12">
+                    <div class="item r" data-id="item-12">
+                    <div class="item-media ">
+                      <a href="event.detail.html" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                    </div>
+                    <div class="item-info">
+                      <div class="item-overlay bottom text-right">
+                        <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                        <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                        <div class="dropdown-menu pull-right black lt"></div>
+                      </div>
+                      <h6>{{ event.datetime|date:"l, d M Y – g:i A" }}</h6>
+                      <div class="item-title text-ellipsis">
+                        <a href="event.detail.html">{{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}</a>
+                      </div>
+                      <div class="item-meta text-sm text-muted">
+                        <span class="item-meta-stats text-xs  item-meta-right">
+                          <i class="fa fa-play text-muted"></i> 860
+                          <i class="fa fa-heart m-l-sm text-muted"></i> 240
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="col-xs-12">
+              No upcoming events
+            </div>
+          {% endif %}
+        </div>
+        <div class="tab-pane" id="tab_4">
+          <div class="row-col m-b">
+            <div class="col-xs w-xs text-muted">Location</div>
+            <div class="col-xs">UK</div>
+          </div>
+          <div class="row-col m-b">
+            <div class="col-xs w-xs text-muted">Website</div>
+            <div class="col-xs"><a href="https://www.entershikari.com/">https://www.entershikari.com/</a></div>
+          </div>
+          <div class="row-col m-b">
+            <div class="col-xs w-xs text-muted"></div>
+            <div class="col-xs">
+                <a href="" class="btn btn-icon btn-social rounded white btn-sm">
+                  <i class="fa fa-facebook"></i>
+                  <i class="fa fa-facebook indigo"></i>
+                </a>
+                <a href="" class="btn btn-icon btn-social rounded white btn-sm">
+                  <i class="fa fa-twitter"></i>
+                  <i class="fa fa-twitter light-blue"></i>
+                </a>
+                <a href="" class="btn btn-icon btn-social rounded white btn-sm">
+                  <i class="fa fa-google-plus"></i>
+                  <i class="fa fa-google-plus red"></i>
+                </a>
+            </div>
+          </div>
+        </div>
+      </div>
 {% endblock content %}
