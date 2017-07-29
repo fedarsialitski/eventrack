@@ -28,12 +28,12 @@
             <div class="item-action m-b">
               <a class="btn btn-icon white rounded btn-share pull-right" data-toggle="modal" data-target="#share-modal"><i class="fa fa-share-alt"></i></a>
               <span>
-                {% if artist.events.count %}
-                  {{ artist.events.count }}
-                  {% if artist.events.count == 1 %}
-                    event
+                {% if upcoming_events.count %}
+                  {{ upcoming_events.count }}
+                  {% if upcoming_events.count == 1 %}
+                    upcoming event
                   {% else %}
-                    events
+                    upcoming events
                   {% endif %}
                 {% else %}
                   No upcoming events
