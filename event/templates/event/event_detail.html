@@ -33,7 +33,7 @@
     <div class="col-sm">
       <div class="p-l-md no-padding-xs">
         <div class="page-title">
-          <h1 class="inline">{{ event.title }}</h1>
+          <h2 class="inline">{{ event.title }}</h2>
         </div>
         <div class="item-action m-b">
           <a class="btn btn-icon white rounded btn-share pull-right" data-toggle="modal" data-target="#share-modal"><i class="fa fa-share-alt"></i></a>
@@ -72,57 +72,61 @@
                 </h6>
               {% endif %}
             {% endfor %}
-        {% else %}
-          <h5 class="m-b">Artists</h5>
-          <div class="row item-list item-list-xs item-list-li m-b" id="artists">
-            {% for artist in event.artists.all %}
-                  <div class="col-xs-12">
-                    <div class="item r" data-id="item-7">
-                    <div class="item-media">
-                      <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+        {% endif %}
+        <h5 class="m-b">Date</h5>
+        <div class="row-col m-b">
+          <h6 class="m-b">
+            <span class="col-xs-1 text-muted">Date</span>
+            <p data-pjax class="item-author _600">{{ event.datetime|date:"l, d M Y – g:i A" }}</p>
+          </h6>
+        </div>
+        <h5 class="m-b">Venue</h5>
+        <div class="row-col m-b">
+          <h6 class="m-b">
+            <span class="col-xs-1 text-muted">Name</span>
+            <p data-pjax class="item-author _600">{{ event.venue.name }}</p>
+          </h6>
+        </div>
+        <h5 class="m-b">Location</h5>
+        <div class="row-col m-b">
+          <h6 class="m-b">
+            <span class="col-xs-1 text-muted">City</span>
+            <p data-pjax class="item-author _600">{{ event.venue.city }}</p>
+            <span class="col-xs-1 text-muted">Country</span>
+            <p data-pjax class="item-author _600">{{ event.venue.country }}</p>
+          </h6>
+        </div>
+        {% if event.artists.count > 1 %}
+          <h5 class="m-b">Line-up ({{ event.artists.count }})</h5>
+          <div class="row m-b">
+              {% for artist in event.artists.all %}
+                <div class="col-xs-4 col-sm-4 col-md-3">
+                  <div class="item r" data-id="item-7">
+                  <div class="item-media ">
+                    <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                  </div>
+                  <div class="item-info">
+                    <div class="item-overlay bottom text-right">
+                      <a href="#" class="btn-favorite"><i class="fa fa-star-o"></i></a>
+                      <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                      <div class="dropdown-menu pull-right black lt"></div>
                     </div>
-                    <div class="item-info">
-                      <div class="item-overlay bottom text-right">
-                        <a href="#" class="btn-favorite"><i class="fa fa-star-o"></i></a>
-                        <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                        <div class="dropdown-menu pull-right black lt"></div>
-                      </div>
-                      <div class="item-title text-ellipsis">
-                        <a href="{% url 'event:artist_detail' artist.id %}">{{ artist.name }}</a>
-                      </div>
-                      <div class="item-author text-sm text-ellipsis hide">
-                        <a href="{% url 'event:artist_detail' artist.id %}" class="text-muted">{{ artist.name }}</a>
-                      </div>
+                    <div class="item-title text-ellipsis">
+                      <a href="{% url 'event:artist_detail' artist.id %}">{{ artist.name }}</a>
+                    </div>
+                    <div class="item-author text-sm text-ellipsis hide">
+                      <a href="{% url 'event:artist_detail' artist.id %}" class="text-muted">{{ artist.name }}</a>
                     </div>
                     <div class="item-meta text-sm text-muted">
-                      <span class="item-meta-stats text-xs  item-meta-right">
-                        <i class="fa fa-star m-l-sm text-muted"></i> 10
+                      <span class="item-meta-stats text-xs ">
+                        <i class="fa fa-star m-l-sm text-muted"></i> 510
                       </span>
                     </div>
                   </div>
                 </div>
+              </div>
             {% endfor %}
-          </div>
           {% endif %}
-          <h5 class="m-b">Date</h5>
-          <div class="row-col m-b">
-            <div class="col-xs w-xs text-muted">Date</div>
-            <div class="col-xs">{{ event.datetime|date:"l, d M Y – g:i A" }}</div>
-          </div>
-          <h5 class="m-b">Venue</h5>
-          <div class="row-col m-b">
-            <div class="col-xs w-xs text-muted">Name</div>
-            <div class="col-xs">{{ event.venue.name}}</div>
-          </div>
-          <h5 class="m-b">Location</h5>
-          <div class="row-col m-b">
-            <div class="col-xs w-xs text-muted">City</div>
-            <div class="col-xs">{{ event.venue.city }}</div>
-          </div>
-          <div class="row-col m-b">
-            <div class="col-xs w-xs text-muted">Country</div>
-            <div class="col-xs">{{ event.venue.country }}</div>
-          </div>
         </div>
       </div>
     </div>
