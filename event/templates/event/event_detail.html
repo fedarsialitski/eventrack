@@ -104,6 +104,25 @@
             {% endfor %}
           </div>
           {% endif %}
+          <h5 class="m-b">Date</h5>
+          <div class="row-col m-b">
+            <div class="col-xs w-xs text-muted">Date</div>
+            <div class="col-xs">{{ event.datetime|date:"l, d M Y – g:i A" }}</div>
+          </div>
+          <h5 class="m-b">Venue</h5>
+          <div class="row-col m-b">
+            <div class="col-xs w-xs text-muted">Name</div>
+            <div class="col-xs">{{ event.venue.name}}</div>
+          </div>
+          <h5 class="m-b">Location</h5>
+          <div class="row-col m-b">
+            <div class="col-xs w-xs text-muted">City</div>
+            <div class="col-xs">{{ event.venue.city }}</div>
+          </div>
+          <div class="row-col m-b">
+            <div class="col-xs w-xs text-muted">Country</div>
+            <div class="col-xs">{{ event.venue.country }}</div>
+          </div>
         </div>
       </div>
     </div>
