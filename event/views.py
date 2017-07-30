@@ -61,6 +61,17 @@ class EventView(generic.ListView):
         ).order_by('datetime')[:10]
 
 
+class EventDetailView(generic.DetailView):
+    model = Event
+
+    def get_object(self):
+        """
+        Return the event detail information
+        """
+        object = super(EventDetailView, self).get_object()
+        return object
+
+
 class VenueView(generic.ListView):
     model = Venue
     template_name = 'event/venue.html'

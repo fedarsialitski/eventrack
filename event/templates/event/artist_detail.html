@@ -72,7 +72,7 @@
                   <div class="col-md-12 col-lg-6">
                     <div class="item r" data-id="item-2">
                       <div class="item-media ">
-                        <a href="event.detail.html" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                        <a href="{% url 'event:event_detail' upcoming_event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
                       </div>
                       <div class="item-info">
                         <div class="item-overlay bottom text-right">
@@ -80,12 +80,12 @@
                           <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                           <div class="dropdown-menu pull-right black lt"></div>
                         </div>
-                        <h6><a href="event.detail.html">{{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
+                        <h6><a href="{% url 'event:event_detail' upcoming_event.id %}">{{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
                         <div class="item-title text-ellipsis">
-                          <a href="event.detail.html">{{ upcoming_event.title }} @ {{ upcoming_event.venue.name }}, {{ upcoming_event.venue.city }}, {{ upcoming_event.venue.country }}</a>
+                          <a href="{% url 'event:event_detail' upcoming_event.id %}">{{ upcoming_event.title }} @ {{ upcoming_event.venue.name }}, {{ upcoming_event.venue.city }}, {{ upcoming_event.venue.country }}</a>
                         </div>
                         <div class="item-author text-sm text-ellipsis hide">
-                          <a href="artist.detail.html" class="text-muted">{{ artist.name }}</a>
+                          <a href="{% url 'event:artist_detail' artist.id %}" class="text-muted">{{ artist.name }}</a>
                         </div>
                         <div class="item-meta text-sm text-muted">
                           <span class="item-meta-stats text-xs  item-meta-right">
@@ -109,7 +109,7 @@
                 <div class="col-md-12 col-lg-6">
                   <div class="item r" data-id="item-2">
                     <div class="item-media">
-                      <a href="event.detail.html" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                      <a href="{% url 'event:event_detail' past_event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
@@ -117,12 +117,12 @@
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>
-                      <h6><a href="event.detail.html">{{ past_event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
+                      <h6><a href="{% url 'event:event_detail' past_event.id %}">{{ past_event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
                       <div class="item-title text-ellipsis">
-                        <a href="event.detail.html">{{ past_event.title }} @ {{ past_event.venue.name }}, {{ past_event.venue.city }}, {{ past_event.venue.country }}</a>
+                        <a href="{% url 'event:event_detail' past_event.id %}">{{ past_event.title }} @ {{ past_event.venue.name }}, {{ past_event.venue.city }}, {{ past_event.venue.country }}</a>
                       </div>
                       <div class="item-author text-sm text-ellipsis hide">
-                        <a href="artist.detail.html" class="text-muted">{{ artist.name }}</a>
+                        <a href="{% url 'event:artist_detail' artist.id %}" class="text-muted">{{ artist.name }}</a>
                       </div>
                       <div class="item-meta text-sm text-muted">
                         <span class="item-meta-stats text-xs  item-meta-right">
@@ -167,7 +167,7 @@
                   <div class="col-xs-12">
                     <div class="item r" data-id="item-12">
                     <div class="item-media ">
-                      <a href="event.detail.html" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                      <a href="{% url 'event:event_detail' upcoming_event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
@@ -175,9 +175,9 @@
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>
-                      <h6><a href="event.detail.html">{{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
+                      <h6><a href="{% url 'event:event_detail' upcoming_event.id %}">{{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
                       <div class="item-title text-ellipsis">
-                        <a href="event.detail.html">{{ upcoming_event.title }} @ {{ upcoming_event.venue.name }}, {{ upcoming_event.venue.city }}, {{ upcoming_event.venue.country }}</a>
+                        <a href="{% url 'event:event_detail' upcoming_event.id %}">{{ upcoming_event.title }} @ {{ upcoming_event.venue.name }}, {{ upcoming_event.venue.city }}, {{ upcoming_event.venue.country }}</a>
                       </div>
                       <div class="item-meta text-sm text-muted">
                         <span class="item-meta-stats text-xs  item-meta-right">
@@ -223,7 +223,7 @@
                   <div class="col-xs-12">
                     <div class="item r" data-id="item-12">
                     <div class="item-media ">
-                      <a href="event.detail.html" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                      <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
@@ -231,9 +231,9 @@
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>
-                      <h6><a href="event.detail.html">{{ event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
+                      <h6><a href="{% url 'event:event_detail' event.id %}">{{ event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
                       <div class="item-title text-ellipsis">
-                        <a href="event.detail.html">{{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}</a>
+                        <a href="{% url 'event:event_detail' event.id %}">{{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}</a>
                       </div>
                       <div class="item-meta text-sm text-muted">
                         <span class="item-meta-stats text-xs  item-meta-right">
