@@ -74,8 +74,8 @@
             {% endfor %}
         {% else %}
           <h5 class="m-b">Artists</h5>
-          {% for artist in event.artists.all %}
-            <div class="row item-list item-list-xs item-list-li m-b" id="artists">
+          <div class="row item-list item-list-xs item-list-li m-b" id="artists">
+            {% for artist in event.artists.all %}
                   <div class="col-xs-12">
                     <div class="item r" data-id="item-7">
                     <div class="item-media">
@@ -101,8 +101,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
             {% endfor %}
+          </div>
           {% endif %}
         </div>
       </div>
