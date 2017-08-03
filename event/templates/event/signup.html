@@ -49,8 +49,8 @@
     </div>
   </div>
   <div class="b-t">
-    <div class="center-block w-xxl w-auto-xs p-y-md text-center">
-      <div class="p-a-md">
+    <div class="center-block p-a-md text-center">
+      <div class="center-block w-xxl p-a-md">
         <div>
           <a href="#" class="btn btn-block indigo text-white m-b-sm">
             <i class="fa fa-facebook pull-left"></i>
@@ -61,40 +61,109 @@
             Sign up with Google+
           </a>
         </div>
-        <div class="m-y text-sm">
+        <br>
+        <div class="m-y-xxs text-sm">
           OR
         </div>
-        <form name="form" action="{% url 'event:signup' %}" method="post">
-          {% csrf_token %}
-          <div class="form-group">
-            <input type="text" name="username" class="form-control" placeholder="Username" required>
+      </div>
+      <form name="form" action="{% url 'event:signup' %}" method="post">
+        {% csrf_token %}
+        <div class="col-xs-8 offset-xs-2 p-x-xs">
+          <div class="form-group row">
+            <div class="col-xs-4 offset-xs-4">
+              <input type="text" name="username" value="{{ form.username.value|default_if_none:"" }}" class="form-control {% if form.username.errors %}b-danger{% endif %}" placeholder="Username" required>
+            </div>
+            {% if form.username.errors %}
+              <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
+                <b class="arrow left b-danger"></b>
+                {% for errors in form.username.errors %}
+                  {{ errors|striptags }}<br>
+                {% endfor %}
+              </span>
+            {% endif %}
           </div>
-          <div class="form-group">
-            <input type="email" name="email" class="form-control" placeholder="Email" required>
+          <div class="form-group row">
+            <div class="col-xs-4 offset-xs-4">
+              <input type="email" name="email"  value="{{ form.email.value|default_if_none:"" }}" class="form-control {% if form.email.errors %}b-danger{% endif %}" placeholder="Email" required>
+            </div>
+            {% if form.email.errors %}
+              <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
+                <b class="arrow left b-danger"></b>
+                {% for errors in form.email.errors %}
+                  {{ errors|striptags }}<br>
+                {% endfor %}
+              </span>
+            {% endif %}
           </div>
-          <div class="form-group">
-            <input type="text" name="first_name" class="form-control" placeholder="First name">
+          <div class="form-group row">
+            <div class="col-xs-4 offset-xs-4">
+              <input title="{{ form.first_name.help_text }}" value="{{ form.first_name.value|default_if_none:"" }}" type="text" name="first_name" class="form-control {% if form.first_name.errors %}b-danger{% endif %}" placeholder="First name">
+            </div>
+            {% if form.first_name.errors %}
+              <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
+                <b class="arrow left b-danger"></b>
+                {% for errors in form.first_name.errors %}
+                  {{ errors|striptags }}<br>
+                {% endfor %}
+              </span>
+            {% endif %}
           </div>
-          <div class="form-group">
-            <input type="text" name="last_name" class="form-control" placeholder="Last name">
+          <div class="form-group row">
+            <div class="col-xs-4 offset-xs-4">
+              <input title="{{ form.last_name.help_text }}" value="{{ form.last_name.value|default_if_none:"" }}" type="text" name="last_name" class="form-control {% if form.last_name.errors %}b-danger{% endif %}" placeholder="Last name">
+            </div>
+            {% if form.last_name.errors %}
+              <span class="label label-md danger pos-rlt p-a-sm col-xs-4 col-form-label mr-2">
+                <b class="arrow left b-danger"></b>
+                {% for errors in form.last_name.errors %}
+                  {{ errors|striptags }}<br>
+                {% endfor %}
+              </span>
+            {% endif %}
           </div>
-          <div class="form-group">
-            <input type="password" name="password1" class="form-control" placeholder="Password" required>
+          <div class="form-group row">
+            <div class="col-xs-4 offset-xs-4">
+              <input type="password" name="password1" value="{{ form.password1.value|default_if_none:"" }}" class="form-control {% if form.password1.errors or form.password2.errors %}b-danger{% endif %}" placeholder="Password" required>
+            </div>
+            {% if form.password1.errors or form.password2.errors %}
+              <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
+                <b class="arrow left b-danger"></b>
+                {% for errors in form.password1.errors %}
+                  {{ errors|striptags }}<br>
+                {% endfor %}
+                {% for errors in form.password2.errors %}
+                  {{ errors|striptags }}<br>
+                {% endfor %}
+              </span>
+            {% endif %}
           </div>
-          <div class="form-group">
-            <input type="password" name="password2" class="form-control" placeholder="Confirm Password" required>
+          <div class="form-group row">
+            <div class="col-xs-4 offset-xs-4">
+              <input type="password" name="password2" value="{{ form.password1.value|default_if_none:"" }}" class="form-control {% if form.password1.errors or form.password2.errors %}b-danger{% endif %}" placeholder="Confirm Password" required>
+            </div>
+            {% if form.password1.errors or form.password2.errors %}
+              <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
+                <b class="arrow left b-danger"></b>
+                {% for errors in form.password1.errors %}
+                  {{ errors|striptags }}<br>
+                {% endfor %}
+                {% for errors in form.password2.errors %}
+                  {{ errors|striptags }}<br>
+                {% endfor %}
+              </span>
+            {% endif %}
           </div>
-          <div class="m-b-md text-sm">
-            <span class="text-muted">By clicking Sign Up, I agree to the</span>
-            <a href="#">Terms of service</a>
-            <span class="text-muted">and</span>
-            <a href="#">Policy Privacy.</a>
-          </div>
-          <button type="submit" class="btn btn-lg black p-x-lg">Sign Up</button>
-        </form>
-        <div class="p-y-lg text-center">
-          <div>Already have an account? <a href="signin.html" class="text-primary _600">Sign in</a></div>
-        </div>
+          <div class="col-xs-4 offset-xs-4 p-x-sm">
+            <div class="m-b-md text-sm">
+              <span class="text-muted">By clicking Sign Up, I agree to the</span>
+              <a href="#">Terms of service</a>
+              <span class="text-muted">and</span>
+              <a href="#">Policy Privacy.</a>
+            </div>
+            <button type="submit" class="btn btn-md black p-x-lg">Sign Up</button>
+      </form>
+      <div class="p-y-md text-center">
+        <div>Already have an account? <a href="signin.html" class="text-primary _600">Sign in</a></div>
       </div>
     </div>
   </div>

@@ -99,7 +99,7 @@ def signup(request):
             login(request, user)
             return HttpResponseRedirect(reverse('event:index'))
         else:
-            return render(request, 'event/signup.html', {'error': True})
+            return render(request, 'event/signup.html', {'form': form, 'error': True})
     else:
         form = SignupForm()
     return render(request, 'event/signup.html', {'form': form})
