@@ -71,7 +71,7 @@
         <div class="col-xs-8 offset-xs-2 p-x-xs">
           <div class="form-group row">
             <div class="col-xs-4 offset-xs-4">
-              <input type="text" name="username" value="{{ form.username.value|default_if_none:"" }}" class="form-control {% if form.username.errors %}b-danger{% endif %}" placeholder="Username" required>
+              <input type="text" name="username" value="{{ form.username.value|default_if_none:"" }}" class="form-control {% if form.username.errors %}b-danger{% endif %}" placeholder="Username">
             </div>
             {% if form.username.errors %}
               <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
@@ -84,7 +84,7 @@
           </div>
           <div class="form-group row">
             <div class="col-xs-4 offset-xs-4">
-              <input type="email" name="email"  value="{{ form.email.value|default_if_none:"" }}" class="form-control {% if form.email.errors %}b-danger{% endif %}" placeholder="Email" required>
+              <input type="email" name="email"  value="{{ form.email.value|default_if_none:"" }}" class="form-control {% if form.email.errors %}b-danger{% endif %}" placeholder="Email">
             </div>
             {% if form.email.errors %}
               <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
@@ -123,30 +123,30 @@
           </div>
           <div class="form-group row">
             <div class="col-xs-4 offset-xs-4">
-              <input type="password" name="password1" value="{{ form.password1.value|default_if_none:"" }}" class="form-control {% if form.password1.errors or form.password2.errors %}b-danger{% endif %}" placeholder="Password" required>
+              <input type="password" name="password1" value="{{ form.password1.value|default_if_none:"" }}" class="form-control {% if form.password1.errors or form.password2.errors %}b-danger{% endif %}" placeholder="Password">
             </div>
             {% if form.password1.errors or form.password2.errors %}
               <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
                 <b class="arrow left b-danger"></b>
-                {% for errors in form.password1.errors %}
-                  {{ errors|striptags }}<br>
-                {% endfor %}
-                {% for errors in form.password2.errors %}
-                  {{ errors|striptags }}<br>
-                {% endfor %}
+                {% if form.password1.errors %}
+                  {% for errors in form.password1.errors %}
+                    {{ errors|striptags }}<br>
+                  {% endfor %}
+                {% elif form.password2.errors %}
+                  {% for errors in form.password2.errors %}
+                    {{ errors|striptags }}<br>
+                  {% endfor %}
+                {% endif %}
               </span>
             {% endif %}
           </div>
           <div class="form-group row">
             <div class="col-xs-4 offset-xs-4">
-              <input type="password" name="password2" value="{{ form.password1.value|default_if_none:"" }}" class="form-control {% if form.password1.errors or form.password2.errors %}b-danger{% endif %}" placeholder="Confirm Password" required>
+              <input type="password" name="password2" value="{{ form.password2.value|default_if_none:"" }}" class="form-control {% if form.password1.errors or form.password2.errors %}b-danger{% endif %}" placeholder="Confirm Password">
             </div>
-            {% if form.password1.errors or form.password2.errors %}
+            {% if form.password2.errors %}
               <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
                 <b class="arrow left b-danger"></b>
-                {% for errors in form.password1.errors %}
-                  {{ errors|striptags }}<br>
-                {% endfor %}
                 {% for errors in form.password2.errors %}
                   {{ errors|striptags }}<br>
                 {% endfor %}

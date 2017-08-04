@@ -1,11 +1,11 @@
 from django.http import HttpResponseRedirect
 from django.views import generic
 from django.utils import timezone
-from django.shortcuts import render, redirect, reverse
-from django.contrib.auth import login, authenticate
+from django.shortcuts import render, reverse
+from django.contrib.auth import login
 from django.views.decorators.csrf import csrf_protect
 
-from .forms import SignupForm
+from .forms import SignupForm, SigninForm
 from .models import Artist, Event, Venue
 
 
@@ -93,11 +93,10 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return HttpResponseRedirect(reverse('event:index'))
+            user = form.signin(request)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse('event:index'))
         else:
             return render(request, 'event/signup.html', {'form': form, 'error': True})
     else:
@@ -110,12 +109,14 @@ def signin(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('event:index'))
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return HttpResponseRedirect(reverse('event:index'))
+        form = SigninForm(data=request.POST)
+        if form.is_valid():
+            user = form.signin(request)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse('event:index'))
         else:
-            return render(request, 'event/signin.html', {'error': True})
-    return render(request, 'event/signin.html')
+            return render(request, 'event/signin.html', {'form': form, 'error': True})
+    else:
+        form = SigninForm()
+    return render(request, 'event/signin.html', {'form': form})
