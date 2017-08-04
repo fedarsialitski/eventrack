@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.views import generic
 from django.utils import timezone
 from django.shortcuts import render, reverse
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.views.decorators.csrf import csrf_protect
 
 from .forms import SignupForm, SigninForm
@@ -120,3 +120,9 @@ def signin(request):
     else:
         form = SigninForm()
     return render(request, 'event/signin.html', {'form': form})
+
+
+@csrf_protect
+def signout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('event:index'))
