@@ -103,3 +103,19 @@ def signup(request):
     else:
         form = SignupForm()
     return render(request, 'event/signup.html', {'form': form})
+
+
+@csrf_protect
+def signin(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('event:index'))
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse('event:index'))
+        else:
+            return render(request, 'event/signin.html', {'error': True})
+    return render(request, 'event/signin.html')

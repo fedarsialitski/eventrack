@@ -1,0 +1,127 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Eventrack – Track Upcoming Live Concerts, Tour Dates and Festivals</title>
+  <meta name="description" content="Artist, Event, Festivals, Live Concerts, Music, Musician, Tour Dates, Venue" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+  <link rel="apple-touch-icon" href="{% static 'event/images/icon.png' %}">
+  <meta name="apple-mobile-web-app-title" content="Flatkit">
+  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" sizes="96x96" href="{% static 'event/images/icon.png' %}">
+
+  <!-- style -->
+  <link rel="stylesheet" href="{% static 'event/css/animate.css/animate.min.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'event/css/glyphicons/glyphicons.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'event/css/font-awesome/css/font-awesome.min.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'event/css/material-design-icons/material-design-icons.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'event/css/bootstrap/dist/css/bootstrap.min.css' %}" type="text/css" />
+
+  <!-- build:css css/styles/app.min.css -->
+  <link rel="stylesheet" href="{% static 'event/css/styles/app.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'event/css/styles/style.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'event/css/styles/font.css' %}" type="text/css" />
+
+    <!-- endbuild -->
+</head>
+<body>
+  <div class="app dk" id="app">
+
+<!-- ############ LAYOUT START-->
+
+  <div class="padding">
+    <div class="navbar">
+      <div class="pull-center">
+        <!-- brand -->
+        <a href="{% url 'event:signin' %}" class="navbar-brand md">
+        	<img src="{% static 'event/images/logo.png' %}" alt=".">
+        </a>
+        <!-- / brand -->
+      </div>
+    </div>
+  </div>
+  <div class="b-t">
+    <div class="center-block w-xxl w-auto-xs p-y-md text-center">
+      <div class="p-a-md">
+        <div>
+          <a href="#" class="btn btn-block indigo text-white m-b-sm">
+            <i class="fa fa-facebook pull-left"></i>
+            Sign in with Facebook
+          </a>
+          <a href="#" class="btn btn-block red text-white">
+            <i class="fa fa-google-plus pull-left"></i>
+            Sign in with Google+
+          </a>
+        </div>
+        <div class="m-y text-sm">
+          OR
+        </div>
+        <form name="form" action="{% url 'event:signin' %}" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" name="username" class="form-control" placeholder="Username" required>
+          </div>
+          <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
+          </div>
+          <div class="m-b-md">
+            <label class="md-check">
+              <input type="checkbox"><i class="primary"></i> Keep me signed in
+            </label>
+          </div>
+          <button type="submit" class="btn btn-md black p-x-lg">Sign in</button>
+        </form>
+        <div class="m-y">
+          <a href="forgot-password.html" class="_600">Forgot password?</a>
+        </div>
+        <div>
+          Do not have an account?
+          <a href="{% url 'event:signup' %}" class="text-primary _600">Sign up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- ############ LAYOUT END-->
+</div>
+
+<!-- build:js scripts/app.min.js -->
+<!-- jQuery -->
+  <script src="{% static 'event/libs/jquery/dist/jquery.js' %}"></script>
+<!-- Bootstrap -->
+  <script src="{% static 'event/libs/tether/dist/js/tether.min.js' %}"></script>
+  <script src="{% static 'event/libs/bootstrap/dist/js/bootstrap.js' %}"></script>
+<!-- core -->
+  <script src="{% static 'event/libs/jQuery-Storage-API/jquery.storageapi.min.js' %}"></script>
+  <script src="{% static 'event/libs/jquery.stellar/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'event/libs/owl.carousel/dist/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'event/libs/jscroll/jquery.jscroll.min.js' %}"></script>
+  <script src="{% static 'event/libs/PACE/pace.min.js' %}"></script>
+  <script src="{% static 'event/libs/jquery-pjax/jquery.pjax.js' %}"></script>
+
+  <script src="{% static 'event/scripts/config.lazyload.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-load.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-jp.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-include.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-device.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-form.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-nav.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-screenfull.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-scroll-to.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-toggle-class.js' %}"></script>
+  <script src="{% static 'event/scripts/ui-taburl.js' %}"></script>
+  <script src="{% static 'event/scripts/app.js' %}"></script>
+  <script src="{% static 'event/scripts/site.js' %}"></script>
+  <script src="{% static 'event/scripts/ajax.js' %}"></script>
+<!-- endbuild -->
+
+</body>
+</html>
