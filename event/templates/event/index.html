@@ -106,7 +106,7 @@
                 </a>
               </li>
 
-
+              {% if user.is_authenticated.value %}
               <li class="nav-header hidden-folded m-t">
                 <span class="text-xs text-muted">Profile</span>
               </li>
@@ -143,9 +143,49 @@
                   <span class="nav-text">Bookmarks</span>
                 </a>
               </li>
+              {% endif %}
             </ul>
           </nav>
       </div>
+      {% if user.is_authenticated.value %}
+        <div data-flex-no-shrink>
+          <div class="nav-fold dropup">
+            <a data-toggle="dropdown">
+                <span class="pull-left">
+                  <i class="material-icons md-36">account_circle</i>
+                </span>
+                <span class="clear hidden-folded p-x p-y-xs">
+                  <span class="block _600 text-ellipsis">
+                    {% if user.first_name and user.last_name %}
+                      {{ user.first_name }} {{ user.last_name }}
+                    {% else %}
+                      {{ user.username }}
+                    {% endif %}
+                  </span>
+                </span>
+            </a>
+            <div class="dropdown-menu w dropdown-menu-scale ">
+              <a class="dropdown-item" href="{% url 'event:profile' %}">
+                <span>Profile</span>
+              </a>
+              <a class="dropdown-item" href="{% url 'event:profile' %}">
+                <span>Events</span>
+              </a>
+              <a class="dropdown-item" href="{% url 'event:profile' %}">
+                <span>Artists</span>
+              </a>
+              <a class="dropdown-item" href="{% url 'event:profile' %}">
+                <span>Bookmarks</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="docs.html">
+                Need help?
+              </a>
+              <a class="dropdown-item" href="{% url 'event:signout' %}">Sign out</a>
+            </div>
+          </div>
+        </div>
+      {% endif %}
     </div>
   </div>
   <!-- / -->

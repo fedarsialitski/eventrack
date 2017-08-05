@@ -3,6 +3,7 @@ from django.views import generic
 from django.utils import timezone
 from django.shortcuts import render, reverse
 from django.contrib.auth import login, logout
+from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect
 
 from .forms import SignupForm, SigninForm
@@ -82,7 +83,8 @@ class VenueView(generic.ListView):
 
 
 class ProfileView(generic.ListView):
-    pass
+    model = User
+    template_name = 'event/profile.html'
 
 
 @csrf_protect

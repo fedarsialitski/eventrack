@@ -1,1 +1,65 @@
 {% extends 'event/index.html' %}
+{% load static %}
+
+{% block content %}
+<div class="app-body light" id="view">
+<!-- ############ PAGE START-->
+<div class="page-bg" data-stellar-ratio="2" style="background-image: url('images/a3.jpg');"></div>
+  <div class="page-content">
+    <div class="padding b-b">
+      <div class="row-col">
+          <div class="col-sm w w-auto-xs m-b">
+            <div class="item w rounded">
+              <div class="item-media">
+                <div class="item-media-content" style="background-image: url({% static 'event/images/a3.jpg' %});"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="p-l-md no-padding-xs">
+              <h1 class="page-title">
+                <span class="h1 _800">
+                  {% if user.first_name and user.last_name %}
+                    {{ user.first_name }} {{ user.last_name }}
+                  {% else %}
+                    {{ user.username }}
+                  {% endif %}
+                </span>
+              </h1>
+              <div class="item-action m-b">
+                <a href="#" class="btn btn-sm rounded primary">Upload</a>
+                <a href="#" class="btn btn-sm rounded white">Edit Profile</a>
+              </div>
+              <div class="block clearfix m-b">
+                <span>23</span> <span class="text-muted">Events</span>, <span>9</span> <span class="text-muted">Artists</span>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="row-col">
+      <div class="col-lg-9 b-r no-border-md">
+        <div class="padding p-y-0 m-b-md">
+          <div class="nav-active-border b-primary bottom m-b-md m-t">
+            <ul class="nav l-h-2x" data-ui-jp="taburl">
+              <li class="nav-item m-r inline">
+                <a class="nav-link active" href="#" data-toggle="tab" data-target="#track">Events</a>
+              </li>
+              <li class="nav-item m-r inline">
+                <a class="nav-link" href="#" data-toggle="tab" data-target="#playlist">Artists</a>
+              </li>
+              <li class="nav-item m-r inline">
+                <a class="nav-link" href="#" data-toggle="tab" data-target="#like">Bookmarks</a>
+              </li>
+              <li class="nav-item m-r inline">
+                <a class="nav-link" href="#" data-toggle="tab" data-target="#profile">Profile</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
