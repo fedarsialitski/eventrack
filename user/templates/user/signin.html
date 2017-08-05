@@ -41,7 +41,7 @@
     <div class="navbar">
       <div class="pull-center">
         <!-- brand -->
-        <a href="{% url 'event:signin' %}" class="navbar-brand md">
+        <a href="{% url 'user:signin' %}" class="navbar-brand md">
         	<img src="{% static 'event/images/logo.png' %}" alt=".">
         </a>
         <!-- / brand -->
@@ -66,7 +66,7 @@
           OR
         </div>
       </div>
-      <form name="form" action="{% url 'event:signin' %}" method="post">
+      <form name="form" action="{% url 'user:signin' %}" method="post">
         {% csrf_token %}
         <div class="col-xs-8 offset-xs-2 p-x-md">
           {% if form.non_field_errors %}
@@ -118,7 +118,7 @@
       </div>
       <div>
         Do not have an account?
-        <a href="{% url 'event:signup' %}" class="text-primary _600">Sign up</a>
+        <a href="{% url 'user:signup' %}" class="text-primary _600">Sign up</a>
       </div>
     </div>
   </div>

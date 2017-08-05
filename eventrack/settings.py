@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'event',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -84,6 +85,12 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+
+# User model
+# https://docs.djangoproject.com/en/1.11/ref/settings/#auth-user-model
+
+AUTH_USER_MODEL = 'user.User'
 
 
 # Password validation
