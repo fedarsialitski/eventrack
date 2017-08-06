@@ -29,6 +29,7 @@
               <a class="btn btn-icon white rounded btn-share pull-right" data-toggle="modal" data-target="#share-modal"><i class="fa fa-share-alt"></i></a>
               <span>
                 {% if upcoming_events.count %}
+                  <i class="material-icons md-24">event_note</i>
                   {{ upcoming_events.count }}
                   {% if upcoming_events.count == 1 %}
                     upcoming event
@@ -80,9 +81,11 @@
                           <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                           <div class="dropdown-menu pull-right black lt"></div>
                         </div>
-                        <h6><a href="{% url 'event:event_detail' upcoming_event.id %}">{{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
                         <div class="item-title text-ellipsis">
                           <a href="{% url 'event:event_detail' upcoming_event.id %}">{{ upcoming_event.title }} @ {{ upcoming_event.venue.name }}, {{ upcoming_event.venue.city }}, {{ upcoming_event.venue.country }}</a>
+                        </div>
+                        <div class="item-author text-sm text-ellipsis ">
+                          <a href="{% url 'event:event_detail' upcoming_event.id %}" class="text-muted">{{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}</a>
                         </div>
                         <div class="item-author text-sm text-ellipsis hide">
                           <a href="{% url 'event:artist_detail' artist.id %}" class="text-muted">{{ artist.name }}</a>
@@ -117,9 +120,11 @@
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>
-                      <h6><a href="{% url 'event:event_detail' past_event.id %}">{{ past_event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
                       <div class="item-title text-ellipsis">
                         <a href="{% url 'event:event_detail' past_event.id %}">{{ past_event.title }} @ {{ past_event.venue.name }}, {{ past_event.venue.city }}, {{ past_event.venue.country }}</a>
+                      </div>
+                      <div class="item-author text-sm text-ellipsis ">
+                        <a href="{% url 'event:event_detail' past_event.id %}" class="text-muted">{{ past_event.datetime|date:"l, d M Y – g:i A" }}</a>
                       </div>
                       <div class="item-author text-sm text-ellipsis hide">
                         <a href="{% url 'event:artist_detail' artist.id %}" class="text-muted">{{ artist.name }}</a>
@@ -175,9 +180,11 @@
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>
-                      <h6><a href="{% url 'event:event_detail' upcoming_event.id %}">{{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
                       <div class="item-title text-ellipsis">
                         <a href="{% url 'event:event_detail' upcoming_event.id %}">{{ upcoming_event.title }} @ {{ upcoming_event.venue.name }}, {{ upcoming_event.venue.city }}, {{ upcoming_event.venue.country }}</a>
+                      </div>
+                      <div class="item-author text-sm text-ellipsis ">
+                        <a href="{% url 'event:event_detail' upcoming_event.id %}" class="text-muted">{{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}</a>
                       </div>
                       <div class="item-meta text-sm text-muted">
                         <span class="item-meta-stats text-xs  item-meta-right">
@@ -231,9 +238,11 @@
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>
-                      <h6><a href="{% url 'event:event_detail' event.id %}">{{ event.datetime|date:"l, d M Y – g:i A" }}</a></h6>
                       <div class="item-title text-ellipsis">
                         <a href="{% url 'event:event_detail' event.id %}">{{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}</a>
+                      </div>
+                      <div class="item-author text-sm text-ellipsis ">
+                        <a href="{% url 'event:event_detail' event.id %}" class="text-muted">{{ event.datetime|date:"l, d M Y – g:i A" }}</a>
                       </div>
                       <div class="item-meta text-sm text-muted">
                         <span class="item-meta-stats text-xs  item-meta-right">

@@ -73,31 +73,41 @@
               {% endif %}
             {% endfor %}
         {% endif %}
-        <h5 class="m-b">Date</h5>
-        <div class="row-col m-b">
-          <h6 class="m-b">
-            <span class="col-xs-1 text-muted">Date</span>
-            <p data-pjax class="item-author _600">{{ event.datetime|date:"l, d M Y – g:i A" }}</p>
-          </h6>
+        <h6 class="">Date</h6>
+        <div class="col-xs-12">
+          <div class="item-info">
+            <div class="item-title text-ellipsis">
+                <div class="col-xs-1 text-muted">
+                  Date
+                </div>
+                <div class="offset-xs-1">
+                  {{ event.datetime|date:"l, d M Y – g:i A" }}
+                </div>
+            </div>
+          </div>
         </div>
-        <h5 class="m-b">Venue</h5>
-        <div class="row-col m-b">
-          <h6 class="m-b">
-            <span class="col-xs-1 text-muted">Name</span>
-            <p data-pjax class="item-author _600">{{ event.venue.name }}</p>
-          </h6>
+        <h6>Venue</h6>
+        <div class="col-xs-12">
+          <div class="item-info">
+            <div class="item-title text-ellipsis">
+                <div class="col-xs-1 text-muted">Name</div>
+                <div class="offset-xs-1">{{ event.venue.name }}</div>
+            </div>
+          </div>
         </div>
-        <h5 class="m-b">Location</h5>
-        <div class="row-col m-b">
-          <h6 class="m-b">
-            <span class="col-xs-1 text-muted">City</span>
-            <p data-pjax class="item-author _600">{{ event.venue.city }}</p>
-            <span class="col-xs-1 text-muted">Country</span>
-            <p data-pjax class="item-author _600">{{ event.venue.country }}</p>
-          </h6>
+        <h6>Location</h6>
+        <div class="col-xs-12 m-b">
+          <div class="item-info">
+            <div class="item-title text-ellipsis">
+                <div class="col-xs-1 text-muted">City</div>
+                <div class="offset-xs-1 m-b-sm">{{ event.venue.city }}</div>
+                <div class="col-xs-1 text-muted">Country</div>
+                <div class="offset-xs-1">{{ event.venue.country }}</div>
+            </div>
+          </div>
         </div>
         {% if event.artists.count > 1 %}
-          <h5 class="m-b">Line-up ({{ event.artists.count }})</h5>
+          <h6 class="m-b">Line-up ({{ event.artists.count }})</h6>
           <div class="row m-b">
               {% for artist in event.artists.all %}
                 <div class="col-xs-4 col-sm-4 col-md-3">
