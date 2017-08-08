@@ -86,6 +86,7 @@ class VenueCreateView(generic.CreateView):
         'country',
     ]
 
+
 class VenueUpdateView(generic.UpdateView):
     model = Venue
     success_url = '/profile/'
@@ -95,3 +96,11 @@ class VenueUpdateView(generic.UpdateView):
         'city',
         'country',
     ]
+
+
+class VenueDeleteView(generic.DeleteView):
+    model = Venue
+    success_url = '/profile/'
+
+    def get(self, *args, **kwargs):
+        return self.post(*args, **kwargs)

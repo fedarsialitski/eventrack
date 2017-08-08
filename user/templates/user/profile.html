@@ -4,7 +4,7 @@
 {% block content %}
 <div class="app-body light" id="view">
 <!-- ############ PAGE START-->
-<div class="page-bg" data-stellar-ratio="2" style="background-image: url('images/a3.jpg');"></div>
+<div class="page-bg" data-stellar-ratio="2" style="background-image: url(% static 'event/images/a3.jpg' %});"></div>
   <div class="page-content">
     <div class="padding b-b">
       <div class="row-col">
@@ -78,10 +78,7 @@
                             <div class="dropdown-menu pull-right black lt"></div>
                           </div>
                           <div class="item-title text-ellipsis">
-                            <a href="track.detail.html">{{ venue.name }}</a>
-                          </div>
-                          <div class="item-author text-sm text-ellipsis hide">
-                            <a href="artist.detail.html" class="text-muted">Judith Garcia</a>
+                            <a href="venue.detail.html">{{ venue.name }}</a>
                           </div>
                           <div class="item-except visible-list text-sm m-t-sm">
                             City: {{ venue.city }}
@@ -91,12 +88,18 @@
                           </div>
                           <div class="item-action visible-list m-t-md">
                             <a href="{% url 'event:venue_update' venue.id %}" class="btn btn-xs white">Edit</a>
-                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
+                            <a href="{% url 'event:venue_delete' venue.id %}" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
                           </div>
                         </div>
                       </div>
                     </div>
                   {% endfor %}
+                    <div class="col-lg-12">
+                      <div class="p-t-md">
+                        <h6 class="text-muted m-b-md">Would you like to add a venue?</h6>
+                        <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:venue_add' %}">Add</a>
+                      </div>
+                    </div>
                 </div>
               {% else %}
                 <div class="col-lg-12 text-center">
@@ -120,4 +123,27 @@
     </div>
   </div>
 </div>
+<!-- .modal -->
+<div id="delete-modal" class="modal fade animate black-overlay" data-backdrop="false">
+  <div class="row-col h-v">
+    <div class="row-cell v-m">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content flip-y">
+          <div class="modal-body text-center">
+            <p class="p-y m-t"><i class="fa fa-remove text-warning fa-3x"></i></p>
+            <p>Are you sure to delete this item?</p>
+          </div>
+          <div class="modal-footer">
+            <form method="post" action="">
+              {% csrf_token %}
+              <button type="button" class="btn btn-default p-x-md" data-dismiss="modal">No</button>
+              <button type="button submit" class="btn red p-x-md">Yes</button>
+            </form>
+          </div>
+        </div><!-- /.modal-content -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- / .modal -->
 {% endblock content %}
