@@ -41,5 +41,12 @@ class Venue(models.Model):
     city = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
 
+    class Meta:
+        ordering = [
+            'country',
+            'city',
+            'name',
+        ]
+
     def __str__(self):
         return self.name

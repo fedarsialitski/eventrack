@@ -85,3 +85,13 @@ class VenueCreateView(generic.CreateView):
         'city',
         'country',
     ]
+
+class VenueUpdateView(generic.UpdateView):
+    model = Venue
+    success_url = '/profile/'
+
+    fields = [
+        'name',
+        'city',
+        'country',
+    ]
