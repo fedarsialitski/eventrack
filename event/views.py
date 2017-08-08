@@ -74,3 +74,14 @@ class EventDetailView(generic.DetailView):
 class VenueView(generic.ListView):
     model = Venue
     template_name = 'event/venue.html'
+
+
+class VenueCreateView(generic.CreateView):
+    model = Venue
+    success_url = '/profile/'
+
+    fields = [
+        'name',
+        'city',
+        'country',
+    ]

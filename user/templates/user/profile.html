@@ -44,18 +44,45 @@
           <div class="nav-active-border b-primary bottom m-b-md m-t">
             <ul class="nav l-h-2x" data-ui-jp="taburl">
               <li class="nav-item m-r inline">
-                <a class="nav-link active" href="#" data-toggle="tab" data-target="#track">Events</a>
+                <a class="nav-link" href="#" data-toggle="tab" data-target="#event">Events</a>
               </li>
               <li class="nav-item m-r inline">
-                <a class="nav-link" href="#" data-toggle="tab" data-target="#playlist">Artists</a>
+                <a class="nav-link" href="#" data-toggle="tab" data-target="#artist">Artists</a>
               </li>
               <li class="nav-item m-r inline">
-                <a class="nav-link" href="#" data-toggle="tab" data-target="#like">Bookmarks</a>
+                <a class="nav-link active" href="#" data-toggle="tab" data-target="#venue">Venues</a>
+              </li>
+              <li class="nav-item m-r inline">
+                <a class="nav-link" href="#" data-toggle="tab" data-target="#bookmark">Bookmarks</a>
               </li>
               <li class="nav-item m-r inline">
                 <a class="nav-link" href="#" data-toggle="tab" data-target="#profile">Profile</a>
               </li>
             </ul>
+          </div>
+          <div class="tab-content">
+            <div class="tab-pane" id="event">
+            </div>
+            <div class="tab-pane" id="artist">
+            </div>
+            <div class="tab-pane active" id="venue">
+              {% if user.venues.all %}
+              {% else %}
+                <div class="col-lg-12 text-center">
+                  <div class="p-a-lg">
+                    <h2 class="m-y-md">No added venues</h2>
+                    <h6 class="text-muted m-b-md">Would you like to add a venue?</h6>
+                    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:venue_add' %}">Add</a>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+            <div class="tab-pane" id="add-venue">
+            </div>
+            <div class="tab-pane" id="bookmark">
+            </div>
+            <div class="tab-pane" id="profile">
+            </div>
           </div>
         </div>
       </div>

@@ -1,0 +1,31 @@
+{% extends 'user/profile.html' %}
+
+{% block content %}
+<!-- ############ PAGE START-->
+<div class="app-body light" id="view">
+  <div class="row-col">
+    <div class="col-lg-9 b-r no-border-md">
+      <div class="padding p-y-0 m-b-md">
+        <h2 class="m-y-md">Add venue</h2>
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group row">
+            <div class="col-sm-1 form-control-label text-muted">Name</div>
+            <div class="col-sm-3"><input name="name" placeholder="Name" class="form-control"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-1 form-control-label text-muted">City</div>
+            <div class="col-sm-3"><input name="city" placeholder="City" class="form-control"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-1 form-control-label text-muted">Country</div>
+            <div class="col-sm-3"><input name="country" placeholder="Country" class="form-control"></div>
+            </div>
+            <button type="submit" class="btn btn-md rounded primary p-x-md">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

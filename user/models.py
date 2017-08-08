@@ -14,3 +14,9 @@ class User(AbstractUser):
         related_name='users',
         blank=True,
     )
+
+    venues = models.ManyToManyField(
+        'event.Venue',
+        related_name='users',
+        blank=True,
+    )
