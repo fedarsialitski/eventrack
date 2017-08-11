@@ -1,0 +1,55 @@
+{% extends 'event/index.html' %}
+
+{% block content %}
+<!-- ############ PAGE START-->
+<div class="app-body light" id="view">
+  <div class="row-col">
+    <div class="col-lg-9 b-r no-border-md">
+      <div class="padding p-y-0 m-b-md">
+        <h2 class="m-y-md">{% if artist.id %} Update {% else %} Add {% endif %} artist</h2>
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group row">
+            <div class="col-sm-1 form-control-label text-muted">Name</div>
+            <div class="col-sm-3"><input name="name" value="{{ form.name.value|default_if_none:"" }}" placeholder="Name" class="form-control"></div>
+            {% if form.name.errors %}
+              <span class="label label-md danger pos-rlt p-a-sm col-xs-2">
+                <b class="arrow left b-danger"></b>
+                {% for errors in form.name.errors %}
+                  {{ errors|striptags }}<br>
+                {% endfor %}
+              </span>
+            {% endif %}
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-1 form-control-label text-muted">Image url</div>
+            <div class="col-sm-3"><input name="image_url" value="{{ form.image_url.value|default_if_none:"" }}" placeholder="Image url" class="form-control"></div>
+            {% if form.image_url.errors %}
+              <span class="label label-md danger pos-rlt p-a-sm col-xs-2">
+                <b class="arrow left b-danger"></b>
+                {% for errors in form.image_url.errors %}
+                  {{ errors|striptags }}<br>
+                {% endfor %}
+              </span>
+            {% endif %}
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-1 form-control-label text-muted">Thumb url</div>
+            <div class="col-sm-3"><input name="thumb_url" value="{{ form.thumb_url.value|default_if_none:"" }}" placeholder="Thumb url" class="form-control"></div>
+            {% if form.thumb_url.errors %}
+              <span class="label label-md danger pos-rlt p-a-sm col-xs-2">
+                <b class="arrow left b-danger"></b>
+                {% for errors in form.thumb_url.errors %}
+                  {{ errors|striptags }}<br>
+                {% endfor %}
+              </span>
+            {% endif %}
+            </div>
+            <button type="submit" class="btn btn-md rounded primary p-x-md">{% if artist.id %} Update {% else %} Add {% endif %}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

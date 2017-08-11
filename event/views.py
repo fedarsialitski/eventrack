@@ -46,6 +46,40 @@ class ArtistDetailView(generic.DetailView):
         return context
 
 
+class ArtistCreateView(generic.CreateView):
+    model = Artist
+    success_url = '/profile/'
+
+    fields = [
+        'name',
+        'image_url',
+        'thumb_url',
+    ]
+
+    def form_valid(self, form):
+        self.request.user.artists.add(form.save())
+        return super(ArtistCreateView, self).form_valid(form)
+
+
+class ArtistUpdateView(generic.UpdateView):
+    model = Artist
+    success_url = '/profile/'
+
+    fields = [
+        'name',
+        'image_url',
+        'thumb_url',
+    ]
+
+
+class ArtistDeleteView(generic.DeleteView):
+    model = Artist
+    success_url = '/profile/'
+
+    def get(self, *args, **kwargs):
+        return self.post(*args, **kwargs)
+
+
 class EventView(generic.ListView):
     model = Event
     template_name = 'event/event.html'

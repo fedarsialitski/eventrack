@@ -4,7 +4,7 @@
 {% block content %}
 <div class="app-body light" id="view">
 <!-- ############ PAGE START-->
-<div class="page-bg" data-stellar-ratio="2" style="background-image: url(% static 'event/images/a3.jpg' %});"></div>
+<div class="page-bg" data-stellar-ratio="2" style="background-image: url({% static 'event/images/a3.jpg' %});"></div>
   <div class="page-content">
     <div class="padding b-b">
       <div class="row-col">
@@ -64,6 +64,61 @@
             <div class="tab-pane" id="event">
             </div>
             <div class="tab-pane" id="artist">
+              {% if user.artists.all %}
+                <div class="row item-list item-list-by m-b">
+                  {% for artist in user.artists.all %}
+                    <div class="col-xs-12">
+                      <div class="item r">
+                        <div class="item-media ">
+                          <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                        </div>
+                        <div class="item-info">
+                          <div class="item-overlay bottom text-right">
+                            <a href="#" class="btn-favorite"><i class="fa fa-star-o"></i></a>
+                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                            <div class="dropdown-menu pull-right black lt"></div>
+                          </div>
+                          <div class="item-title text-ellipsis">
+                            <a href="{% url 'event:artist_detail' artist.id %}">{{ artist.name }}</a>
+                          </div>
+                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm m-b-md">
+                              {% if artist.events.count %}
+                                <i class="material-icons md-24">event_note</i>
+                                {{ artist.events.count }}
+                                {% if artist.events.count == 1 %}
+                                  event
+                                {% else %}
+                                  events
+                                {% endif %}
+                              {% else %}
+                                No events
+                              {% endif %}
+                            </span>
+                          </div>
+                          <div class="item-action visible-list m-t-sm">
+                            <a href="{% url 'event:artist_update' artist.id %}" class="btn btn-xs white">Edit</a>
+                            <a href="{% url 'event:artist_delete' artist.id %}" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                    <div class="col-lg-12">
+                      <div class="p-t-md">
+                        <h6 class="text-muted m-b-md">Would you like to add a artist?</h6>
+                        <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:artist_add' %}">Add</a>
+                      </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="col-lg-12 text-center">
+                  <div class="p-a-lg">
+                    <h2 class="m-y-md">No added artists</h2>
+                    <h6 class="text-muted m-b-md">Would you like to add a artist?</h6>
+                    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:artist_add' %}">Add</a>
+                  </div>
+                </div>
+              {% endif %}
             </div>
             <div class="tab-pane active" id="venue">
               {% if user.venues.all %}
