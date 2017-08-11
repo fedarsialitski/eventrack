@@ -34,7 +34,7 @@ class ArtistDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         """
-        Return the arist detail information
+        Return the artist detail information
         """
         context = super(ArtistDetailView, self).get_context_data(**kwargs)
         context['upcoming_events'] = self.object.events.filter(
@@ -63,12 +63,11 @@ class EventView(generic.ListView):
 class EventDetailView(generic.DetailView):
     model = Event
 
-    def get_object(self):
+    def get_object(self, queryset=None):
         """
         Return the event detail information
         """
-        object = super(EventDetailView, self).get_object()
-        return object
+        return super(EventDetailView, self).get_object()
 
 
 class VenueView(generic.ListView):
@@ -85,6 +84,10 @@ class VenueCreateView(generic.CreateView):
         'city',
         'country',
     ]
+
+    def form_valid(self, form):
+        self.request.user.venues.add(form.save())
+        return super(VenueCreateView, self).form_valid(form)
 
 
 class VenueUpdateView(generic.UpdateView):
