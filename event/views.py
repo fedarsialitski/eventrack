@@ -2,6 +2,7 @@ from django.views import generic
 from django.utils import timezone
 
 from .models import Artist, Event, Venue
+from .forms import ArtistForm, EventForm, VenueForm
 
 
 class IndexView(generic.ListView):
@@ -48,13 +49,8 @@ class ArtistDetailView(generic.DetailView):
 
 class ArtistCreateView(generic.CreateView):
     model = Artist
+    form_class = ArtistForm
     success_url = '/profile/'
-
-    fields = [
-        'name',
-        'image_url',
-        'thumb_url',
-    ]
 
     def form_valid(self, form):
         self.request.user.artists.add(form.save())
@@ -63,13 +59,8 @@ class ArtistCreateView(generic.CreateView):
 
 class ArtistUpdateView(generic.UpdateView):
     model = Artist
+    form_class = ArtistForm
     success_url = '/profile/'
-
-    fields = [
-        'name',
-        'image_url',
-        'thumb_url',
-    ]
 
 
 class ArtistDeleteView(generic.DeleteView):
@@ -104,6 +95,30 @@ class EventDetailView(generic.DetailView):
         return super(EventDetailView, self).get_object()
 
 
+class EventCreateView(generic.CreateView):
+    model = Event
+    form_class = EventForm
+    success_url = '/profile/'
+
+    def form_valid(self, form):
+        self.request.user.events.add(form.save())
+        return super(EventCreateView, self).form_valid(form)
+
+
+class EventUpdateView(generic.UpdateView):
+    model = Event
+    form_class = EventForm
+    success_url = '/profile/'
+
+
+class EventDeleteView(generic.DeleteView):
+    model = Event
+    success_url = '/profile/'
+
+    def get(self, *args, **kwargs):
+        return self.post(*args, **kwargs)
+
+
 class VenueView(generic.ListView):
     model = Venue
     template_name = 'event/venue.html'
@@ -111,13 +126,8 @@ class VenueView(generic.ListView):
 
 class VenueCreateView(generic.CreateView):
     model = Venue
+    form_class = VenueForm
     success_url = '/profile/'
-
-    fields = [
-        'name',
-        'city',
-        'country',
-    ]
 
     def form_valid(self, form):
         self.request.user.venues.add(form.save())
@@ -126,13 +136,8 @@ class VenueCreateView(generic.CreateView):
 
 class VenueUpdateView(generic.UpdateView):
     model = Venue
+    form_class = VenueForm
     success_url = '/profile/'
-
-    fields = [
-        'name',
-        'city',
-        'country',
-    ]
 
 
 class VenueDeleteView(generic.DeleteView):

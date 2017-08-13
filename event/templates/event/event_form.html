@@ -1,0 +1,61 @@
+{% extends 'event/index.html' %}
+
+{% block content %}
+<!-- ############ PAGE START-->
+<div class="app-body light" id="view">
+  <div class="row-col">
+    <div class="col-lg-9 b-r no-border-md">
+      <div class="padding p-y-0 m-b-md">
+        <h2 class="m-y-md">{% if event.id %} Update {% else %} Add {% endif %} event</h2>
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group row">
+            <div class="col-sm-1 form-control-label text-muted">Title</div>
+            <div class="col-sm-3"><input name="title" value="{{ form.title.value|default_if_none:"" }}" placeholder="Title" class="form-control {% if form.title.errors %}b-danger{% endif %}"></div>
+            {% if form.title.errors %}
+              <span class="label label-md danger pos-rlt p-a-sm col-xs-2">
+                <b class="arrow left b-danger"></b>
+                {% for errors in form.title.errors %}
+                  {{ errors|striptags }}<br>
+                {% endfor %}
+              </span>
+            {% endif %}
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-1 form-control-label text-muted">Datetime</div>
+            <div class="col-sm-3"><input name="datetime" type="datetime-local" value="{{ form.datetime.value|date:"Y-m-d\TH:i"|default_if_none:"" }}" class="form-control {% if form.datetime.errors %}b-danger{% endif %}"></div>
+            {% if form.datetime.errors %}
+              <span class="label label-md danger pos-rlt p-a-sm col-xs-2">
+                <b class="arrow left b-danger"></b>
+                {% for errors in form.datetime.errors %}
+                  {{ errors|striptags }}<br>
+                {% endfor %}
+              </span>
+            {% endif %}
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-1 form-control-label text-muted">Venue</div>
+            <div class="col-sm-3"><input name="venue" value="{{ form.venue.value|default_if_none:"" }}" placeholder="Venue" class="form-control {% if form.venue.errors %}b-danger{% endif %}"></div>
+            {% if form.venue.errors %}
+              <span class="label label-md danger pos-rlt p-a-sm col-xs-2">
+                <b class="arrow left b-danger"></b>
+                {% for errors in form.venue.errors %}
+                  {{ errors|striptags }}<br>
+                {% endfor %}
+              </span>
+            {% endif %}
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-1 form-control-label text-muted">Artists</div>
+            <div class="col-sm-3">
+              {{ form.artists }}
+            </div>
+          </div>
+            <button type="submit" class="btn btn-md rounded primary p-x-md">{% if event.id %} Update {% else %} Add {% endif %}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
