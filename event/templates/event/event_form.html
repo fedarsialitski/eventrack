@@ -35,7 +35,13 @@
           </div>
           <div class="form-group row">
             <div class="col-sm-1 form-control-label text-muted">Venue</div>
-            <div class="col-sm-3"><input name="venue" value="{{ form.venue.value|default_if_none:"" }}" placeholder="Venue" class="form-control {% if form.venue.errors %}b-danger{% endif %}"></div>
+            <div class="col-sm-3">
+              <select name="venue" required_id="id_venue" class="form-control {% if form.venue.errors %}b-danger{% endif %}">
+                {% for id, venue in form.venue.field.choices %}
+                  <option value="{{ id }}" {% if id == form.venue.value %}selected{% endif %}>{{ venue }}</option>
+                {% endfor %}
+              </select>
+            </div>
             {% if form.venue.errors %}
               <span class="label label-md danger pos-rlt p-a-sm col-xs-2">
                 <b class="arrow left b-danger"></b>
@@ -48,8 +54,20 @@
           <div class="form-group row">
             <div class="col-sm-1 form-control-label text-muted">Artists</div>
             <div class="col-sm-3">
-              {{ form.artists }}
+              <select name="artists" required_id="id_artists" multiple="multiple" class="form-control {% if form.artists.errors %}b-danger{% endif %}">
+                {% for id, artist in form.artists.field.choices %}
+                  <option value="{{ id }}">{{ artist }}</option>
+                {% endfor %}
+              </select>
             </div>
+            {% if form.artists.errors %}
+              <span class="label label-md danger pos-rlt p-a-sm m-y-md col-xs-2">
+                <b class="arrow left b-danger"></b>
+                {% for errors in form.artists.errors %}
+                  {{ errors|striptags }}<br>
+                {% endfor %}
+              </span>
+            {% endif %}
           </div>
             <button type="submit" class="btn btn-md rounded primary p-x-md">{% if event.id %} Update {% else %} Add {% endif %}</button>
           </div>

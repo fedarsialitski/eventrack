@@ -20,7 +20,7 @@ class ArtistForm(forms.ModelForm):
 
 class EventForm(forms.ModelForm):
     title = forms.CharField(required=True)
-    venue = forms.ModelChoiceField(required=True, queryset=Venue.objects.all())
+    venue = forms.ModelChoiceField(required=True, queryset=Venue.objects.all(), empty_label='')
     datetime = forms.DateTimeField(required=True, input_formats=['%Y-%m-%dT%H:%M'])
     artists  = forms.ModelMultipleChoiceField(required=True, queryset=Artist.objects.all())
 
