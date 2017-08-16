@@ -44,13 +44,13 @@
           <div class="nav-active-border b-primary bottom m-b-md m-t">
             <ul class="nav l-h-2x" data-ui-jp="taburl">
               <li class="nav-item m-r inline">
-                <a class="nav-link" href="#" data-toggle="tab" data-target="#event">Events</a>
+                <a class="nav-link active" href="#" data-toggle="tab" data-target="#event">Events</a>
               </li>
               <li class="nav-item m-r inline">
                 <a class="nav-link" href="#" data-toggle="tab" data-target="#artist">Artists</a>
               </li>
               <li class="nav-item m-r inline">
-                <a class="nav-link active" href="#" data-toggle="tab" data-target="#venue">Venues</a>
+                <a class="nav-link" href="#" data-toggle="tab" data-target="#venue">Venues</a>
               </li>
               <li class="nav-item m-r inline">
                 <a class="nav-link" href="#" data-toggle="tab" data-target="#bookmark">Bookmarks</a>
@@ -61,7 +61,7 @@
             </ul>
           </div>
           <div class="tab-content">
-            <div class="tab-pane" id="event">
+            <div class="tab-pane active" id="event">
               {% if user.events.all %}
                 <div class="row item-list item-list-by m-b">
                   {% for event in user.events.all %}
@@ -169,7 +169,7 @@
                 </div>
               {% endif %}
             </div>
-            <div class="tab-pane active" id="venue">
+            <div class="tab-pane" id="venue">
               {% if user.venues.all %}
                 <div class="row item-list item-list-by m-b">
                   {% for venue in user.venues.all %}
