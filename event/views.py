@@ -102,6 +102,7 @@ class EventCreateView(generic.CreateView):
 
     def form_valid(self, form):
         self.request.user.events.add(form.save())
+        form.instance.artists.set(form.cleaned_data['artists'])
         return super(EventCreateView, self).form_valid(form)
 
 
@@ -109,6 +110,10 @@ class EventUpdateView(generic.UpdateView):
     model = Event
     form_class = EventForm
     success_url = '/profile/'
+
+    def form_valid(self, form):
+        form.instance.artists.set(form.cleaned_data['artists'])
+        return super(EventUpdateView, self).form_valid(form)
 
 
 class EventDeleteView(generic.DeleteView):
