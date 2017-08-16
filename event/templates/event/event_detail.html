@@ -127,11 +127,13 @@
                     <div class="item-author text-sm text-ellipsis hide">
                       <a href="{% url 'event:artist_detail' artist.id %}" class="text-muted">{{ artist.name }}</a>
                     </div>
+                    {% if artist.users.count %}
                     <div class="item-meta text-sm text-muted">
                       <span class="item-meta-stats text-xs ">
-                        <i class="fa fa-star text-muted"></i> 510
+                        <i class="fa fa-star text-muted"></i> {{ artist.users.count }}
                       </span>
                     </div>
+                    {% endif %}
                   </div>
                 </div>
               </div>

@@ -90,11 +90,13 @@
                         <div class="item-author text-sm text-ellipsis hide">
                           <a href="{% url 'event:artist_detail' artist.id %}" class="text-muted">{{ artist.name }}</a>
                         </div>
+                        {% if upcoming_event.users.count %}
                         <div class="item-meta text-sm text-muted">
                           <span class="item-meta-stats text-xs  item-meta-right">
-                            <i class="fa fa-star m-l-sm text-muted"></i> 10
+                            <i class="fa fa-star m-l-sm text-muted"></i> {{ upcoming_event.users.count }}
                           </span>
                         </div>
+                        {% endif %}
                       </div>
                     </div>
                   </div>
@@ -129,11 +131,13 @@
                       <div class="item-author text-sm text-ellipsis hide">
                         <a href="{% url 'event:artist_detail' artist.id %}" class="text-muted">{{ artist.name }}</a>
                       </div>
+                      {% if past_event.users.count %}
                       <div class="item-meta text-sm text-muted">
                         <span class="item-meta-stats text-xs  item-meta-right">
-                          <i class="fa fa-star m-l-sm text-muted"></i> 10
+                          <i class="fa fa-star m-l-sm text-muted"></i> {{ past_event.users.count }}
                         </span>
                       </div>
+                      {% endif %}
                     </div>
                   </div>
                 </div>
@@ -186,12 +190,13 @@
                       <div class="item-author text-sm text-ellipsis ">
                         <a href="{% url 'event:event_detail' upcoming_event.id %}" class="text-muted">{{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}</a>
                       </div>
+                      {% if upcoming_event.users.count %}
                       <div class="item-meta text-sm text-muted">
                         <span class="item-meta-stats text-xs  item-meta-right">
-                          <i class="fa fa-play text-muted"></i> 860
-                          <i class="fa fa-star m-l-sm text-muted"></i> 240
+                          <i class="fa fa-star text-muted"></i> {{ upcoming_event.users.count }}
                         </span>
                       </div>
+                      {% endif %}
                     </div>
                   </div>
                 </div>
@@ -244,12 +249,13 @@
                       <div class="item-author text-sm text-ellipsis ">
                         <a href="{% url 'event:event_detail' event.id %}" class="text-muted">{{ event.datetime|date:"l, d M Y – g:i A" }}</a>
                       </div>
+                      {% if event.users.count %}
                       <div class="item-meta text-sm text-muted">
                         <span class="item-meta-stats text-xs  item-meta-right">
-                          <i class="fa fa-play text-muted"></i> 860
-                          <i class="fa fa-star m-l-sm text-muted"></i> 240
+                          <i class="fa fa-star text-muted"></i> {{ event.users.count }}
                         </span>
                       </div>
+                      {% endif %}
                     </div>
                   </div>
                 </div>
