@@ -53,6 +53,9 @@ class ArtistCreateView(generic.CreateView):
     success_url = '/profile/'
 
     def form_valid(self, form):
+        """
+        Create the artist
+        """
         self.request.user.artists.add(form.save())
         return super(ArtistCreateView, self).form_valid(form)
 
@@ -101,6 +104,9 @@ class EventCreateView(generic.CreateView):
     success_url = '/profile/'
 
     def form_valid(self, form):
+        """
+        Create the event
+        """
         self.request.user.events.add(form.save())
         form.instance.artists.set(form.cleaned_data['artists'])
         return super(EventCreateView, self).form_valid(form)
@@ -112,6 +118,9 @@ class EventUpdateView(generic.UpdateView):
     success_url = '/profile/'
 
     def form_valid(self, form):
+        """
+        Update the event
+        """
         form.instance.artists.set(form.cleaned_data['artists'])
         return super(EventUpdateView, self).form_valid(form)
 
@@ -135,6 +144,9 @@ class VenueCreateView(generic.CreateView):
     success_url = '/profile/'
 
     def form_valid(self, form):
+        """
+        Create the venue
+        """
         self.request.user.venues.add(form.save())
         return super(VenueCreateView, self).form_valid(form)
 
