@@ -31,7 +31,8 @@
                 <a href="#" class="btn btn-sm rounded white">Edit Profile</a>
               </div>
               <div class="block clearfix m-b">
-                <span>23</span> <span class="text-muted">Events</span>, <span>9</span> <span class="text-muted">Artists</span>
+                {% if user.events.count %}<span>{{ user.events.count }}</span> <span class="text-muted">Events</span>, {% endif %}
+                {% if user.artists.count %}<span>{{ user.artists.count }}</span> <span class="text-muted">Artists</span>{% endif %}
               </div>
             </div>
           </div>
