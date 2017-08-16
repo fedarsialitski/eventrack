@@ -67,9 +67,17 @@
                   {% for event in user.events.all %}
                     <div class="col-xs-12">
                       <div class="item r">
-                        <div class="item-media ">
-                          <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{% static 'event/images/a3.jpg' %}');"></a>
-                        </div>
+                          {% if event.artists.all %}
+                            {% with event.artists.all|first as artist %}
+                              <div class="item-media ">
+                                <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                              </div>
+                            {% endwith %}
+                          {% else %}
+                            <div class="item-media ">
+                              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{% static 'event/images/a3.jpg' %}');"></a>
+                            </div>
+                          {% endif %}
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
                             <a href="#" class="btn-favorite"><i class="fa fa-star-o"></i></a>
