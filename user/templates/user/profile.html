@@ -80,7 +80,7 @@
                           {% endif %}
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-star-o"></i></a>
+                            <a href="#" class="btn-favorite"><i class="fa fa-star"></i></a>
                             <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                             <div class="dropdown-menu pull-right black lt"></div>
                           </div>
@@ -123,7 +123,7 @@
                         </div>
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-star-o"></i></a>
+                            <a href="#" class="btn-favorite"><i class="fa fa-star"></i></a>
                             <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                             <div class="dropdown-menu pull-right black lt"></div>
                           </div>
@@ -177,19 +177,23 @@
                       <div class="item r" data-id="item-4">
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-star-o"></i></a>
+                            <a href="#" class="btn-favorite"><i class="fa fa-star"></i></a>
                             <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                             <div class="dropdown-menu pull-right black lt"></div>
                           </div>
                           <div class="item-title text-ellipsis">
                             <a href="venue.detail.html">{{ venue.name }}</a>
                           </div>
+                          {% if venue.city %}
                           <div class="item-except visible-list text-sm m-t-sm">
                             City: {{ venue.city }}
                           </div>
+                          {% endif %}
+                          {% if venue.country %}
                           <div class="item-except visible-list text-sm m-t-sm">
                             Country: {{ venue.country }}
                           </div>
+                          {% endif %}
                           <div class="item-action visible-list m-t-md">
                             <a href="{% url 'event:venue_update' venue.id %}" class="btn btn-xs white">Edit</a>
                             <a href="{% url 'event:venue_delete' venue.id %}" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
@@ -215,9 +219,82 @@
                 </div>
               {% endif %}
             </div>
-            <div class="tab-pane" id="add-venue">
-            </div>
             <div class="tab-pane" id="bookmark">
+              <h5 class="m-b">Events</h5>
+              {% if user.events.all %}
+                <div class="row item-list item-list-md item-list-li m-b" id="events">
+                  {% for event in user.events.all%}
+                    <div class="col-md-12 col-lg-6">
+                      <div class="item r" data-id="item-2">
+                        {% if event.artists.all %}
+                          {% with event.artists.all|first as artist %}
+                            <div class="item-media ">
+                              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                            </div>
+                          {% endwith %}
+                        {% else %}
+                          <div class="item-media ">
+                            <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{% static 'event/images/a3.jpg' %}');"></a>
+                          </div>
+                        {% endif %}
+                        <div class="item-info">
+                          <div class="item-overlay bottom text-right">
+                            <a href="#" class="btn-favorite"><i class="fa fa-star"></i></a>
+                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                            <div class="dropdown-menu pull-right black lt"></div>
+                          </div>
+                          <div class="item-title text-ellipsis">
+                            <a href="{% url 'event:event_detail' event.id %}">{{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}</a>
+                          </div>
+                          <div class="item-author text-sm text-ellipsis ">
+                            <a href="{% url 'event:event_detail' event.id %}" class="text-muted">{{ event.datetime|date:"l, d M Y – g:i A" }}</a>
+                          </div>
+                          <div class="item-meta text-sm text-muted">
+                            <span class="item-meta-stats text-xs  item-meta-right">
+                              <i class="fa fa-star m-l-sm text-muted"></i> 10
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              {% else %}
+              {% endif %}
+              <h5 class="m-b">Artists</h5>
+              {% if user.artists.all %}
+                <div class="row m-b">
+                  {% for artist in user.artists.all %}
+                    <div class="col-xs-4 col-sm-4 col-md-3">
+                      <div class="item r" data-id="item-7">
+                      <div class="item-media ">
+                        <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                      </div>
+                      <div class="item-info">
+                        <div class="item-overlay bottom text-right">
+                          <a href="#" class="btn-favorite"><i class="fa fa-star"></i></a>
+                          <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                          <div class="dropdown-menu pull-right black lt"></div>
+                        </div>
+                        <div class="item-title text-ellipsis">
+                          <a href="{% url 'event:artist_detail' artist.id %}">{{ artist.name }}</a>
+                        </div>
+                        <div class="item-author text-sm text-ellipsis hide">
+                          <a href="{% url 'event:artist_detail' artist.id %}" class="text-muted">{{ artist.name }}</a>
+                        </div>
+                        <div class="item-meta text-sm text-muted">
+                          <span class="item-meta-stats text-xs ">
+                            <i class="fa fa-star text-muted"></i> 510
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+                </div>
+              {% else %}
+              {% endif %}
+              </div>
             </div>
             <div class="tab-pane" id="profile">
             </div>
