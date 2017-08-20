@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.views import generic
 from django.utils import timezone
 
@@ -163,3 +164,33 @@ class VenueDeleteView(generic.DeleteView):
 
     def get(self, *args, **kwargs):
         return self.post(*args, **kwargs)
+
+
+def bookmark_artist(request, pk):
+    if request.user.is_authenticated():
+        if request.user.artists.filter(id=pk):
+            request.user.artists.remove(pk)
+        else:
+            request.user.artists.add(pk)
+
+        return JsonResponse({'pk': pk})
+
+
+def bookmark_event(request, pk):
+    if request.user.is_authenticated():
+        if request.user.events.filter(id=pk):
+            request.user.events.remove(pk)
+        else:
+            request.user.events.add(pk)
+
+        return JsonResponse({'pk': pk})
+
+
+def bookmark_venue(request, pk):
+    if request.user.is_authenticated():
+        if request.user.venues.filter(id=pk):
+            request.user.venues.remove(pk)
+        else:
+            request.user.venues.add(pk)
+
+        return JsonResponse({'pk': pk})

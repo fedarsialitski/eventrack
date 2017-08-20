@@ -37,7 +37,7 @@
         </div>
         <div class="item-action m-b">
           <a class="btn btn-icon white rounded btn-share pull-right" data-toggle="modal" data-target="#share-modal"><i class="fa fa-share-alt"></i></a>
-          <a class="btn btn-icon rounded btn-favorite"><i class="fa fa-star-o"></i></a>
+          <a class="btn btn-icon rounded btn-favorite" data-url="{% url 'event:event_bookmark' event.id %}"><i class="fa fa-star-o"></i></a>
           <span class="text-muted">232</span>
           <div class="inline dropdown m-l-xs">
             <a class="btn btn-icon rounded btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
@@ -117,7 +117,7 @@
                   </div>
                   <div class="item-info">
                     <div class="item-overlay bottom text-right">
-                      <a href="#" class="btn-favorite"><i class="fa fa-star-o"></i></a>
+                      <a class="btn-favorite" data-url="{% url 'event:artist_bookmark' artist.id %}"><i class="fa fa-star-o"></i></a>
                       <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                       <div class="dropdown-menu pull-right black lt"></div>
                     </div>

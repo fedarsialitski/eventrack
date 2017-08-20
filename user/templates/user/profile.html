@@ -31,8 +31,8 @@
                 <a href="#" class="btn btn-sm rounded white">Edit Profile</a>
               </div>
               <div class="block clearfix m-b">
-                {% if user.events.count %}<span>{{ user.events.count }}</span> <span class="text-muted">Events</span>, {% endif %}
-                {% if user.artists.count %}<span>{{ user.artists.count }}</span> <span class="text-muted">Artists</span>{% endif %}
+                {% if user.events.count %}<span>{{ user.events.count }}</span> <span class="text-muted">Event{% if user.events.count > 1 %}s{% endif %}</span>{% endif %}{% if user.events.count and user.artists.count %}, {% endif %}
+                {% if user.artists.count %}<span>{{ user.artists.count }}</span> <span class="text-muted">Artist{% if user.artists.count > 1 %}s{% endif %}</span>{% endif %}
               </div>
             </div>
           </div>
@@ -81,7 +81,7 @@
                           {% endif %}
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-star"></i></a>
+                            <a class="btn-favorite" data-url="{% url 'event:event_bookmark' event.id %}"><i class="fa fa-star"></i></a>
                             <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                             <div class="dropdown-menu pull-right black lt"></div>
                           </div>
@@ -124,7 +124,7 @@
                         </div>
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-star"></i></a>
+                            <a class="btn-favorite" data-url="{% url 'event:artist_bookmark' artist.id %}"><i class="fa fa-star"></i></a>
                             <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                             <div class="dropdown-menu pull-right black lt"></div>
                           </div>
@@ -178,7 +178,7 @@
                       <div class="item r" data-id="item-4">
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-star"></i></a>
+                            <a class="btn-favorite" data-url="{% url 'event:venue_bookmark' venue.id %}"><i class="fa fa-star"></i></a>
                             <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                             <div class="dropdown-menu pull-right black lt"></div>
                           </div>
@@ -240,7 +240,7 @@
                         {% endif %}
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-star"></i></a>
+                            <a class="btn-favorite" data-url="{% url 'event:event_bookmark' event.id %}"><i class="fa fa-star"></i></a>
                             <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                             <div class="dropdown-menu pull-right black lt"></div>
                           </div>
@@ -273,7 +273,7 @@
                       </div>
                       <div class="item-info">
                         <div class="item-overlay bottom text-right">
-                          <a href="#" class="btn-favorite"><i class="fa fa-star"></i></a>
+                          <a class="btn-favorite" data-url="{% url 'event:artist_bookmark' artist.id %}"><i class="fa fa-star"></i></a>
                           <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                           <div class="dropdown-menu pull-right black lt"></div>
                         </div>
