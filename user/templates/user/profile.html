@@ -261,6 +261,13 @@
                   {% endfor %}
                 </div>
               {% else %}
+                <div class="col-lg-12 text-center">
+                  <div class="p-a-sm">
+                    <h2 class="m-y-md">No events in bookmarks</h2>
+                    <h6 class="text-muted m-b-md">Would you like to add a event to bookmarks?</h6>
+                    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:event' %}">Add</a>
+                  </div>
+                </div>
               {% endif %}
               <h5 class="m-b">Artists</h5>
               {% if user.artists.all %}
@@ -294,6 +301,13 @@
                 {% endfor %}
                 </div>
               {% else %}
+                <div class="col-lg-12 text-center">
+                  <div class="p-a-sm">
+                    <h2 class="m-y-md">No artists in bookmarks</h2>
+                    <h6 class="text-muted m-b-md">Would you like to add a artist to bookmarks?</h6>
+                    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:artist' %}">Add</a>
+                  </div>
+                </div>
               {% endif %}
               </div>
               <div class="tab-pane" id="profile">
