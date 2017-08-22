@@ -252,7 +252,7 @@
                           </div>
                           <div class="item-meta text-sm text-muted">
                             <span class="item-meta-stats text-xs  item-meta-right">
-                              <i class="fa fa-star m-l-sm text-muted"></i> {{ event.users.count }}
+                              {% if event.users.count %}<i class="fa fa-star m-l-sm text-muted"></i> {{ event.users.count }} {% endif %}
                             </span>
                           </div>
                         </div>
@@ -292,7 +292,7 @@
                         </div>
                         <div class="item-meta text-sm text-muted">
                           <span class="item-meta-stats text-xs ">
-                            <i class="fa fa-star text-muted"></i> {{ artist.users.count }}
+                            {% if artist.users.count %}<i class="fa fa-star text-muted"></i> {{ artist.users.count }} {% endif %}
                           </span>
                         </div>
                       </div>

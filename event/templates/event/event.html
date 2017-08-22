@@ -60,13 +60,12 @@
                           <div class="item-author text-sm text-ellipsis ">
                             <a href="{% url 'event:event_detail' event.id %}" class="text-muted">{{ event.datetime|date:"l, d M Y – g:i A" }}</a>
                           </div>
-                          {% if event.users.count %}
                           <div class="item-meta text-sm text-muted">
                             <span class="item-meta-stats text-xs  item-meta-right">
-                              <i class="fa fa-star text-muted"></i> {{ event.users.count }}
+                              {% if event.users.count %}<i class="fa fa-star text-muted"></i>
+                                  {{ event.users.count }}{% endif %}
                             </span>
                           </div>
-                          {% endif %}
                         </div>
                       </div>
                     </div>

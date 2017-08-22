@@ -13,13 +13,18 @@ $(document).on('click', '.btn-favorite', function () {
   $.ajax({
     url: url,
     dataType: 'json',
-    success: function () {
+    success: function (data) {
       if (pathName === '/profile/') {
         var elements = document.querySelectorAll("#" + id);
+
         Array.prototype.forEach.call(elements, function(node) {
           node.parentNode.removeChild(node);
         });
       } else {
+        var selector = '#' + id + ' span.item-meta-stats',
+            count = document.querySelector(selector),
+            countClass = $(selector).hasClass('text-xs');
+
         switch (className) {
           case 'fa-star':
             button.removeClass('fa-star');
@@ -29,6 +34,16 @@ $(document).on('click', '.btn-favorite', function () {
             button.removeClass('fa-star-o');
             button.addClass('fa-star');
             break;
+        }
+
+        if (data.count) {
+          if (countClass) {
+              count.innerHTML = '<i class="fa fa-star text-muted"></i> ' + data.count;
+          } else {
+              count.innerHTML = data.count;
+          }
+        } else {
+          count.innerHTML = '';
         }
       }
     }
