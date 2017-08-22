@@ -23,7 +23,7 @@
           <div class="p-l-md no-padding-xs">
             <div class="page-title">
               <h2 class="inline">{{ artist.name }}</h2>
-              <a class="btn-favorite text-primary text-lg m-l-xs" data-url="{% url 'event:artist_bookmark' artist.id %}">
+              <a class="btn-favorite text-primary text-lg m-l-xs" data-id="artist_{{ artist.id }}" data-url="{% url 'event:artist_bookmark' artist.id %}">
                 <i class="fa {% if artist in user.artists.all %}fa-star{% else %}fa-star-o{% endif %}"></i>
               </a>
             </div>
@@ -72,14 +72,14 @@
             {% if upcoming_events %}
               <div class="row item-list item-list-md item-list-li m-b" id="upcoming_events">
                 {% for upcoming_event in upcoming_events|slice:":4" %}
-                  <div class="col-md-12 col-lg-6">
+                  <div id="event_{{ upcoming_event.id }}" class="col-md-12 col-lg-6">
                     <div class="item r" data-id="item-2">
                       <div class="item-media ">
                         <a href="{% url 'event:event_detail' upcoming_event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
                       </div>
                       <div class="item-info">
                         <div class="item-overlay bottom text-right">
-                          <a class="btn-favorite" data-url="{% url 'event:event_bookmark' upcoming_event.id %}"><i class="fa {% if upcoming_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+                          <a class="btn-favorite" data-id="event_{{ upcoming_event.id }}" data-url="{% url 'event:event_bookmark' upcoming_event.id %}"><i class="fa {% if upcoming_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
                           <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                           <div class="dropdown-menu pull-right black lt"></div>
                         </div>
@@ -113,14 +113,14 @@
           {% if past_events %}
             <div class="row item-list item-list-md item-list-li m-b" id="past_events">
               {% for past_event in past_events|slice:":4" %}
-                <div class="col-md-12 col-lg-6">
+                <div id="event_{{ past_event.id }}" class="col-md-12 col-lg-6">
                   <div class="item r" data-id="item-2">
                     <div class="item-media">
                       <a href="{% url 'event:event_detail' past_event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
-                        <a class="btn-favorite" data-url="{% url 'event:event_bookmark' past_event.id %}"><i class="fa {% if past_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+                        <a class="btn-favorite" data-id="event_{{ past_event.id }}"  data-url="{% url 'event:event_bookmark' past_event.id %}"><i class="fa {% if past_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>
@@ -175,14 +175,14 @@
           {% if upcoming_events %}
               <div class="row item-list item-list-md item-list-li m-b">
                 {% for upcoming_event in upcoming_events %}
-                  <div class="col-xs-12">
+                  <div id="event_{{ upcoming_event.id }}" class="col-xs-12">
                     <div class="item r" data-id="item-12">
                     <div class="item-media ">
                       <a href="{% url 'event:event_detail' upcoming_event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
-                        <a class="btn-favorite" data-url="{% url 'event:event_bookmark' upcoming_event.id %}"><i class="fa {% if upcoming_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+                        <a class="btn-favorite" data-id="event_{{ upcoming_event.id }}"  data-url="{% url 'event:event_bookmark' upcoming_event.id %}"><i class="fa {% if upcoming_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>
@@ -234,14 +234,14 @@
           {% if artist.events.all %}
               <div class="row item-list item-list-md item-list-li m-b">
                 {% for event in artist.events.all %}
-                  <div class="col-xs-12">
+                  <div id="event_{{ event.id }}" class="col-xs-12">
                     <div class="item r" data-id="item-12">
                     <div class="item-media ">
                       <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
-                        <a class="btn-favorite" data-url="{% url 'event:event_bookmark' event.id %}"><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+                        <a class="btn-favorite" data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}"><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>

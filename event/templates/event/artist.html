@@ -28,7 +28,7 @@
         </div>
         <div class="row row-lg">
               {% for artist in artists %}
-                <div class="col-xs-4 col-sm-4 col-md-3">
+                <div id="artist_{{ artist.id }}" class="col-xs-4 col-sm-4 col-md-3">
                   <div class="item">
                   <div class="item-media rounded ">
                     <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
