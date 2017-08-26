@@ -17,7 +17,7 @@ $(document).on('click', '.btn-favorite', function () {
       if (pathName === '/profile/') {
         var elements = document.querySelectorAll("#" + id);
 
-        Array.prototype.forEach.call(elements, function(node) {
+        elements.forEach(function(node){
           node.parentNode.removeChild(node);
         });
       } else {
