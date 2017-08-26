@@ -3,7 +3,9 @@ $(document).on('click', 'div.item-action a', function () {
   $('form').attr('action', href);
 });
 
-$(document).unbind('click').on('click', '.btn-favorite', function () {
+$(document).on('click', '.btn-favorite', function (e) {
+  e.stopImmediatePropagation();
+
   var id = $(this).data('id'),
       url = $(this).data('url'),
       button = $(this).children('i'),
