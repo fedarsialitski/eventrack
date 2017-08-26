@@ -129,7 +129,7 @@
                     </div>
                     <div class="item-meta text-sm text-muted">
                       <span class="item-meta-stats text-xs ">
-                        {% if artist.users.count %}<i class="fa fa-star text-muted"></i> {{ artist.users.count }}{% endif %}
+                        {% if artist.users.count %}<i class="fa fa-star text-muted"></i> {{ artist.users.count }}{% else %}&nbsp{% endif %}
                       </span>
                     </div>
                   </div>

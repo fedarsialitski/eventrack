@@ -43,7 +43,7 @@ $(document).on('click', '.btn-favorite', function () {
               count.innerHTML = data.count;
           }
         } else {
-          count.innerHTML = '';
+          count.innerHTML = '&nbsp';
         }
       }
     }
