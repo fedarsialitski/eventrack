@@ -47,16 +47,16 @@
           <div class="nav-active-border b-primary bottom m-b-md m-t">
             <ul class="nav l-h-2x" data-ui-jp="taburl">
               <li class="nav-item m-r inline">
-                <a class="nav-link active" href="#" data-toggle="tab" data-target="#event">Events</a>
+                <a class="nav-link active" href="#" data-toggle="tab" data-target="#tab_events">Events</a>
               </li>
               <li class="nav-item m-r inline">
-                <a class="nav-link" href="#" data-toggle="tab" data-target="#artist">Artists</a>
+                <a class="nav-link" href="#" data-toggle="tab" data-target="#tab_artists">Artists</a>
               </li>
               <li class="nav-item m-r inline">
-                <a class="nav-link" href="#" data-toggle="tab" data-target="#venue">Venues</a>
+                <a class="nav-link" href="#" data-toggle="tab" data-target="#tab_venues">Venues</a>
               </li>
               <li class="nav-item m-r inline">
-                <a class="nav-link" href="#" data-toggle="tab" data-target="#bookmark">Bookmarks</a>
+                <a class="nav-link" href="#" data-toggle="tab" data-target="#tab_bookmark">Bookmarks</a>
               </li>
               <li class="nav-item m-r inline">
                 <a class="nav-link" href="#" data-toggle="tab" data-target="#profile">Profile</a>
@@ -64,9 +64,9 @@
             </ul>
           </div>
           <div class="tab-content">
-            <div class="tab-pane active" id="event">
+            <div class="tab-pane active" id="tab_events">
               {% if user.events.all %}
-                <div class="row item-list item-list-by m-b">
+                <div id="events" class="row item-list item-list-by m-b">
                   {% for event in user.events.all %}
                     <div id="event_{{ event.id }}" class="col-xs-12">
                       <div class="item r">
@@ -115,9 +115,9 @@
                 </div>
               {% endif %}
             </div>
-            <div class="tab-pane" id="artist">
+            <div class="tab-pane" id="tab_artists">
               {% if user.artists.all %}
-                <div class="row item-list item-list-by m-b">
+                <div id="artists" class="row item-list item-list-by m-b">
                   {% for artist in user.artists.all %}
                     <div id="artist_{{ artist.id }}" class="col-xs-12">
                       <div class="item r">
@@ -172,7 +172,7 @@
                 </div>
               {% endif %}
             </div>
-            <div class="tab-pane" id="venue">
+            <div class="tab-pane" id="tab_venues">
               {% if user.venues.all %}
                 <div class="row item-list item-list-by m-b">
                   {% for venue in user.venues.all %}
@@ -222,10 +222,10 @@
                 </div>
               {% endif %}
             </div>
-            <div class="tab-pane" id="bookmark">
+            <div class="tab-pane" id="tab_bookmark">
               <h5 class="m-b">Events</h5>
               {% if user.events.all %}
-                <div id="events" class="row item-list item-list-md item-list-li m-b">
+                <div id="bookmark_events" class="row item-list item-list-md item-list-li m-b">
                   {% for event in user.events.all%}
                     <div id="event_{{ event.id }}" class="col-md-12 col-lg-6">
                       <div class="item r" data-id="item-2">
@@ -273,7 +273,7 @@
               {% endif %}
               <h5 class="m-b">Artists</h5>
               {% if user.artists.all %}
-                <div id="artists" class="row m-b">
+                <div id="bookmark_artists" class="row m-b">
                   {% for artist in user.artists.all %}
                     <div id="artist_{{ artist.id }}" class="col-xs-4 col-sm-4 col-md-3">
                       <div class="item r" data-id="item-7">
@@ -344,13 +344,27 @@
   </div>
 </div>
 <div id="events" class="modal col-lg-12 text-center">
+  <div class="p-a-lg">
+    <h2 class="m-y-md">No added events</h2>
+    <h6 class="text-muted m-b-md">Would you like to add a event?</h6>
+    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:event_add' %}">Add</a>
+  </div>
+</div>
+<div id="artists" class="modal col-lg-12 text-center">
+  <div class="p-a-lg">
+    <h2 class="m-y-md">No added artists</h2>
+    <h6 class="text-muted m-b-md">Would you like to add a artist?</h6>
+    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:artist_add' %}">Add</a>
+  </div>
+</div>
+<div id="bookmark_events" class="modal col-lg-12 text-center">
   <div class="p-a-xs">
     <h2 class="m-y-sm">No events in bookmarks</h2>
     <h6 class="text-muted m-b-md">Would you like to add a event to bookmarks?</h6>
     <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:event' %}">Add</a>
   </div>
 </div>
-<div id="artists" class="modal col-lg-12 text-center">
+<div id="bookmark_artists" class="modal col-lg-12 text-center">
   <div class="p-a-xs">
     <h2 class="m-y-sm">No artists in bookmarks</h2>
     <h6 class="text-muted m-b-md">Would you like to add a artist to bookmarks?</h6>

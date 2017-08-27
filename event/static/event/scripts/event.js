@@ -20,11 +20,7 @@ $(document).on('click', '.btn-favorite', function (e) {
         var elements = document.querySelectorAll("#" + id),
             count = document.querySelector('span#' + data.id),
             comma = document.querySelector('span#comma'),
-            row = document.querySelector('div.row#' + data.id),
-            modal = document.querySelector('div.modal#' + data.id),
-            bookmark = document.querySelector('div.tab-pane#bookmark'),
             text = document.querySelector('span.text-muted#' + data.id),
-            modalElement = $('div.modal#' + data.id),
             dataCount;
 
         elements.forEach(function(node){
@@ -43,6 +39,15 @@ $(document).on('click', '.btn-favorite', function (e) {
         if (dataCount) {
           count.textContent = dataCount;
         } else {
+          var tab = document.querySelector('div.tab-pane#tab_' + data.id),
+              tabRow = document.querySelector('div.row#' + data.id),
+              tabModal = document.querySelector('div.modal#' + data.id),
+              tabModalElement = $('div.modal#' + data.id),
+              bookmark = document.querySelector('div.tab-pane#tab_bookmark'),
+              bookmarkRow = document.querySelector('div.row#bookmark_' + data.id),
+              bookmarkModal = document.querySelector('div.modal#bookmark_' + data.id),
+              bookmarkModalElement = $('div.modal#bookmark_' + data.id);
+
           text.remove();
           count.remove();
 
@@ -50,8 +55,11 @@ $(document).on('click', '.btn-favorite', function (e) {
             comma.remove();
           }
 
-          bookmark.replaceChild(modal, row);
-          modalElement.removeClass('modal');
+          bookmark.replaceChild(bookmarkModal, bookmarkRow);
+          bookmarkModalElement.removeClass('modal');
+
+          tab.replaceChild(tabModal, tabRow);
+          tabModalElement.removeClass('modal');
         }
       } else {
         var selector = '#' + id + ' span.item-meta-stats',
