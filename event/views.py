@@ -175,7 +175,9 @@ def bookmark_artist(request, pk):
 
         return JsonResponse({
             'pk': pk,
-            'count': Artist.objects.get(pk=pk).users.count(),
+            'id': 'artists',
+            'user_count': Artist.objects.get(pk=pk).users.count(),
+            'artist_count': request.user.artists.count(),
         })
 
 
@@ -188,7 +190,9 @@ def bookmark_event(request, pk):
 
         return JsonResponse({
             'pk': pk,
-            'count': Event.objects.get(pk=pk).users.count(),
+            'id': 'events',
+            'user_count': Event.objects.get(pk=pk).users.count(),
+            'event_count': request.user.events.count(),
         })
 
 
@@ -201,5 +205,7 @@ def bookmark_venue(request, pk):
 
         return JsonResponse({
             'pk': pk,
-            'count': Venue.objects.get(pk=pk).users.count(),
+            'id': 'venues',
+            'user_count': Venue.objects.get(pk=pk).users.count(),
+            'venue_count': request.user.venues.count(),
         })

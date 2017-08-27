@@ -30,10 +30,11 @@
                 <a href="#" class="btn btn-sm rounded primary">Upload</a>
                 <a href="#" class="btn btn-sm rounded white">Edit Profile</a>
               </div>
+              {% if user.events.count or user.artists.count %}
               <div class="block clearfix m-b">
-                {% if user.events.count %}<span>{{ user.events.count }}</span> <span class="text-muted">Event{% if user.events.count > 1 %}s{% endif %}</span>{% endif %}{% if user.events.count and user.artists.count %}, {% endif %}
-                {% if user.artists.count %}<span>{{ user.artists.count }}</span> <span class="text-muted">Artist{% if user.artists.count > 1 %}s{% endif %}</span>{% endif %}
-              </div>
+                {% if user.events.count %}<span id="events">{{ user.events.count }}</span> <span id="events" class="text-muted">Event{% if user.events.count > 1 %}s{% endif %}</span>{% endif %}{% if user.events.count and user.artists.count %}<span id="comma">, </span>{% endif %}
+                {% if user.artists.count %}<span id="artists">{{ user.artists.count }}</span> <span id="artists" class="text-muted">Artist{% if user.artists.count > 1 %}s{% endif %}</span>{% endif %}
+              {% endif %}
             </div>
           </div>
       </div>

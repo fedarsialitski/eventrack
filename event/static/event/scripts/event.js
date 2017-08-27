@@ -17,15 +17,39 @@ $(document).on('click', '.btn-favorite', function (e) {
     dataType: 'json',
     success: function (data) {
       if (pathName === '/profile/') {
-        var elements = document.querySelectorAll("#" + id);
+        var elements = document.querySelectorAll("#" + id),
+            count = document.querySelector('span#' + data.id),
+            comma = document.querySelector('span#comma'),
+            text = document.querySelector('span.text-muted#' + data.id),
+            dataCount;
 
         elements.forEach(function(node){
           node.parentNode.removeChild(node);
         });
+
+        switch (data.id) {
+          case 'events':
+            dataCount = data.event_count;
+            break;
+          case 'artists':
+            dataCount = data.artist_count;
+            break;
+        }
+
+        if (dataCount) {
+          count.textContent = dataCount;
+        } else {
+          text.remove();
+          count.remove();
+
+          if (comma) {
+            comma.remove();
+          }
+        }
       } else {
         var selector = '#' + id + ' span.item-meta-stats',
-            count = document.querySelector(selector),
-            countClass = $(selector).hasClass('text-xs');
+            userCount = document.querySelector(selector),
+            userCountClass = $(selector).hasClass('text-xs');
 
         switch (className) {
           case 'fa-star':
@@ -38,14 +62,14 @@ $(document).on('click', '.btn-favorite', function (e) {
             break;
         }
 
-        if (data.count) {
-          if (countClass) {
-              count.innerHTML = '<i class="fa fa-star text-muted"></i> ' + data.count;
+        if (data.user_count) {
+          if (userCountClass) {
+            userCount.innerHTML = '<i class="fa fa-star text-muted"></i> ' + data.user_count;
           } else {
-              count.innerHTML = data.count;
+            userCount.innerHTML = data.user_count;
           }
         } else {
-          count.innerHTML = '&nbsp';
+          userCount.innerHTML = '&nbsp';
         }
       }
     }
