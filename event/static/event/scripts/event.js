@@ -20,7 +20,11 @@ $(document).on('click', '.btn-favorite', function (e) {
         var elements = document.querySelectorAll("#" + id),
             count = document.querySelector('span#' + data.id),
             comma = document.querySelector('span#comma'),
+            row = document.querySelector('div.row#' + data.id),
+            modal = document.querySelector('div.modal#' + data.id),
+            bookmark = document.querySelector('div.tab-pane#bookmark'),
             text = document.querySelector('span.text-muted#' + data.id),
+            modalElement = $('div.modal#' + data.id),
             dataCount;
 
         elements.forEach(function(node){
@@ -45,6 +49,9 @@ $(document).on('click', '.btn-favorite', function (e) {
           if (comma) {
             comma.remove();
           }
+
+          bookmark.replaceChild(modal, row);
+          modalElement.removeClass('modal');
         }
       } else {
         var selector = '#' + id + ' span.item-meta-stats',
