@@ -174,7 +174,7 @@
             </div>
             <div class="tab-pane" id="tab_venues">
               {% if user.venues.all %}
-                <div class="row item-list item-list-by m-b">
+                <div id="venues" class="row item-list item-list-by m-b">
                   {% for venue in user.venues.all %}
                     <div id="venue_{{ venue.id }}" class="col-xs-12">
                       <div class="item r" data-id="item-4">
@@ -355,6 +355,13 @@
     <h2 class="m-y-md">No added artists</h2>
     <h6 class="text-muted m-b-md">Would you like to add a artist?</h6>
     <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:artist_add' %}">Add</a>
+  </div>
+</div>
+<div id="venues" class="modal col-lg-12 text-center">
+  <div class="p-a-lg">
+    <h2 class="m-y-md">No added venues</h2>
+    <h6 class="text-muted m-b-md">Would you like to add a venue?</h6>
+    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:venue_add' %}">Add</a>
   </div>
 </div>
 <div id="bookmark_events" class="modal col-lg-12 text-center">
