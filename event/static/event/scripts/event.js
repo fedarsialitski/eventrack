@@ -42,11 +42,9 @@ $(document).on('click', '.btn-favorite', function (e) {
           var tab = document.querySelector('div.tab-pane#tab_' + data.id),
               tabRow = document.querySelector('div.row#' + data.id),
               tabModal = document.querySelector('div.modal#' + data.id),
-              tabModalElement = $('div.modal#' + data.id),
               bookmark = document.querySelector('div.tab-pane#tab_bookmark'),
               bookmarkRow = document.querySelector('div.row#bookmark_' + data.id),
-              bookmarkModal = document.querySelector('div.modal#bookmark_' + data.id),
-              bookmarkModalElement = $('div.modal#bookmark_' + data.id);
+              bookmarkModal = document.querySelector('div.modal#bookmark_' + data.id);
 
           text.remove();
           count.remove();
@@ -55,11 +53,11 @@ $(document).on('click', '.btn-favorite', function (e) {
             comma.remove();
           }
 
-          bookmark.replaceChild(bookmarkModal, bookmarkRow);
-          bookmarkModalElement.removeClass('modal');
+          bookmark.replaceChild(bookmarkModal.cloneNode(true), bookmarkRow);
+          $('div.modal#bookmark_' + data.id + ':first').removeClass('modal');
 
-          tab.replaceChild(tabModal, tabRow);
-          tabModalElement.removeClass('modal');
+          tab.replaceChild(tabModal.cloneNode(true), tabRow);
+          $('div.modal#' + data.id + ':first').removeClass('modal');
         }
       } else {
         var selector = '#' + id + ' span.item-meta-stats',
