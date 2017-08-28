@@ -37,6 +37,7 @@
 
 <!-- ############ LAYOUT START-->
 
+{% if not user.is_authenticated.value %}
 <div id="sign-modal" class="modal fade animate black-overlay" data-backdrop="false">
   <div class="row-col h-v">
     <div class="row-cell v-m">
@@ -63,6 +64,7 @@
     </div>
   </div>
 </div>
+{% endif %}
 
   <!-- aside -->
   <div id="aside" class="app-aside modal fade nav-dropdown">
