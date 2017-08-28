@@ -37,6 +37,33 @@
 
 <!-- ############ LAYOUT START-->
 
+<div id="sign-modal" class="modal fade animate black-overlay" data-backdrop="false">
+  <div class="row-col h-v">
+    <div class="row-cell v-m">
+      <div class="modal-dialog">
+        <div class="modal-content ">
+          <div class="row-col">
+            <a data-dismiss="modal" class="pull-right text-muted text-lg p-a-sm m-r-sm">×</a>
+            <div class="p-a b-b">
+              <span class="h5">
+                Sign up for Eventrack
+              </span>
+            </div>
+          </div>
+          <div class="modal-body text-center">
+            <p class="p-y-sm"><img src="{% static 'event/images/logo.png' %}" alt="."></p>
+            <p>Join Eventrack to perform this action.</p>
+          </div>
+          <div class="modal-footer">
+            <a href="{% url 'user:signin' %}" role="button" class="btn btn-default b-primary p-x-md">Sign in</a>
+            <button type="button" class="btn green p-x-md"><a href="{% url 'user:signup' %}">Sign up</a></button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div>
+    </div>
+  </div>
+</div>
+
   <!-- aside -->
   <div id="aside" class="app-aside modal fade nav-dropdown">
     <!-- fluid app aside -->

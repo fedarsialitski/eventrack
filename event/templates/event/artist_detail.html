@@ -23,7 +23,7 @@
           <div class="p-l-md no-padding-xs">
             <div class="page-title">
               <h2 class="inline">{{ artist.name }}</h2>
-              <a class="btn-favorite text-primary text-lg m-l-xs" data-id="artist_{{ artist.id }}" data-url="{% url 'event:artist_bookmark' artist.id %}">
+              <a class="btn-favorite text-primary text-lg m-l-xs" {% if user.is_authenticated.value %}data-id="artist_{{ artist.id }}" data-url="{% url 'event:artist_bookmark' artist.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}>
                 <i class="fa {% if artist in user.artists.all %}fa-star{% else %}fa-star-o{% endif %}"></i>
               </a>
             </div>
@@ -79,7 +79,7 @@
                       </div>
                       <div class="item-info">
                         <div class="item-overlay bottom text-right">
-                          <a class="btn-favorite" data-id="event_{{ upcoming_event.id }}" data-url="{% url 'event:event_bookmark' upcoming_event.id %}"><i class="fa {% if upcoming_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+                          <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ upcoming_event.id }}" data-url="{% url 'event:event_bookmark' upcoming_event.id %}"{% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if upcoming_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
                           <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                           <div class="dropdown-menu pull-right black lt"></div>
                         </div>
@@ -118,7 +118,7 @@
                     </div>
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
-                        <a class="btn-favorite" data-id="event_{{ past_event.id }}"  data-url="{% url 'event:event_bookmark' past_event.id %}"><i class="fa {% if past_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+                        <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ past_event.id }}"  data-url="{% url 'event:event_bookmark' past_event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if past_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>
@@ -178,7 +178,7 @@
                     </div>
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
-                        <a class="btn-favorite" data-id="event_{{ upcoming_event.id }}"  data-url="{% url 'event:event_bookmark' upcoming_event.id %}"><i class="fa {% if upcoming_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+                        <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ upcoming_event.id }}"  data-url="{% url 'event:event_bookmark' upcoming_event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if upcoming_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>
@@ -235,7 +235,7 @@
                     </div>
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
-                        <a class="btn-favorite" data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}"><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+                        <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>
