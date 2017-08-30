@@ -3,6 +3,21 @@ $(document).on('click', 'div.item-action a', function () {
   $('form').attr('action', href);
 });
 
+$(document).on('click', 'div.item-action a#edit_profile', function () {
+  var activeTab = $('div.tab-pane.active'),
+      activeNav = $('a.nav-link.active'),
+      profileTab = $('div#tab_profile.tab-pane'),
+      profileNav = $('[data-target="#tab_profile"]');
+
+  activeNav.removeClass('active');
+  activeTab.removeClass('active');
+  activeTab.attr('aria-expanded', 'false');
+
+  profileNav.addClass('active');
+  profileTab.addClass('active');
+  profileTab.attr('aria-expanded', 'true');
+});
+
 $(document).on('click', '.btn-favorite', function (e) {
   e.stopImmediatePropagation();
 

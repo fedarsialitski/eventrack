@@ -28,7 +28,7 @@
               </h1>
               <div class="item-action m-b">
                 <a href="#" class="btn btn-sm rounded primary">Upload</a>
-                <a href="#" class="btn btn-sm rounded white">Edit Profile</a>
+                <a id="edit_profile" class="btn btn-sm rounded white">Edit Profile</a>
               </div>
               {% if user.events.count or user.artists.count %}
               <div class="block clearfix m-b">
@@ -59,7 +59,7 @@
                 <a class="nav-link" href="#" data-toggle="tab" data-target="#tab_bookmark">Bookmarks</a>
               </li>
               <li class="nav-item m-r inline">
-                <a class="nav-link" href="#" data-toggle="tab" data-target="#profile">Profile</a>
+                <a class="nav-link" href="#" data-toggle="tab" data-target="#tab_profile">Profile</a>
               </li>
             </ul>
           </div>
@@ -312,7 +312,68 @@
                 </div>
               {% endif %}
               </div>
-              <div class="tab-pane" id="profile">
+              <div class="tab-pane" id="tab_profile">
+                <form name="form" action="{% url 'user:update' %}" method="post">
+                  {% csrf_token %}
+                  <div class="col-xs-8 p-x-xs">
+                    <div class="form-group row">
+                      <div class="col-sm-2 form-control-label text-muted p-y-sm">Username</div>
+                      <div class="col-sm-4">
+                        <input type="text" name="username" value="{{ form.username.value|default_if_none:"" }}" class="form-control {% if form.username.errors %}b-danger{% endif %}" placeholder="Username">
+                      </div>
+                      {% if form.username.errors %}
+                        <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
+                          <b class="arrow left b-danger"></b>
+                          {% for errors in form.username.errors %}
+                            {{ errors|striptags }}<br>
+                          {% endfor %}
+                        </span>
+                      {% endif %}
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-2 form-control-label text-muted p-y-sm">Email</div>
+                      <div class="col-sm-4">
+                        <input type="email" name="email" value="{{ form.email.value|default_if_none:"" }}" class="form-control {% if form.email.errors %}b-danger{% endif %}" placeholder="Email">
+                      </div>
+                      {% if form.email.errors %}
+                        <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
+                          <b class="arrow left b-danger"></b>
+                          {% for errors in form.email.errors %}
+                            {{ errors|striptags }}<br>
+                          {% endfor %}
+                        </span>
+                      {% endif %}
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-2 form-control-label text-muted p-y-sm">First name</div>
+                      <div class="col-sm-4">
+                        <input title="{{ form.first_name.help_text }}" value="{{ form.first_name.value|default_if_none:"" }}" type="text" name="first_name" class="form-control {% if form.first_name.errors %}b-danger{% endif %}" placeholder="First name">
+                      </div>
+                      {% if form.first_name.errors %}
+                        <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
+                          <b class="arrow left b-danger"></b>
+                          {% for errors in form.first_name.errors %}
+                            {{ errors|striptags }}<br>
+                          {% endfor %}
+                        </span>
+                      {% endif %}
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-2 form-control-label text-muted p-y-sm">Last name</div>
+                      <div class="col-sm-4">
+                        <input title="{{ form.last_name.help_text }}" value="{{ form.last_name.value|default_if_none:"" }}" type="text" name="last_name" class="form-control {% if form.last_name.errors %}b-danger{% endif %}" placeholder="Last name">
+                      </div>
+                      {% if form.last_name.errors %}
+                        <span class="label label-md danger pos-rlt p-a-sm col-xs-4 col-form-label mr-2">
+                          <b class="arrow left b-danger"></b>
+                          {% for errors in form.last_name.errors %}
+                            {{ errors|striptags }}<br>
+                          {% endfor %}
+                        </span>
+                      {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-md circle btn-outline b-primary p-x-md m-b-lg">Update</button>
+                  </form>
               </div>
             </div>
           </div>

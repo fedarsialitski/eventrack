@@ -4,7 +4,7 @@ from django.shortcuts import render, reverse
 from django.contrib.auth import login, logout
 from django.views.decorators.csrf import csrf_protect
 
-from .forms import SignupForm, SigninForm
+from .forms import SignupForm, SigninForm, UpdateForm
 from .models import User
 
 
@@ -54,3 +54,16 @@ def signin(request):
 def signout(request):
     logout(request)
     return HttpResponseRedirect(reverse('event:index'))
+
+
+@csrf_protect
+def update(request):
+    if request.method == 'POST':
+        form = UpdateForm(data=request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+        else:
+            return render(request, 'user/profile.html', {'form': form, 'error': True})
+    else:
+        form = UpdateForm(instance=request.user)
+    return render(request, 'user/profile.html', {'form': form})
