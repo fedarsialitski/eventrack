@@ -4,18 +4,10 @@ $(document).on('click', 'div.item-action a', function () {
 });
 
 $(document).on('click', 'div.item-action a#edit_profile', function () {
-  var activeTab = $('div.tab-pane.active'),
-      activeNav = $('a.nav-link.active'),
-      profileTab = $('div#tab_profile.tab-pane'),
-      profileNav = $('[data-target="#tab_profile"]');
-
-  activeNav.removeClass('active');
-  activeTab.removeClass('active');
-  activeTab.attr('aria-expanded', 'false');
-
-  profileNav.addClass('active');
-  profileTab.addClass('active');
-  profileTab.attr('aria-expanded', 'true');
+  $('a.nav-link.active').removeClass('active');
+  $('[data-target="#tab_profile"]').addClass('active');
+  $(this).removeClass('active');
+  $(this).removeAttr('aria-expanded');
 });
 
 $(document).on('click', '.btn-favorite', function (e) {
