@@ -79,9 +79,9 @@ $(document).on('click', '.btn-favorite', function (e) {
     success: function (data) {
       if (pathName === '/profile/') {
         var elements = document.querySelectorAll("#" + id),
-            count = document.querySelector('span#' + data.id),
+            count = document.querySelector('span#count_' + data.id),
             comma = document.querySelector('span#comma'),
-            text = document.querySelector('span.text-muted#' + data.id),
+            text = document.querySelector('span.text-muted#text_' + data.id),
             dataCount;
 
         elements.forEach(function(node){
@@ -100,10 +100,10 @@ $(document).on('click', '.btn-favorite', function (e) {
         if (dataCount) {
           count.textContent = dataCount;
         } else {
-          var tab = document.querySelector('div.tab-pane#tab_' + data.id),
-              tabRow = document.querySelector('div.row#' + data.id),
-              tabModal = document.querySelector('div.modal#' + data.id),
-              bookmark = document.querySelector('div.tab-pane#tab_bookmark'),
+          var tab = document.querySelector('div.tab-pane#' + data.id),
+              tabRow = document.querySelector('div.row#row_' + data.id),
+              tabModal = document.querySelector('div.modal#modal_' + data.id),
+              bookmark = document.querySelector('div.tab-pane#bookmarks'),
               bookmarkRow = document.querySelector('div.row#bookmark_' + data.id),
               bookmarkModal = document.querySelector('div.modal#bookmark_' + data.id);
 
@@ -126,7 +126,7 @@ $(document).on('click', '.btn-favorite', function (e) {
 
           if (tab && tabRow && tabModal) {
             tab.replaceChild(tabModal.cloneNode(true), tabRow);
-            $('div.modal#' + data.id + ':first').removeClass('modal');
+            $('div.modal#modal_' + data.id + ':first').removeClass('modal');
           }
         }
       } else {

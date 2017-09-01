@@ -140,7 +140,7 @@
                 <span class="text-xs text-muted">Profile</span>
               </li>
               <li>
-                <a href="{% url 'user:profile' %}#tab_events">
+                <a href="{% url 'user:profile' %}#events">
                   <span class="nav-label">
                     <b class="label">8</b>
                   </span>
@@ -153,7 +153,7 @@
                 </a>
               </li>
               <li>
-                <a href="{% url 'user:profile' %}#tab_artists">
+                <a href="{% url 'user:profile' %}#artists">
                   <span class="nav-icon">
                     <i class="material-icons">
                       recent_actors
@@ -163,7 +163,7 @@
                 </a>
               </li>
               <li>
-                <a href="{% url 'user:profile' %}#tab_venues">
+                <a href="{% url 'user:profile' %}#venues">
                   <span class="nav-icon">
                     <i class="material-icons">
                       pin_drop
@@ -173,7 +173,7 @@
                 </a>
               </li>
               <li>
-                <a href="{% url 'user:profile' %}#tab_bookmark">
+                <a href="{% url 'user:profile' %}#bookmarks">
                   <span class="nav-icon">
                     <i class="material-icons">
                       star
@@ -205,19 +205,19 @@
             </a>
             {% url 'user:profile' as profile %}
             <div id="dropdown_menu" class="dropdown-menu w dropdown-menu-scale ">
-              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#tab_profile" {% if request.path == profile%}data-toggle="tab" data-target="#tab_profile"{% endif %}>
+              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#profile" {% if request.path == profile%}data-toggle="tab" data-target="#profile"{% endif %}>
                 <span>Profile</span>
               </a>
-              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#tab_events" {% if request.path == profile%}data-toggle="tab" data-target="#tab_events"{% endif %}>
+              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#events" {% if request.path == profile%}data-toggle="tab" data-target="#events"{% endif %}>
                 <span>Events</span>
               </a>
-              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#tab_artists" {% if request.path == profile%}data-toggle="tab" data-target="#tab_artists"{% endif %}>
+              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#artists" {% if request.path == profile%}data-toggle="tab" data-target="#artists"{% endif %}>
                 <span>Artists</span>
               </a>
-              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#tab_venues" {% if request.path == profile%}data-toggle="tab" data-target="#tab_venues"{% endif %}>
+              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#venues" {% if request.path == profile%}data-toggle="tab" data-target="#venues"{% endif %}>
                 <span>Venues</span>
               </a>
-              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#tab_bookmark" {% if request.path == profile%}data-toggle="tab" data-target="#tab_bookmark"{% endif %}>
+              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#bookmarks" {% if request.path == profile%}data-toggle="tab" data-target="#bookmarks"{% endif %}>
                 <span>Bookmarks</span>
               </a>
               <div class="dropdown-divider"></div>
