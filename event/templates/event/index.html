@@ -80,7 +80,7 @@
       <div data-flex class="hide-scroll">
           <nav class="scroll nav-stacked nav-active-primary">
 
-            <ul class="nav" data-ui-nav>
+            <ul id="change_menu" class="nav" data-ui-nav>
               <li class="nav-header hidden-folded">
                 <span class="text-xs text-muted">Main</span>
               </li>
@@ -140,7 +140,7 @@
                 <span class="text-xs text-muted">Profile</span>
               </li>
               <li>
-                <a href="{% url 'user:profile' %}">
+                <a href="{% url 'user:profile' %}#tab_events">
                   <span class="nav-label">
                     <b class="label">8</b>
                   </span>
@@ -153,7 +153,7 @@
                 </a>
               </li>
               <li>
-                <a href="{% url 'user:profile' %}">
+                <a href="{% url 'user:profile' %}#tab_artists">
                   <span class="nav-icon">
                     <i class="material-icons">
                       recent_actors
@@ -163,7 +163,7 @@
                 </a>
               </li>
               <li>
-                <a href="{% url 'user:profile' %}">
+                <a href="{% url 'user:profile' %}#tab_venues">
                   <span class="nav-icon">
                     <i class="material-icons">
                       pin_drop
@@ -173,7 +173,7 @@
                 </a>
               </li>
               <li>
-                <a href="{% url 'user:profile' %}">
+                <a href="{% url 'user:profile' %}#tab_bookmark">
                   <span class="nav-icon">
                     <i class="material-icons">
                       star
@@ -203,20 +203,21 @@
                   </span>
                 </span>
             </a>
-            <div class="dropdown-menu w dropdown-menu-scale ">
-              <a class="dropdown-item" href="{% url 'user:profile' %}">
+            {% url 'user:profile' as profile %}
+            <div id="dropdown_menu" class="dropdown-menu w dropdown-menu-scale ">
+              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#tab_profile" {% if request.path == profile%}data-toggle="tab" data-target="#tab_profile"{% endif %}>
                 <span>Profile</span>
               </a>
-              <a class="dropdown-item" href="{% url 'user:profile' %}">
+              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#tab_events" {% if request.path == profile%}data-toggle="tab" data-target="#tab_events"{% endif %}>
                 <span>Events</span>
               </a>
-              <a class="dropdown-item" href="{% url 'user:profile' %}">
+              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#tab_artists" {% if request.path == profile%}data-toggle="tab" data-target="#tab_artists"{% endif %}>
                 <span>Artists</span>
               </a>
-              <a class="dropdown-item" href="{% url 'user:profile' %}">
+              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#tab_venues" {% if request.path == profile%}data-toggle="tab" data-target="#tab_venues"{% endif %}>
                 <span>Venues</span>
               </a>
-              <a class="dropdown-item" href="{% url 'user:profile' %}">
+              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#tab_bookmark" {% if request.path == profile%}data-toggle="tab" data-target="#tab_bookmark"{% endif %}>
                 <span>Bookmarks</span>
               </a>
               <div class="dropdown-divider"></div>

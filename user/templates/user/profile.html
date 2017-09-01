@@ -28,7 +28,7 @@
               </h1>
               <div class="item-action m-b">
                 <a href="#" class="btn btn-sm rounded primary">Upload</a>
-                <a id="edit_profile" class="btn btn-sm rounded white" data-toggle="tab" data-target="#tab_profile">Edit Profile</a>
+                <a id="change_tab" class="btn btn-sm rounded white" data-toggle="tab" data-target="#tab_profile">Edit Profile</a>
               </div>
               {% if user.events.count or user.artists.count %}
               <div class="block clearfix m-b">
@@ -45,7 +45,7 @@
       <div class="col-lg-9 b-r no-border-md">
         <div class="padding p-y-0 m-b-md">
           <div class="nav-active-border b-primary bottom m-b-md m-t">
-            <ul class="nav l-h-2x" data-ui-jp="taburl">
+            <ul id="change_nav" class="nav l-h-2x" data-ui-jp="taburl">
               <li class="nav-item m-r inline">
                 <a class="nav-link active" href="#" data-toggle="tab" data-target="#tab_events">Events</a>
               </li>

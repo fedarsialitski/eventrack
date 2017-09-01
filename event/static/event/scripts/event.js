@@ -3,11 +3,65 @@ $(document).on('click', 'div.item-action a', function () {
   $('form').attr('action', href);
 });
 
-$(document).on('click', 'div.item-action a#edit_profile', function () {
+$(document).on('click', 'ul#change_nav li', function () {
+  var target = $(this).children().data('target'),
+      menuItem = document.querySelector('[href="/profile/' + target + '"]'),
+      dropdownItem = document.querySelector('[data-target="' + target + '"]');
+
+  $('a#change_tab.active').removeClass('active');
+  $('ul#change_menu.nav li.active').removeClass('active');
+
+  menuItem.parentNode.classList.add('active');
+  dropdownItem.classList.add('active');
+});
+
+$(document).on('click', 'ul#change_menu.nav li', function () {
+  var href = $(this).children().attr('href'),
+      dropdownItem = $('div#dropdown_menu.dropdown-menu a.dropdown-item');
+
+  if (href.startsWith('/profile/')) {
+    var dropdownItems = document.querySelectorAll('div#dropdown_menu.dropdown-menu a.dropdown-item');
+
+    dropdownItem.attr('id', 'change_tab');
+    dropdownItem.attr('data-toggle', 'tab');
+    dropdownItems.forEach(function(item) {
+      item.setAttribute('data-target', item.hash);
+    });
+  } else {
+    var changeTab = $('a#change_tab');
+
+    changeTab.removeAttr('id');
+    changeTab.removeAttr('data-toggle');
+    changeTab.removeAttr('data-target');
+    dropdownItem.removeClass('active');
+  }
+});
+
+$(document).on('click', 'a#change_tab', function () {
+  var target = $(this).data('target'),
+      menuItem = document.querySelector('[href="/profile/' + target + '"]'),
+      dropdownItem = document.querySelector('[data-target="' + target + '"]');
+
   $('a.nav-link.active').removeClass('active');
-  $('[data-target="#tab_profile"]').addClass('active');
-  $(this).removeClass('active');
+  $('[data-target="' + target + '"]').addClass('active');
+  $('a#change_tab').removeClass('active');
+
+  if ($(this).hasClass('btn')) {
+    $(this).removeClass('active');
+  } else {
+    $(this).addClass('active');
+  }
+
   $(this).removeAttr('aria-expanded');
+  $('ul#change_menu.nav li.active').removeClass('active');
+
+  if (menuItem) {
+    menuItem.parentNode.classList.add('active');
+  }
+
+  if (dropdownItem) {
+    dropdownItem.classList.add('active');
+  }
 });
 
 $(document).on('click', '.btn-favorite', function (e) {
