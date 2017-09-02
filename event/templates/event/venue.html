@@ -1,1 +1,77 @@
 {% extends 'event/index.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="app-body light" id="view">
+    <!-- ############ PAGE START-->
+
+    <div class="page-content">
+      <div class="row-col">
+        <div class="col-lg-9 b-r no-border-md">
+          <div class="padding">
+
+            <div class="page-title m-b">
+              <h2 class="inline m-a-0">Venues</h2>
+            </div>
+            <div class="row item-list item-list-md item-list-li m-b">
+              {% if venues %}
+                {% for venue in venues %}
+                  <div id="venue_{{ venue.id }}" class="col-xs-12">
+                    <div class="item r" data-id="item-12">
+                        {% if venue.events.all %}
+                            {% for event in venue.events.all %}
+                              {% if forloop.counter <= 5 %}
+                                <div class="item-media ">
+                                  <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" {% if event.artists.all.0.thumb_url %}style="background-image: url('{{ event.artists.all.0.thumb_url }}');"{% endif %}>
+                                    {% if not event.artists.all.0.thumb_url %}
+                                      <i class="material-icons md-36 center text-muted">
+                                        event
+                                      </i>
+                                    {% endif %}
+                                  </a>
+                                </div>
+                              {% endif %}
+                            {% endfor %}
+                        {% else %}
+                          <div class="item-media ">
+                            <a {% if user.is_authenticated.value %}href="{% url 'event:venue_update' venue.id %}"{% endif %} class="item-media-content">
+                              <i class="material-icons md-36 center text-muted">
+                                place
+                              </i>
+                            </a>
+                          </div>
+                        {% endif %}
+                        <div class="item-info">
+                          <div class="item-overlay bottom text-right">
+                            <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="venue_{{ venue.id }}" data-url="{% url 'event:venue_bookmark' venue.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if venue in user.venues.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                            <div class="dropdown-menu pull-right black lt"></div>
+                          </div>
+                          <div class="item-title text-ellipsis">
+                            <a {% if user.is_authenticated.value %}href="{% url 'event:venue_update' venue.id %}"{% endif %}>{{ venue.name }}</a>
+                          </div>
+                          <div class="item-author text-sm text-ellipsis ">
+                            <a {% if user.is_authenticated.value %}href="{% url 'event:venue_update' venue.id %}"{% endif %} class="text-muted">{{ venue.city }}{% if venue.city and venue.country %}, {% endif %}{{ venue.country }}</a>
+                          </div>
+                          <div class="item-meta text-sm text-muted">
+                            <span class="item-meta-stats text-xs  item-meta-right">
+                              {% if venue.users.count %}<i class="fa fa-star text-muted"></i>
+                                  {{ venue.users.count }}{% endif %}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                {% else %}
+                  <div class="col-xs-12">
+                    No venues
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock content %}

@@ -137,6 +137,13 @@ class EventDeleteView(generic.DeleteView):
 class VenueView(generic.ListView):
     model = Venue
     template_name = 'event/venue.html'
+    context_object_name = 'venues'
+
+    def get_queryset(self):
+        """
+        Return the first twelve venues
+        """
+        return Venue.objects.all()[:12]
 
 
 class VenueCreateView(generic.CreateView):

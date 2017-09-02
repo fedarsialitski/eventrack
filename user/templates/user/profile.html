@@ -185,7 +185,7 @@
                             <div class="dropdown-menu pull-right black lt"></div>
                           </div>
                           <div class="item-title text-ellipsis">
-                            <a href="venue.detail.html">{{ venue.name }}</a>
+                            <a href="{% url 'event:venue_update' venue.id %}">{{ venue.name }}</a>
                           </div>
                           {% if venue.city %}
                           <div class="item-except visible-list text-sm m-t-sm">
