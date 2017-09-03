@@ -3,6 +3,19 @@ $(document).on('click', 'div.item-action a', function () {
   $('form').attr('action', href);
 });
 
+$(document).on('click', 'div#artist_sort a', function () {
+  var id = $(this).attr('id'),
+      activeSort = $('div#artist_sort a.dropdown-item.active'),
+      button = document.querySelector('button#artist_button');
+
+  activeSort.removeClass('active');
+  $(this).addClass('active');
+
+  $('div.row').addClass('modal');
+  $('div.modal.row#' + id).removeClass('modal');
+  button.textContent = $(this).text();
+});
+
 $(document).on('click', 'ul#change_nav li', function () {
   var target = $(this).children().data('target'),
       menuItem = document.querySelector('[href="/profile/' + target + '"]'),

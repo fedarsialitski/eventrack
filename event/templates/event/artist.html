@@ -15,44 +15,72 @@
         <div class="page-title m-b">
           <h2 class="inline m-a-0">Artists</h2>
           <div class="dropdown inline">
-            <button class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">By name</button>
-            <div class="dropdown-menu">
-              <a href="#" class="dropdown-item active">
+            <button id="artist_button" class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">By name</button>
+            <div id="artist_sort" class="dropdown-menu">
+              <a id="by_name" class="dropdown-item active">
                 By name
               </a>
-              <a href="#" class="dropdown-item">
+              <a id="by_events" class="dropdown-item">
                 Events
               </a>
             </div>
           </div>
         </div>
-        <div class="row row-lg">
-              {% for artist in artists %}
-                <div id="artist_{{ artist.id }}" class="col-xs-4 col-sm-4 col-md-3">
-                  <div class="item">
-                  <div class="item-media rounded ">
-                    <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
-                  </div>
-                  <div class="item-info text-center">
-                    <div class="item-title text-ellipsis">
-                      <a href="{% url 'event:artist_detail' artist.id %}">{{artist.name}}</a>
-                      <div class="text-sm text-muted">
-                        {% if artist.events.count %}
-                          {{ artist.events.count }}
-                          {% if artist.events.count == 1 %}
-                            event
-                          {% else %}
-                            events
-                          {% endif %}
-                        {% else %}
-                          No upcoming events
-                        {% endif %}
-                      </div>
-                    </div>
+        <div id="by_name" class="row row-lg">
+          {% for artist in artists %}
+            <div id="artist_{{ artist.id }}" class="col-xs-4 col-sm-4 col-md-3">
+              <div class="item">
+              <div class="item-media rounded ">
+                <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+              </div>
+              <div class="item-info text-center">
+                <div class="item-title text-ellipsis">
+                  <a href="{% url 'event:artist_detail' artist.id %}">{{artist.name}}</a>
+                  <div class="text-sm text-muted">
+                    {% if artist.events.count %}
+                      {{ artist.events.count }}
+                      {% if artist.events.count == 1 %}
+                        event
+                      {% else %}
+                        events
+                      {% endif %}
+                    {% else %}
+                      No upcoming events
+                    {% endif %}
                   </div>
                 </div>
               </div>
-            {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+        <div id="by_events" class="row row-lg modal">
+          {% for artist in artists|dictsortreversed:"events.count" %}
+            <div id="artist_{{ artist.id }}" class="col-xs-4 col-sm-4 col-md-3">
+              <div class="item">
+              <div class="item-media rounded ">
+                <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+              </div>
+              <div class="item-info text-center">
+                <div class="item-title text-ellipsis">
+                  <a href="{% url 'event:artist_detail' artist.id %}">{{artist.name}}</a>
+                  <div class="text-sm text-muted">
+                    {% if artist.events.count %}
+                      {{ artist.events.count }}
+                      {% if artist.events.count == 1 %}
+                        event
+                      {% else %}
+                        events
+                      {% endif %}
+                    {% else %}
+                      No upcoming events
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
         </div>
       </div>
     </div>
