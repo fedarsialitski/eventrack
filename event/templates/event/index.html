@@ -191,7 +191,11 @@
           <div class="nav-fold dropup">
             <a data-toggle="dropdown">
                 <span class="pull-left">
-                  <i class="material-icons md-36">account_circle</i>
+                  {% if user.thumb_url %}
+                    <img src="{{ user.thumb_url }}" class="w-32 img-circle">
+                  {% else %}
+                    <i class="material-icons md-36">account_circle</i>
+                  {% endif %}
                 </span>
                 <span class="clear hidden-folded p-x p-y-xs">
                   <span class="block _600 text-ellipsis">

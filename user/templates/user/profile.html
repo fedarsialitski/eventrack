@@ -4,14 +4,14 @@
 {% block content %}
 <div class="app-body light" id="view">
 <!-- ############ PAGE START-->
-<div class="page-bg" data-stellar-ratio="2" style="background-image: url({% static 'event/images/a3.jpg' %});"></div>
+<div class="page-bg" data-stellar-ratio="2" style="background-image: url({% if user.image_url %}{{ user.image_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %});"></div>
   <div class="page-content">
     <div class="padding b-b">
       <div class="row-col">
           <div class="col-sm w w-auto-xs m-b">
             <div class="item w rounded">
               <div class="item-media">
-                <div class="item-media-content" style="background-image: url({% static 'event/images/a3.jpg' %});"></div>
+                <div class="item-media-content" style="background-image: url({% if user.thumb_url %}{{ user.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %});"></div>
               </div>
             </div>
           </div>
@@ -367,6 +367,34 @@
                         <span class="label label-md danger pos-rlt p-a-sm col-xs-4 col-form-label mr-2">
                           <b class="arrow left b-danger"></b>
                           {% for errors in form.last_name.errors %}
+                            {{ errors|striptags }}<br>
+                          {% endfor %}
+                        </span>
+                      {% endif %}
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-2 form-control-label text-muted p-y-sm">Image url</div>
+                      <div class="col-sm-4">
+                        <input type="url" name="image_url" value="{{ form.image_url.value|default_if_none:"" }}" class="form-control {% if form.image_url.errors %}b-danger{% endif %}" placeholder="Image url">
+                      </div>
+                      {% if form.image_url.errors %}
+                        <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
+                          <b class="arrow left b-danger"></b>
+                          {% for errors in form.image_url.errors %}
+                            {{ errors|striptags }}<br>
+                          {% endfor %}
+                        </span>
+                      {% endif %}
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-2 form-control-label text-muted p-y-sm">Thumb url</div>
+                      <div class="col-sm-4">
+                        <input type="url" name="thumb_url" value="{{ form.thumb_url.value|default_if_none:"" }}" class="form-control {% if form.thumb_url.errors %}b-danger{% endif %}" placeholder="Thumb url">
+                      </div>
+                      {% if form.thumb_url.errors %}
+                        <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
+                          <b class="arrow left b-danger"></b>
+                          {% for errors in form.thumb_url.errors %}
                             {{ errors|striptags }}<br>
                           {% endfor %}
                         </span>

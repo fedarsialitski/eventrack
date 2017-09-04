@@ -57,4 +57,6 @@ class UpdateForm(forms.ModelForm):
             'email',
             'first_name',
             'last_name',
+            'image_url',
+            'thumb_url',
         ]
