@@ -30,10 +30,10 @@
             <div class="item-action m-b">
               <a class="btn btn-icon white rounded btn-share pull-right" data-toggle="modal" data-target="#share-modal"><i class="fa fa-share-alt"></i></a>
               <span>
-                {% if upcoming_events.count %}
+                {% if upcoming_events.all.count %}
                   <i class="material-icons md-24">event_note</i>
-                  {{ upcoming_events.count }}
-                  {% if upcoming_events.count == 1 %}
+                  {{ upcoming_events.all.count }}
+                  {% if upcoming_events.all.count == 1 %}
                     upcoming event
                   {% else %}
                     upcoming events
@@ -59,7 +59,7 @@
               <a class="nav-link" href="#" data-toggle="tab" data-target="#tab_2">Upcoming</a>
             </li>
             <li class="nav-item m-r inline">
-              <a class="nav-link" href="#" data-toggle="tab" data-target="#tab_3">All</a>
+              <a class="nav-link" href="#" data-toggle="tab" data-target="#tab_3">Past</a>
             </li>
             <li class="nav-item m-r inline">
               <a class="nav-link" href="#" data-toggle="tab" data-target="#tab_4">Profile</a>
@@ -69,9 +69,9 @@
         <div class="tab-content">
           <div class="tab-pane active" id="tab_1">
             <h5 class="m-b">Upcoming events</h5>
-            {% if upcoming_events %}
+            {% if upcoming_events.all %}
               <div class="row item-list item-list-md item-list-li m-b" id="upcoming_events">
-                {% for upcoming_event in upcoming_events|slice:":4" %}
+                {% for upcoming_event in upcoming_events.all|slice:":4" %}
                   <div id="event_{{ upcoming_event.id }}" class="col-md-12 col-lg-6">
                     <div class="item r" data-id="item-2">
                       <div class="item-media ">
@@ -108,9 +108,9 @@
             </div>
           {% endif %}
           <h5 class="m-b">Past events</h5>
-          {% if past_events %}
+          {% if past_events.all %}
             <div class="row item-list item-list-md item-list-li m-b" id="past_events">
-              {% for past_event in past_events|slice:":4" %}
+              {% for past_event in past_events.all|slice:":4" %}
                 <div id="event_{{ past_event.id }}" class="col-md-12 col-lg-6">
                   <div class="item r" data-id="item-2">
                     <div class="item-media">
@@ -151,25 +151,28 @@
           <div class="page-title m-b">
             <h5 class="inline m-a-0">Upcoming</h5>
             <div class="dropdown inline">
-              <button class="btn btn-sm no-bg h5 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">Last week</button>
-              <div class="dropdown-menu">
-                <a href="#" class="dropdown-item active">
-                  Last week
+              <button id="event_button" class="btn btn-sm no-bg h5 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">All the time</button>
+              <div id="event_sort" class="dropdown-menu">
+                <a id="week" class="dropdown-item">
+                  This week
                 </a>
-                <a href="#" class="dropdown-item">
-                  Last month
+                <a id="month" class="dropdown-item">
+                  This month
                 </a>
-                <a href="#" class="dropdown-item">
-                  Last year
+                <a id="year" class="dropdown-item">
+                  This year
                 </a>
-                <a href="#" class="dropdown-item">
+                <a id="all" class="dropdown-item active">
                   All the time
                 </a>
               </div>
             </div>
           </div>
-          {% if upcoming_events %}
-              <div class="row item-list item-list-md item-list-li m-b">
+          {% if upcoming_events.items %}
+            <div class="row item-list item-list-md item-list-li m-b">
+              {% for key, upcoming_events in upcoming_events.items %}
+              <div id="{{ key }}" {% if key in 'week, month, year' %}class="modal"{% endif %}>
+              {% if upcoming_events %}
                 {% for upcoming_event in upcoming_events %}
                   <div id="event_{{ upcoming_event.id }}" class="col-xs-12">
                     <div class="item r" data-id="item-12">
@@ -196,6 +199,16 @@
                     </div>
                   </div>
                 </div>
+                {% endfor %}
+              {% else  %}
+                <div class="col-xs-12">
+                  No upcoming events
+                  {% if key in 'week, month, year' %}
+                    this {{ key }}
+                  {% endif %}
+                </div>
+              {% endif %}
+              </div>
               {% endfor %}
             </div>
           {% else %}
@@ -206,53 +219,66 @@
         </div>
         <div class="tab-pane" id="tab_3">
           <div class="page-title m-b">
-            <h5 class="inline m-a-0">All</h5>
+            <h5 class="inline m-a-0">Past</h5>
             <div class="dropdown inline">
-              <button class="btn btn-sm no-bg h5 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">Last week</button>
-              <div class="dropdown-menu">
-                <a href="#" class="dropdown-item active">
+              <button id="past_event_button" class="btn btn-sm no-bg h5 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">All the time</button>
+              <div id="past_event_sort" class="dropdown-menu">
+                <a id="week" class="dropdown-item">
                   Last week
                 </a>
-                <a href="#" class="dropdown-item">
+                <a id="month" class="dropdown-item">
                   Last month
                 </a>
-                <a href="#" class="dropdown-item">
+                <a id="year" class="dropdown-item">
                   Last year
                 </a>
-                <a href="#" class="dropdown-item">
+                <a id="all" class="dropdown-item active">
                   All the time
                 </a>
               </div>
             </div>
           </div>
-          {% if artist.events.all %}
+          {% if past_events.items %}
               <div class="row item-list item-list-md item-list-li m-b">
-                {% for event in artist.events.all %}
+              {% for key, past_events in past_events.items %}
+              <div id="past_{{ key }}" {% if key in 'week, month, year' %}class="modal"{% endif %}>
+              {% if past_events %}
+                {% for past_event in past_events %}
                   <div id="event_{{ event.id }}" class="col-xs-12">
                     <div class="item r" data-id="item-12">
                     <div class="item-media ">
-                      <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                      <a href="{% url 'event:event_detail' past_event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
-                        <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+                        <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ past_event.id }}" data-url="{% url 'event:event_bookmark' past_event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if past_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
                         <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                         <div class="dropdown-menu pull-right black lt"></div>
                       </div>
                       <div class="item-title text-ellipsis">
-                        <a href="{% url 'event:event_detail' event.id %}">{{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}</a>
+                        <a href="{% url 'event:event_detail' past_event.id %}">{{ past_event.title }} @ {{ past_event.venue.name }}, {{ past_event.venue.city }}, {{ past_event.venue.country }}</a>
                       </div>
                       <div class="item-author text-sm text-ellipsis ">
-                        <a href="{% url 'event:event_detail' event.id %}" class="text-muted">{{ event.datetime|date:"l, d M Y – g:i A" }}</a>
+                        <a href="{% url 'event:event_detail' past_event.id %}" class="text-muted">{{ past_event.datetime|date:"l, d M Y – g:i A" }}</a>
                       </div>
                       <div class="item-meta text-sm text-muted">
                         <span class="item-meta-stats text-xs  item-meta-right">
-                          {% if event.users.count %}<i class="fa fa-star text-muted"></i> {{ event.users.count }}{% endif %}
+                          {% if past_event.users.count %}<i class="fa fa-star text-muted"></i> {{ past_event.users.count }}{% endif %}
                         </span>
                       </div>
                     </div>
                   </div>
                 </div>
+                {% endfor %}
+              {% else  %}
+                <div class="col-xs-12">
+                  No past events
+                  {% if key in 'week, month, year' %}
+                    last {{ key }}
+                  {% endif %}
+                </div>
+              {% endif %}
+              </div>
               {% endfor %}
             </div>
           {% else %}

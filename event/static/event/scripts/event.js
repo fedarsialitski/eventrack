@@ -31,6 +31,20 @@ $(document).on('click', 'div#event_sort a', function () {
   button.textContent = $(this).text();
 });
 
+$(document).on('click', 'div#past_event_sort a', function () {
+  var id = $(this).attr('id'),
+      activeSort = $('div#past_event_sort a.dropdown-item.active'),
+      button = document.querySelector('button#past_event_button');
+
+  activeSort.removeClass('active');
+  $(this).addClass('active');
+
+  $('div#past_' + activeSort.attr('id')).addClass('modal');
+  $('div.modal#past_' + id).removeClass('modal');
+
+  button.textContent = $(this).text();
+});
+
 $(document).on('click', 'ul#change_nav li', function () {
   var target = $(this).children().data('target'),
       menuItem = document.querySelector('[href="/profile/' + target + '"]'),

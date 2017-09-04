@@ -34,6 +34,7 @@
               {% if events.items %}
                 {% for key, events in events.items %}
                   <div id="{{ key }}" {% if key in 'week, month, year' %}class="modal"{% endif %}>
+                  {% if events %}
                     {% for event in events %}
                       <div id="event_{{ event.id }}" class="col-xs-12">
                         <div class="item r" data-id="item-12">
@@ -72,6 +73,14 @@
                         </div>
                       </div>
                     {% endfor %}
+                    {% else %}
+                      <div class="col-xs-12">
+                        No upcoming events
+                        {% if key in 'week, month, year' %}
+                          this {{ key }}
+                        {% endif %}
+                      </div>
+                    {% endif %}
                   </div>
                   {% endfor %}
                 {% else %}
