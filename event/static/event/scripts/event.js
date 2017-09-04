@@ -13,6 +13,21 @@ $(document).on('click', 'div#artist_sort a', function () {
 
   $('div.row').addClass('modal');
   $('div.modal.row#' + id).removeClass('modal');
+
+  button.textContent = $(this).text();
+});
+
+$(document).on('click', 'div#event_sort a', function () {
+  var id = $(this).attr('id'),
+      activeSort = $('div#event_sort a.dropdown-item.active'),
+      button = document.querySelector('button#event_button');
+
+  activeSort.removeClass('active');
+  $(this).addClass('active');
+
+  $('div#' + activeSort.attr('id')).addClass('modal');
+  $('div.modal#' + id).removeClass('modal');
+
   button.textContent = $(this).text();
 });
 

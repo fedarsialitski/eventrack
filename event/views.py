@@ -1,3 +1,5 @@
+from datetime import date
+from itertools import chain
 from django.http import JsonResponse
 from django.views import generic
 from django.utils import timezone
@@ -80,13 +82,29 @@ class EventView(generic.ListView):
     template_name = 'event/event.html'
     context_object_name = 'events'
 
-    def get_queryset(self):
+    def get_context_data(self, **kwargs):
         """
         Return the upcoming events
         """
-        return Event.objects.filter(
+        today = date.today()
+        context = super(EventView, self).get_context_data(**kwargs)
+        context['events'] = {}
+        context['events'].update({'week': Event.objects.filter(
+            datetime__week=today.isocalendar()[1],
             datetime__gte=timezone.now()
-        ).order_by('datetime')[:10]
+        ).order_by('datetime')})
+        context['events'].update({'month': Event.objects.filter(
+            datetime__month=today.month,
+            datetime__gte=timezone.now()
+        ).order_by('datetime')})
+        context['events'].update({'year': Event.objects.filter(
+            datetime__year=today.year,
+            datetime__gte=timezone.now()
+        ).order_by('datetime')})
+        context['events'].update({'all': Event.objects.filter(
+            datetime__gte=timezone.now()
+        ).order_by('datetime')})
+        return context
 
 
 class EventDetailView(generic.DetailView):
