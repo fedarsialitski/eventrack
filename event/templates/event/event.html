@@ -13,9 +13,9 @@
             <div class="page-title m-b">
               <h2 class="inline m-a-0">Events</h2>
               <div class="dropdown inline">
-                <button id="event_button" class="btn btn-sm no-bg h5 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">This week</button>
+                <button id="event_button" class="btn btn-sm no-bg h5 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">All the time</button>
                 <div id="event_sort" class="dropdown-menu">
-                  <a id="week" class="dropdown-item active">
+                  <a id="week" class="dropdown-item">
                     This week
                   </a>
                   <a id="month" class="dropdown-item">
@@ -24,7 +24,7 @@
                   <a id="year" class="dropdown-item">
                     This year
                   </a>
-                  <a id="all" class="dropdown-item">
+                  <a id="all" class="dropdown-item active">
                     All the time
                   </a>
                 </div>
@@ -33,7 +33,7 @@
             <div class="row item-list item-list-md item-list-li m-b">
               {% if events.items %}
                 {% for key, events in events.items %}
-                  <div id="{{ key }}" {% if key in 'month, year, all' %}class="modal"{% endif %}>
+                  <div id="{{ key }}" {% if key in 'week, month, year' %}class="modal"{% endif %}>
                     {% for event in events %}
                       <div id="event_{{ event.id }}" class="col-xs-12">
                         <div class="item r" data-id="item-12">
