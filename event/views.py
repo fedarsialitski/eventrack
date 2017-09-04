@@ -1,5 +1,4 @@
 from datetime import date
-from itertools import chain
 from django.http import JsonResponse
 from django.views import generic
 from django.utils import timezone
