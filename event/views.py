@@ -2,22 +2,32 @@ from datetime import date
 from django.http import JsonResponse
 from django.views import generic
 from django.utils import timezone
+from django.db.models import Count
 
 from .models import Artist, Event, Venue
 from .forms import ArtistForm, EventForm, VenueForm
 
 
 class IndexView(generic.ListView):
+    model = Artist
     template_name = 'event/index.html'
-    context_object_name = 'upcoming_events_list'
 
-    def get_queryset(self):
+    def get_context_data(self, **kwargs):
         """
-        Return the five upcoming events
+        Return the discover, trending, new,
+        recommended artists and events
         """
-        return Event.objects.filter(
-            datetime__gte=timezone.now()
-        ).order_by('-datetime')[:5]
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['discover'] = Artist.objects.exclude(image_url__exact='', thumb_url__exact='')[:5]
+        context['trending'] = Artist.objects.annotate(user_count=Count('users')).order_by('-user_count')[:8]
+        if self.request.user.is_authenticated():
+            context['recommend'] = Event.objects.filter(artists__in=self.request.user.artists.all(),
+                                                        datetime__gte=timezone.now()).exclude(
+                                                        users__in=[self.request.user.id]).annotate(
+                                                        user_count=Count('users')).order_by(
+                                                        'datetime', '-user_count')[:10]
+            context['event_count'] = self.request.user.events.filter(datetime__gte=timezone.now()).count()
+        return context
 
 
 class ArtistView(generic.ListView):

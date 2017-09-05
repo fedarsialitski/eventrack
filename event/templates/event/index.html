@@ -141,9 +141,11 @@
               </li>
               <li>
                 <a href="{% url 'user:profile' %}#events">
-                  <span class="nav-label">
-                    <b class="label">8</b>
-                  </span>
+                  {% if event_count %}
+                    <span class="nav-label">
+                      <b class="label">{{ event_count }}</b>
+                    </span>
+                  {% endif %}
                   <span class="nav-icon">
                     <i class="material-icons">
                       event
@@ -263,6 +265,114 @@
     {% endblock menu %}
 
     {% block content %}
+      <div class="app-body light" id="view">
+
+        <!-- ############ PAGE START-->
+
+        <div class="page-content">
+          {% if discover %}
+            <div class="padding p-b-0">
+              <div class="page-title m-b">
+                <h2 class="inline m-a-0">Discover</h2>
+              </div>
+              <div class="row row-sm item-masonry item-info-overlay">
+              {% for artist in discover %}
+                <div id="artist_{{ artist.id }}" class="{% if forloop.first %}col-sm-6 text-white m-b-sm{% else %}col-sm-3 col-xs-6{% endif %}">
+                  <div class="item r">
+                    <div class="item-media {% if forloop.first %}primary{% endif %}">
+                      <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if forloop.first %}{% if artist.image_url %}{{ artist.image_url }}{% else %}{{ artist.thumb_url }}{% endif %}{% else %}{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}{% endif %}');"></a>
+                    </div>
+                    <div class="item-info">
+                      <div class="item-overlay bottom text-right">
+                        <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="artist_{{ artist.id }}" data-url="{% url 'event:artist_bookmark' artist.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if artist in user.artists.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+                        <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                        <div class="dropdown-menu pull-right black lt"></div>
+                      </div>
+                      <div class="item-title text-ellipsis">
+                        <a href="{% url 'event:artist_detail' artist.id %}">{{ artist.name }}</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+             </div>
+            </div>
+          {% endif %}
+          <div class="row-col">
+            <div class="col-lg-9 b-r no-border-md">
+              <div class="padding">
+                {% if trending %}
+                  <h2 class="widget-title h4 m-b">Trending</h2>
+                  <div class="row">
+                    {% for artist in trending %}
+                      <div id="artist_{{ artist.id }}" class="col-xs-4 col-sm-4 col-md-3">
+                        <div class="item r">
+                          <div class="item-media item-media-4by3">
+                            <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% if artist.image_url %}{{ artist.image_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}{% endif %}');"></a>
+                          </div>
+                          <div class="item-info">
+                            <div class="item-overlay bottom text-right">
+                              <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="artist_{{ artist.id }}" data-url="{% url 'event:artist_bookmark' artist.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if artist in user.artists.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+                              <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                              <div class="dropdown-menu pull-right black lt"></div>
+                            </div>
+                            <div class="item-title text-ellipsis">
+                              <a href="{% url 'event:artist_detail' artist.id %}">{{ artist.name }}</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+                {% if recommend %}
+                  <h2 class="widget-title h4 m-b m-t-md">Recommend for you</h2>
+                  <div class="row item-list item-list-md m-b">
+                    {% for event in recommend %}
+                      <div id="event_{{ event.id }}" class="col-sm-6">
+                        <div class="item r">
+                          {% if event.artists.all %}
+                              {% for artist in event.artists.all %}
+                                {% if forloop.counter <= 2 %}
+                                  <div class="item-media ">
+                                    <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{{ artist.thumb_url }}');"></a>
+                                  </div>
+                                {% endif %}
+                              {% endfor %}
+                          {% else %}
+                            <div class="item-media ">
+                              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{% static 'event/images/a3.jpg' %}');"></a>
+                            </div>
+                          {% endif %}
+                          <div class="item-info">
+                            <div class="item-overlay bottom text-right">
+                              <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+                              <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                              <div class="dropdown-menu pull-right black lt"></div>
+                            </div>
+                            <div class="item-title text-ellipsis">
+                              <a href="{% url 'event:event_detail' event.id %}">{{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}</a>
+                            </div>
+                            <div class="item-author text-sm text-ellipsis ">
+                              <a href="{% url 'event:event_detail' event.id %}" class="text-muted">{{ event.datetime|date:"l, d M Y – g:i A" }}</a>
+                            </div>
+                            <div class="item-meta text-sm text-muted">
+                              <span class="item-meta-stats text-xs  item-meta-right">
+                                {% if event.users.count %}<i class="fa fa-star text-muted"></i>
+                                  {{ event.users.count }}{% endif %}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     {% endblock content %}
     </div>
   </div>
