@@ -18,7 +18,8 @@ class IndexView(generic.ListView):
         recommended artists and events
         """
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['discover'] = Artist.objects.exclude(image_url__exact='', thumb_url__exact='')[:5]
+        context['discover'] = Artist.objects.exclude(image_url__exact='', thumb_url__exact='').exclude(
+                                                     users__in=[self.request.user.id])[:5]
         context['trending'] = Artist.objects.annotate(user_count=Count('users')).order_by('-user_count')[:8]
         if self.request.user.is_authenticated():
             context['recommend'] = Event.objects.filter(artists__in=self.request.user.artists.all(),

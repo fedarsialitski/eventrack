@@ -319,6 +319,12 @@
                             <div class="item-title text-ellipsis">
                               <a href="{% url 'event:artist_detail' artist.id %}">{{ artist.name }}</a>
                             </div>
+                            <div class="item-meta text-sm text-muted">
+                              <span class="item-meta-stats text-xs  item-meta-right">
+                                {% if artist.users.count %}<i class="fa fa-star text-muted"></i>
+                                  {{ artist.users.count }}{% endif %}
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
