@@ -303,11 +303,11 @@
               <div class="padding">
                 {% if trending %}
                   <h2 class="widget-title h4 m-b">Trending</h2>
-                  <div class="row">
+                  <div class="row m-b">
                     {% for artist in trending %}
                       <div id="artist_{{ artist.id }}" class="col-xs-4 col-sm-4 col-md-3">
                         <div class="item r">
-                          <div class="item-media item-media-4by3">
+                          <div class="item-media">
                             <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% if artist.image_url %}{{ artist.image_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}{% endif %}');"></a>
                           </div>
                           <div class="item-info">
