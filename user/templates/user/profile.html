@@ -88,7 +88,16 @@
                             <div class="dropdown-menu pull-right black lt"></div>
                           </div>
                           <div class="item-title text-ellipsis">
-                            <a href="{% url 'event:event_detail' event.id %}">{{ event.title }}</a>
+                            <a href="{% url 'event:event_detail' event.id %}">{{ event.title }} – {{ event.datetime|date:"l, d M Y – g:i A" }}</a>
+                          </div>
+                          <div class="item-except visible-list text-sm text-muted h-3x m-t-sm">
+                            <div class="row m-l-0">Venue: {{ event.venue.name }}</div>
+                            {% if event.venue.city %}
+                              <div class="row m-l-0">City: {{ event.venue.city }}</div>
+                            {% endif %}
+                            {% if event.venue.country %}
+                              <div class="row m-l-0">Country: {{ event.venue.country }}</div>
+                            {% endif %}
                           </div>
                           <div class="item-action visible-list m-t-sm">
                             <a href="{% url 'event:event_update' event.id %}" class="btn btn-xs white">Edit</a>
