@@ -227,12 +227,17 @@
                 <span>Bookmarks</span>
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="docs.html">
+              <a class="dropdown-item" href="#">
                 Need help?
               </a>
               <a class="dropdown-item" href="{% url 'user:signout' %}">Sign out</a>
             </div>
           </div>
+        </div>
+      {% else %}
+        <div class="item-action m-b m-l">
+          <a href="{% url 'user:signin' %}" class="btn btn-sm rounded white _600">Sign in</a>
+          <a href="{% url 'user:signup' %}" class="btn btn-sm rounded primary _600">Sign up</a>
         </div>
       {% endif %}
     </div>
