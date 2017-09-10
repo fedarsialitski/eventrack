@@ -54,7 +54,7 @@
           <div class="form-group row">
             <div class="col-sm-1 form-control-label text-muted">Artists</div>
             <div class="col-sm-3">
-              <select name="artists" required_id="id_artists" multiple="multiple" class="form-control {% if form.artists.errors %}b-danger{% endif %}">
+              <select name="artists" required_id="id_artists" multiple="multiple" class="form-control {% if form.artists.errors %}b-danger{% endif %}" style="overflow-y: scroll; height: {% if form.artists.field.choices.queryset.all|length >= 10 %}12.75{% else %}6.75{% endif %}rem">
                 {% for id, artist in form.artists.field.choices %}
                   <option value="{{ id }}">{{ artist }}</option>
                 {% endfor %}
