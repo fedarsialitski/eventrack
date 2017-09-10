@@ -31,6 +31,11 @@ class IndexView(generic.ListView):
         return context
 
 
+class SearchView(generic.ListView):
+    model = Event
+    template_name = 'event/search.html'
+
+
 class ArtistView(generic.ListView):
     model = Artist
     template_name = 'event/artist.html'

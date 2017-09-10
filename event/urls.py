@@ -5,6 +5,7 @@ from . import views
 app_name = 'event'
 urlpatterns = [
     url(r'^home/$',                        views.IndexView.as_view(),        name='index'),
+    url(r'^search/$',                      views.SearchView.as_view(),       name='search'),
     url(r'^artist/$',                      views.ArtistView.as_view(),       name='artist'),
     url(r'^artist/add/$',                  views.ArtistCreateView.as_view(), name='artist_add'),
     url(r'^artist/(?P<pk>\d+)/edit/$',     views.ArtistUpdateView.as_view(), name='artist_update'),
