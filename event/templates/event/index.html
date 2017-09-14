@@ -64,6 +64,65 @@
     </div>
   </div>
 </div>
+{% else %}
+<!-- .modal -->
+<div id="delete-modal" class="modal fade animate black-overlay" data-backdrop="false">
+  <div class="row-col h-v">
+    <div class="row-cell v-m">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <p class="p-y m-t"><i class="fa fa-remove text-warning fa-3x"></i></p>
+            <p>Are you sure to delete this item?</p>
+          </div>
+          <div class="modal-footer">
+            <form method="post" action="">
+              {% csrf_token %}
+              <button type="button" class="btn btn-default p-x-md" data-dismiss="modal">No</button>
+              <button type="button submit" class="btn red p-x-md">Yes</button>
+            </form>
+          </div>
+        </div><!-- /.modal-content -->
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal_events" class="modal col-lg-12 text-center">
+  <div class="p-a-lg">
+    <h2 class="m-y-md">No added events</h2>
+    <h6 class="text-muted m-b-md">Would you like to add a event?</h6>
+    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:event_add' %}">Add</a>
+  </div>
+</div>
+<div id="modal_artists" class="modal col-lg-12 text-center">
+  <div class="p-a-lg">
+    <h2 class="m-y-md">No added artists</h2>
+    <h6 class="text-muted m-b-md">Would you like to add a artist?</h6>
+    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:artist_add' %}">Add</a>
+  </div>
+</div>
+<div id="modal_venues" class="modal col-lg-12 text-center">
+  <div class="p-a-lg">
+    <h2 class="m-y-md">No added venues</h2>
+    <h6 class="text-muted m-b-md">Would you like to add a venue?</h6>
+    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:venue_add' %}">Add</a>
+  </div>
+</div>
+<div id="bookmark_events" class="modal col-lg-12 text-center">
+  <div class="p-a-xs">
+    <h2 class="m-y-sm">No events in bookmarks</h2>
+    <h6 class="text-muted m-b-md">Would you like to add a event to bookmarks?</h6>
+    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:event' %}">Add</a>
+  </div>
+</div>
+<div id="bookmark_artists" class="modal col-lg-12 text-center">
+  <div class="p-a-xs">
+    <h2 class="m-y-sm">No artists in bookmarks</h2>
+    <h6 class="text-muted m-b-md">Would you like to add a artist to bookmarks?</h6>
+    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:artist' %}">Add</a>
+  </div>
+</div>
+<!-- / .modal -->
 {% endif %}
 
 <!-- ############ SEARCH START -->
