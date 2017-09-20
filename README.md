@@ -11,5 +11,8 @@
 
 ## Getting started
 
+* Create a virtual environment with interpreter `Python 3.6`.
+* Create a database named `eventrack`.
+* Run `pip install -r requirements.txt` to install dependencies.
 * Run `python manage.py migrate` to apply migrations.
 * Run `python manage.py runserver` to run the app and view it on http://localhost:8000/home/
