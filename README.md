@@ -2,6 +2,8 @@
 
 ![Eventrack logo](https://github.com/FedorSelitsky/eventrack/blob/master/event/static/event/images/logo.png)
 
+Eventrack is a concert tracking application. Eventrack allows users to track their favorite artists and discover concerts. It also allows users to submit events, contributing to archives of upcoming and past shows. Users can bookmark their favorite artists and receive recommendations about their upcoming events.
+
 ## Requirements
 
 * Python 3.6.2
