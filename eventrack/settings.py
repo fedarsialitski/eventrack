@@ -79,10 +79,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'eventrack',
-        'USER': 'root',
-        'PASSWORD': 'MAJXfz2zxJDjreP6',
-        'HOST': 'localhost',
-        'PORT': '5432',
     }
 }
 
