@@ -19,7 +19,7 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            user = form.signin(request)
+            user = form.signin()
             if user is not None:
                 login(request, user)
                 return HttpResponseRedirect(reverse('event:index'))
@@ -36,7 +36,7 @@ def signin(request):
     if request.method == 'POST':
         form = SigninForm(data=request.POST)
         if form.is_valid():
-            user = form.signin(request)
+            user = form.signin()
             if user is not None:
                 login(request, user)
                 return HttpResponseRedirect(reverse('event:index'))
