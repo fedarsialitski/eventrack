@@ -62,12 +62,7 @@
                   <a href="{% url 'event:artist_detail' artist.id %}" data-pjax class="item-author _600">{{ artist.name }}</a>
                   <span class="text-muted text-sm">–
                     {% if artist.events.count %}
-                      {{ artist.events.count }}
-                      {% if artist.events.count == 1 %}
-                        event
-                      {% else %}
-                        events
-                      {% endif %}
+                      {{ artist.events.count }} event{{ artist.events.count|pluralize:"s" }}
                     {% else %}
                       No events
                     {% endif %}

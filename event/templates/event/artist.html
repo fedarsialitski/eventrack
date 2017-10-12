@@ -40,12 +40,7 @@
                   <a href="{% url 'event:artist_detail' artist.id %}">{{artist.name}}</a>
                   <div class="text-sm text-muted">
                     {% if artist.events.count %}
-                      {{ artist.events.count }}
-                      {% if artist.events.count == 1 %}
-                        event
-                      {% else %}
-                        events
-                      {% endif %}
+                      {{ artist.events.count }} event{{ artist.events.count|pluralize:"s" }}
                     {% else %}
                       No upcoming events
                     {% endif %}
@@ -68,12 +63,7 @@
                   <a href="{% url 'event:artist_detail' artist.id %}">{{artist.name}}</a>
                   <div class="text-sm text-muted">
                     {% if artist.events.count %}
-                      {{ artist.events.count }}
-                      {% if artist.events.count == 1 %}
-                        event
-                      {% else %}
-                        events
-                      {% endif %}
+                      {{ artist.events.count }} event{{ artist.events.count|pluralize:"s" }}
                     {% else %}
                       No upcoming events
                     {% endif %}

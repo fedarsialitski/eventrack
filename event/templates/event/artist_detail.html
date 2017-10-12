@@ -34,12 +34,7 @@
               <span>
                 {% if upcoming_events.all.count %}
                   <i class="material-icons md-24">event_note</i>
-                  {{ upcoming_events.all.count }}
-                  {% if upcoming_events.all.count == 1 %}
-                    upcoming event
-                  {% else %}
-                    upcoming events
-                  {% endif %}
+                  {{ upcoming_events.all.count }} upcoming event{{ upcoming_events.all.count|pluralize:"s" }}
                 {% else %}
                   No upcoming events
                 {% endif %}

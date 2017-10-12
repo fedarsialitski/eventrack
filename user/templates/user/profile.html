@@ -35,8 +35,13 @@
               </div>
               {% if user.events.count or user.artists.count %}
               <div class="block clearfix m-b">
-                {% if user.events.count %}<span id="count_events">{{ user.events.count }}</span> <span id="text_events" class="text-muted">Event{% if user.events.count > 1 %}s{% endif %}</span>{% endif %}{% if user.events.count and user.artists.count %}<span id="comma">, </span>{% endif %}
-                {% if user.artists.count %}<span id="count_artists">{{ user.artists.count }}</span> <span id="text_artists" class="text-muted">Artist{% if user.artists.count > 1 %}s{% endif %}</span>{% endif %}
+                {% if user.events.count %}
+                  <span id="count_events">{{ user.events.count }}</span>
+                  <span id="text_events" class="text-muted">Event{{ user.events.count|pluralize:"s" }}</span>{% endif %}{% if user.events.count and user.artists.count %}<span id="comma">, </span>{% endif %}
+                {% if user.artists.count %}
+                  <span id="count_artists">{{ user.artists.count }}</span>
+                  <span id="text_artists" class="text-muted">Artist{{ user.artists.count|pluralize:"s"}}</span>
+                {% endif %}
               </div>
               {% endif %}
             </div>
@@ -148,12 +153,7 @@
                           <div class="item-except visible-list text-sm text-muted h-2x m-t-sm m-b-md">
                               {% if artist.events.count %}
                                 <i class="material-icons md-24">event_note</i>
-                                {{ artist.events.count }}
-                                {% if artist.events.count == 1 %}
-                                  event
-                                {% else %}
-                                  events
-                                {% endif %}
+                                {{ artist.events.count }} event{{ artist.events.count|pluralize:"s" }}
                               {% else %}
                                 No events
                               {% endif %}
