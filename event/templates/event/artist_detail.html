@@ -3,11 +3,13 @@
 
 {% block content %}
 
+{% static 'event/images/a3.jpg' as default_url %}
+
 <div class="app-body light" id="view">
 
 <!-- ############ PAGE START-->
 <div class="pos-rlt">
-  <div class="page-bg" data-stellar-ratio="2" style="background-image:url('{% if artist.image_url %}{{ artist.image_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></div>
+  <div class="page-bg" data-stellar-ratio="2" style="background-image:url({{ artist.image_url|default:default_url }});"></div>
 </div>
 <div class="page-content">
   <div class="padding b-b">
@@ -15,7 +17,7 @@
         <div class="col-sm w w-auto-xs m-b">
           <div class="item w rounded">
             <div class="item-media">
-              <div class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></div>
+              <div class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }}{% else %});"></div>
             </div>
           </div>
         </div>
@@ -75,7 +77,7 @@
                   <div id="event_{{ upcoming_event.id }}" class="col-md-12 col-lg-6">
                     <div class="item r" data-id="item-2">
                       <div class="item-media ">
-                        <a href="{% url 'event:event_detail' upcoming_event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                        <a href="{% url 'event:event_detail' upcoming_event.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
                       </div>
                       <div class="item-info">
                         <div class="item-overlay bottom text-right">
@@ -114,7 +116,7 @@
                 <div id="event_{{ past_event.id }}" class="col-md-12 col-lg-6">
                   <div class="item r" data-id="item-2">
                     <div class="item-media">
-                      <a href="{% url 'event:event_detail' past_event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                      <a href="{% url 'event:event_detail' past_event.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
@@ -177,7 +179,7 @@
                   <div id="event_{{ upcoming_event.id }}" class="col-xs-12">
                     <div class="item r" data-id="item-12">
                     <div class="item-media ">
-                      <a href="{% url 'event:event_detail' upcoming_event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                      <a href="{% url 'event:event_detail' upcoming_event.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
@@ -247,7 +249,7 @@
                   <div id="event_{{ event.id }}" class="col-xs-12">
                     <div class="item r" data-id="item-12">
                     <div class="item-media ">
-                      <a href="{% url 'event:event_detail' past_event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                      <a href="{% url 'event:event_detail' past_event.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">

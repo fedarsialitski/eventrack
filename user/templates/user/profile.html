@@ -2,16 +2,19 @@
 {% load static %}
 
 {% block content %}
+
+{% static 'event/images/a3.jpg' as default_url %}
+
 <div class="app-body light" id="view">
 <!-- ############ PAGE START-->
-<div class="page-bg" data-stellar-ratio="2" style="background-image: url({% if user.image_url %}{{ user.image_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %});"></div>
+<div class="page-bg" data-stellar-ratio="2" style="background-image: url({{ user.image_url|default:default_url }});"></div>
   <div class="page-content">
     <div class="padding b-b">
       <div class="row-col">
           <div class="col-sm w w-auto-xs m-b">
             <div class="item w rounded">
               <div class="item-media">
-                <div class="item-media-content" style="background-image: url({% if user.thumb_url %}{{ user.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %});"></div>
+                <div class="item-media-content" style="background-image: url({{ user.thumb_url|default:default_url }});"></div>
               </div>
             </div>
           </div>
@@ -73,12 +76,12 @@
                           {% if event.artists.all %}
                             {% with event.artists.all|first as artist %}
                               <div class="item-media ">
-                                <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                                <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
                               </div>
                             {% endwith %}
                           {% else %}
                             <div class="item-media ">
-                              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{% static 'event/images/a3.jpg' %}');"></a>
+                              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ default_url }});"></a>
                             </div>
                           {% endif %}
                         <div class="item-info">
@@ -131,7 +134,7 @@
                     <div id="artist_{{ artist.id }}" class="col-xs-12">
                       <div class="item r">
                         <div class="item-media ">
-                          <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                          <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
                         </div>
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
@@ -241,12 +244,12 @@
                         {% if event.artists.all %}
                           {% with event.artists.all|first as artist %}
                             <div class="item-media ">
-                              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
                             </div>
                           {% endwith %}
                         {% else %}
                           <div class="item-media ">
-                            <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{% static 'event/images/a3.jpg' %}');"></a>
+                            <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ default_url }});"></a>
                           </div>
                         {% endif %}
                         <div class="item-info">
@@ -287,7 +290,7 @@
                     <div id="artist_{{ artist.id }}" class="col-xs-4 col-sm-4 col-md-3">
                       <div class="item r" data-id="item-7">
                       <div class="item-media ">
-                        <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                        <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
                       </div>
                       <div class="item-info">
                         <div class="item-overlay bottom text-right">

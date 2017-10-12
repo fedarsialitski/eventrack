@@ -2,6 +2,9 @@
 {% load static %}
 
 {% block content %}
+
+{% static 'event/images/a3.jpg' as default_url %}
+
   <div class="app-body light" id="view">
     <!-- ############ PAGE START-->
 
@@ -48,7 +51,7 @@
                               {% endfor %}
                           {% else %}
                             <div class="item-media ">
-                              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{% static 'event/images/a3.jpg' %}');"></a>
+                              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ default_url }});"></a>
                             </div>
                           {% endif %}
                             <div class="item-info">

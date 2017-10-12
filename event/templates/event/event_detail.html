@@ -2,6 +2,9 @@
 {% load static %}
 
 {% block content %}
+
+{% static 'event/images/a3.jpg' as default_url %}
+
 <div class="app-body light" id="view">
 
 <!-- ############ PAGE START-->
@@ -9,7 +12,7 @@
 {% if event.artists.all %}
     {% for artist in event.artists.all %}
       {% if forloop.counter == 1 %}
-        <div class="page-bg" data-stellar-ratio="2" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></div>
+        <div class="page-bg" data-stellar-ratio="2" style="background-image: url({{ artist.thumb_url|default:default_url }});"></div>
       {% endif %}
     {% endfor %}
 {% endif %}
@@ -23,7 +26,7 @@
           {% for artist in event.artists.all %}
             {% if forloop.counter <= 1 %}
               <div class="item-media">
-                <div class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></div>
+                <div class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></div>
               </div>
             {% endif %}
           {% endfor %}
@@ -113,7 +116,7 @@
                 <div id="artist_{{ artist.id }}" class="col-xs-4 col-sm-4 col-md-3">
                   <div class="item r" data-id="item-7">
                   <div class="item-media ">
-                    <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}');"></a>
+                    <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
                   </div>
                   <div class="item-info">
                     <div class="item-overlay bottom text-right">

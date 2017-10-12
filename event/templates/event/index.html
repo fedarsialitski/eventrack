@@ -365,6 +365,9 @@
     {% endblock menu %}
 
     {% block content %}
+
+    {% static 'event/images/a3.jpg' as default_url %}
+
       <div class="app-body light" id="view">
 
         <!-- ############ PAGE START-->
@@ -380,7 +383,7 @@
                 <div id="artist_{{ artist.id }}" class="{% if forloop.first %}col-sm-6 text-white m-b-sm{% else %}col-sm-3 col-xs-6{% endif %}">
                   <div class="item r">
                     <div class="item-media {% if forloop.first %}primary{% endif %}">
-                      <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if forloop.first %}{% if artist.image_url %}{{ artist.image_url }}{% else %}{{ artist.thumb_url }}{% endif %}{% else %}{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}{% endif %}');"></a>
+                      <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url({% if forloop.first %}{{ artist.image_url|default:artist.thumb_url }}{% else %}{{ artist.thumb_url|default:default_url }}{% endif %});"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
@@ -408,7 +411,7 @@
                       <div id="artist_{{ artist.id }}" class="col-xs-4 col-sm-4 col-md-3">
                         <div class="item r">
                           <div class="item-media">
-                            <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url('{% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{% if artist.image_url %}{{ artist.image_url }}{% else %}{% static 'event/images/a3.jpg' %}{% endif %}{% endif %}');"></a>
+                            <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url({% if artist.thumb_url %}{{ artist.thumb_url }}{% else %}{{ artist.image_url|default:default_url }}{% endif %});"></a>
                           </div>
                           <div class="item-info">
                             <div class="item-overlay bottom text-right">
@@ -447,7 +450,7 @@
                               {% endfor %}
                           {% else %}
                             <div class="item-media ">
-                              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{% static 'event/images/a3.jpg' %}');"></a>
+                              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ default_url }});"></a>
                             </div>
                           {% endif %}
                           <div class="item-info">
