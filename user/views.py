@@ -2,7 +2,6 @@ from django.http import HttpResponseRedirect
 from django.views import generic
 from django.shortcuts import render, reverse
 from django.contrib.auth import login, logout
-from django.views.decorators.csrf import csrf_protect
 
 from .forms import SignupForm, SigninForm, UpdateForm
 from .models import User
@@ -13,7 +12,6 @@ class ProfileView(generic.ListView):
     template_name = 'user/profile.html'
 
 
-@csrf_protect
 def signup(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('event:index'))
@@ -32,7 +30,6 @@ def signup(request):
     return render(request, 'user/signup.html', {'form': form})
 
 
-@csrf_protect
 def signin(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('event:index'))
@@ -50,13 +47,11 @@ def signin(request):
     return render(request, 'user/signin.html', {'form': form})
 
 
-@csrf_protect
 def signout(request):
     logout(request)
     return HttpResponseRedirect(reverse('event:index'))
 
 
-@csrf_protect
 def update(request):
     if request.method == 'POST':
         form = UpdateForm(data=request.POST, instance=request.user)
