@@ -1,5 +1,6 @@
 from datetime import date
 from django.http import JsonResponse
+from django.urls import reverse_lazy
 from django.views import generic
 from django.utils import timezone
 from django.db.models import Count
@@ -102,7 +103,7 @@ class ArtistDetailView(generic.DetailView):
 class ArtistCreateView(generic.CreateView):
     model = Artist
     form_class = ArtistForm
-    success_url = '/profile/'
+    success_url = reverse_lazy('user:profile')
 
     def form_valid(self, form):
         """
@@ -115,12 +116,12 @@ class ArtistCreateView(generic.CreateView):
 class ArtistUpdateView(generic.UpdateView):
     model = Artist
     form_class = ArtistForm
-    success_url = '/profile/'
+    success_url = reverse_lazy('user:profile')
 
 
 class ArtistDeleteView(generic.DeleteView):
     model = Artist
-    success_url = '/profile/'
+    success_url = reverse_lazy('user:profile')
 
     def get(self, *args, **kwargs):
         return self.post(*args, **kwargs)
