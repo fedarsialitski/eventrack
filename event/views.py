@@ -152,12 +152,6 @@ class EventView(generic.ListView):
 class EventDetailView(generic.DetailView):
     model = Event
 
-    def get_object(self, queryset=None):
-        """
-        Return the event detail information
-        """
-        return super(EventDetailView, self).get_object()
-
 
 class EventCreateView(generic.CreateView):
     model = Event
