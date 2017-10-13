@@ -63,40 +63,26 @@ class ArtistDetailView(generic.DetailView):
         """
         Return the artist detail information
         """
+        now = timezone.now()
         today = date.today()
+        year = today.year
+        week = today.isocalendar()[1]
+        month = today.month
+        events = self.object.events
+
         context = super(ArtistDetailView, self).get_context_data(**kwargs)
+
         context['upcoming_events'] = {}
+        context['upcoming_events'].update({'week':  events.filter(datetime__gte=now, datetime__week=week).order_by('datetime')})
+        context['upcoming_events'].update({'month': events.filter(datetime__gte=now, datetime__month=month).order_by('datetime')})
+        context['upcoming_events'].update({'year':  events.filter(datetime__gte=now, datetime__year=year).order_by('datetime')})
+        context['upcoming_events'].update({'all':   events.filter(datetime__gte=now).order_by('datetime')})
+
         context['past_events'] = {}
-        context['upcoming_events'].update({'week': self.object.events.filter(
-            datetime__week=today.isocalendar()[1],
-            datetime__gte=timezone.now()
-        ).order_by('datetime')})
-        context['upcoming_events'].update({'month': self.object.events.filter(
-            datetime__month=today.month,
-            datetime__gte=timezone.now()
-        ).order_by('datetime')})
-        context['upcoming_events'].update({'year': self.object.events.filter(
-            datetime__year=today.year,
-            datetime__gte=timezone.now()
-        ).order_by('datetime')})
-        context['upcoming_events'].update({'all': self.object.events.filter(
-            datetime__gte=timezone.now()
-        ).order_by('datetime')})
-        context['past_events'].update({'week': self.object.events.filter(
-            datetime__week=today.isocalendar()[1],
-            datetime__lte=timezone.now()
-        ).order_by('-datetime')})
-        context['past_events'].update({'month': self.object.events.filter(
-            datetime__month=today.month,
-            datetime__lte=timezone.now()
-        ).order_by('-datetime')})
-        context['past_events'].update({'year': self.object.events.filter(
-            datetime__year=today.year,
-            datetime__lte=timezone.now()
-        ).order_by('-datetime')})
-        context['past_events'].update({'all': self.object.events.filter(
-            datetime__lte=timezone.now()
-        ).order_by('-datetime')})
+        context['past_events'].update({'week':  events.filter(datetime__lte=now, datetime__week=week).order_by('-datetime')})
+        context['past_events'].update({'month': events.filter(datetime__lte=now, datetime__month=month).order_by('-datetime')})
+        context['past_events'].update({'year':  events.filter(datetime__lte=now, datetime__year=year).order_by('-datetime')})
+        context['past_events'].update({'all':   events.filter(datetime__lte=now).order_by('-datetime')})
         return context
 
 
@@ -136,24 +122,20 @@ class EventView(generic.ListView):
         """
         Return the upcoming events
         """
+        now = timezone.now()
         today = date.today()
+        year = today.year
+        week = today.isocalendar()[1]
+        month = today.month
+        events = Event.objects
+
         context = super(EventView, self).get_context_data(**kwargs)
+
         context['events'] = {}
-        context['events'].update({'week': Event.objects.filter(
-            datetime__week=today.isocalendar()[1],
-            datetime__gte=timezone.now()
-        ).order_by('datetime')})
-        context['events'].update({'month': Event.objects.filter(
-            datetime__month=today.month,
-            datetime__gte=timezone.now()
-        ).order_by('datetime')})
-        context['events'].update({'year': Event.objects.filter(
-            datetime__year=today.year,
-            datetime__gte=timezone.now()
-        ).order_by('datetime')})
-        context['events'].update({'all': Event.objects.filter(
-            datetime__gte=timezone.now()
-        ).order_by('datetime')})
+        context['events'].update({'week':  events.filter(datetime__gte=now, datetime__week=week).order_by('datetime')})
+        context['events'].update({'month': events.filter(datetime__gte=now, datetime__month=month).order_by('datetime')})
+        context['events'].update({'year':  events.filter(datetime__gte=now, datetime__year=year).order_by('datetime')})
+        context['events'].update({'all':   events.filter(datetime__gte=now).order_by('datetime')})
         return context
 
 
