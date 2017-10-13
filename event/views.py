@@ -38,6 +38,7 @@ class SearchView(generic.ListView):
 
 class ArtistView(generic.ListView):
     model = Artist
+    count = 12
     template_name = 'event/artist.html'
     context_object_name = 'artists'
 
@@ -45,7 +46,7 @@ class ArtistView(generic.ListView):
         """
         Return the first twelve artists
         """
-        return Artist.objects.all()[:12]
+        return super().get_queryset()[:self.count]
 
 
 class ArtistDetailView(generic.DetailView):
