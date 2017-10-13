@@ -146,7 +146,7 @@ class EventDetailView(generic.DetailView):
 class EventCreateView(generic.CreateView):
     model = Event
     form_class = EventForm
-    success_url = '/profile/'
+    success_url = reverse_lazy('user:profile')
 
     def form_valid(self, form):
         """
@@ -160,7 +160,7 @@ class EventCreateView(generic.CreateView):
 class EventUpdateView(generic.UpdateView):
     model = Event
     form_class = EventForm
-    success_url = '/profile/'
+    success_url = reverse_lazy('user:profile')
 
     def form_valid(self, form):
         """
@@ -172,7 +172,7 @@ class EventUpdateView(generic.UpdateView):
 
 class EventDeleteView(generic.DeleteView):
     model = Event
-    success_url = '/profile/'
+    success_url = reverse_lazy('user:profile')
 
     def get(self, *args, **kwargs):
         return self.post(*args, **kwargs)
@@ -194,7 +194,7 @@ class VenueView(generic.ListView):
 class VenueCreateView(generic.CreateView):
     model = Venue
     form_class = VenueForm
-    success_url = '/profile/'
+    success_url = reverse_lazy('user:profile')
 
     def form_valid(self, form):
         """
@@ -207,12 +207,12 @@ class VenueCreateView(generic.CreateView):
 class VenueUpdateView(generic.UpdateView):
     model = Venue
     form_class = VenueForm
-    success_url = '/profile/'
+    success_url = reverse_lazy('user:profile')
 
 
 class VenueDeleteView(generic.DeleteView):
     model = Venue
-    success_url = '/profile/'
+    success_url = reverse_lazy('user:profile')
 
     def get(self, *args, **kwargs):
         return self.post(*args, **kwargs)
