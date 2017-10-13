@@ -11,6 +11,9 @@ from .forms import ArtistForm, EventForm, VenueForm
 class IndexView(generic.ListView):
     model = Artist
     template_name = 'event/index.html'
+    discover_count = 5
+    trending_count = 8
+    recommend_count = 10
 
     def get_context_data(self, **kwargs):
         """
@@ -18,15 +21,18 @@ class IndexView(generic.ListView):
         recommended artists and events
         """
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['discover'] = Artist.objects.exclude(image_url__exact='', thumb_url__exact='').exclude(
-                                                     users__in=[self.request.user.id])[:5]
-        context['trending'] = Artist.objects.annotate(user_count=Count('users')).order_by('-user_count')[:8]
+        # Get all artists, but exclude artists without images
+        context['discover'] = Artist.objects.exclude(image_url__exact='', thumb_url__exact='')
+        # Exclude artists already followed by a current user
+        context['discover'] = context['discover'].exclude(users__in=[self.request.user.id])[:self.discover_count]
+        context['trending'] = Artist.objects.annotate(user_count=Count('users')).order_by('-user_count')[:self.trending_count]
         if self.request.user.is_authenticated():
-            context['recommend'] = Event.objects.filter(artists__in=self.request.user.artists.all(),
-                                                        datetime__gte=timezone.now()).exclude(
-                                                        users__in=[self.request.user.id]).annotate(
-                                                        user_count=Count('users')).order_by(
-                                                        'datetime', '-user_count')[:10]
+            # Get upcoming events by a user's favorite artists
+            context['recommend'] = Event.objects.filter(artists__in=self.request.user.artists.all(), datetime__gte=timezone.now())
+            # Exclude events already followed by a current user
+            context['recommend'] = context['recommend'].exclude(users__in=[self.request.user.id]).annotate(
+                                                                user_count=Count('users')).order_by(
+                                                                'datetime', '-user_count')[:self.recommend_count]
             context['event_count'] = self.request.user.events.filter(datetime__gte=timezone.now()).count()
         return context
 
