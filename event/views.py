@@ -21,20 +21,32 @@ class IndexView(generic.ListView):
         Return the discover, trending, new,
         recommended artists and events
         """
+        now = timezone.now()
+        events = Event.objects
+        artists = Artist.objects
+        user_id = self.request.user.id
+        user_count = Count('users')
+        discover_count = self.discover_count
+        trending_count = self.trending_count
+        recommend_count = self.recommend_count
+
         context = super(IndexView, self).get_context_data(**kwargs)
+
         # Get all artists, but exclude artists without images
-        context['discover'] = Artist.objects.exclude(image_url__exact='', thumb_url__exact='')
+        context['discover'] = artists.exclude(image_url__exact='', thumb_url__exact='')
         # Exclude artists already followed by a current user
-        context['discover'] = context['discover'].exclude(users__in=[self.request.user.id])[:self.discover_count]
-        context['trending'] = Artist.objects.annotate(user_count=Count('users')).order_by('-user_count')[:self.trending_count]
+        context['discover'] = context['discover'].exclude(users__in=[user_id])[:discover_count]
+        context['trending'] = artists.annotate(user_count=user_count).order_by('-user_count')[:trending_count]
         if self.request.user.is_authenticated():
+            user_artists = self.request.user.artists.all()
+
             # Get upcoming events by a user's favorite artists
-            context['recommend'] = Event.objects.filter(artists__in=self.request.user.artists.all(), datetime__gte=timezone.now())
+            context['recommend'] = events.filter(artists__in=user_artists, datetime__gte=now)
             # Exclude events already followed by a current user
-            context['recommend'] = context['recommend'].exclude(users__in=[self.request.user.id]).annotate(
-                                                                user_count=Count('users')).order_by(
-                                                                'datetime', '-user_count')[:self.recommend_count]
-            context['event_count'] = self.request.user.events.filter(datetime__gte=timezone.now()).count()
+            context['recommend'] = context['recommend'].exclude(users__in=[user_id]).annotate(user_count=user_count)
+            context['recommend'] = context['recommend'].order_by('datetime', '-user_count')[:recommend_count]
+
+            context['event_count'] = self.request.user.events.filter(datetime__gte=now).count()
         return context
 
 
