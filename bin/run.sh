@@ -6,4 +6,4 @@ set -e
 python manage.py migrate --noinput
 
 # Run uWSGI
-exec uwsgi --ini uwsgi.ini "$@"
+exec uwsgi --ini eventrack/uwsgi.ini "$@"

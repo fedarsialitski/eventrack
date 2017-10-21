@@ -1,0 +1,41 @@
+version: '3'
+
+
+volumes:
+  eventrack_app_data: {}
+  eventrack_postgres_data: {}
+
+
+networks:
+  backend: {}
+
+
+services:
+  # Eventrack application
+  eventrack_app:
+    build: .
+    restart: always
+    networks:
+      - backend
+    env_file:
+      # You need to have this file to be able to work with docker
+      - ~/.docker/secrets/eventrack.prod.env
+    environment:
+      - CFG_STATIC_ROOT=/app/static
+      - CFG_MEDIA_ROOT=/var/eventrack/media
+    volumes:
+      - "eventrack_app_data:/var/eventrack"
+    links:
+      - eventrack_postgres:postgres
+    depends_on:
+      - eventrack_postgres
+
+
+  # DB container
+  eventrack_postgres:
+    image: postgres:9.5
+    restart: always
+    networks:
+      - backend
+    volumes:
+      - "eventrack_postgres_data:/var/lib/postgresql/data"
