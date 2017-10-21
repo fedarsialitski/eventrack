@@ -19,22 +19,6 @@
   </div>
   <div class="b-t">
     <div class="center-block p-a-md text-center">
-      <div class="center-block w-xxl p-a-md">
-        <div>
-          <a href="#" class="btn btn-block indigo text-white m-b-sm">
-            <i class="fa fa-facebook pull-left"></i>
-            Sign in with Facebook
-          </a>
-          <a href="#" class="btn btn-block red text-white">
-            <i class="fa fa-google-plus pull-left"></i>
-            Sign in with Google+
-          </a>
-        </div>
-        <br>
-        <div class="text-sm">
-          OR
-        </div>
-      </div>
       <form name="form" action="{% url 'user:signin' %}" method="post">
         {% csrf_token %}
         <div class="col-xs-8 offset-xs-2 p-x-md">
