@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.6-slim
+FROM python:3.6
 
 # Install non-python dependencies
 RUN apt-get update && apt-get install -y \
@@ -12,15 +12,16 @@ RUN apt-get update && apt-get install -y \
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-ADD . /app
-
-# Install any needed packages specified in requirements.txt
+# Install python packages. Done in a separate step so Docker can cache it.
+COPY requirements.txt ./requirements.txt
 RUN pip install -r requirements.txt
 
 # Copy a script to run the application.
 COPY bin/run.sh /run.sh
 CMD ["/run.sh"]
+
+# Copy the current directory contents into the container at /app
+COPY . /app
 
 # We need to include static files into a Docker image.
 # SECRET_KEY is actually not so important for collectstatic,
