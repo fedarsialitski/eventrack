@@ -11,9 +11,6 @@ if 'CFG_SECRET_KEY' in os.environ:
 if 'CFG_ALLOWED_HOSTS' in os.environ:
     ALLOWED_HOSTS = os.environ['CFG_ALLOWED_HOSTS'].split(',')
 
-if 'CFG_ADMINS' in os.environ:
-    ADMINS = os.environ['CFG_ADMINS']
-
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
