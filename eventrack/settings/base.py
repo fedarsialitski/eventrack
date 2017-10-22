@@ -85,3 +85,47 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+# Logging
+# https://docs.djangoproject.com/en/1.11/topics/logging/#configuring-logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'default': {
+            'verbose': '[%(asctime)s] (%(process)d/%(thread)d) %(name)s %(levelname)s: %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'ERROR',
+            'class': 'logging.StreamHandler',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        },
+    },
+    'loggers': {
+        'eventrack': {
+            'handlers': ['mail_admins', 'console'],
+            'level': 'INFO',
+            'propagate': False,
+            'formatter': 'verbose',
+        },
+        'django.request': {
+            'handlers': ['mail_admins', 'console'],
+            'level': 'ERROR',
+            'propagate': False,
+            'formatter': 'verbose',
+        },
+        'django.security': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+            'formatter': 'verbose',
+        },
+    },
+}
