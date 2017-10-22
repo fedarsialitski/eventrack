@@ -108,13 +108,12 @@ LOGGING = {
             'class': 'django.utils.log.AdminEmailHandler',
         },
     },
+    'root': {
+        'handlers': ['mail_admins', 'console'],
+        'level': 'INFO',
+        'formatter': 'verbose',
+    },
     'loggers': {
-        'eventrack': {
-            'handlers': ['mail_admins', 'console'],
-            'level': 'INFO',
-            'propagate': False,
-            'formatter': 'verbose',
-        },
         'django.request': {
             'handlers': ['mail_admins', 'console'],
             'level': 'ERROR',
