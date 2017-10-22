@@ -110,7 +110,7 @@ LOGGING = {
     },
     'root': {
         'handlers': ['mail_admins', 'console'],
-        'level': 'INFO',
+        'level': 'ERROR',
         'formatter': 'verbose',
     },
     'loggers': {
