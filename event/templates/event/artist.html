@@ -28,6 +28,7 @@
             </div>
           </div>
         </div>
+        {% if artists %}
         <div id="by_name" class="row row-lg">
           {% for artist in artists %}
             <div id="artist_{{ artist.id }}" class="col-xs-4 col-sm-4 col-md-3">
@@ -74,6 +75,11 @@
           </div>
         {% endfor %}
         </div>
+        {% else %}
+          <div class="col-xs-12">
+            No artists
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>
