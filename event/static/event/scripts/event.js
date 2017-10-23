@@ -55,6 +55,13 @@ $(document).on('click', 'ul#change_nav li', function () {
 
   menuItem.parentNode.classList.add('active');
   dropdownItem.classList.add('active');
+
+  if (history.pushState) {
+    history.pushState(null, null, target);
+  }
+  else {
+    location.hash = target;
+  }
 });
 
 $(document).on('click', 'ul#change_menu.nav li', function () {
@@ -76,6 +83,8 @@ $(document).on('click', 'ul#change_menu.nav li', function () {
     changeTab.removeAttr('data-toggle');
     changeTab.removeAttr('data-target');
     dropdownItem.removeClass('active');
+
+    location.href = href;
   }
 });
 
@@ -103,6 +112,13 @@ $(document).on('click', 'a#change_tab', function () {
 
   if (dropdownItem) {
     dropdownItem.classList.add('active');
+  }
+
+  if (history.pushState) {
+    history.pushState(null, null, target);
+  }
+  else {
+    location.hash = target;
   }
 });
 

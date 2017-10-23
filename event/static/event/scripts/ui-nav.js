@@ -16,7 +16,7 @@
 
   // init the active class when page reload\
   $('[ui-nav] a, [data-ui-nav] a').filter( function() {
-        return location.href.indexOf( $(this).attr('href') ) != -1;
+        return $(this).attr('href') === location.pathname + location.hash;
   }).parent().addClass( 'active' );
 
 })(jQuery);
