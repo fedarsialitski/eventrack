@@ -42,12 +42,6 @@
 
       $('[data-target="folded"] input').prop('checked', app.setting.folded);
       $('[data-target="container"] input').prop('checked', app.setting.container);
-      
-      if(color != app.setting.color){
-        uiLoad.remove('css/theme/'+color+'.css');
-        uiLoad.load('css/theme/'+app.setting.color+'.css');
-        color = app.setting.color;
-      }
     }
 
     // click to switch
