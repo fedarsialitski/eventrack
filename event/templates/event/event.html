@@ -57,7 +57,6 @@
                             <div class="item-info">
                               <div class="item-overlay bottom text-right">
                                 <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
-                                <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                                 <div class="dropdown-menu pull-right black lt"></div>
                               </div>
                               <div class="item-title text-ellipsis">
