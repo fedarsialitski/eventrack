@@ -45,7 +45,7 @@
               </span>
             {% endif %}
           </div>
-          <div class="form-group row">
+          <div class="form-group row m-b-md">
             <div class="col-xs-4 offset-xs-4">
               <input type="password" name="password" value="{{ form.password.value|default_if_none:"" }}" class="form-control {% if form.password.errors  or form.non_field_errors %}b-danger{% endif %}"  class="form-control" placeholder="Password">
             </div>
@@ -58,18 +58,9 @@
               </span>
             {% endif %}
           </div>
-        <div class="col-xs-4 offset-xs-4 p-x-sm text-center">
-          <div class="m-b-md">
-            <label class="md-check">
-              <input type="checkbox"><i class="primary"></i> Keep me signed in
-            </label>
-          </div>
           <button type="submit" class="btn btn-md black p-x-lg">Sign in</button>
       </form>
       <div class="m-y">
-        <a href="forgot-password.html" class="_600">Forgot password?</a>
-      </div>
-      <div>
         Do not have an account?
         <a href="{% url 'user:signup' %}" class="text-primary _600">Sign up</a>
       </div>
