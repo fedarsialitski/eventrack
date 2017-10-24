@@ -83,8 +83,6 @@ $(document).on('click', 'ul#change_menu.nav li', function () {
     changeTab.removeAttr('data-toggle');
     changeTab.removeAttr('data-target');
     dropdownItem.removeClass('active');
-
-    location.href = href;
   }
 });
 
