@@ -11,7 +11,7 @@
         <input name="keyword" value="{{ request.GET.keyword.strip }}" type="text" class="form-control"
         {% if not request.GET.keyword.strip %}placeholder="Type keyword"{% endif %}>
         <span class="input-group-btn">
-          <button class="btn b-a no-shadow white" type="button">Search</button>
+          <button class="btn b-a no-shadow white" type="submit">Search</button>
         </span>
       </div>
     </form>
