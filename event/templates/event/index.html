@@ -129,31 +129,14 @@
     <div class="p-a-lg h-v row-cell v-m">
       <div class="row">
         <div class="col-md-8 offset-md-2">
-          <form action="{% url 'event:search' %}" class="m-b-md">
+          <form action="{% url 'event:search' %}" method="get" class="m-b-md">
             <div class="input-group input-group-md">
-              <input type="text" class="form-control" placeholder="Type keyword" data-ui-toggle-class="hide" data-ui-target="#search-result">
+              <input name="keyword" type="text" class="form-control" placeholder="Type keyword" data-ui-toggle-class="hide" data-ui-target="#search-result">
               <span class="input-group-btn">
                 <button class="btn b-a no-shadow white" type="submit">Search</button>
               </span>
             </div>
           </form>
-          <div id="search-result" class="animated fadeIn">
-            <p class="m-b-md"><strong>23</strong> <span class="text-muted">Results found for: </span><strong>Keyword</strong></p>
-          </div>
-          <div id="top-search" class="btn-groups">
-            <strong class="text-muted">Top searches: </strong>
-            <a href="#" class="btn btn-xs white">Balthazar</a>
-            <a href="#" class="btn btn-xs white">Defeater</a>
-            <a href="#" class="btn btn-xs white">Enter Shikari</a>
-            <a href="#" class="btn btn-xs white">Foals</a>
-            <a href="#" class="btn btn-xs white">Hurts</a>
-            <a href="#" class="btn btn-xs white">London Grammar</a>
-            <a href="#" class="btn btn-xs white">Marmozets</a>
-            <a href="#" class="btn btn-xs white">Massive Attack</a>
-            <a href="#" class="btn btn-xs white">Oh Wonder</a>
-            <a href="#" class="btn btn-xs white">System of a Down</a>
-            <a href="#" class="btn btn-xs white">Warhaus</a>
-          </div>
         </div>
       </div>
     </div>

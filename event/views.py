@@ -3,10 +3,10 @@ from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views import generic
 from django.utils import timezone
-from django.db.models import Count
+from django.db.models import Count, Q
 
 from .models import Artist, Event, Venue
-from .forms import ArtistForm, EventForm, VenueForm
+from .forms import ArtistForm, EventForm, VenueForm, SearchForm
 
 
 class IndexView(generic.ListView):
@@ -52,7 +52,23 @@ class IndexView(generic.ListView):
 
 class SearchView(generic.ListView):
     model = Event
+    form_class = SearchForm
+    paginate_by = 12
     template_name = 'event/search.html'
+    context_object_name = 'events'
+
+    def get_queryset(self):
+        form = self.form_class(self.request.GET)
+        if form.is_valid():
+            keyword = form.cleaned_data['keyword']
+            return Event.objects.filter(
+                Q(title__search=keyword) |
+                Q(venue__name__search=keyword) |
+                Q(venue__city__search=keyword) |
+                Q(venue__country__search=keyword) |
+                Q(artists__name__search=keyword)
+            ).distinct()
+        return Event.objects.all()
 
 
 class ArtistView(generic.ListView):

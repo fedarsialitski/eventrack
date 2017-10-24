@@ -6,15 +6,112 @@
 
   <!-- ############ PAGE START-->
   <div class="padding">
-    <form action="#" class="m-b-md">
+    <form action="{% url 'event:search' %}" method="get" class="m-b-md">
       <div class="input-group input-group-md">
-        <input type="text" class="form-control" placeholder="Type keyword">
+        <input name="keyword" value="{{ request.GET.keyword.strip }}" type="text" class="form-control"
+        {% if not request.GET.keyword.strip %}placeholder="Type keyword"{% endif %}>
         <span class="input-group-btn">
           <button class="btn b-a no-shadow white" type="button">Search</button>
         </span>
       </div>
     </form>
-    <p class="m-b-md"><strong>23</strong> Results found for: <strong>Keyword</strong></p>
+    <p class="m-b-md">
+      {% if page_obj.paginator.count %}
+        <strong>{{ page_obj.paginator.count }}</strong>
+          Result{{ page_obj.paginator.count|pluralize:"s" }}
+          {% if request.GET.keyword.strip %}
+            found for: <strong>«{{ request.GET.keyword.strip }}»
+          {% endif %}
+        </strong>
+      {% else %}
+        <div class="no-results">
+          <h6>Sorry, we found no results for «<strong class="query">{{ request.GET.keyword }}</strong>».</h6>
+          <p>
+            <strong>Suggestions:</strong><br>
+            Make sure all words are spelled correctly.<br>
+            Try different words.<br>
+            Try another artist, location, event, or venue.
+          </p>
+        </div>
+      {% endif %}
+    </p>
+    <div class="row item-list item-list-md item-list-by m-b">
+      {% if events %}
+        {% for event in events %}
+          <div id="event_{{ event.id }}" class="col-xs-12">
+            <div class="item r" data-id="item-12">
+              {% if event.artists.all %}
+                  {% for artist in event.artists.all %}
+                    {% if forloop.counter <= 5 %}
+                      <div class="item-media ">
+                        <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{{ artist.thumb_url }}');"></a>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+              {% else %}
+                <div class="item-media ">
+                  <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ default_url }});"></a>
+                </div>
+              {% endif %}
+                <div class="item-info">
+                  <div class="item-overlay bottom text-right">
+                    <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+                    <div class="dropdown-menu pull-right black lt"></div>
+                  </div>
+                  <div class="item-title text-ellipsis">
+                    <a href="{% url 'event:event_detail' event.id %}">{{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}</a>
+                  </div>
+                  <div class="item-author text-sm text-ellipsis ">
+                    <a href="{% url 'event:event_detail' event.id %}" class="text-muted">{{ event.datetime|date:"l, d M Y – g:i A" }}</a>
+                  </div>
+                  {% if event.artists.count > 1 %}
+                    <div class="row">
+                      {% for artist in event.artists.all|slice:":10" %}
+                          <a href="{% url 'event:artist_detail' artist.id %}" class="text-muted">{{ artist.name }}</a>{% if not forloop.last %}, {% endif %}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                  <div class="item-meta text-sm text-muted">
+                    <span class="item-meta-stats text-xs  item-meta-right">
+                      {% if event.users.count %}<i class="fa fa-star text-muted"></i>
+                          {{ event.users.count }}{% endif %}
+                    </span>
+                  </div>
+                </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+    {% if is_paginated %}
+      <div>
+        <ul class="pagination white">
+          {% if page_obj.has_previous %}
+            <li>
+              <a href="
+                {% if request.GET.keyword.strip %}?keyword={{ request.GET.keyword.strip }}&{% else %}?{% endif %}page={{ page_obj.previous_page_number }}">
+                <i class="fa fa-chevron-left"></i>
+              </a>
+            </li>
+          {% endif %}
+
+          {% for page in page_obj.paginator.page_range %}
+            <li {% if forloop.counter == page_obj.number %}class="active"{% endif %}><a href="
+              {% if request.GET.keyword.strip %}?keyword={{ request.GET.keyword.strip }}&{% else %}?{% endif %}page={{ forloop.counter }}">{{ forloop.counter }}</a>
+            </li>
+          {% endfor %}
+
+          {% if page_obj.has_next %}
+            <li>
+              <a href="
+                {% if request.GET.keyword.strip %}?keyword={{ request.GET.keyword.strip }}&{% else %}?{% endif %}page={{ page_obj.next_page_number }}">
+                <i class="fa fa-chevron-right"></i>
+              </a>
+            </li>
+        {% endif %}
+        </ul>
+      </div>
+    {% endif %}
   </div>
 </div>
 {% endblock content %}

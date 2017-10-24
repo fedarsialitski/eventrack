@@ -47,3 +47,7 @@ class VenueForm(forms.ModelForm):
             'city',
             'country',
         ]
+
+
+class SearchForm(forms.Form):
+    keyword = forms.CharField(required=False)
