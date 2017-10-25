@@ -158,10 +158,15 @@ $(document).on('click', '.btn-favorite', function (e) {
           case 'artists':
             dataCount = data.artist_count;
             break;
+          case 'venues':
+            dataCount = data.venue_count;
+            break;
         }
 
         if (dataCount) {
-          count.textContent = dataCount;
+          if (data.id !== 'venues') {
+            count.textContent = dataCount;
+          }
         } else {
           var tab = document.querySelector('div.tab-pane#' + data.id),
               tabRow = document.querySelector('div.row#row_' + data.id),
