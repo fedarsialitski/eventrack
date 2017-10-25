@@ -64,7 +64,7 @@
           <div class="tab-pane active" id="tab_1">
             <h5 class="m-b">Upcoming events</h5>
             {% if upcoming_events.all %}
-              <div class="row item-list item-list-md item-list-li m-b" id="upcoming_events">
+              <div class="row item-list item-list-md item-list-li-by m-b" id="upcoming_events">
                 {% for upcoming_event in upcoming_events.all|slice:":4" %}
                   <div id="event_{{ upcoming_event.id }}" class="col-md-12 col-lg-6">
                     <div class="item r" data-id="item-2">
@@ -96,13 +96,13 @@
                 {% endfor %}
               </div>
           {% else %}
-            <div class="item-list item-list-md item-list-li m-b" id="upcoming_events">
+            <div class="item-list item-list-md item-list-li-by m-b" id="upcoming_events">
               No upcoming events
             </div>
           {% endif %}
           <h5 class="m-b">Past events</h5>
           {% if past_events.all %}
-            <div class="row item-list item-list-md item-list-li m-b" id="past_events">
+            <div class="row item-list item-list-md item-list-li-by m-b" id="past_events">
               {% for past_event in past_events.all|slice:":4" %}
                 <div id="event_{{ past_event.id }}" class="col-md-12 col-lg-6">
                   <div class="item r" data-id="item-2">
@@ -134,7 +134,7 @@
               {% endfor %}
             </div>
           {% else %}
-            <div class="item-list item-list-md item-list-li m-b" id="past_events">
+            <div class="item-list item-list-md item-list-li-by m-b" id="past_events">
               No past events
             </div>
           {% endif %}
@@ -161,7 +161,7 @@
             </div>
           </div>
           {% if upcoming_events.items %}
-            <div class="row item-list item-list-md item-list-li m-b">
+            <div class="row item-list item-list-md item-list-li-by m-b">
               {% for key, upcoming_events in upcoming_events.items %}
               <div id="{{ key }}" {% if key in 'week, month, year' %}class="modal"{% endif %}>
               {% if upcoming_events %}
@@ -230,7 +230,7 @@
             </div>
           </div>
           {% if past_events.items %}
-              <div class="row item-list item-list-md item-list-li m-b">
+              <div class="row item-list item-list-md item-list-li-by m-b">
               {% for key, past_events in past_events.items %}
               <div id="past_{{ key }}" {% if key in 'week, month, year' %}class="modal"{% endif %}>
               {% if past_events %}

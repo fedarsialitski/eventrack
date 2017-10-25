@@ -233,7 +233,7 @@
             <div class="tab-pane" id="bookmarks">
               <h5 class="m-b">Events</h5>
               {% if user.events.all %}
-                <div id="bookmark_events" class="row item-list item-list-md item-list-li m-b">
+                <div id="bookmark_events" class="row item-list item-list-md item-list-li-by m-b">
                   {% for event in user.events.all%}
                     <div id="event_{{ event.id }}" class="col-md-12 col-lg-6">
                       <div class="item r" data-id="item-2">
