@@ -58,6 +58,9 @@ class SearchView(generic.ListView):
     context_object_name = 'events'
 
     def get_queryset(self):
+        """
+        Return the events found by keyword
+        """
         form = self.form_class(self.request.GET)
         if form.is_valid():
             keyword = form.cleaned_data['keyword']
@@ -143,28 +146,15 @@ class ArtistDeleteView(generic.DeleteView):
 
 class EventView(generic.ListView):
     model = Event
+    paginate_by = 12
     template_name = 'event/event.html'
     context_object_name = 'events'
 
-    def get_context_data(self, **kwargs):
+    def get_queryset(self):
         """
         Return the upcoming events
         """
-        now = timezone.now()
-        today = date.today()
-        year = today.year
-        week = today.isocalendar()[1]
-        month = today.month
-        events = Event.objects
-
-        context = super(EventView, self).get_context_data(**kwargs)
-
-        context['events'] = {}
-        context['events'].update({'week':  events.filter(datetime__gte=now, datetime__week=week).order_by('datetime')})
-        context['events'].update({'month': events.filter(datetime__gte=now, datetime__month=month).order_by('datetime')})
-        context['events'].update({'year':  events.filter(datetime__gte=now, datetime__year=year).order_by('datetime')})
-        context['events'].update({'all':   events.filter(datetime__gte=now).order_by('datetime')})
-        return context
+        return super().get_queryset().filter(datetime__gte=timezone.now())
 
 
 class EventDetailView(generic.DetailView):
