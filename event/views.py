@@ -76,15 +76,9 @@ class SearchView(generic.ListView):
 
 class ArtistView(generic.ListView):
     model = Artist
-    count = 12
+    paginate_by = 12
     template_name = 'event/artist.html'
     context_object_name = 'artists'
-
-    def get_queryset(self):
-        """
-        Return the first twelve artists
-        """
-        return super().get_queryset()[:self.count]
 
 
 class ArtistDetailView(generic.DetailView):
