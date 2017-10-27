@@ -34,6 +34,57 @@
 
 <!-- ############ LAYOUT START-->
 
+{% if not user.is_authenticated.value %}
+<div id="sign-modal" class="modal fade animate black-overlay" data-backdrop="false">
+  <div class="row-col h-v">
+    <div class="row-cell v-m">
+      <div class="modal-dialog">
+        <div class="modal-content ">
+          <div class="row-col">
+            <a data-dismiss="modal" class="pull-right text-muted text-lg p-a-sm m-r-sm">×</a>
+            <div class="p-a b-b">
+              <span class="h5">
+                Sign up for Eventrack
+              </span>
+            </div>
+          </div>
+          <div class="modal-body text-center">
+            <p class="p-y-sm"><img src="{% static 'event/images/logo.png' %}" alt="."></p>
+            <p>Join Eventrack to perform this action.</p>
+          </div>
+          <div class="modal-footer">
+            <a href="{% url 'user:signin' %}" role="button" class="btn btn-default b-primary p-x-md">Sign in</a>
+            <button type="button" class="btn green p-x-md"><a href="{% url 'user:signup' %}">Sign up</a></button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- ############ SEARCH START -->
+<div class="modal white lt fade" id="search-modal" data-backdrop="false">
+  <a data-dismiss="modal" class="text-muted text-lg p-x modal-close-btn">&times;</a>
+  <div class="row-col">
+    <div class="p-a-lg h-v row-cell v-m">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <form action="{% url 'event:search' %}" method="get" class="m-b-md">
+            <div class="input-group input-group-md">
+              <input name="keyword" type="text" class="form-control" placeholder="Type keyword" data-ui-toggle-class="hide" data-ui-target="#search-result">
+              <span class="input-group-btn">
+                <button class="btn b-a no-shadow white" type="submit">Search</button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ############ SEARCH END -->
+
   <!-- aside -->
   <div id="aside" class="app-aside modal fade nav-dropdown">
     <!-- fluid app aside -->
@@ -350,34 +401,7 @@
       </div>
     {% endblock content %}
     </div>
-    {% if not user.is_authenticated.value %}
-    <div id="sign-modal" class="modal fade animate black-overlay" data-backdrop="false">
-      <div class="row-col h-v">
-        <div class="row-cell v-m">
-          <div class="modal-dialog">
-            <div class="modal-content ">
-              <div class="row-col">
-                <a data-dismiss="modal" class="pull-right text-muted text-lg p-a-sm m-r-sm">×</a>
-                <div class="p-a b-b">
-                  <span class="h5">
-                    Sign up for Eventrack
-                  </span>
-                </div>
-              </div>
-              <div class="modal-body text-center">
-                <p class="p-y-sm"><img src="{% static 'event/images/logo.png' %}" alt="."></p>
-                <p>Join Eventrack to perform this action.</p>
-              </div>
-              <div class="modal-footer">
-                <a href="{% url 'user:signin' %}" role="button" class="btn btn-default b-primary p-x-md">Sign in</a>
-                <button type="button" class="btn green p-x-md"><a href="{% url 'user:signup' %}">Sign up</a></button>
-              </div>
-            </div><!-- /.modal-content -->
-          </div>
-        </div>
-      </div>
-    </div>
-    {% else %}
+    {% if user.is_authenticated.value %}
     <!-- .modal -->
     <div id="delete-modal" class="modal fade animate black-overlay" data-backdrop="false">
       <div class="row-col h-v">
@@ -437,28 +461,6 @@
     </div>
     <!-- / .modal -->
     {% endif %}
-
-    <!-- ############ SEARCH START -->
-    <div class="modal white lt fade" id="search-modal" data-backdrop="false">
-      <a data-dismiss="modal" class="text-muted text-lg p-x modal-close-btn">&times;</a>
-      <div class="row-col">
-        <div class="p-a-lg h-v row-cell v-m">
-          <div class="row">
-            <div class="col-md-8 offset-md-2">
-              <form action="{% url 'event:search' %}" method="get" class="m-b-md">
-                <div class="input-group input-group-md">
-                  <input name="keyword" type="text" class="form-control" placeholder="Type keyword" data-ui-toggle-class="hide" data-ui-target="#search-result">
-                  <span class="input-group-btn">
-                    <button class="btn b-a no-shadow white" type="submit">Search</button>
-                  </span>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- ############ SEARCH END -->
   </div>
 
 <!-- build:js scripts/app.min.js -->
