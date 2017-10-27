@@ -30,7 +30,6 @@
               </a>
             </div>
             <div class="item-action m-b">
-              <a class="btn btn-icon white rounded btn-share pull-right" data-toggle="modal" data-target="#share-modal"><i class="fa fa-share-alt"></i></a>
               <span>
                 {% if upcoming_events.all.count %}
                   <i class="material-icons md-24">event_note</i>
@@ -74,7 +73,6 @@
                       <div class="item-info">
                         <div class="item-overlay bottom text-right">
                           <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ upcoming_event.id }}" data-url="{% url 'event:event_bookmark' upcoming_event.id %}"{% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if upcoming_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
-                          <div class="dropdown-menu pull-right black lt"></div>
                         </div>
                         <div class="item-title text-ellipsis">
                           <a href="{% url 'event:event_detail' upcoming_event.id %}">{{ upcoming_event.title }} @ {{ upcoming_event.venue.name }}, {{ upcoming_event.venue.city }}, {{ upcoming_event.venue.country }}</a>
@@ -112,7 +110,6 @@
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
                         <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ past_event.id }}"  data-url="{% url 'event:event_bookmark' past_event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if past_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
-                        <div class="dropdown-menu pull-right black lt"></div>
                       </div>
                       <div class="item-title text-ellipsis">
                         <a href="{% url 'event:event_detail' past_event.id %}">{{ past_event.title }} @ {{ past_event.venue.name }}, {{ past_event.venue.city }}, {{ past_event.venue.country }}</a>
@@ -174,7 +171,6 @@
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
                         <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ upcoming_event.id }}"  data-url="{% url 'event:event_bookmark' upcoming_event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if upcoming_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
-                        <div class="dropdown-menu pull-right black lt"></div>
                       </div>
                       <div class="item-title text-ellipsis">
                         <a href="{% url 'event:event_detail' upcoming_event.id %}">{{ upcoming_event.title }} @ {{ upcoming_event.venue.name }}, {{ upcoming_event.venue.city }}, {{ upcoming_event.venue.country }}</a>
@@ -243,7 +239,6 @@
                     <div class="item-info">
                       <div class="item-overlay bottom text-right">
                         <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ past_event.id }}" data-url="{% url 'event:event_bookmark' past_event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if past_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
-                        <div class="dropdown-menu pull-right black lt"></div>
                       </div>
                       <div class="item-title text-ellipsis">
                         <a href="{% url 'event:event_detail' past_event.id %}">{{ past_event.title }} @ {{ past_event.venue.name }}, {{ past_event.venue.city }}, {{ past_event.venue.country }}</a>

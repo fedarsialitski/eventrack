@@ -304,16 +304,14 @@
                 <div id="artist_{{ artist.id }}" class="{% if forloop.first %}col-sm-6 text-white m-b-sm{% else %}col-sm-3 col-xs-6{% endif %}">
                   <div class="item r">
                     <div class="item-media {% if forloop.first %}primary{% endif %}">
-                      <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url({% if forloop.first %}{{ artist.image_url|default:artist.thumb_url }}{% else %}{{ artist.thumb_url|default:default_url }}{% endif %});"></a>
+                      <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url({% if forloop.first %}{{ artist.image_url|default:artist.thumb_url }}{% else %}{{ artist.thumb_url|default:default_url }}{% endif %});">
+                        <div class="item-info">
+                          <div class="item-title text-ellipsis">{{ artist.name }}</div>
+                        </div>
+                      </a>
                     </div>
-                    <div class="item-info">
-                      <div class="item-overlay bottom text-right">
-                        <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="artist_{{ artist.id }}" data-url="{% url 'event:artist_bookmark' artist.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if artist in user.artists.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
-                        <div class="dropdown-menu pull-right black lt"></div>
-                      </div>
-                      <div class="item-title text-ellipsis">
-                        <a href="{% url 'event:artist_detail' artist.id %}">{{ artist.name }}</a>
-                      </div>
+                    <div class="item-overlay bottom text-right">
+                      <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="artist_{{ artist.id }}" data-url="{% url 'event:artist_bookmark' artist.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if artist in user.artists.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
                     </div>
                   </div>
                 </div>
@@ -336,7 +334,6 @@
                           <div class="item-info">
                             <div class="item-overlay bottom text-right">
                               <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="artist_{{ artist.id }}" data-url="{% url 'event:artist_bookmark' artist.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if artist in user.artists.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
-                              <div class="dropdown-menu pull-right black lt"></div>
                             </div>
                             <div class="item-title text-ellipsis">
                               <a href="{% url 'event:artist_detail' artist.id %}">{{ artist.name }}</a>
@@ -374,7 +371,6 @@
                           <div class="item-info">
                             <div class="item-overlay bottom text-right">
                               <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
-                              <div class="dropdown-menu pull-right black lt"></div>
                             </div>
                             <div class="item-title text-ellipsis">
                               <a href="{% url 'event:event_detail' event.id %}">{{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}</a>

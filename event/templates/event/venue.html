@@ -44,7 +44,6 @@
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
                             <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="venue_{{ venue.id }}" data-url="{% url 'event:venue_bookmark' venue.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if venue in user.venues.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
-                            <div class="dropdown-menu pull-right black lt"></div>
                           </div>
                           <div class="item-title text-ellipsis">
                             <a {% if user.is_authenticated.value %}href="{% url 'event:venue_update' venue.id %}"{% endif %}>{{ venue.name }}</a>
