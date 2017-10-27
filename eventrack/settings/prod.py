@@ -35,3 +35,9 @@ STATIC_ROOT = os.environ.get('CFG_STATIC_ROOT', os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.environ.get('CFG_MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
+
+
+# ManifestStaticFilesStorage
+# https://docs.djangoproject.com/en/1.11/ref/contrib/staticfiles/#manifeststaticfilesstorage
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
