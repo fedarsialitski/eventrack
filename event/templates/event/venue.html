@@ -34,11 +34,11 @@
                             {% endfor %}
                         {% else %}
                           <div class="item-media ">
-                            <a {% if user.is_authenticated.value %}href="{% url 'event:venue_update' venue.id %}"{% endif %} class="item-media-content">
                               <i class="material-icons md-36 center text-muted">
+                              {% if perms.change_venue %}<a href="{% url 'event:venue_update' venue.id %}">{% endif %}
                                 place
+                              {% if perms.change_venue %}</a>{% endif %}
                               </i>
-                            </a>
                           </div>
                         {% endif %}
                         <div class="item-info">
@@ -46,10 +46,22 @@
                             <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="venue_{{ venue.id }}" data-url="{% url 'event:venue_bookmark' venue.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if venue in user.venues.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
                           </div>
                           <div class="item-title text-ellipsis">
-                            <a {% if user.is_authenticated.value %}href="{% url 'event:venue_update' venue.id %}"{% endif %}>{{ venue.name }}</a>
+                            {% if perms.change_venue %}<a href="{% url 'event:venue_update' venue.id %}">{% endif %}
+                              {{ venue.name }}
+                            {% if perms.change_venue %}</a>{% endif %}
                           </div>
                           <div class="item-author text-sm text-ellipsis ">
-                            <a {% if user.is_authenticated.value %}href="{% url 'event:venue_update' venue.id %}"{% endif %} class="text-muted">{{ venue.city }}{% if venue.city and venue.country %}, {% endif %}{{ venue.country }}</a>
+                            {% if perms.change_venue %}
+                              <a href="{% url 'event:venue_update' venue.id %}" class="text-muted">
+                            {% else %}
+                              <div class="text-muted">
+                            {% endif %}
+                              {{ venue.city }}{% if venue.city and venue.country %}, {% endif %}{{ venue.country }}
+                            {% if perms.change_venue %}
+                              </a>
+                            {% else %}
+                              </div>
+                            {% endif %}
                           </div>
                           <div class="item-meta text-sm text-muted">
                             <span class="item-meta-stats text-xs  item-meta-right">

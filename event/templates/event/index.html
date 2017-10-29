@@ -399,6 +399,7 @@
     </div>
     {% if user.is_authenticated.value %}
     <!-- .modal -->
+    {% if perms.delete_event or perms.delete_artist or perms.delete_venue %}
     <div id="delete-modal" class="modal fade animate black-overlay" data-backdrop="false">
       <div class="row-col h-v">
         <div class="row-cell v-m">
@@ -412,7 +413,7 @@
                 <form method="post" action="">
                   {% csrf_token %}
                   <button type="button" class="btn btn-default p-x-md" data-dismiss="modal">No</button>
-                  <button type="button submit" class="btn red p-x-md">Yes</button>
+                  <button type="button" class="btn red p-x-md">Yes</button>
                 </form>
               </div>
             </div><!-- /.modal-content -->
@@ -420,6 +421,7 @@
         </div>
       </div>
     </div>
+    {% endif %}
     <div id="modal_events" class="modal col-lg-12 text-center">
       <div class="p-a-lg">
         <h2 class="m-y-md">No added events</h2>

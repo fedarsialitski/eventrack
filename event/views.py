@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.utils import timezone
 from django.db.models import Count, Q
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from .models import Artist, Event, Venue
 from .forms import ArtistForm, EventForm, VenueForm, SearchForm
@@ -111,10 +112,12 @@ class ArtistDetailView(generic.DetailView):
         return context
 
 
-class ArtistCreateView(generic.CreateView):
+class ArtistCreateView(PermissionRequiredMixin, generic.CreateView):
     model = Artist
     form_class = ArtistForm
     success_url = reverse_lazy('user:profile')
+    raise_exception = True
+    permission_required = 'event.add_artist'
 
     def form_valid(self, form):
         """
@@ -124,15 +127,19 @@ class ArtistCreateView(generic.CreateView):
         return super(ArtistCreateView, self).form_valid(form)
 
 
-class ArtistUpdateView(generic.UpdateView):
+class ArtistUpdateView(PermissionRequiredMixin, generic.UpdateView):
     model = Artist
     form_class = ArtistForm
     success_url = reverse_lazy('user:profile')
+    raise_exception = True
+    permission_required = 'event.change_artist'
 
 
-class ArtistDeleteView(generic.DeleteView):
+class ArtistDeleteView(PermissionRequiredMixin, generic.DeleteView):
     model = Artist
     success_url = reverse_lazy('user:profile')
+    raise_exception = True
+    permission_required = 'event.delete_artist'
 
     def get(self, *args, **kwargs):
         return self.post(*args, **kwargs)
@@ -155,10 +162,12 @@ class EventDetailView(generic.DetailView):
     model = Event
 
 
-class EventCreateView(generic.CreateView):
+class EventCreateView(PermissionRequiredMixin, generic.CreateView):
     model = Event
     form_class = EventForm
     success_url = reverse_lazy('user:profile')
+    raise_exception = True
+    permission_required = 'event.add_event'
 
     def form_valid(self, form):
         """
@@ -169,10 +178,12 @@ class EventCreateView(generic.CreateView):
         return super(EventCreateView, self).form_valid(form)
 
 
-class EventUpdateView(generic.UpdateView):
+class EventUpdateView(PermissionRequiredMixin, generic.UpdateView):
     model = Event
     form_class = EventForm
     success_url = reverse_lazy('user:profile')
+    raise_exception = True
+    permission_required = 'event.change_event'
 
     def form_valid(self, form):
         """
@@ -182,9 +193,11 @@ class EventUpdateView(generic.UpdateView):
         return super(EventUpdateView, self).form_valid(form)
 
 
-class EventDeleteView(generic.DeleteView):
+class EventDeleteView(PermissionRequiredMixin, generic.DeleteView):
     model = Event
     success_url = reverse_lazy('user:profile')
+    raise_exception = True
+    permission_required = 'event.delete_event'
 
     def get(self, *args, **kwargs):
         return self.post(*args, **kwargs)
@@ -197,10 +210,12 @@ class VenueView(generic.ListView):
     context_object_name = 'venues'
 
 
-class VenueCreateView(generic.CreateView):
+class VenueCreateView(PermissionRequiredMixin, generic.CreateView):
     model = Venue
     form_class = VenueForm
     success_url = reverse_lazy('user:profile')
+    raise_exception = True
+    permission_required = 'event.add_venue'
 
     def form_valid(self, form):
         """
@@ -210,15 +225,19 @@ class VenueCreateView(generic.CreateView):
         return super(VenueCreateView, self).form_valid(form)
 
 
-class VenueUpdateView(generic.UpdateView):
+class VenueUpdateView(PermissionRequiredMixin, generic.UpdateView):
     model = Venue
     form_class = VenueForm
     success_url = reverse_lazy('user:profile')
+    raise_exception = True
+    permission_required = 'event.change_venue'
 
 
-class VenueDeleteView(generic.DeleteView):
+class VenueDeleteView(PermissionRequiredMixin, generic.DeleteView):
     model = Venue
     success_url = reverse_lazy('user:profile')
+    raise_exception = True
+    permission_required = 'event.delete_venue'
 
     def get(self, *args, **kwargs):
         return self.post(*args, **kwargs)

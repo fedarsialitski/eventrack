@@ -104,10 +104,16 @@
                               <div class="row m-l-0">Country: {{ event.venue.country }}</div>
                             {% endif %}
                           </div>
+                          {% if perms.change_event or perms.delete_event %}
                           <div class="item-action visible-list m-t-sm">
+                            {% if perms.change_event %}
                             <a href="{% url 'event:event_update' event.id %}" class="btn btn-xs white">Edit</a>
+                            {% endif %}
+                            {% if perms.delete_event %}
                             <a href="{% url 'event:event_delete' event.id %}" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
+                            {% endif %}
                           </div>
+                          {% endif %}
                         </div>
                       </div>
                     </div>
@@ -115,7 +121,9 @@
                     <div class="col-lg-12">
                       <div class="p-t-md">
                         <h6 class="text-muted m-b-md">Would you like to add a event?</h6>
-                        <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:event_add' %}">Add</a>
+                        <a class="btn circle btn-outline b-primary m-b-lg p-x-md"
+                           href="{% if perms.add_event %}{% url 'event:event_add' %}{% else %}{% url 'event:event' %}{% endif %}"
+                        >Add</a>
                       </div>
                     </div>
                 </div>
@@ -124,7 +132,9 @@
                   <div class="p-a-lg">
                     <h2 class="m-y-md">No added events</h2>
                     <h6 class="text-muted m-b-md">Would you like to add a event?</h6>
-                    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:event_add' %}">Add</a>
+                    <a class="btn circle btn-outline b-primary m-b-lg p-x-md"
+                      href="{% if perms.add_event %}{% url 'event:event_add' %}{% else %}{% url 'event:event' %}{% endif %}"
+                    >Add</a>
                   </div>
                 </div>
               {% endif %}
@@ -145,19 +155,24 @@
                           <div class="item-title text-ellipsis">
                             <a href="{% url 'event:artist_detail' artist.id %}">{{ artist.name }}</a>
                           </div>
-                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm m-b-md">
+                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm {% if perms.change_artist or perms.delete_artist %}m-b-md{% endif %}">
                               {% if artist.events.count %}
                                 <i class="material-icons md-24">event_note</i>
                                 {{ artist.events.count }} event{{ artist.events.count|pluralize:"s" }}
                               {% else %}
                                 No events
                               {% endif %}
-                            </span>
                           </div>
+                          {% if perms.change_artist or perms.delete_artist %}
                           <div class="item-action visible-list m-t-sm">
+                            {% if perms.change_artist %}
                             <a href="{% url 'event:artist_update' artist.id %}" class="btn btn-xs white">Edit</a>
+                            {% endif %}
+                            {% if perms.delete_artist %}
                             <a href="{% url 'event:artist_delete' artist.id %}" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
+                            {% endif %}
                           </div>
+                          {% endif %}
                         </div>
                       </div>
                     </div>
@@ -165,7 +180,9 @@
                     <div class="col-lg-12">
                       <div class="p-t-md">
                         <h6 class="text-muted m-b-md">Would you like to add a artist?</h6>
-                        <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:artist_add' %}">Add</a>
+                        <a class="btn circle btn-outline b-primary m-b-lg p-x-md"
+                           href="{% if perms.add_artist %}{% url 'event:artist_add' %}{% else %}{% url 'event:artist' %}{% endif %}"
+                        >Add</a>
                       </div>
                     </div>
                 </div>
@@ -174,7 +191,9 @@
                   <div class="p-a-lg">
                     <h2 class="m-y-md">No added artists</h2>
                     <h6 class="text-muted m-b-md">Would you like to add a artist?</h6>
-                    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:artist_add' %}">Add</a>
+                    <a class="btn circle btn-outline b-primary m-b-lg p-x-md"
+                       href="{% if perms.add_artist %}{% url 'event:artist_add' %}{% else %}{% url 'event:artist' %}{% endif %}"
+                    >Add</a>
                   </div>
                 </div>
               {% endif %}
@@ -190,7 +209,9 @@
                             <a class="btn-favorite" data-id="venue_{{ venue.id }}" data-url="{% url 'event:venue_bookmark' venue.id %}"><i class="fa fa-star"></i></a>
                           </div>
                           <div class="item-title text-ellipsis">
-                            <a href="{% url 'event:venue_update' venue.id %}">{{ venue.name }}</a>
+                            {% if perms.change_venue %}<a href="{% url 'event:venue_update' venue.id %}">{% endif %}
+                              {{ venue.name }}
+                            {% if perms.change_venue %}</a>{% endif %}
                           </div>
                           {% if venue.city %}
                           <div class="item-except visible-list text-sm m-t-sm">
@@ -202,10 +223,16 @@
                             Country: {{ venue.country }}
                           </div>
                           {% endif %}
+                          {% if perms.change_venue or perms.delete_venue %}
                           <div class="item-action visible-list m-t-md">
+                            {% if perms.change_venue %}
                             <a href="{% url 'event:venue_update' venue.id %}" class="btn btn-xs white">Edit</a>
+                            {% endif %}
+                            {% if perms.delete_venue %}
                             <a href="{% url 'event:venue_delete' venue.id %}" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
+                            {% endif %}
                           </div>
+                          {% endif %}
                         </div>
                       </div>
                     </div>
@@ -213,7 +240,9 @@
                     <div class="col-lg-12">
                       <div class="p-t-md">
                         <h6 class="text-muted m-b-md">Would you like to add a venue?</h6>
-                        <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:venue_add' %}">Add</a>
+                        <a class="btn circle btn-outline b-primary m-b-lg p-x-md"
+                           href="{% if perms.add_venue %}{% url 'event:venue_add' %}{% else %}{% url 'event:venue' %}{% endif %}"
+                        >Add</a>
                       </div>
                     </div>
                 </div>
@@ -222,7 +251,9 @@
                   <div class="p-a-lg">
                     <h2 class="m-y-md">No added venues</h2>
                     <h6 class="text-muted m-b-md">Would you like to add a venue?</h6>
-                    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:venue_add' %}">Add</a>
+                    <a class="btn circle btn-outline b-primary m-b-lg p-x-md"
+                       href="{% if perms.add_venue %}{% url 'event:venue_add' %}{% else %}{% url 'event:venue' %}{% endif %}"
+                    >Add</a>
                   </div>
                 </div>
               {% endif %}
