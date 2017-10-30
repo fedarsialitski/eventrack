@@ -424,22 +424,22 @@
     {% endif %}
     <div id="modal_events" class="modal col-lg-12 text-center">
       <div class="p-a-lg">
-        <h2 class="m-y-md">No added events</h2>
-        <h6 class="text-muted m-b-md">Would you like to add a event?</h6>
+        <h2 class="m-y-md">No {% if perms.add_event %}added {% endif %}events{% if not perms.add_event %} in bookmarks{% endif %}</h2>
+        <h6 class="text-muted m-b-md">Would you like to add a event{% if not perms.add_event %} to bookmarks{% endif %}?</h6>
         <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:event_add' %}">Add</a>
       </div>
     </div>
     <div id="modal_artists" class="modal col-lg-12 text-center">
       <div class="p-a-lg">
-        <h2 class="m-y-md">No added artists</h2>
-        <h6 class="text-muted m-b-md">Would you like to add a artist?</h6>
+        <h2 class="m-y-md">No {% if perms.add_artist %}added {% endif %}artists{% if not perms.add_artist %} in bookmarks{% endif %}</h2>
+        <h6 class="text-muted m-b-md">Would you like to add a artist{% if not perms.add_artist %} to bookmarks{% endif %}?</h6>
         <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:artist_add' %}">Add</a>
       </div>
     </div>
     <div id="modal_venues" class="modal col-lg-12 text-center">
       <div class="p-a-lg">
-        <h2 class="m-y-md">No added venues</h2>
-        <h6 class="text-muted m-b-md">Would you like to add a venue?</h6>
+        <h2 class="m-y-md">No {% if perms.add_venue %}added {% endif %}venues{% if not perms.add_venue %} in bookmarks{% endif %}</h2>
+        <h6 class="text-muted m-b-md">Would you like to add a venue{% if not perms.add_venue %} to bookmarks{% endif %}?</h6>
         <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:venue_add' %}">Add</a>
       </div>
     </div>
