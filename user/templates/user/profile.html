@@ -88,14 +88,15 @@
                               <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ default_url }});"></a>
                             </div>
                           {% endif %}
+                        <a href="{% if perms.change_event %}{% url 'event:event_update' event.id %}{% else %}{% url 'event:event_detail' event.id %}{% endif %}" class="item-media-content" style="background-color: transparent">
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
                             <a class="btn-favorite" data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}"><i class="fa fa-star"></i></a>
                           </div>
                           <div class="item-title text-ellipsis">
-                            <a href="{% url 'event:event_detail' event.id %}">{{ event.title }} – {{ event.datetime|date:"l, d M Y – g:i A" }}</a>
+                            {{ event.title }} – {{ event.datetime|date:"l, d M Y – g:i A" }}
                           </div>
-                          <div class="item-except visible-list text-sm text-muted h-3x m-t-sm">
+                          <div class="item-except visible-list text-sm h-3x m-t-sm">
                             <div class="row m-l-0">Venue: {{ event.venue.name }}</div>
                             {% if event.venue.city %}
                               <div class="row m-l-0">City: {{ event.venue.city }}</div>
@@ -107,14 +108,15 @@
                           {% if perms.change_event or perms.delete_event %}
                           <div class="item-action visible-list m-t-sm">
                             {% if perms.change_event %}
-                            <a href="{% url 'event:event_update' event.id %}" class="btn btn-xs white">Edit</a>
+                            <a href="{% url 'event:event_update' event.id %}" class="item m-l-0 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;">Edit</a>
                             {% endif %}
                             {% if perms.delete_event %}
-                            <a href="{% url 'event:event_delete' event.id %}" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
+                            <a href="{% url 'event:event_delete' event.id %}" class="item m-l-1 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;" data-toggle="modal" data-target="#delete-modal">Delete</a>
                             {% endif %}
                           </div>
                           {% endif %}
                         </div>
+                        </a>
                       </div>
                     </div>
                   {% endfor %}
@@ -148,14 +150,15 @@
                         <div class="item-media ">
                           <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
                         </div>
+                        <a href="{% if perms.change_artist %}{% url 'event:artist_update' artist.id %}{% else %}{% url 'event:artist_detail' artist.id %}{% endif %}" class="item-media-content" style="background-color: transparent">
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
                             <a class="btn-favorite" data-id="artist_{{ artist.id }}" data-url="{% url 'event:artist_bookmark' artist.id %}"><i class="fa fa-star"></i></a>
                           </div>
                           <div class="item-title text-ellipsis">
-                            <a href="{% url 'event:artist_detail' artist.id %}">{{ artist.name }}</a>
+                            {{ artist.name }}
                           </div>
-                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm {% if perms.change_artist or perms.delete_artist %}m-b-md{% endif %}">
+                          <div class="item-except visible-list text-sm h-2x m-t-sm {% if perms.change_artist or perms.delete_artist %}m-b-md{% endif %}">
                               {% if artist.events.count %}
                                 <i class="material-icons md-24">event_note</i>
                                 {{ artist.events.count }} event{{ artist.events.count|pluralize:"s" }}
@@ -166,14 +169,15 @@
                           {% if perms.change_artist or perms.delete_artist %}
                           <div class="item-action visible-list m-t-sm">
                             {% if perms.change_artist %}
-                            <a href="{% url 'event:artist_update' artist.id %}" class="btn btn-xs white">Edit</a>
+                            <a href="{% url 'event:artist_update' artist.id %}" class="item btn m-l-0 btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;">Edit</a>
                             {% endif %}
                             {% if perms.delete_artist %}
-                            <a href="{% url 'event:artist_delete' artist.id %}" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
+                            <a href="{% url 'event:artist_delete' artist.id %}" class="item btn m-l-1 btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;" data-toggle="modal" data-target="#delete-modal">Delete</a>
                             {% endif %}
                           </div>
                           {% endif %}
                         </div>
+                        </a>
                       </div>
                     </div>
                   {% endfor %}
@@ -204,6 +208,7 @@
                   {% for venue in user.venues.all %}
                     <div id="venue_{{ venue.id }}" class="col-xs-12">
                       <div class="item r" data-id="item-4">
+                        {% if perms.change_venue %}<a href="{% url 'event:venue_update' venue.id %}" class="item-media-content" style="background-color: transparent">{% endif %}
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
                             <a class="btn-favorite" data-id="venue_{{ venue.id }}" data-url="{% url 'event:venue_bookmark' venue.id %}"><i class="fa fa-star"></i></a>
@@ -226,14 +231,15 @@
                           {% if perms.change_venue or perms.delete_venue %}
                           <div class="item-action visible-list m-t-md">
                             {% if perms.change_venue %}
-                            <a href="{% url 'event:venue_update' venue.id %}" class="btn btn-xs white">Edit</a>
+                            <a href="{% url 'event:venue_update' venue.id %}" class="item m-l-0 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;">Edit</a>
                             {% endif %}
                             {% if perms.delete_venue %}
-                            <a href="{% url 'event:venue_delete' venue.id %}" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
+                            <a href="{% url 'event:venue_delete' venue.id %}" class="item m-l-1 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;" data-toggle="modal" data-target="#delete-modal">Delete</a>
                             {% endif %}
                           </div>
                           {% endif %}
                         </div>
+                        {% if perms.change_venue %}</a>{% endif %}
                       </div>
                     </div>
                   {% endfor %}
@@ -276,15 +282,16 @@
                             <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ default_url }});"></a>
                           </div>
                         {% endif %}
+                        <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-color: transparent">
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
                             <a class="btn-favorite" data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}"><i class="fa fa-star"></i></a>
                           </div>
                           <div class="item-title text-ellipsis">
-                            <a href="{% url 'event:event_detail' event.id %}">{{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}</a>
+                            {{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}
                           </div>
                           <div class="item-author text-sm text-ellipsis ">
-                            <a href="{% url 'event:event_detail' event.id %}" class="text-muted">{{ event.datetime|date:"l, d M Y – g:i A" }}</a>
+                            {{ event.datetime|date:"l, d M Y – g:i A" }}
                           </div>
                           <div class="item-meta text-sm text-muted">
                             <span class="item-meta-stats text-xs  item-meta-right">
@@ -292,6 +299,7 @@
                             </span>
                           </div>
                         </div>
+                        </a>
                       </div>
                     </div>
                   {% endfor %}

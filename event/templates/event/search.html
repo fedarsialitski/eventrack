@@ -53,20 +53,21 @@
                   <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ default_url }});"></a>
                 </div>
               {% endif %}
+              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-color: transparent">
                 <div class="item-info">
                   <div class="item-overlay bottom text-right">
                     <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
                   </div>
                   <div class="item-title text-ellipsis">
-                    <a href="{% url 'event:event_detail' event.id %}">{{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}</a>
+                    {{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}
                   </div>
                   <div class="item-author text-sm text-ellipsis ">
-                    <a href="{% url 'event:event_detail' event.id %}" class="text-muted">{{ event.datetime|date:"l, d M Y – g:i A" }}</a>
+                    {{ event.datetime|date:"l, d M Y – g:i A" }}
                   </div>
                   {% if event.artists.count > 1 %}
                     <div class="row">
                       {% for artist in event.artists.all|slice:":10" %}
-                          <a href="{% url 'event:artist_detail' artist.id %}" class="text-muted">{{ artist.name }}</a>{% if not forloop.last %}, {% endif %}
+                        {{ artist.name }}{% if not forloop.last %}, {% endif %}
                       {% endfor %}
                     </div>
                   {% endif %}
@@ -77,6 +78,7 @@
                     </span>
                   </div>
                 </div>
+              </a>
             </div>
           </div>
         {% endfor %}
