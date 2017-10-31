@@ -425,7 +425,7 @@
     <div id="modal_events" class="modal col-lg-12 text-center">
       <div class="p-a-lg">
         <h2 class="m-y-md">No {% if perms.add_event %}added {% endif %}events{% if not perms.add_event %} in bookmarks{% endif %}</h2>
-        <h6 class="text-muted m-b-md">Would you like to add a event{% if not perms.add_event %} to bookmarks{% endif %}?</h6>
+        <h6 class="text-muted m-b-md">Would you like to add an event{% if not perms.add_event %} to bookmarks{% endif %}?</h6>
         <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:event_add' %}">Add</a>
       </div>
     </div>
@@ -446,7 +446,7 @@
     <div id="bookmark_events" class="modal col-lg-12 text-center">
       <div class="p-a-xs">
         <h2 class="m-y-sm">No events in bookmarks</h2>
-        <h6 class="text-muted m-b-md">Would you like to add a event to bookmarks?</h6>
+        <h6 class="text-muted m-b-md">Would you like to add an event to bookmarks?</h6>
         <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:event' %}">Add</a>
       </div>
     </div>
