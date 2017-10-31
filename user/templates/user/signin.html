@@ -47,7 +47,7 @@
           </div>
           <div class="form-group row m-b-md">
             <div class="col-xs-4 offset-xs-4">
-              <input type="password" name="password" value="{{ form.password.value|default_if_none:"" }}" class="form-control {% if form.password.errors  or form.non_field_errors %}b-danger{% endif %}"  class="form-control" placeholder="Password">
+              <input type="password" name="password" class="form-control {% if form.password.errors  or form.non_field_errors %}b-danger{% endif %}"  class="form-control" placeholder="Password">
             </div>
             {% if form.password.errors %}
               <span class="label label-md danger pos-rlt p-a-sm col-xs-3">
