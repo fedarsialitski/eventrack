@@ -57,6 +57,7 @@ def update(request):
         form = UpdateForm(data=request.POST, instance=request.user)
         if form.is_valid():
             form.save()
+            return HttpResponseRedirect(reverse('user:profile') + '#profile')
         else:
             return render(request, 'user/profile.html', {'form': form, 'error': True})
     else:
