@@ -129,42 +129,7 @@
               {% if user.venues.all %}
                 <div id="row_venues" class="row item-list item-list-by m-b">
                   {% for venue in user.venues.all %}
-                    <div id="venue_{{ venue.id }}" class="col-xs-12">
-                      <div class="item r" data-id="item-4">
-                        {% if perms.change_venue %}<a href="{% url 'event:venue_update' venue.id %}" class="item-media-content" style="background-color: transparent">{% endif %}
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a class="btn-favorite" data-id="venue_{{ venue.id }}" data-url="{% url 'event:venue_bookmark' venue.id %}"><i class="fa fa-star"></i></a>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            {% if perms.change_venue %}<a href="{% url 'event:venue_update' venue.id %}">{% endif %}
-                              {{ venue.name }}
-                            {% if perms.change_venue %}</a>{% endif %}
-                          </div>
-                          {% if venue.city %}
-                          <div class="item-except visible-list text-sm m-t-sm">
-                            City: {{ venue.city }}
-                          </div>
-                          {% endif %}
-                          {% if venue.country %}
-                          <div class="item-except visible-list text-sm m-t-sm">
-                            Country: {{ venue.country }}
-                          </div>
-                          {% endif %}
-                          {% if perms.change_venue or perms.delete_venue %}
-                          <div class="item-action visible-list m-t-md">
-                            {% if perms.change_venue %}
-                            <a href="{% url 'event:venue_update' venue.id %}" class="item m-l-0 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;">Edit</a>
-                            {% endif %}
-                            {% if perms.delete_venue %}
-                            <a href="{% url 'event:venue_delete' venue.id %}" class="item m-l-1 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;" data-toggle="modal" data-target="#delete-modal">Delete</a>
-                            {% endif %}
-                          </div>
-                          {% endif %}
-                        </div>
-                        {% if perms.change_venue %}</a>{% endif %}
-                      </div>
-                    </div>
+                    {% include "event/venue_item.html" with venue=venue admin=True %}
                   {% endfor %}
                     <div class="col-lg-12">
                       <div class="p-t-md">

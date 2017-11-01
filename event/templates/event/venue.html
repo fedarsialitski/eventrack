@@ -16,7 +16,7 @@
             <div class="row item-list item-list-md item-list-li-by m-b">
               {% if venues %}
                   {% for venue in venues %}
-                    {% include "event/venue_item.html" with venue=venue %}
+                    {% include "event/venue_item.html" with venue=venue admin=False %}
                   {% endfor %}
                 {% else %}
                   <div class="col-xs-12">

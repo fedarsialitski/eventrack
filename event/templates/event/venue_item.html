@@ -1,5 +1,7 @@
 <div id="venue_{{ venue.id }}" class="col-xs-12">
-  <div class="item r" data-id="item-12">
+  <div class="item r">
+    {% if admin and perms.change_venue %}<a href="{% url 'event:venue_update' venue.id %}" class="item-media-content" style="background-color: transparent">{% endif %}
+    {% if not admin %}
     {% if venue.events.all %}
         {% for event in venue.events.all %}
           {% if forloop.counter <= 5 %}
@@ -23,6 +25,7 @@
           </i>
       </div>
     {% endif %}
+    {% endif %}
     <div class="item-info">
       <div class="item-overlay bottom text-right">
         <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="venue_{{ venue.id }}" data-url="{% url 'event:venue_bookmark' venue.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if venue in user.venues.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
@@ -36,21 +39,47 @@
         {% if perms.change_venue %}
           <a href="{% url 'event:venue_update' venue.id %}" class="text-muted">
         {% else %}
-          <div class="text-muted">
+          <div>
         {% endif %}
+        {% if admin %}
+          {% if venue.city %}
+            <div class="item-except visible-list text-sm m-t-sm">
+              City: {{ venue.city }}
+            </div>
+          {% endif %}
+          {% if venue.country %}
+            <div class="item-except visible-list text-sm m-t-sm">
+              Country: {{ venue.country }}
+            </div>
+          {% endif %}
+          {% if perms.change_venue or perms.delete_venue %}
+            <div class="item-action visible-list m-t-md">
+              {% if perms.change_venue %}
+                <a href="{% url 'event:venue_update' venue.id %}" class="item m-l-0 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;">Edit</a>
+              {% endif %}
+              {% if perms.delete_venue %}
+                <a href="{% url 'event:venue_delete' venue.id %}" class="item m-l-1 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;" data-toggle="modal" data-target="#delete-modal">Delete</a>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% else %}
           {{ venue.city }}{% if venue.city and venue.country %}, {% endif %}{{ venue.country }}
+        {% endif %}
         {% if perms.change_venue %}
           </a>
         {% else %}
           </div>
         {% endif %}
       </div>
+      {% if not admin %}
       <div class="item-meta text-sm text-muted">
         <span class="item-meta-stats text-xs  item-meta-right">
           {% if venue.users.count %}<i class="fa fa-star text-muted"></i>
               {{ venue.users.count }}{% endif %}
         </span>
       </div>
+      {% endif %}
     </div>
+    {% if admin and perms.change_venue %}</a>{% endif %}
   </div>
 </div>
