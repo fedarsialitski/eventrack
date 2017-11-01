@@ -1,0 +1,56 @@
+<div id="venue_{{ venue.id }}" class="col-xs-12">
+  <div class="item r" data-id="item-12">
+    {% if venue.events.all %}
+        {% for event in venue.events.all %}
+          {% if forloop.counter <= 5 %}
+            <div class="item-media ">
+              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" {% if event.artists.all.0.thumb_url %}style="background-image: url('{{ event.artists.all.0.thumb_url }}');"{% endif %}>
+                {% if not event.artists.all.0.thumb_url %}
+                  <i class="material-icons md-36 center text-muted">
+                    event
+                  </i>
+                {% endif %}
+              </a>
+            </div>
+          {% endif %}
+        {% endfor %}
+    {% else %}
+      <div class="item-media ">
+          <i class="material-icons md-36 center text-muted">
+          {% if perms.change_venue %}<a href="{% url 'event:venue_update' venue.id %}">{% endif %}
+            place
+          {% if perms.change_venue %}</a>{% endif %}
+          </i>
+      </div>
+    {% endif %}
+    <div class="item-info">
+      <div class="item-overlay bottom text-right">
+        <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="venue_{{ venue.id }}" data-url="{% url 'event:venue_bookmark' venue.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if venue in user.venues.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+      </div>
+      <div class="item-title text-ellipsis">
+        {% if perms.change_venue %}<a href="{% url 'event:venue_update' venue.id %}">{% endif %}
+          {{ venue.name }}
+        {% if perms.change_venue %}</a>{% endif %}
+      </div>
+      <div class="item-author text-sm text-ellipsis ">
+        {% if perms.change_venue %}
+          <a href="{% url 'event:venue_update' venue.id %}" class="text-muted">
+        {% else %}
+          <div class="text-muted">
+        {% endif %}
+          {{ venue.city }}{% if venue.city and venue.country %}, {% endif %}{{ venue.country }}
+        {% if perms.change_venue %}
+          </a>
+        {% else %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="item-meta text-sm text-muted">
+        <span class="item-meta-stats text-xs  item-meta-right">
+          {% if venue.users.count %}<i class="fa fa-star text-muted"></i>
+              {{ venue.users.count }}{% endif %}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
