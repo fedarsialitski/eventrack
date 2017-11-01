@@ -102,30 +102,8 @@
         {% if event.artists.count > 1 %}
           <h6 class="m-b">Line-up ({{ event.artists.count }})</h6>
           <div class="row m-b">
-              {% for artist in event.artists.all %}
-                <div id="artist_{{ artist.id }}" class="col-xs-4 col-sm-4 col-md-3">
-                  <div class="item r" data-id="item-7">
-                  <div class="item-media ">
-                    <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
-                  </div>
-                  <div class="item-info">
-                    <div class="item-overlay bottom text-right">
-                      <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="artist_{{ artist.id }}" data-url="{% url 'event:artist_bookmark' artist.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if artist in user.artists.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
-                    </div>
-                    <div class="item-title text-ellipsis">
-                      <a href="{% url 'event:artist_detail' artist.id %}">{{ artist.name }}</a>
-                    </div>
-                    <div class="item-author text-sm text-ellipsis hide">
-                      <a href="{% url 'event:artist_detail' artist.id %}" class="text-muted">{{ artist.name }}</a>
-                    </div>
-                    <div class="item-meta text-sm text-muted">
-                      <span class="item-meta-stats text-xs ">
-                        {% if artist.users.count %}<i class="fa fa-star text-muted"></i> {{ artist.users.count }}{% else %}&nbsp{% endif %}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            {% for artist in event.artists.all %}
+              {% include "event/artist_item.html" with artist=artist rounded=False %}
             {% endfor %}
           {% endif %}
         </div>
