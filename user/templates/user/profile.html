@@ -102,41 +102,7 @@
               {% if user.artists.all %}
                 <div id="row_artists" class="row item-list item-list-by m-b">
                   {% for artist in user.artists.all %}
-                    <div id="artist_{{ artist.id }}" class="col-xs-12">
-                      <div class="item r">
-                        <div class="item-media ">
-                          <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
-                        </div>
-                        <a href="{% if perms.change_artist %}{% url 'event:artist_update' artist.id %}{% else %}{% url 'event:artist_detail' artist.id %}{% endif %}" class="item-media-content" style="background-color: transparent">
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a class="btn-favorite" data-id="artist_{{ artist.id }}" data-url="{% url 'event:artist_bookmark' artist.id %}"><i class="fa fa-star"></i></a>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            {{ artist.name }}
-                          </div>
-                          <div class="item-except visible-list text-sm h-2x m-t-sm {% if perms.change_artist or perms.delete_artist %}m-b-md{% endif %}">
-                              {% if artist.events.count %}
-                                <i class="material-icons md-24">event_note</i>
-                                {{ artist.events.count }} event{{ artist.events.count|pluralize:"s" }}
-                              {% else %}
-                                No events
-                              {% endif %}
-                          </div>
-                          {% if perms.change_artist or perms.delete_artist %}
-                          <div class="item-action visible-list m-t-sm">
-                            {% if perms.change_artist %}
-                            <a href="{% url 'event:artist_update' artist.id %}" class="item btn m-l-0 btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;">Edit</a>
-                            {% endif %}
-                            {% if perms.delete_artist %}
-                            <a href="{% url 'event:artist_delete' artist.id %}" class="item btn m-l-1 btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;" data-toggle="modal" data-target="#delete-modal">Delete</a>
-                            {% endif %}
-                          </div>
-                          {% endif %}
-                        </div>
-                        </a>
-                      </div>
-                    </div>
+                    {% include "event/artist_item.html" with artist=artist rounded=False admin=True %}
                   {% endfor %}
                     <div class="col-lg-12">
                       <div class="p-t-md">
@@ -242,7 +208,7 @@
               {% if user.artists.all %}
                 <div id="bookmark_artists" class="row m-b">
                   {% for artist in user.artists.all %}
-                    {% include "event/artist_item.html" with artist=artist rounded=False %}
+                    {% include "event/artist_item.html" with artist=artist rounded=False admin=False %}
                   {% endfor %}
                 </div>
               {% else %}

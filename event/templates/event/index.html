@@ -326,7 +326,7 @@
                   <h2 class="widget-title h4 m-b">Trending</h2>
                   <div class="row m-b">
                     {% for artist in trending %}
-                      {% include "event/artist_item.html" with artist=artist rounded=False %}
+                      {% include "event/artist_item.html" with artist=artist rounded=False admin=False %}
                     {% endfor %}
                   </div>
                 {% endif %}

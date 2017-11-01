@@ -103,7 +103,7 @@
           <h6 class="m-b">Line-up ({{ event.artists.count }})</h6>
           <div class="row m-b">
             {% for artist in event.artists.all %}
-              {% include "event/artist_item.html" with artist=artist rounded=False %}
+              {% include "event/artist_item.html" with artist=artist rounded=False admin=False %}
             {% endfor %}
           {% endif %}
         </div>
