@@ -65,34 +65,7 @@
             {% if upcoming_events.all %}
               <div class="row item-list item-list-md item-list-li-by m-b" id="upcoming_events">
                 {% for upcoming_event in upcoming_events.all|slice:":4" %}
-                  <div id="event_{{ upcoming_event.id }}" class="col-md-12 col-lg-6">
-                    <div class="item r" data-id="item-2">
-                      <div class="item-media ">
-                        <a href="{% url 'event:event_detail' upcoming_event.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
-                      </div>
-                      <a href="{% url 'event:event_detail' upcoming_event.id %}" class="item-media-content" style="background-color: transparent">
-                      <div class="item-info">
-                        <div class="item-overlay bottom text-right">
-                          <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ upcoming_event.id }}" data-url="{% url 'event:event_bookmark' upcoming_event.id %}"{% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if upcoming_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
-                        </div>
-                        <div class="item-title text-ellipsis">
-                          {{ upcoming_event.title }} @ {{ upcoming_event.venue.name }}, {{ upcoming_event.venue.city }}, {{ upcoming_event.venue.country }}
-                        </div>
-                        <div class="item-author text-sm text-ellipsis ">
-                          {{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}
-                        </div>
-                        <div class="item-author text-sm text-ellipsis hide">
-                          <a href="{% url 'event:artist_detail' artist.id %}" class="text-muted">{{ artist.name }}</a>
-                        </div>
-                        <div class="item-meta text-sm text-muted">
-                          <span class="item-meta-stats text-xs  item-meta-right">
-                            {% if upcoming_event.users.count %}<i class="fa fa-star m-l-sm text-muted"></i> {{ upcoming_event.users.count }}{% endif %}
-                          </span>
-                        </div>
-                      </div>
-                      </a>
-                    </div>
-                  </div>
+                  {% include "event/event_item.html" with event=upcoming_event overview=True profile=True %}
                 {% endfor %}
               </div>
           {% else %}
@@ -104,34 +77,7 @@
           {% if past_events.all %}
             <div class="row item-list item-list-md item-list-li-by m-b" id="past_events">
               {% for past_event in past_events.all|slice:":4" %}
-                <div id="event_{{ past_event.id }}" class="col-md-12 col-lg-6">
-                  <div class="item r" data-id="item-2">
-                    <div class="item-media">
-                      <a href="{% url 'event:event_detail' past_event.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
-                    </div>
-                    <a href="{% url 'event:event_detail' past_event.id %}" class="item-media-content" style="background-color: transparent">
-                    <div class="item-info">
-                      <div class="item-overlay bottom text-right">
-                        <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ past_event.id }}"  data-url="{% url 'event:event_bookmark' past_event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if past_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
-                      </div>
-                      <div class="item-title text-ellipsis">
-                        {{ past_event.title }} @ {{ past_event.venue.name }}, {{ past_event.venue.city }}, {{ past_event.venue.country }}
-                      </div>
-                      <div class="item-author text-sm text-ellipsis ">
-                        {{ past_event.datetime|date:"l, d M Y – g:i A" }}
-                      </div>
-                      <div class="item-author text-sm text-ellipsis hide">
-                        <a href="{% url 'event:artist_detail' artist.id %}" class="text-muted">{{ artist.name }}</a>
-                      </div>
-                      <div class="item-meta text-sm text-muted">
-                        <span class="item-meta-stats text-xs  item-meta-right">
-                          {% if past_event.users.count %}<i class="fa fa-star m-l-sm text-muted"></i> {{ past_event.users.count }}{% endif %}
-                        </span>
-                      </div>
-                    </div>
-                    </a>
-                  </div>
-                </div>
+                  {% include "event/event_item.html" with event=past_event overview=True profile=True %}
               {% endfor %}
             </div>
           {% else %}
@@ -167,31 +113,7 @@
               <div id="{{ key }}" {% if key in 'week, month, year' %}class="modal"{% endif %}>
               {% if upcoming_events %}
                 {% for upcoming_event in upcoming_events %}
-                  <div id="event_{{ upcoming_event.id }}" class="col-xs-12">
-                    <div class="item r" data-id="item-12">
-                    <div class="item-media ">
-                      <a href="{% url 'event:event_detail' upcoming_event.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
-                    </div>
-                    <a href="{% url 'event:event_detail' upcoming_event.id %}" class="item-media-content" style="background-color: transparent">
-                    <div class="item-info">
-                      <div class="item-overlay bottom text-right">
-                        <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ upcoming_event.id }}"  data-url="{% url 'event:event_bookmark' upcoming_event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if upcoming_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
-                      </div>
-                      <div class="item-title text-ellipsis">
-                        {{ upcoming_event.title }} @ {{ upcoming_event.venue.name }}, {{ upcoming_event.venue.city }}, {{ upcoming_event.venue.country }}
-                      </div>
-                      <div class="item-author text-sm text-ellipsis ">
-                        {{ upcoming_event.datetime|date:"l, d M Y – g:i A" }}
-                      </div>
-                      <div class="item-meta text-sm text-muted">
-                        <span class="item-meta-stats text-xs  item-meta-right">
-                          {% if upcoming_event.users.count %}<i class="fa fa-star text-muted"></i> {{ upcoming_event.users.count }}{% endif %}
-                        </span>
-                      </div>
-                    </div>
-                    </a>
-                  </div>
-                </div>
+                  {% include "event/event_item.html" with event=upcoming_event overview=False profile=True %}
                 {% endfor %}
               {% else  %}
                 <div class="col-xs-12">
@@ -237,31 +159,7 @@
               <div id="past_{{ key }}" {% if key in 'week, month, year' %}class="modal"{% endif %}>
               {% if past_events %}
                 {% for past_event in past_events %}
-                  <div id="event_{{ event.id }}" class="col-xs-12">
-                    <div class="item r" data-id="item-12">
-                    <div class="item-media ">
-                      <a href="{% url 'event:event_detail' past_event.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
-                    </div>
-                    <a href="{% url 'event:event_detail' past_event.id %}" class="item-media-content" style="background-color: transparent">
-                    <div class="item-info">
-                      <div class="item-overlay bottom text-right">
-                        <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ past_event.id }}" data-url="{% url 'event:event_bookmark' past_event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if past_event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
-                      </div>
-                      <div class="item-title text-ellipsis">
-                        {{ past_event.title }} @ {{ past_event.venue.name }}, {{ past_event.venue.city }}, {{ past_event.venue.country }}
-                      </div>
-                      <div class="item-author text-sm text-ellipsis ">
-                        {{ past_event.datetime|date:"l, d M Y – g:i A" }}
-                      </div>
-                      <div class="item-meta text-sm text-muted">
-                        <span class="item-meta-stats text-xs  item-meta-right">
-                          {% if past_event.users.count %}<i class="fa fa-star text-muted"></i> {{ past_event.users.count }}{% endif %}
-                        </span>
-                      </div>
-                    </div>
-                    </a>
-                  </div>
-                </div>
+                  {% include "event/event_item.html" with event=past_event overview=False profile=True %}
                 {% endfor %}
               {% else  %}
                 <div class="col-xs-12">

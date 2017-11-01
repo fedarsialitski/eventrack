@@ -353,42 +353,7 @@
                   <h2 class="widget-title h4 m-b m-t-md">Recommend for you</h2>
                   <div class="row item-list item-list-md m-b">
                     {% for event in recommend %}
-                      <div id="event_{{ event.id }}" class="col-sm-6">
-                        <div class="item r">
-                          {% if event.artists.all %}
-                              {% for artist in event.artists.all %}
-                                {% if forloop.counter <= 2 %}
-                                  <div class="item-media ">
-                                    <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{{ artist.thumb_url }}');"></a>
-                                  </div>
-                                {% endif %}
-                              {% endfor %}
-                          {% else %}
-                            <div class="item-media ">
-                              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ default_url }});"></a>
-                            </div>
-                          {% endif %}
-                          <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-color: transparent">
-                          <div class="item-info">
-                            <div class="item-overlay bottom text-right">
-                              <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
-                            </div>
-                            <div class="item-title text-ellipsis">
-                              {{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}
-                            </div>
-                            <div class="item-author text-sm text-ellipsis ">
-                              {{ event.datetime|date:"l, d M Y – g:i A" }}
-                            </div>
-                            <div class="item-meta text-sm text-muted">
-                              <span class="item-meta-stats text-xs  item-meta-right">
-                                {% if event.users.count %}<i class="fa fa-star text-muted"></i>
-                                  {{ event.users.count }}{% endif %}
-                              </span>
-                            </div>
-                          </div>
-                          </a>
-                        </div>
-                      </div>
+                      {% include "event/event_item.html" with event=event artist=event.artists.all|first overview=True profile=True %}
                     {% endfor %}
                   </div>
                 {% endif %}

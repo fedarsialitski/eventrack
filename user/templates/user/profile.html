@@ -269,39 +269,7 @@
               {% if user.events.all %}
                 <div id="bookmark_events" class="row item-list item-list-md item-list-li-by m-b">
                   {% for event in user.events.all%}
-                    <div id="event_{{ event.id }}" class="col-md-12 col-lg-6">
-                      <div class="item r" data-id="item-2">
-                        {% if event.artists.all %}
-                          {% with event.artists.all|first as artist %}
-                            <div class="item-media ">
-                              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
-                            </div>
-                          {% endwith %}
-                        {% else %}
-                          <div class="item-media ">
-                            <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ default_url }});"></a>
-                          </div>
-                        {% endif %}
-                        <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-color: transparent">
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a class="btn-favorite" data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}"><i class="fa fa-star"></i></a>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            {{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}
-                          </div>
-                          <div class="item-author text-sm text-ellipsis ">
-                            {{ event.datetime|date:"l, d M Y – g:i A" }}
-                          </div>
-                          <div class="item-meta text-sm text-muted">
-                            <span class="item-meta-stats text-xs  item-meta-right">
-                              {% if event.users.count %}<i class="fa fa-star m-l-sm text-muted"></i> {{ event.users.count }} {% endif %}
-                            </span>
-                          </div>
-                        </div>
-                        </a>
-                      </div>
-                    </div>
+                    {% include "event/event_item.html" with event=event artist=event.artists.all|first overview=True profile=True %}
                   {% endfor %}
                 </div>
               {% else %}
