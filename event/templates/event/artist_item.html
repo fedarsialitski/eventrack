@@ -1,0 +1,19 @@
+<div id="artist_{{ artist.id }}" class="col-xs-4 col-sm-4 col-md-3">
+  <div class="item">
+    <div class="item-media rounded ">
+      <a href="{% url 'event:artist_detail' artist.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
+    </div>
+    <div class="item-info text-center">
+      <div class="item-title text-ellipsis">
+        <a href="{% url 'event:artist_detail' artist.id %}">{{artist.name}}</a>
+        <div class="text-sm text-muted">
+          {% if artist.events.count %}
+            {{ artist.events.count }} event{{ artist.events.count|pluralize:"s" }}
+          {% else %}
+            No upcoming events
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
