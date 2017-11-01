@@ -85,33 +85,7 @@
       {% endif %}
     </div>
     {% if is_paginated %}
-      <div>
-        <ul class="pagination white">
-          {% if page_obj.has_previous %}
-            <li>
-              <a href="
-                {% if request.GET.keyword.strip %}?keyword={{ request.GET.keyword.strip }}&{% else %}?{% endif %}page={{ page_obj.previous_page_number }}">
-                <i class="fa fa-chevron-left"></i>
-              </a>
-            </li>
-          {% endif %}
-
-          {% for page in page_obj.paginator.page_range %}
-            <li {% if forloop.counter == page_obj.number %}class="active"{% endif %}><a href="
-              {% if request.GET.keyword.strip %}?keyword={{ request.GET.keyword.strip }}&{% else %}?{% endif %}page={{ forloop.counter }}">{{ forloop.counter }}</a>
-            </li>
-          {% endfor %}
-
-          {% if page_obj.has_next %}
-            <li>
-              <a href="
-                {% if request.GET.keyword.strip %}?keyword={{ request.GET.keyword.strip }}&{% else %}?{% endif %}page={{ page_obj.next_page_number }}">
-                <i class="fa fa-chevron-right"></i>
-              </a>
-            </li>
-        {% endif %}
-        </ul>
-      </div>
+      {% include "event/pagination.html" with page_obj=page_obj request=request %}
     {% endif %}
   </div>
 </div>
