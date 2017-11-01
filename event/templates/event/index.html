@@ -334,7 +334,7 @@
                   <h2 class="widget-title h4 m-b m-t-md">Recommend for you</h2>
                   <div class="row item-list item-list-md m-b">
                     {% for event in recommend %}
-                      {% include "event/event_item.html" with event=event artist=event.artists.all|first overview=True profile=True %}
+                      {% include "event/event_item.html" with event=event artist=event.artists.all|first overview=True profile=True admin=False %}
                     {% endfor %}
                   </div>
                 {% endif %}

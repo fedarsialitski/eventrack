@@ -41,7 +41,7 @@
     <div class="row item-list item-list-md item-list-by m-b">
       {% if events %}
         {% for event in events %}
-          {% include "event/event_item.html" with event=event overview=False profile=False %}
+          {% include "event/event_item.html" with event=event overview=False profile=False admin=False %}
         {% endfor %}
       {% endif %}
     </div>

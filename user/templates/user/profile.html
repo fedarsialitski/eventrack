@@ -75,50 +75,7 @@
               {% if user.events.all %}
                 <div id="row_events" class="row item-list item-list-by m-b">
                   {% for event in user.events.all %}
-                    <div id="event_{{ event.id }}" class="col-xs-12">
-                      <div class="item r">
-                          {% if event.artists.all %}
-                            {% with event.artists.all|first as artist %}
-                              <div class="item-media ">
-                                <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
-                              </div>
-                            {% endwith %}
-                          {% else %}
-                            <div class="item-media ">
-                              <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ default_url }});"></a>
-                            </div>
-                          {% endif %}
-                        <a href="{% if perms.change_event %}{% url 'event:event_update' event.id %}{% else %}{% url 'event:event_detail' event.id %}{% endif %}" class="item-media-content" style="background-color: transparent">
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a class="btn-favorite" data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}"><i class="fa fa-star"></i></a>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            {{ event.title }} – {{ event.datetime|date:"l, d M Y – g:i A" }}
-                          </div>
-                          <div class="item-except visible-list text-sm h-3x m-t-sm">
-                            <div class="row m-l-0">Venue: {{ event.venue.name }}</div>
-                            {% if event.venue.city %}
-                              <div class="row m-l-0">City: {{ event.venue.city }}</div>
-                            {% endif %}
-                            {% if event.venue.country %}
-                              <div class="row m-l-0">Country: {{ event.venue.country }}</div>
-                            {% endif %}
-                          </div>
-                          {% if perms.change_event or perms.delete_event %}
-                          <div class="item-action visible-list m-t-sm">
-                            {% if perms.change_event %}
-                            <a href="{% url 'event:event_update' event.id %}" class="item m-l-0 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;">Edit</a>
-                            {% endif %}
-                            {% if perms.delete_event %}
-                            <a href="{% url 'event:event_delete' event.id %}" class="item m-l-1 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;" data-toggle="modal" data-target="#delete-modal">Delete</a>
-                            {% endif %}
-                          </div>
-                          {% endif %}
-                        </div>
-                        </a>
-                      </div>
-                    </div>
+                    {% include "event/event_item.html" with event=event artist=event.artists.all|first overview=False profile=True admin=True %}
                   {% endfor %}
                     <div class="col-lg-12">
                       <div class="p-t-md">
@@ -269,7 +226,7 @@
               {% if user.events.all %}
                 <div id="bookmark_events" class="row item-list item-list-md item-list-li-by m-b">
                   {% for event in user.events.all%}
-                    {% include "event/event_item.html" with event=event artist=event.artists.all|first overview=True profile=True %}
+                    {% include "event/event_item.html" with event=event artist=event.artists.all|first overview=True profile=True admin=False %}
                   {% endfor %}
                 </div>
               {% else %}

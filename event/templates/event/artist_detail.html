@@ -65,7 +65,7 @@
             {% if upcoming_events.all %}
               <div class="row item-list item-list-md item-list-li-by m-b" id="upcoming_events">
                 {% for upcoming_event in upcoming_events.all|slice:":4" %}
-                  {% include "event/event_item.html" with event=upcoming_event overview=True profile=True %}
+                  {% include "event/event_item.html" with event=upcoming_event overview=True profile=True admin=False %}
                 {% endfor %}
               </div>
           {% else %}
@@ -77,7 +77,7 @@
           {% if past_events.all %}
             <div class="row item-list item-list-md item-list-li-by m-b" id="past_events">
               {% for past_event in past_events.all|slice:":4" %}
-                  {% include "event/event_item.html" with event=past_event overview=True profile=True %}
+                  {% include "event/event_item.html" with event=past_event overview=True profile=True admin=False %}
               {% endfor %}
             </div>
           {% else %}
@@ -113,7 +113,7 @@
               <div id="{{ key }}" {% if key in 'week, month, year' %}class="modal"{% endif %}>
               {% if upcoming_events %}
                 {% for upcoming_event in upcoming_events %}
-                  {% include "event/event_item.html" with event=upcoming_event overview=False profile=True %}
+                  {% include "event/event_item.html" with event=upcoming_event overview=False profile=True admin=False %}
                 {% endfor %}
               {% else  %}
                 <div class="col-xs-12">
@@ -159,7 +159,7 @@
               <div id="past_{{ key }}" {% if key in 'week, month, year' %}class="modal"{% endif %}>
               {% if past_events %}
                 {% for past_event in past_events %}
-                  {% include "event/event_item.html" with event=past_event overview=False profile=True %}
+                  {% include "event/event_item.html" with event=past_event overview=False profile=True admin=False %}
                 {% endfor %}
               {% else  %}
                 <div class="col-xs-12">

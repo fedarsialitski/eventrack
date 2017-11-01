@@ -1,5 +1,8 @@
 <div id="event_{{ event.id }}" class="{% if overview %}col-md-12 col-lg-6{% else %}col-xs-12{% endif %}">
   <div class="item r">
+    {% if admin %}
+      <a href="{% if perms.change_event %}{% url 'event:event_update' event.id %}{% else %}{% url 'event:event_detail' event.id %}{% endif %}" class="item-media-content" style="background-color: transparent">
+    {% endif %}
     {% if event.artists.all and not overview and not profile %}
       {% for artist in event.artists.all %}
         {% if forloop.counter <= 5 %}
@@ -18,6 +21,30 @@
       <div class="item-overlay bottom text-right">
         <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
       </div>
+      {% if admin %}
+        <div class="item-title text-ellipsis">
+          {{ event.title }} – {{ event.datetime|date:"l, d M Y – g:i A" }}
+        </div>
+        <div class="item-except visible-list text-sm h-3x m-t-sm">
+          <div class="row m-l-0">Venue: {{ event.venue.name }}</div>
+          {% if event.venue.city %}
+            <div class="row m-l-0">City: {{ event.venue.city }}</div>
+          {% endif %}
+          {% if event.venue.country %}
+            <div class="row m-l-0">Country: {{ event.venue.country }}</div>
+          {% endif %}
+        </div>
+        {% if perms.change_event or perms.delete_event %}
+          <div class="item-action visible-list m-t-sm">
+            {% if perms.change_event %}
+            <a href="{% url 'event:event_update' event.id %}" class="item m-l-0 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;">Edit</a>
+            {% endif %}
+            {% if perms.delete_event %}
+            <a href="{% url 'event:event_delete' event.id %}" class="item m-l-1 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;" data-toggle="modal" data-target="#delete-modal">Delete</a>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% else %}
       <div class="item-title text-ellipsis">
         {{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}
       </div>
@@ -36,6 +63,7 @@
           {% if event.users.count %}<i class="fa fa-star text-muted"></i> {{ event.users.count }}{% endif %}
         </span>
       </div>
+      {% endif %}
     </div>
     </a>
   </div>
