@@ -9,7 +9,7 @@ from .models import User
 
 class ProfileView(generic.ListView):
     model = User
-    template_name = 'user/profile.html'
+    template_name = 'user/pages/profile.html'
 
 
 def signup(request):
@@ -24,10 +24,10 @@ def signup(request):
                 login(request, user)
                 return HttpResponseRedirect(reverse('event:index'))
         else:
-            return render(request, 'user/signup.html', {'form': form, 'error': True})
+            return render(request, 'user/pages/signup.html', {'form': form, 'error': True})
     else:
         form = SignupForm()
-    return render(request, 'user/signup.html', {'form': form})
+    return render(request, 'user/pages/signup.html', {'form': form})
 
 
 def signin(request):
@@ -41,10 +41,10 @@ def signin(request):
                 login(request, user)
                 return HttpResponseRedirect(reverse('event:index'))
         else:
-            return render(request, 'user/signin.html', {'form': form, 'error': True})
+            return render(request, 'user/pages/signin.html', {'form': form, 'error': True})
     else:
         form = SigninForm()
-    return render(request, 'user/signin.html', {'form': form})
+    return render(request, 'user/pages/signin.html', {'form': form})
 
 
 def signout(request):
@@ -59,7 +59,7 @@ def update(request):
             form.save()
             return HttpResponseRedirect(reverse('user:profile') + '#profile')
         else:
-            return render(request, 'user/profile.html', {'form': form, 'error': True})
+            return render(request, 'user/pages/profile.html', {'form': form, 'error': True})
     else:
         form = UpdateForm(instance=request.user)
-    return render(request, 'user/profile.html', {'form': form})
+    return render(request, 'user/pages/profile.html', {'form': form})

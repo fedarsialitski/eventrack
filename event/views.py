@@ -12,7 +12,7 @@ from .forms import ArtistForm, EventForm, VenueForm, SearchForm
 
 class IndexView(generic.ListView):
     model = Artist
-    template_name = 'event/index.html'
+    template_name = 'event/pages/index.html'
     discover_count = 5
     trending_count = 8
     recommend_count = 10
@@ -55,7 +55,7 @@ class SearchView(generic.ListView):
     model = Event
     form_class = SearchForm
     paginate_by = 12
-    template_name = 'event/search.html'
+    template_name = 'event/pages/search.html'
     context_object_name = 'events'
 
     def get_queryset(self):
@@ -78,12 +78,13 @@ class SearchView(generic.ListView):
 class ArtistView(generic.ListView):
     model = Artist
     paginate_by = 12
-    template_name = 'event/artist.html'
+    template_name = 'event/pages/artist.html'
     context_object_name = 'artists'
 
 
 class ArtistDetailView(generic.DetailView):
     model = Artist
+    template_name = 'event/details/artist_detail.html'
 
     def get_context_data(self, **kwargs):
         """
@@ -116,6 +117,7 @@ class ArtistCreateView(PermissionRequiredMixin, generic.CreateView):
     model = Artist
     form_class = ArtistForm
     success_url = reverse_lazy('user:profile')
+    template_name = 'event/forms/artist_form.html'
     raise_exception = True
     permission_required = 'event.add_artist'
 
@@ -131,6 +133,7 @@ class ArtistUpdateView(PermissionRequiredMixin, generic.UpdateView):
     model = Artist
     form_class = ArtistForm
     success_url = reverse_lazy('user:profile')
+    template_name = 'event/forms/artist_form.html'
     raise_exception = True
     permission_required = 'event.change_artist'
 
@@ -148,7 +151,7 @@ class ArtistDeleteView(PermissionRequiredMixin, generic.DeleteView):
 class EventView(generic.ListView):
     model = Event
     paginate_by = 12
-    template_name = 'event/event.html'
+    template_name = 'event/pages/event.html'
     context_object_name = 'events'
 
     def get_queryset(self):
@@ -160,12 +163,14 @@ class EventView(generic.ListView):
 
 class EventDetailView(generic.DetailView):
     model = Event
+    template_name = 'event/details/event_detail.html'
 
 
 class EventCreateView(PermissionRequiredMixin, generic.CreateView):
     model = Event
     form_class = EventForm
     success_url = reverse_lazy('user:profile')
+    template_name = 'event/forms/event_form.html'
     raise_exception = True
     permission_required = 'event.add_event'
 
@@ -182,6 +187,7 @@ class EventUpdateView(PermissionRequiredMixin, generic.UpdateView):
     model = Event
     form_class = EventForm
     success_url = reverse_lazy('user:profile')
+    template_name = 'event/forms/event_form.html'
     raise_exception = True
     permission_required = 'event.change_event'
 
@@ -206,7 +212,7 @@ class EventDeleteView(PermissionRequiredMixin, generic.DeleteView):
 class VenueView(generic.ListView):
     model = Venue
     paginate_by = 12
-    template_name = 'event/venue.html'
+    template_name = 'event/pages/venue.html'
     context_object_name = 'venues'
 
 
@@ -214,6 +220,7 @@ class VenueCreateView(PermissionRequiredMixin, generic.CreateView):
     model = Venue
     form_class = VenueForm
     success_url = reverse_lazy('user:profile')
+    template_name = 'event/forms/venue_form.html'
     raise_exception = True
     permission_required = 'event.add_venue'
 
@@ -229,6 +236,7 @@ class VenueUpdateView(PermissionRequiredMixin, generic.UpdateView):
     model = Venue
     form_class = VenueForm
     success_url = reverse_lazy('user:profile')
+    template_name = 'event/forms/venue_form.html'
     raise_exception = True
     permission_required = 'event.change_venue'
 

@@ -1,4 +1,4 @@
-{% extends 'event/index.html' %}
+{% extends 'event/pages/index.html' %}
 {% load static %}
 
 {% block content %}
@@ -29,12 +29,12 @@
         {% if artists %}
         <div id="by_name" class="row row-lg">
           {% for artist in artists %}
-            {% include "event/artist_item.html" with artist=artist rounded=True admin=False %}
+            {% include "event/items/artist_item.html" with artist=artist rounded=True admin=False %}
           {% endfor %}
         </div>
         <div id="by_events" class="row row-lg modal">
           {% for artist in artists|dictsortreversed:"events.count" %}
-            {% include "event/artist_item.html" with artist=artist rounded=True admin=False %}
+            {% include "event/items/artist_item.html" with artist=artist rounded=True admin=False %}
           {% endfor %}
         </div>
         {% else %}
@@ -43,7 +43,7 @@
           </div>
         {% endif %}
         {% if is_paginated %}
-          {% include "event/pagination.html" with page_obj=page_obj request=request %}
+          {% include "event/items/pagination.html" with page_obj=page_obj request=request %}
         {% endif %}
       </div>
     </div>
