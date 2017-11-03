@@ -19,7 +19,7 @@ class IndexView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         """
-        Return the discover, trending, new,
+        Return the discover, trending,
         recommended artists and events
         """
         now = timezone.now()
