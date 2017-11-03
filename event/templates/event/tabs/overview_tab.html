@@ -1,0 +1,24 @@
+<h5 class="m-b">Upcoming events</h5>
+{% if upcoming_events.all %}
+  <div class="row item-list item-list-md item-list-li-by m-b" id="upcoming_events">
+    {% for upcoming_event in upcoming_events.all|slice:":4" %}
+      {% include "event/items/event_item.html" with event=upcoming_event overview=True profile=True admin=False %}
+    {% endfor %}
+  </div>
+{% else %}
+<div class="item-list item-list-md item-list-li-by m-b" id="upcoming_events">
+  No upcoming events
+</div>
+{% endif %}
+<h5 class="m-b">Past events</h5>
+{% if past_events.all %}
+<div class="row item-list item-list-md item-list-li-by m-b" id="past_events">
+  {% for past_event in past_events.all|slice:":4" %}
+      {% include "event/items/event_item.html" with event=past_event overview=True profile=True admin=False %}
+  {% endfor %}
+</div>
+{% else %}
+<div class="item-list item-list-md item-list-li-by m-b" id="past_events">
+  No past events
+</div>
+{% endif %}

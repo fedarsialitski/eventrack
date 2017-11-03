@@ -61,122 +61,18 @@
         </div>
         <div class="tab-content">
           <div class="tab-pane active" id="tab_1">
-            <h5 class="m-b">Upcoming events</h5>
-            {% if upcoming_events.all %}
-              <div class="row item-list item-list-md item-list-li-by m-b" id="upcoming_events">
-                {% for upcoming_event in upcoming_events.all|slice:":4" %}
-                  {% include "event/items/event_item.html" with event=upcoming_event overview=True profile=True admin=False %}
-                {% endfor %}
-              </div>
-          {% else %}
-            <div class="item-list item-list-md item-list-li-by m-b" id="upcoming_events">
-              No upcoming events
-            </div>
-          {% endif %}
-          <h5 class="m-b">Past events</h5>
-          {% if past_events.all %}
-            <div class="row item-list item-list-md item-list-li-by m-b" id="past_events">
-              {% for past_event in past_events.all|slice:":4" %}
-                  {% include "event/items/event_item.html" with event=past_event overview=True profile=True admin=False %}
-              {% endfor %}
-            </div>
-          {% else %}
-            <div class="item-list item-list-md item-list-li-by m-b" id="past_events">
-              No past events
-            </div>
-          {% endif %}
-        </div>
-        <div class="tab-pane" id="tab_2">
-          <div class="page-title m-b">
-            <h5 class="inline m-a-0">Upcoming</h5>
-            <div class="dropdown inline">
-              <button id="event_button" class="btn btn-sm no-bg h5 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">All the time</button>
-              <div id="event_sort" class="dropdown-menu">
-                <a id="week" class="dropdown-item">
-                  This week
-                </a>
-                <a id="month" class="dropdown-item">
-                  This month
-                </a>
-                <a id="year" class="dropdown-item">
-                  This year
-                </a>
-                <a id="all" class="dropdown-item active">
-                  All the time
-                </a>
-              </div>
-            </div>
+            {% include 'event/tabs/overview_tab.html' %}
           </div>
-          {% if upcoming_events.items %}
-            <div class="row item-list item-list-md item-list-li-by m-b">
-              {% for key, upcoming_events in upcoming_events.items %}
-              <div id="{{ key }}" {% if key in 'week, month, year' %}class="modal"{% endif %}>
-              {% if upcoming_events %}
-                {% for upcoming_event in upcoming_events %}
-                  {% include "event/items/event_item.html" with event=upcoming_event overview=False profile=True admin=False %}
-                {% endfor %}
-              {% else  %}
-                <div class="col-xs-12">
-                  No upcoming events
-                  {% if key in 'week, month, year' %}
-                    this {{ key }}
-                  {% endif %}
-                </div>
-              {% endif %}
-              </div>
-              {% endfor %}
-            </div>
-          {% else %}
-            <div class="col-xs-12">
-              No upcoming events
-            </div>
-          {% endif %}
-        </div>
-        <div class="tab-pane" id="tab_3">
-          <div class="page-title m-b">
-            <h5 class="inline m-a-0">Past</h5>
-            <div class="dropdown inline">
-              <button id="past_event_button" class="btn btn-sm no-bg h5 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">All the time</button>
-              <div id="past_event_sort" class="dropdown-menu">
-                <a id="week" class="dropdown-item">
-                  Last week
-                </a>
-                <a id="month" class="dropdown-item">
-                  Last month
-                </a>
-                <a id="year" class="dropdown-item">
-                  Last year
-                </a>
-                <a id="all" class="dropdown-item active">
-                  All the time
-                </a>
-              </div>
-            </div>
+          <div class="tab-pane" id="tab_2">
+            {% include 'event/tabs/upcoming_events_tab.html' %}
           </div>
-          {% if past_events.items %}
-              <div class="row item-list item-list-md item-list-li-by m-b">
-              {% for key, past_events in past_events.items %}
-              <div id="past_{{ key }}" {% if key in 'week, month, year' %}class="modal"{% endif %}>
-              {% if past_events %}
-                {% for past_event in past_events %}
-                  {% include "event/items/event_item.html" with event=past_event overview=False profile=True admin=False %}
-                {% endfor %}
-              {% else  %}
-                <div class="col-xs-12">
-                  No past events
-                  {% if key in 'week, month, year' %}
-                    last {{ key }}
-                  {% endif %}
-                </div>
-              {% endif %}
-              </div>
-              {% endfor %}
-            </div>
-          {% else %}
-            <div class="col-xs-12">
-              No events
-            </div>
-          {% endif %}
+          <div class="tab-pane" id="tab_3">
+            {% include 'event/tabs/past_events_tab.html' %}
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+</div>
 {% endblock content %}
