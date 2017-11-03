@@ -144,9 +144,6 @@ class ArtistDeleteView(PermissionRequiredMixin, generic.DeleteView):
     raise_exception = True
     permission_required = 'event.delete_artist'
 
-    def get(self, *args, **kwargs):
-        return self.post(*args, **kwargs)
-
 
 class EventView(generic.ListView):
     model = Event
@@ -205,9 +202,6 @@ class EventDeleteView(PermissionRequiredMixin, generic.DeleteView):
     raise_exception = True
     permission_required = 'event.delete_event'
 
-    def get(self, *args, **kwargs):
-        return self.post(*args, **kwargs)
-
 
 class VenueView(generic.ListView):
     model = Venue
@@ -246,9 +240,6 @@ class VenueDeleteView(PermissionRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy('user:profile')
     raise_exception = True
     permission_required = 'event.delete_venue'
-
-    def get(self, *args, **kwargs):
-        return self.post(*args, **kwargs)
 
 
 def bookmark_artist(request, pk):
