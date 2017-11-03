@@ -49,25 +49,25 @@
         <div class="nav-active-border b-primary bottom m-b-md">
           <ul class="nav l-h-2x">
             <li class="nav-item m-r inline">
-              <a class="nav-link active" href="#" data-toggle="tab" data-target="#tab_1">Overview</a>
+              <a class="nav-link active" href="#" data-toggle="tab" data-target="#overview">Overview</a>
             </li>
             <li class="nav-item m-r inline">
-              <a class="nav-link" href="#" data-toggle="tab" data-target="#tab_2">Upcoming</a>
+              <a class="nav-link" href="#" data-toggle="tab" data-target="#upcoming">Upcoming</a>
             </li>
             <li class="nav-item m-r inline">
-              <a class="nav-link" href="#" data-toggle="tab" data-target="#tab_3">Past</a>
+              <a class="nav-link" href="#" data-toggle="tab" data-target="#past">Past</a>
             </li>
           </ul>
         </div>
         <div class="tab-content">
-          <div class="tab-pane active" id="tab_1">
+          <div class="tab-pane active" id="overview">
             {% include 'event/tabs/overview_tab.html' %}
           </div>
-          <div class="tab-pane" id="tab_2">
-            {% include 'event/tabs/upcoming_events_tab.html' %}
+          <div class="tab-pane" id="upcoming">
+            {% include 'event/tabs/events_tab.html' with past=False events=upcoming_events %}
           </div>
-          <div class="tab-pane" id="tab_3">
-            {% include 'event/tabs/past_events_tab.html' %}
+          <div class="tab-pane" id="past">
+            {% include 'event/tabs/events_tab.html' with past=True events=past_events %}
           </div>
         </div>
       </div>
