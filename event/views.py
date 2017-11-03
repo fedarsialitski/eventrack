@@ -5,6 +5,7 @@ from django.views import generic
 from django.utils import timezone
 from django.db.models import Count, Q
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 from .models import Artist, Event, Venue
 from .forms import ArtistForm, EventForm, VenueForm, SearchForm
@@ -242,46 +243,46 @@ class VenueDeleteView(PermissionRequiredMixin, generic.DeleteView):
     permission_required = 'event.delete_venue'
 
 
+@login_required
 def bookmark_artist(request, pk):
-    if request.user.is_authenticated():
-        if request.user.artists.filter(id=pk):
-            request.user.artists.remove(pk)
-        else:
-            request.user.artists.add(pk)
+    if request.user.artists.filter(id=pk):
+        request.user.artists.remove(pk)
+    else:
+        request.user.artists.add(pk)
 
-        return JsonResponse({
-            'pk': pk,
-            'id': 'artists',
-            'user_count': Artist.objects.get(pk=pk).users.count(),
-            'artist_count': request.user.artists.count(),
-        })
+    return JsonResponse({
+        'pk': pk,
+        'id': 'artists',
+        'user_count': Artist.objects.get(pk=pk).users.count(),
+        'artist_count': request.user.artists.count(),
+    })
 
 
+@login_required
 def bookmark_event(request, pk):
-    if request.user.is_authenticated():
-        if request.user.events.filter(id=pk):
-            request.user.events.remove(pk)
-        else:
-            request.user.events.add(pk)
+    if request.user.events.filter(id=pk):
+        request.user.events.remove(pk)
+    else:
+        request.user.events.add(pk)
 
-        return JsonResponse({
-            'pk': pk,
-            'id': 'events',
-            'user_count': Event.objects.get(pk=pk).users.count(),
-            'event_count': request.user.events.count(),
-        })
+    return JsonResponse({
+        'pk': pk,
+        'id': 'events',
+        'user_count': Event.objects.get(pk=pk).users.count(),
+        'event_count': request.user.events.count(),
+    })
 
 
+@login_required
 def bookmark_venue(request, pk):
-    if request.user.is_authenticated():
-        if request.user.venues.filter(id=pk):
-            request.user.venues.remove(pk)
-        else:
-            request.user.venues.add(pk)
+    if request.user.venues.filter(id=pk):
+        request.user.venues.remove(pk)
+    else:
+        request.user.venues.add(pk)
 
-        return JsonResponse({
-            'pk': pk,
-            'id': 'venues',
-            'user_count': Venue.objects.get(pk=pk).users.count(),
-            'venue_count': request.user.venues.count(),
-        })
+    return JsonResponse({
+        'pk': pk,
+        'id': 'venues',
+        'user_count': Venue.objects.get(pk=pk).users.count(),
+        'venue_count': request.user.venues.count(),
+    })
