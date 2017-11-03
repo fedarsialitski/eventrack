@@ -35,54 +35,11 @@
 <!-- ############ LAYOUT START-->
 
 {% if not user.is_authenticated.value %}
-<div id="sign-modal" class="modal fade animate black-overlay" data-backdrop="false">
-  <div class="row-col h-v">
-    <div class="row-cell v-m">
-      <div class="modal-dialog">
-        <div class="modal-content ">
-          <div class="row-col">
-            <a data-dismiss="modal" class="pull-right text-muted text-lg p-a-sm m-r-sm">×</a>
-            <div class="p-a b-b">
-              <span class="h5">
-                Sign up for Eventrack
-              </span>
-            </div>
-          </div>
-          <div class="modal-body text-center">
-            <p class="p-y-sm"><img src="{% static 'event/images/logo.png' %}" alt="."></p>
-            <p>Join Eventrack to perform this action.</p>
-          </div>
-          <div class="modal-footer">
-            <a href="{% url 'user:signin' %}" role="button" class="btn btn-default b-primary p-x-md">Sign in</a>
-            <a href="{% url 'user:signup' %}" role="button" class="btn green p-x-md">Sign up</a>
-          </div>
-        </div><!-- /.modal-content -->
-      </div>
-    </div>
-  </div>
-</div>
+  {% include 'user/modals/sign_modal.html' %}
 {% endif %}
 
 <!-- ############ SEARCH START -->
-<div class="modal white lt fade" id="search-modal" data-backdrop="false">
-  <a data-dismiss="modal" class="text-muted text-lg p-x modal-close-btn">&times;</a>
-  <div class="row-col">
-    <div class="p-a-lg h-v row-cell v-m">
-      <div class="row">
-        <div class="col-md-8 offset-md-2">
-          <form action="{% url 'event:search' %}" method="get" class="m-b-md">
-            <div class="input-group input-group-md">
-              <input name="keyword" type="text" class="form-control" placeholder="Type keyword" data-ui-toggle-class="hide" data-ui-target="#search-result">
-              <span class="input-group-btn">
-                <button class="btn b-a no-shadow white" type="submit">Search</button>
-              </span>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+  {% include 'user/modals/search_modal.html' %}
 <!-- ############ SEARCH END -->
 
   <!-- aside -->
@@ -348,27 +305,7 @@
     {% if user.is_authenticated.value %}
     <!-- .modal -->
     {% if perms.delete_event or perms.delete_artist or perms.delete_venue %}
-    <div id="delete-modal" class="modal fade animate black-overlay" data-backdrop="false">
-      <div class="row-col h-v">
-        <div class="row-cell v-m">
-          <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-              <div class="modal-body text-center">
-                <p class="p-y m-t"><i class="fa fa-remove text-warning fa-3x"></i></p>
-                <p>Are you sure to delete this item?</p>
-              </div>
-              <div class="modal-footer">
-                <form method="post" action="">
-                  {% csrf_token %}
-                  <button type="button" class="btn btn-default p-x-md" data-dismiss="modal">No</button>
-                  <button type="button submit" class="btn red p-x-md">Yes</button>
-                </form>
-              </div>
-            </div><!-- /.modal-content -->
-          </div>
-        </div>
-      </div>
-    </div>
+      {% include 'user/modals/delete_modal.html' %}
     {% endif %}
     <div id="modal_events" class="modal col-lg-12 text-center">
       {% include 'user/modals/events_modal.html' with profile=True bookmarks=True %}
