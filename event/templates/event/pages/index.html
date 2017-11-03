@@ -61,104 +61,50 @@
                 <span class="text-xs text-muted">Main</span>
               </li>
               <li>
-                <a href="{% url 'event:index' %}">
-                  <span class="nav-icon">
-                    <i class="material-icons">
-                      home
-                    </i>
-                  </span>
-                  <span class="nav-text">Home</span>
-                </a>
+                {% url 'event:index' as index_url %}
+                {% include 'event/items/menu_item.html' with url=index_url icon="home" text="Home" %}
               </li>
               <li>
-                <a href="{% url 'event:artist' %}">
-                  <span class="nav-icon">
-                    <i class="material-icons">
-                      account_box
-                    </i>
-                  </span>
-                  <span class="nav-text">Artist</span>
-                </a>
+                {% url 'event:artist' as artist_url %}
+                {% include 'event/items/menu_item.html' with url=artist_url icon="account_box" text="Artist" %}
               </li>
               <li>
-                <a href="{% url 'event:event' %}">
-                  <span class="nav-icon">
-                    <i class="material-icons">
-                      event_note
-                    </i>
-                  </span>
-                  <span class="nav-text">Event</span>
-                </a>
+                {% url 'event:event' as event_url %}
+                {% include 'event/items/menu_item.html' with url=event_url icon="event_note" text="Event" %}
               </li>
               <li>
-                <a href="{% url 'event:venue' %}">
-                  <span class="nav-icon">
-                    <i class="material-icons">
-                      place
-                    </i>
-                  </span>
-                  <span class="nav-text">Venue</span>
-                </a>
+                {% url 'event:venue' as venue_url %}
+                {% include 'event/items/menu_item.html' with url=venue_url icon="place" text="Venue" %}
               </li>
               <li>
-                <a href="{% url 'event:search' %}" data-toggle="modal" data-target="#search-modal">
-                  <span class="nav-icon">
-                    <i class="material-icons">
-                      search
-                    </i>
-                  </span>
-                  <span class="nav-text">Search</span>
-                </a>
+                {% url 'event:search' as search_url %}
+                {% include 'event/items/menu_item.html' with url=search_url icon="search" text="Search" %}
               </li>
 
               {% if user.is_authenticated.value %}
               <li class="nav-header hidden-folded m-t">
                 <span class="text-xs text-muted">Profile</span>
+                {% url 'user:profile' as profile_url %}
               </li>
               <li>
-                <a href="{% url 'user:profile' %}#events">
-                  {% if event_count %}
-                    <span class="nav-label">
-                      <b class="label">{{ event_count }}</b>
-                    </span>
-                  {% endif %}
-                  <span class="nav-icon">
-                    <i class="material-icons">
-                      event
-                    </i>
-                  </span>
-                  <span class="nav-text">Events</span>
-                </a>
+                {% with profile_url|add:'#events' as profile_events_url %}
+                  {% include 'event/items/menu_item.html' with url=profile_events_url icon="event" text="Events" %}
+                {% endwith %}
               </li>
               <li>
-                <a href="{% url 'user:profile' %}#artists">
-                  <span class="nav-icon">
-                    <i class="material-icons">
-                      recent_actors
-                    </i>
-                  </span>
-                  <span class="nav-text">Artists</span>
-                </a>
+                {% with profile_url|add:'#artists' as profile_artists_url %}
+                  {% include 'event/items/menu_item.html' with url=profile_artists_url icon="recent_actors" text="Artists" %}
+                {% endwith %}
               </li>
               <li>
-                <a href="{% url 'user:profile' %}#venues">
-                  <span class="nav-icon">
-                    <i class="material-icons">
-                      pin_drop
-                    </i>
-                  </span>
-                  <span class="nav-text">Venues</span>
-                </a>
+                {% with profile_url|add:'#venues' as profile_venues_url %}
+                  {% include 'event/items/menu_item.html' with url=profile_venues_url icon="pin_drop" text="Venues" %}
+                {% endwith %}
               </li>
               <li>
-                <a href="{% url 'user:profile' %}#bookmarks">
-                  <span class="nav-icon">
-                    <i class="material-icons">
-                      star
-                    </i>
-                  </span>
-                  <span class="nav-text">Bookmarks</span>
-                </a>
+                {% with profile_url|add:'#bookmarks' as profile_bookmarks_url %}
+                  {% include 'event/items/menu_item.html' with url=profile_bookmarks_url icon="star" text="Bookmarks" %}
+                {% endwith %}
               </li>
               {% endif %}
             </ul>
