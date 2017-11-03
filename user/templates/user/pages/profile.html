@@ -72,123 +72,19 @@
           </div>
           <div class="tab-content">
             <div class="tab-pane active" id="events">
-              {% if user.events.all %}
-                <div id="row_events" class="row item-list item-list-by m-b">
-                  {% for event in user.events.all %}
-                    {% include "event/items/event_item.html" with event=event artist=event.artists.all|first overview=False profile=True admin=True %}
-                  {% endfor %}
-                    <div class="col-lg-12">
-                      <div class="p-t-md">
-                        <h6 class="text-muted m-b-md">Would you like to add an event{% if not perms.add_event %} to bookmarks{% endif %}?</h6>
-                        <a class="btn circle btn-outline b-primary m-b-lg p-x-md"
-                           href="{% if perms.add_event %}{% url 'event:event_add' %}{% else %}{% url 'event:event' %}{% endif %}"
-                        >Add</a>
-                      </div>
-                    </div>
-                </div>
-              {% else %}
-                <div class="col-lg-12 text-center">
-                  <div class="p-a-lg">
-                    <h2 class="m-y-md">No {% if perms.add_event %}added {% endif %}events{% if not perms.add_event %} in bookmarks{% endif %}</h2>
-                    <h6 class="text-muted m-b-md">Would you like to add an event{% if not perms.add_event %} to bookmarks{% endif %}?</h6>
-                    <a class="btn circle btn-outline b-primary m-b-lg p-x-md"
-                      href="{% if perms.add_event %}{% url 'event:event_add' %}{% else %}{% url 'event:event' %}{% endif %}"
-                    >Add</a>
-                  </div>
-                </div>
-              {% endif %}
+              {% include 'user/tabs/events_tab.html' %}
             </div>
             <div class="tab-pane" id="artists">
-              {% if user.artists.all %}
-                <div id="row_artists" class="row item-list item-list-by m-b">
-                  {% for artist in user.artists.all %}
-                    {% include "event/items/artist_item.html" with artist=artist rounded=False admin=True %}
-                  {% endfor %}
-                    <div class="col-lg-12">
-                      <div class="p-t-md">
-                        <h6 class="text-muted m-b-md">Would you like to add a artist{% if not perms.add_artist %} to bookmarks{% endif %}?</h6>
-                        <a class="btn circle btn-outline b-primary m-b-lg p-x-md"
-                           href="{% if perms.add_artist %}{% url 'event:artist_add' %}{% else %}{% url 'event:artist' %}{% endif %}"
-                        >Add</a>
-                      </div>
-                    </div>
-                </div>
-                {% else %}
-                <div class="col-lg-12 text-center">
-                  <div class="p-a-lg">
-                    <h2 class="m-y-md">No {% if perms.add_artist %}added {% endif %}artists{% if not perms.add_artist %} in bookmarks{% endif %}</h2>
-                    <h6 class="text-muted m-b-md">Would you like to add a artist{% if not perms.add_artist %} to bookmarks{% endif %}?</h6>
-                    <a class="btn circle btn-outline b-primary m-b-lg p-x-md"
-                       href="{% if perms.add_artist %}{% url 'event:artist_add' %}{% else %}{% url 'event:artist' %}{% endif %}"
-                    >Add</a>
-                  </div>
-                </div>
-              {% endif %}
+              {% include 'user/tabs/artists_tab.html' %}
             </div>
             <div class="tab-pane" id="venues">
-              {% if user.venues.all %}
-                <div id="row_venues" class="row item-list item-list-by m-b">
-                  {% for venue in user.venues.all %}
-                    {% include "event/items/venue_item.html" with venue=venue admin=True %}
-                  {% endfor %}
-                    <div class="col-lg-12">
-                      <div class="p-t-md">
-                        <h6 class="text-muted m-b-md">Would you like to add a venue{% if not perms.add_venue %} to bookmarks{% endif %}?</h6>
-                        <a class="btn circle btn-outline b-primary m-b-lg p-x-md"
-                           href="{% if perms.add_venue %}{% url 'event:venue_add' %}{% else %}{% url 'event:venue' %}{% endif %}"
-                        >Add</a>
-                      </div>
-                    </div>
-                </div>
-              {% else %}
-                <div class="col-lg-12 text-center">
-                  <div class="p-a-lg">
-                    <h2 class="m-y-md">No {% if perms.add_venue %}added {% endif %}venues{% if not perms.add_venue %} in bookmarks{% endif %}</h2>
-                    <h6 class="text-muted m-b-md">Would you like to add a venue{% if not perms.add_venue %} to bookmarks{% endif %}?</h6>
-                    <a class="btn circle btn-outline b-primary m-b-lg p-x-md"
-                       href="{% if perms.add_venue %}{% url 'event:venue_add' %}{% else %}{% url 'event:venue' %}{% endif %}"
-                    >Add</a>
-                  </div>
-                </div>
-              {% endif %}
+              {% include 'user/tabs/venues_tab.html' %}
             </div>
             <div class="tab-pane" id="bookmarks">
-              <h5 class="m-b">Events</h5>
-              {% if user.events.all %}
-                <div id="bookmark_events" class="row item-list item-list-md item-list-li-by m-b">
-                  {% for event in user.events.all%}
-                    {% include "event/items/event_item.html" with event=event artist=event.artists.all|first overview=True profile=True admin=False %}
-                  {% endfor %}
-                </div>
-              {% else %}
-                <div class="col-lg-12 text-center">
-                  <div class="p-a-xs">
-                    <h2 class="m-y-sm">No events in bookmarks</h2>
-                    <h6 class="text-muted m-b-md">Would you like to add an event to bookmarks?</h6>
-                    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:event' %}">Add</a>
-                  </div>
-                </div>
-              {% endif %}
-              <h5 class="m-b">Artists</h5>
-              {% if user.artists.all %}
-                <div id="bookmark_artists" class="row m-b">
-                  {% for artist in user.artists.all %}
-                    {% include "event/items/artist_item.html" with artist=artist rounded=False admin=False %}
-                  {% endfor %}
-                </div>
-              {% else %}
-                <div class="col-lg-12 text-center">
-                  <div class="p-a-xs">
-                    <h2 class="m-y-sm">No artists in bookmarks</h2>
-                    <h6 class="text-muted m-b-md">Would you like to add a artist to bookmarks?</h6>
-                    <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'event:artist' %}">Add</a>
-                  </div>
-                </div>
-              {% endif %}
-              </div>
-              <div class="tab-pane" id="profile">
-                {% include "user/forms/update_form.html" %}
-              </div>
+              {% include 'user/tabs/bookmarks_tab.html' %}
+            </div>
+            <div class="tab-pane" id="profile">
+              {% include "user/forms/update_form.html" %}
             </div>
           </div>
         </div>

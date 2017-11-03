@@ -1,0 +1,14 @@
+{% if user.events.all %}
+  <div id="row_events" class="row item-list item-list-by m-b">
+    {% for event in user.events.all %}
+      {% include "event/items/event_item.html" with event=event artist=event.artists.all|first overview=False profile=True admin=True %}
+    {% endfor %}
+    <div class="col-lg-12">
+      {% include 'user/modals/events_modal.html' with profile=True bookmarks=False %}
+    </div>
+  </div>
+{% else %}
+  <div class="col-lg-12 text-center">
+    {% include 'user/modals/events_modal.html' with profile=True bookmarks=True %}
+  </div>
+{% endif %}

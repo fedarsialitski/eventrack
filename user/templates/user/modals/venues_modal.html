@@ -1,0 +1,9 @@
+<div class="{% if bookmarks %}p-a-lg{% else %}p-t-md{% endif %}">
+  {% if bookmarks %}
+    <h2 class="m-y-md">No {% if perms.add_venue %}added {% endif %}venues{% if not perms.add_venue %} in bookmarks{% endif %}</h2>
+  {% endif %}
+  <h6 class="text-muted m-b-md">Would you like to add a venue{% if not perms.add_venue %} to bookmarks{% endif %}?</h6>
+  <a class="btn circle btn-outline b-primary m-b-lg p-x-md"
+    href="{% if perms.add_venue %}{% url 'event:venue_add' %}{% else %}{% url 'event:venue' %}{% endif %}"
+  >Add</a>
+</div>
