@@ -103,21 +103,20 @@
                   </span>
                 </span>
             </a>
-            {% url 'user:profile' as profile %}
             <div id="dropdown_menu" class="dropdown-menu w dropdown-menu-scale ">
-              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#profile" {% if request.path == profile%}data-toggle="tab" data-target="#profile"{% endif %}>
+              <a {% if request.path == profile_url%}id="change_tab"{% endif %} class="dropdown-item" href="{{ profile_url }}#profile" {% if request.path == profile_url%}data-toggle="tab" data-target="#profile"{% endif %}>
                 <span>Profile</span>
               </a>
-              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#events" {% if request.path == profile%}data-toggle="tab" data-target="#events"{% endif %}>
+              <a {% if request.path == profile_url%}id="change_tab"{% endif %} class="dropdown-item" href="{{ profile_url }}#events" {% if request.path == profile_url%}data-toggle="tab" data-target="#events"{% endif %}>
                 <span>Events</span>
               </a>
-              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#artists" {% if request.path == profile%}data-toggle="tab" data-target="#artists"{% endif %}>
+              <a {% if request.path == profile_url%}id="change_tab"{% endif %} class="dropdown-item" href="{{ profile_url }}#artists" {% if request.path == profile_url%}data-toggle="tab" data-target="#artists"{% endif %}>
                 <span>Artists</span>
               </a>
-              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#venues" {% if request.path == profile%}data-toggle="tab" data-target="#venues"{% endif %}>
+              <a {% if request.path == profile_url%}id="change_tab"{% endif %} class="dropdown-item" href="{{ profile_url }}#venues" {% if request.path == profile_url%}data-toggle="tab" data-target="#venues"{% endif %}>
                 <span>Venues</span>
               </a>
-              <a {% if request.path == profile%}id="change_tab"{% endif %} class="dropdown-item" href="{% url 'user:profile' %}#bookmarks" {% if request.path == profile%}data-toggle="tab" data-target="#bookmarks"{% endif %}>
+              <a {% if request.path == profile_url%}id="change_tab"{% endif %} class="dropdown-item" href="{{ profile_url }}#bookmarks" {% if request.path == profile_url%}data-toggle="tab" data-target="#bookmarks"{% endif %}>
                 <span>Bookmarks</span>
               </a>
               <div class="dropdown-divider"></div>
