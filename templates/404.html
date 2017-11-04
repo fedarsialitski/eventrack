@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page %}
+<div class="app dk" id="app">
+
+<!-- ############ LAYOUT START-->
+
+  {% include 'logo.html' %}
+
+  <div class="b-t">
+    <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
+      <h2>Hmmm, we couldn't find that.</h2>
+      <br>
+      <p>The page you were trying to visit doesn't exist or has been deleted.</p>
+      <p>If you got to this page from a link on Eventrack, we've logged that and will investigate the broken link.</p>
+      <br>
+      <b>Try a search?</b>
+      <br>
+      <p>
+        {% include 'event/forms/search_form.html' %}
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ############ LAYOUT END-->
+{% endblock %}

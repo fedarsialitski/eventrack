@@ -9,15 +9,7 @@
 
   <!-- ############ PAGE START-->
   <div class="padding">
-    <form action="{% url 'event:search' %}" method="get" class="m-b-md">
-      <div class="input-group input-group-md">
-        <input name="keyword" value="{{ request.GET.keyword.strip }}" type="text" class="form-control"
-        {% if not request.GET.keyword.strip %}placeholder="Type keyword"{% endif %}>
-        <span class="input-group-btn">
-          <button class="btn b-a no-shadow white" type="submit">Search</button>
-        </span>
-      </div>
-    </form>
+    {% include 'event/forms/search_form.html' %}
     <p class="m-b-md">
       {% if page_obj.paginator.count %}
         <strong>{{ page_obj.paginator.count }}</strong>

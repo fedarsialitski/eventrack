@@ -1,0 +1,9 @@
+<form action="{% url 'event:search' %}" method="get" class="m-b-md">
+  <div class="input-group input-group-md">
+    <input name="keyword" value="{{ request.GET.keyword.strip }}" type="text" class="form-control"
+    {% if not request.GET.keyword.strip %}placeholder="Type keyword"{% endif %}>
+    <span class="input-group-btn">
+      <button class="btn b-a no-shadow white" type="submit">Search</button>
+    </span>
+  </div>
+</form>

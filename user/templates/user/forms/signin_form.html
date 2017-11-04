@@ -1,0 +1,49 @@
+<div class="b-t">
+  <div class="center-block p-a-md text-center">
+    <form name="form" action="{% url 'user:signin' %}" method="post">
+      {% csrf_token %}
+      <div class="col-xs-8 offset-xs-2 p-x-md">
+        {% if form.non_field_errors %}
+          <div class="p-x-md">
+            <div class="col-xs-4 offset-xs-4 box-color danger p-x-xs">
+              <span class="arrow bottom b-danger"></span>
+              <div class="box-body p-x-xs" style="font-size: 89%">
+                <b>{{ form.non_field_errors|striptags }}</b>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        <div class="form-group row">
+          <div class="col-xs-4 offset-xs-4">
+            <input type="text" name="username" value="{{ form.username.value|default_if_none:"" }}" class="form-control {% if form.username.errors or form.non_field_errors %}b-danger{% endif %}" class="form-control" placeholder="Username">
+          </div>
+          {% if form.username.errors %}
+            <span class="label label-md danger pos-rlt p-a-sm col-xs-3">
+              <b class="arrow left b-danger"></b>
+              {% for errors in form.username.errors %}
+                {{ errors|striptags }}<br>
+              {% endfor %}
+            </span>
+          {% endif %}
+        </div>
+        <div class="form-group row m-b-md">
+          <div class="col-xs-4 offset-xs-4">
+            <input type="password" name="password" class="form-control {% if form.password.errors  or form.non_field_errors %}b-danger{% endif %}"  class="form-control" placeholder="Password">
+          </div>
+          {% if form.password.errors %}
+            <span class="label label-md danger pos-rlt p-a-sm col-xs-3">
+              <b class="arrow left b-danger"></b>
+              {% for errors in form.password.errors %}
+                {{ errors|striptags }}<br>
+              {% endfor %}
+            </span>
+          {% endif %}
+        </div>
+        <button type="submit" class="btn btn-md black p-x-lg">Sign in</button>
+    </form>
+    <div class="m-y">
+      Do not have an account?
+      <a href="{% url 'user:signup' %}" class="text-primary _600">Sign up</a>
+    </div>
+  </div>
+</div>

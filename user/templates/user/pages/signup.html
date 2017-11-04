@@ -1,119 +1,14 @@
-{% extends 'user/pages/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block page %}
-    <div class="app dk" id="app">
+<div class="app dk" id="app">
 
 <!-- ############ LAYOUT START-->
 
-  <div class="padding">
-    <div class="navbar">
-      <div class="pull-center">
-        <!-- brand -->
-        <a href="{% url 'event:index' %}" class="navbar-brand md">
-        	<img src="{% static 'event/images/logo.png' %}" alt=".">
-        </a>
-        <!-- / brand -->
-      </div>
-    </div>
-  </div>
-  <div class="b-t">
-    <div class="center-block p-a-md text-center">
-      <form name="form" action="{% url 'user:signup' %}" method="post">
-        {% csrf_token %}
-        <div class="col-xs-8 offset-xs-2 p-x-xs">
-          <div class="form-group row">
-            <div class="col-xs-4 offset-xs-4">
-              <input type="text" name="username" value="{{ form.username.value|default_if_none:"" }}" class="form-control {% if form.username.errors %}b-danger{% endif %}" placeholder="Username">
-            </div>
-            {% if form.username.errors %}
-              <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
-                <b class="arrow left b-danger"></b>
-                {% for errors in form.username.errors %}
-                  {{ errors|striptags }}<br>
-                {% endfor %}
-              </span>
-            {% endif %}
-          </div>
-          <div class="form-group row">
-            <div class="col-xs-4 offset-xs-4">
-              <input type="email" name="email"  value="{{ form.email.value|default_if_none:"" }}" class="form-control {% if form.email.errors %}b-danger{% endif %}" placeholder="Email">
-            </div>
-            {% if form.email.errors %}
-              <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
-                <b class="arrow left b-danger"></b>
-                {% for errors in form.email.errors %}
-                  {{ errors|striptags }}<br>
-                {% endfor %}
-              </span>
-            {% endif %}
-          </div>
-          <div class="form-group row">
-            <div class="col-xs-4 offset-xs-4">
-              <input title="{{ form.first_name.help_text }}" value="{{ form.first_name.value|default_if_none:"" }}" type="text" name="first_name" class="form-control {% if form.first_name.errors %}b-danger{% endif %}" placeholder="First name">
-            </div>
-            {% if form.first_name.errors %}
-              <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
-                <b class="arrow left b-danger"></b>
-                {% for errors in form.first_name.errors %}
-                  {{ errors|striptags }}<br>
-                {% endfor %}
-              </span>
-            {% endif %}
-          </div>
-          <div class="form-group row">
-            <div class="col-xs-4 offset-xs-4">
-              <input title="{{ form.last_name.help_text }}" value="{{ form.last_name.value|default_if_none:"" }}" type="text" name="last_name" class="form-control {% if form.last_name.errors %}b-danger{% endif %}" placeholder="Last name">
-            </div>
-            {% if form.last_name.errors %}
-              <span class="label label-md danger pos-rlt p-a-sm col-xs-4 col-form-label mr-2">
-                <b class="arrow left b-danger"></b>
-                {% for errors in form.last_name.errors %}
-                  {{ errors|striptags }}<br>
-                {% endfor %}
-              </span>
-            {% endif %}
-          </div>
-          <div class="form-group row">
-            <div class="col-xs-4 offset-xs-4">
-              <input type="password" name="password1" class="form-control {% if form.password1.errors or form.password2.errors %}b-danger{% endif %}" placeholder="Password">
-            </div>
-            {% if form.password1.errors or form.password2.errors %}
-              <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
-                <b class="arrow left b-danger"></b>
-                {% if form.password1.errors %}
-                  {% for errors in form.password1.errors %}
-                    {{ errors|striptags }}<br>
-                  {% endfor %}
-                {% elif form.password2.errors %}
-                  {% for errors in form.password2.errors %}
-                    {{ errors|striptags }}<br>
-                  {% endfor %}
-                {% endif %}
-              </span>
-            {% endif %}
-          </div>
-          <div class="form-group row m-b-md">
-            <div class="col-xs-4 offset-xs-4">
-              <input type="password" name="password2" class="form-control {% if form.password1.errors or form.password2.errors %}b-danger{% endif %}" placeholder="Confirm Password">
-            </div>
-            {% if form.password2.errors %}
-              <span class="label label-md danger pos-rlt p-a-sm col-xs-4">
-                <b class="arrow left b-danger"></b>
-                {% for errors in form.password2.errors %}
-                  {{ errors|striptags }}<br>
-                {% endfor %}
-              </span>
-            {% endif %}
-          </div>
-          <div class="col-xs-4 offset-xs-4">
-            <button type="submit" class="btn btn-md black p-x-lg">Sign Up</button>
-      </form>
-      <div class="p-y-md text-center">
-        <div>Already have an account? <a href="{% url 'user:signin' %}" class="text-primary _600">Sign in</a></div>
-      </div>
-    </div>
-  </div>
+  {% include 'logo.html' %}
+
+  {% include 'user/forms/signup_form.html' %}
 </div>
 
 <!-- ############ LAYOUT END-->
