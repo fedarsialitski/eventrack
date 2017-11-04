@@ -36,11 +36,13 @@ class IndexView(generic.ListView):
 
         # Get all artists, but exclude artists without images
         context['discover'] = artists.exclude(image_url__exact='', thumb_url__exact='')
-        # Exclude artists already followed by a current user
-        context['discover'] = context['discover'].exclude(users__in=[user_id])[:discover_count]
+        # Get trending artists
         context['trending'] = artists.annotate(user_count=user_count).order_by('-user_count')[:trending_count]
         if self.request.user.is_authenticated():
             user_artists = self.request.user.artists.all()
+
+            # Exclude artists already followed by a current user
+            context['discover'] = context['discover'].exclude(pk__in=user_artists)
 
             # Get upcoming events by a user's favorite artists
             context['recommend'] = events.filter(artists__in=user_artists, datetime__gte=now)
@@ -48,7 +50,7 @@ class IndexView(generic.ListView):
             context['recommend'] = context['recommend'].exclude(users__in=[user_id]).annotate(user_count=user_count)
             context['recommend'] = context['recommend'].order_by('datetime', '-user_count')[:recommend_count]
 
-            context['event_count'] = self.request.user.events.filter(datetime__gte=now).count()
+        context['discover'] = context['discover'][:discover_count]
         return context
 
 
