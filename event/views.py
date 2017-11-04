@@ -1,4 +1,3 @@
-from datetime import date
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views import generic
@@ -78,7 +77,7 @@ class SearchView(generic.ListView):
         return Event.objects.all()
 
 
-class ArtistView(generic.ListView):
+class ArtistListView(generic.ListView):
     model = Artist
     paginate_by = 12
     template_name = 'event/pages/artist.html'
@@ -94,7 +93,7 @@ class ArtistDetailView(generic.DetailView):
         Return the artist detail information
         """
         now = timezone.now()
-        today = date.today()
+        today = now.date()
         year = today.year
         week = today.isocalendar()[1]
         month = today.month
@@ -148,7 +147,7 @@ class ArtistDeleteView(PermissionRequiredMixin, generic.DeleteView):
     permission_required = 'event.delete_artist'
 
 
-class EventView(generic.ListView):
+class EventListView(generic.ListView):
     model = Event
     paginate_by = 12
     template_name = 'event/pages/event.html'
@@ -206,7 +205,7 @@ class EventDeleteView(PermissionRequiredMixin, generic.DeleteView):
     permission_required = 'event.delete_event'
 
 
-class VenueView(generic.ListView):
+class VenueListView(generic.ListView):
     model = Venue
     paginate_by = 12
     template_name = 'event/pages/venue.html'
