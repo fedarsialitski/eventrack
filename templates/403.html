@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page %}
+<div class="app dk" id="app">
+
+<!-- ############ LAYOUT START-->
+
+  {% include 'logo.html' %}
+
+  <div class="b-t">
+    <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
+      <h2>Forbidden</h2>
+      <br>
+      <p>Unfortunately, you do not have permission to view this page.</p>
+      <br>
+      <a href="{% url 'event:index' %}" title="Back to home" class="btn btn-sm rounded primary">Back to home</a>
+    </div>
+  </div>
+</div>
+
+<!-- ############ LAYOUT END-->
+{% endblock %}
