@@ -244,7 +244,7 @@ class VenueDeleteView(PermissionRequiredMixin, generic.DeleteView):
     permission_required = 'event.delete_venue'
 
 
-@login_required
+@login_required(redirect_field_name='redirect')
 def bookmark_artist(request, pk):
     if request.user.artists.filter(id=pk):
         request.user.artists.remove(pk)
@@ -259,7 +259,7 @@ def bookmark_artist(request, pk):
     })
 
 
-@login_required
+@login_required(redirect_field_name='redirect')
 def bookmark_event(request, pk):
     if request.user.events.filter(id=pk):
         request.user.events.remove(pk)
@@ -274,7 +274,7 @@ def bookmark_event(request, pk):
     })
 
 
-@login_required
+@login_required(redirect_field_name='redirect')
 def bookmark_venue(request, pk):
     if request.user.venues.filter(id=pk):
         request.user.venues.remove(pk)

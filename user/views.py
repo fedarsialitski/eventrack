@@ -3,6 +3,7 @@ from django.views import generic
 from django.shortcuts import render, reverse
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 from .forms import SignupForm, SigninForm, UpdateForm
 from .models import User
@@ -50,6 +51,7 @@ def signout(request):
     return HttpResponseRedirect(reverse('event:index'))
 
 
+@login_required(redirect_field_name='redirect')
 def update(request):
     if request.method == 'POST':
         form = UpdateForm(data=request.POST, instance=request.user)
