@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page %}
+<div class="app dk" id="app">
+
+<!-- ############ LAYOUT START-->
+
+  {% include 'logo.html' %}
+
+  <div class="b-t">
+    <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
+      <h2>Bad Request</h2>
+      <br>
+      <p>Your browser sent a request that server could not understand.</p>
+      <p>Client sent malformed Host header.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ############ LAYOUT END-->
+{% endblock %}
