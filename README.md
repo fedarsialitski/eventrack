@@ -1,8 +1,8 @@
-# Eventrack
+# [Eventrack](http://eventrack.org/)
 
-![Eventrack logo](https://github.com/FedorSelitsky/eventrack/blob/master/event/static/event/images/logo.png)
+[![Eventrack logo](https://github.com/FedorSelitsky/eventrack/blob/master/event/static/event/images/logo.png)](http://eventrack.org/)
 
-Eventrack is a concert tracking application. Eventrack allows users to track their favorite artists and discover concerts. It also allows users to submit events, contributing to archives of upcoming and past shows. Users can bookmark their favorite artists and receive recommendations about their upcoming events.
+[Eventrack](http://eventrack.org/) is a concert tracking application. Eventrack allows users to track their favorite artists and discover concerts. It also allows users to submit events, contributing to archives of upcoming and past shows. Users can bookmark their favorite artists and receive recommendations about their upcoming events.
 
 ## Requirements
 
