@@ -1,4 +1,4 @@
-# [Eventrack](http://eventrack.org/)
+# Eventrack
 
 [![Eventrack logo](https://github.com/FedorSelitsky/eventrack/blob/master/event/static/event/images/logo.png)](http://eventrack.org/)
 
