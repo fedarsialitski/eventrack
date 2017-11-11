@@ -21,9 +21,7 @@
     {% else %}
       <div class="item-media ">
         <i class="material-icons md-36 center text-muted">
-          <a href="{% if perms.change_venue %}{% url 'event:venue_update' venue.id %}{% else %}{% url 'event:venue_detail' venue.id %}{% endif %}">
-            place
-          </a>
+          place
         </i>
       </div>
     {% endif %}
@@ -34,12 +32,9 @@
         <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="venue_{{ venue.id }}" data-url="{% url 'event:venue_bookmark' venue.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if venue in user.venues.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
       </div>
       <div class="item-title text-ellipsis">
-        <a href="{% if perms.change_venue %}{% url 'event:venue_update' venue.id %}{% else %}{% url 'event:venue_detail' venue.id %}{% endif %}">
           {{ venue.name }}
-        </a>
       </div>
       <div class="item-author text-sm text-ellipsis ">
-        <a href="{% if perms.change_venue %}{% url 'event:venue_update' venue.id %}{% else %}{% url 'event:venue_detail' venue.id %}{% endif %}" class="text-muted">
         {% if admin %}
           {% if venue.city %}
             <div class="item-except visible-list text-sm m-t-sm">
@@ -64,7 +59,6 @@
         {% else %}
           {{ venue.city }}{% if venue.city and venue.country %}, {% endif %}{{ venue.country }}
         {% endif %}
-        </a>
       </div>
       {% if not admin %}
       <div class="item-meta text-sm text-muted">
