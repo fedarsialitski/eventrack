@@ -84,7 +84,11 @@
           <div class="item-info">
             <div class="item-title text-ellipsis">
                 <div class="col-xs-1 text-muted">Name</div>
-                <div class="offset-xs-1">{{ event.venue.name }}</div>
+                <div class="offset-xs-1">
+                  <a href="{% url 'event:venue_detail' event.venue.id %}">
+                    {{ event.venue.name }}
+                  </a>
+                </div>
             </div>
           </div>
         </div>
