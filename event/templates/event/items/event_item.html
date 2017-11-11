@@ -46,7 +46,7 @@
         {% endif %}
       {% else %}
       <div class="item-title text-ellipsis">
-        {{ event.title }} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }}
+        {{ event.title }}{% if not venue %} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }} {% endif %}
       </div>
       <div class="item-author text-sm text-ellipsis ">
         {{ event.datetime|date:"l, d M Y – g:i A" }}

@@ -1,0 +1,43 @@
+{% extends 'event/pages/index.html' %}
+{% load static %}
+
+{% block content %}
+
+{% static 'event/images/a3.jpg' as default_url %}
+
+<div class="app-body light" id="view">
+  <div class="page-content">
+    <div class="padding">
+      <div class="row-col b-b">
+        <div id="venue_{{ venue.id }}" class="col-sm">
+          <div class="p-l-xs no-padding-xs">
+          <div class="page-title">
+            <h2 class="inline">{{ venue.name }}</h2>
+            <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">
+              {% if venue.city %}{{ venue.city }}{% endif %}{% if venue.city and venue.country %}, {% endif %}
+              {% if venue.country %}{{ venue.country }}{% endif %}
+            </p>
+          </div>
+          <div class="item-action m-b">
+            <a class="btn btn-icon rounded btn-favorite" {% if user.is_authenticated.value %}data-id="venue_{{ venue.id }}" data-url="{% url 'event:venue_bookmark' venue.id %}"{% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if venue in user.venues.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+              <span class="item-meta-stats text-muted">{% if venue.users.count %} {{ venue.users.count }}{% endif %}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row item-list item-list-md item-list-li-by m-b">
+        {% if venue.events.all %}
+          {% for event in venue.events.all %}
+            {% include "event/items/event_item.html" with event=event overview=False profile=False admin=False %}
+          {% endfor %}
+        {% else %}
+          <div class="col-xs-12">
+            No events
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

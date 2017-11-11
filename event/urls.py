@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^venue/add$',                    views.VenueCreateView.as_view(),  name='venue_add'),
     url(r'^venue/(?P<pk>\d+)/edit$',       views.VenueUpdateView.as_view(),  name='venue_update'),
     url(r'^venue/(?P<pk>\d+)/delete$',     views.VenueDeleteView.as_view(),  name='venue_delete'),
+    url(r'^venue/(?P<pk>\d+)$',            views.VenueDetailView.as_view(),  name='venue_detail'),
     url(r'^venue/(?P<pk>\d+)/bookmark$',   views.bookmark_venue,             name='venue_bookmark'),
 ]

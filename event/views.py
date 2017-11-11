@@ -212,6 +212,11 @@ class VenueListView(generic.ListView):
     context_object_name = 'venues'
 
 
+class VenueDetailView(generic.DetailView):
+    model = Venue
+    template_name = 'event/details/venue_detail.html'
+
+
 class VenueCreateView(PermissionRequiredMixin, generic.CreateView):
     model = Venue
     form_class = VenueForm
