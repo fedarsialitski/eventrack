@@ -11,22 +11,23 @@ from event.models import Event
 
 @receiver(post_save, sender=Event)
 def send_update(sender, instance, **kwargs):
-    Group('users').send({
-        'text': json.dumps({
-            'id': instance.id,
-            'title': instance.title,
+    for user in instance.users.all():
+        channel = Group('user-{}'.format(user.id))
+        channel.send({
+            'text': json.dumps({
+                'id': instance.id,
+                'title': instance.title,
+            })
         })
-    })
 
 
 @channel_session_user_from_http
 def ws_connect(message):
-    Group('users').add(message.reply_channel)
-    message.reply_channel.send({
-        'accept': True
-    })
+    message.reply_channel.send({'accept': True})
+    if message.user.is_authenticated:
+        Group('user-{}'.format(message.user.id)).add(message.reply_channel)
 
 
 @channel_session_user
 def ws_disconnect(message):
-    Group('users').discard(message.reply_channel)
+    Group('user-{}'.format(message.user.id)).discard(message.reply_channel)
