@@ -1,5 +1,7 @@
 {% load static %}
 
+{% static 'event/images/icon.png' as icon_url %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,11 +14,11 @@
   <!-- for ios 7 style, multi-resolution icon of 152x152 -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
-  <link rel="apple-touch-icon" href="{% static 'event/images/icon.png' %}">
+  <link rel="apple-touch-icon" href="{{ icon_url }}">
   <meta name="apple-mobile-web-app-title" content="Flatkit">
   <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
   <meta name="mobile-web-app-capable" content="yes">
-  <link rel="shortcut icon" sizes="96x96" href="{% static 'event/images/icon.png' %}">
+  <link rel="shortcut icon" sizes="96x96" href="{{ icon_url }}">
 
   <!-- style -->
   <link rel="stylesheet" href="{% static 'event/css/animate.css/animate.min.css' %}" type="text/css" />
@@ -45,17 +47,34 @@
       socket.onmessage = function message(event) {
         var data = JSON.parse(event.data);
 
-        if (data['id']) {
-            console.log(data['id']);
-        }
-
-        if (data['title']) {
-            console.log(data['title']);
-        }
+        notify(data);
       };
 
       if (socket.readyState === WebSocket.OPEN) {
         socket.onopen();
+      }
+
+      function notify(data) {
+        if ('Notification' in window) {
+          var title = data['date'] + ' ' + data['title'],
+              options = {
+                "body": 'has been changed',
+                "icon": "{{ icon_url|escapejs }}"
+              };
+
+          switch (Notification.permission) {
+            case 'default':
+              Notification.requestPermission().then(function (permission) {
+                if (permission === 'granted') {
+                  new Notification(title, options);
+                }
+              });
+              break;
+            case 'granted':
+              new Notification(title, options);
+              break;
+          }
+        }
       }
     </script>
   {% endblock script %}

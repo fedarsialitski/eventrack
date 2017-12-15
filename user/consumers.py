@@ -17,6 +17,7 @@ def send_update(sender, instance, **kwargs):
             'text': json.dumps({
                 'id': instance.id,
                 'title': instance.title,
+                'date': instance.datetime.strftime('%Y/%m/%d'),
             })
         })
 
