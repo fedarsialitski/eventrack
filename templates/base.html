@@ -34,6 +34,32 @@
   {% block page %}
   {% endblock %}
 
+  {% block script %}
+    <script>
+      var socket = new WebSocket('ws://' + window.location.host + '/');
+
+      socket.onopen = function open() {
+        console.log('WebSockets connection created.');
+      };
+
+      socket.onmessage = function message(event) {
+        var data = JSON.parse(event.data);
+
+        if (data['id']) {
+            console.log(data['id']);
+        }
+
+        if (data['title']) {
+            console.log(data['title']);
+        }
+      };
+
+      if (socket.readyState === WebSocket.OPEN) {
+        socket.onopen();
+      }
+    </script>
+  {% endblock script %}
+
 <!-- build:js scripts/app.min.js -->
 <!-- jQuery -->
   <script src="{% static 'event/libs/jquery/dist/jquery.min.js' %}"></script>
