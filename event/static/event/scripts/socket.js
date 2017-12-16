@@ -1,27 +1,25 @@
 function Socket(url, icon_url) {
   var socket = new WebSocket(url);
 
-  socket.onopen = function open() {
+  socket.addEventListener('open', function () {
     console.log('WebSockets connection created.');
-  };
+  });
 
-  socket.onmessage = function message(event) {
-    var data = JSON.parse(event.data);
+  socket.addEventListener('message', function (event) {
+    var data = JSON.parse(event.data),
+        title = data['date'] + ' ' + data['title'],
+        body = 'has been changed';
 
-    notify(data, icon_url);
-  };
-
-  if (socket.readyState === WebSocket.OPEN) {
-    socket.onopen();
-  }
+    notify(title, body, icon_url);
+  });
 }
 
-function notify(data, icon_url) {
+function notify(text, body, icon) {
   if ('Notification' in window) {
-    var title = data['date'] + ' ' + data['title'],
+    var title = text,
         options = {
-          "body": 'has been changed',
-          "icon": icon_url
+          "body": body,
+          "icon": icon
         };
 
     switch (Notification.permission) {
