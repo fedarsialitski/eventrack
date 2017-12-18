@@ -1,25 +1,5 @@
-import json
-
 from channels import Group
 from channels.auth import channel_session_user, channel_session_user_from_http
-
-from django.dispatch import receiver
-from django.db.models.signals import post_save
-
-from event.models import Event
-
-
-@receiver(post_save, sender=Event)
-def send_update(sender, instance, **kwargs):
-    for user in instance.users.all():
-        channel = Group('user-{}'.format(user.id))
-        channel.send({
-            'text': json.dumps({
-                'id': instance.id,
-                'title': instance.title,
-                'date': instance.datetime.strftime('%Y/%m/%d'),
-            })
-        })
 
 
 @channel_session_user_from_http
