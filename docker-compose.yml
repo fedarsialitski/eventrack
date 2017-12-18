@@ -39,3 +39,8 @@ services:
       - backend
     volumes:
       - "eventrack_postgres_data:/var/lib/postgresql/data"
+
+
+  # Redis container
+  redis:
+    image: redis:4.0.6
