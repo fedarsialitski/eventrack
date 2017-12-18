@@ -7,7 +7,7 @@ from django.db.models.signals import post_save
 from event.models import Event
 
 
-def post_save_event_signal_handler(sender, instance, **kwargs):
+def post_save_event_signal_handler(instance, **kwargs):
     for user in instance.users.all():
         channel = Group('user-{}'.format(user.id))
         channel.send({

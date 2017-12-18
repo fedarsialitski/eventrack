@@ -26,8 +26,10 @@ services:
     volumes:
       - "eventrack_app_data:/var/eventrack"
     links:
+      - eventrack_redis:redis
       - eventrack_postgres:postgres
     depends_on:
+      - eventrack_redis
       - eventrack_postgres
 
 
