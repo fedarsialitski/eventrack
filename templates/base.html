@@ -1,5 +1,7 @@
 {% load static %}
 
+{% static 'event/images/icon.png' as icon_url %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,11 +14,11 @@
   <!-- for ios 7 style, multi-resolution icon of 152x152 -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
-  <link rel="apple-touch-icon" href="{% static 'event/images/icon.png' %}">
+  <link rel="apple-touch-icon" href="{{ icon_url }}">
   <meta name="apple-mobile-web-app-title" content="Flatkit">
   <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
   <meta name="mobile-web-app-capable" content="yes">
-  <link rel="shortcut icon" sizes="96x96" href="{% static 'event/images/icon.png' %}">
+  <link rel="shortcut icon" sizes="96x96" href="{{ icon_url }}">
 
   <!-- style -->
   <link rel="stylesheet" href="{% static 'event/css/animate.css/animate.min.css' %}" type="text/css" />
@@ -60,6 +62,10 @@
   <script src="{% static 'event/scripts/app.js' %}"></script>
   <script src="{% static 'event/scripts/ajax.js' %}"></script>
   <script src="{% static 'event/scripts/event.js' %}"></script>
+  <script src="{% static 'event/scripts/socket.js' %}"></script>
+  <script>
+      Socket('ws://' + window.location.host + '/', "{{ icon_url|escapejs }}");
+  </script>
 <!-- endbuild -->
 
 </body>
