@@ -64,7 +64,7 @@
   <script src="{% static 'event/scripts/event.js' %}"></script>
   <script src="{% static 'event/scripts/socket.js' %}"></script>
   <script>
-      Socket('ws://' + window.location.host + '/', "{{ icon_url|escapejs }}");
+      Socket('ws://' + window.location.host + '/ws', "{{ icon_url|escapejs }}");
   </script>
 <!-- endbuild -->
 

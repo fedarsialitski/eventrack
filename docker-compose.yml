@@ -42,5 +42,41 @@ services:
 
 
   # Redis container
-  redis:
+  eventrack_redis:
     image: redis:4.0.6
+    networks:
+      - backend
+
+
+  # Daphne service
+  eventrack_daphne:
+    build: .
+    command: bash -c "daphne -b 0.0.0.0 -p 8000 eventrack.asgi:channel_layer"
+    ports:
+      - "8000"
+    env_file:
+      # You need to have this file to be able to work with docker
+      - ~/.docker/secrets/eventrack.prod.env
+    networks:
+      - backend
+    links:
+      - eventrack_redis:redis
+    depends_on:
+      - eventrack_redis
+
+
+  # Worker service
+  eventrack_worker:
+    build: .
+    command: bash -c "python manage.py runworker"
+    env_file:
+      # You need to have this file to be able to work with docker
+      - ~/.docker/secrets/eventrack.prod.env
+    networks:
+      - backend
+    links:
+      - eventrack_redis:redis
+      - eventrack_postgres:postgres
+    depends_on:
+      - eventrack_redis
+      - eventrack_postgres
