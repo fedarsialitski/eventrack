@@ -28,8 +28,12 @@ before_script:
 
 install:
   - pip install -r requirements.txt
+  - pip install flake8
 
 script:
+  # Code style
+  - flake8
+
   # Check migrations and run tests
   - python manage.py check
   - python manage.py makemigrations --check
