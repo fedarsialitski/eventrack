@@ -1,4 +1,5 @@
 from .base import *
+import dj_database_url
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -16,14 +17,9 @@ if 'CFG_ALLOWED_HOSTS' in os.environ:
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE':   'django.db.backends.postgresql',
-        'NAME':     os.environ.get('CFG_DATABASES_NAME',     'postgres'),
-        'USER':     os.environ.get('CFG_DATABASES_USER',     'postgres'),
-        'PASSWORD': os.environ.get('CFG_DATABASES_PASSWORD', 'postgres'),
-        'HOST':     os.environ.get('CFG_DATABASES_HOST',     'postgres'),
-        'PORT':     os.environ.get('CFG_DATABASES_PORT',     '5432'),
-    }
+    'default': dj_database_url.config(
+        default='postgres://postgres:postgres@postgres/postgres'
+    ),
 }
 
 
