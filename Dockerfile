@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     # uWSGI needs mime-support to serve static files
     # with the correct content-type header
     mime-support \
-	--no-install-recommends && rm -rf /var/lib/apt/lists/*
+    --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory to /app
 WORKDIR /app
