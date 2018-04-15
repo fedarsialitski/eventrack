@@ -1,4 +1,4 @@
-from .base import *
+from .base import *  # NOQA
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -16,7 +16,7 @@ ALLOWED_HOSTS = []
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':   'eventrack',
+        'NAME': 'eventrack',
     }
 }
 

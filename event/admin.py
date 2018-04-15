@@ -27,15 +27,15 @@ class ArtistAdmin(admin.ModelAdmin):
 
 class EventAdmin(admin.ModelAdmin):
     inlines = [EventArtistsInline]
-    list_display  = ['title', 'datetime', 'venue']
-    list_filter   = ['title', 'datetime', 'venue__name']
+    list_display = ['title', 'datetime', 'venue']
+    list_filter = ['title', 'datetime', 'venue__name']
     search_fields = ['title', 'datetime', 'venue__name']
 
 
 class VenueAdmin(admin.ModelAdmin):
     inlines = [EventInline]
-    list_display  = ['name', 'city', 'country']
-    list_filter   = ['name', 'city', 'country']
+    list_display = ['name', 'city', 'country']
+    list_filter = ['name', 'city', 'country']
     search_fields = ['name', 'city', 'country']
 
 
