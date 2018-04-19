@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/FedorSelitsky/eventrack.svg?branch=master)](https://travis-ci.org/FedorSelitsky/eventrack)
+
 # Eventrack
 
 [![Eventrack logo](https://github.com/FedorSelitsky/eventrack/blob/master/event/static/event/images/logo.png)](http://eventrack.org/)
@@ -7,8 +9,8 @@
 ## Requirements
 
 * Python 3.6.2
-* Django 1.11.3
-* Psycopg 2.7.3
+* Django 1.11.12
+* Psycopg 2.7.4
 * PostgreSQL 9.6.5
 
 ## Getting started
