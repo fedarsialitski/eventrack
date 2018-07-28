@@ -139,13 +139,13 @@ LOGGING = {
     },
 }
 
+ASGI_APPLICATION = "eventrack.routing.application"
 
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'asgi_redis.RedisChannelLayer',
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             'hosts': [os.environ.get('REDIS_HOST', 'redis://localhost:6379')],
         },
-        'ROUTING': 'user.routing.channel_routing',
     }
 }

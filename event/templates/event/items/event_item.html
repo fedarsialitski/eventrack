@@ -19,7 +19,7 @@
     <a href="{% if admin and perms.change_event %}{% url 'event:event_update' event.id %}{% else %}{% url 'event:event_detail' event.id %}{% endif %}" class="item-media-content" style="background-color: transparent">
     <div class="item-info">
       <div class="item-overlay bottom text-right">
-        <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+        <a class="btn-favorite" {% if user.is_authenticated %}data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
       </div>
       {% if admin %}
         <div class="item-title text-ellipsis">

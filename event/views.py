@@ -37,7 +37,7 @@ class IndexView(generic.ListView):
         context['discover'] = artists.exclude(image_url__exact='', thumb_url__exact='')
         # Get trending artists
         context['trending'] = artists.annotate(user_count=user_count).order_by('-user_count')[:trending_count]
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             user_artists = self.request.user.artists.all()
 
             # Exclude artists already followed by a current user

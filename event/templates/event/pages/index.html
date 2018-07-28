@@ -6,7 +6,7 @@
 
 <!-- ############ LAYOUT START-->
 
-{% if not user.is_authenticated.value %}
+{% if not user.is_authenticated %}
   {% include 'user/modals/sign_modal.html' %}
 {% endif %}
 
@@ -53,7 +53,7 @@
                 {% include 'event/items/menu_item.html' with url=search_url icon="search" text="Search" %}
               </li>
 
-              {% if user.is_authenticated.value %}
+              {% if user.is_authenticated %}
               <li class="nav-header hidden-folded m-t">
                 <span class="text-xs text-muted">Profile</span>
                 {% url 'user:profile' as profile_url %}
@@ -82,7 +82,7 @@
             </ul>
           </nav>
       </div>
-      {% if user.is_authenticated.value %}
+      {% if user.is_authenticated %}
         <div data-flex-no-shrink>
           <div class="nav-fold dropup">
             <a data-toggle="dropdown">
@@ -206,7 +206,7 @@
       </div>
     {% endblock content %}
     </div>
-    {% if user.is_authenticated.value %}
+    {% if user.is_authenticated %}
     <!-- .modal -->
     {% if perms.delete_event or perms.delete_artist or perms.delete_venue %}
       {% include 'user/modals/delete_modal.html' %}

@@ -8,14 +8,14 @@
 
 ## Requirements
 
-* Python 3.6.2
-* Django 1.11.12
-* Psycopg 2.7.4
-* PostgreSQL 9.6.5
+* Python 3.7.0
+* Django 2.0.7
+* Psycopg 2.7.5
+* PostgreSQL 9.6.8
 
 ## Getting started
 
-* Create a virtual environment with interpreter `Python 3.6`.
+* Create a virtual environment with interpreter `Python 3.7`.
 * Create a database named `eventrack`.
 * Run `pip install -r requirements.txt` to install dependencies.
 * Run `export DJANGO_SETTINGS_MODULE=eventrack.settings.dev` to set the environment variable.

@@ -16,7 +16,7 @@ class ProfileView(LoginRequiredMixin, generic.ListView):
 
 
 def signup(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('user:profile') + '#events')
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -32,7 +32,7 @@ def signup(request):
 
 
 def signin(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('user:profile') + '#events')
     if request.method == 'POST':
         form = SigninForm(data=request.POST)

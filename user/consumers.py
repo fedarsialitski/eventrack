@@ -1,14 +1,21 @@
-from channels import Group
-from channels.auth import channel_session_user, channel_session_user_from_http
+from asgiref.sync import async_to_sync
+from channels.generic.websocket import JsonWebsocketConsumer
 
 
-@channel_session_user_from_http
-def ws_connect(message):
-    message.reply_channel.send({'accept': True})
-    if message.user.is_authenticated:
-        Group('user-{}'.format(message.user.id)).add(message.reply_channel)
+class UserConsumer(JsonWebsocketConsumer):
+    def connect(self):
+        user = self.scope['user']
+        if user.is_authenticated:
+            self.accept()
+            group = 'user-{}'.format(user.id)
+            async_to_sync(self.channel_layer.group_add)(group, self.channel_name)
+        else:
+            self.close()
 
+    def disconnect(self, close_code):
+        user = self.scope['user']
+        group = 'user-{}'.format(user.id)
+        async_to_sync(self.channel_layer.group_discard)(group, self.channel_name)
 
-@channel_session_user
-def ws_disconnect(message):
-    Group('user-{}'.format(message.user.id)).discard(message.reply_channel)
+    def event_change(self, event):
+        self.send_json(content=event['text'])

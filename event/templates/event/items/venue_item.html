@@ -29,7 +29,7 @@
     <a href="{% if admin and perms.change_venue %}{% url 'event:venue_update' venue.id %}{% else %}{% url 'event:venue_detail' venue.id %}{% endif %}" class="item-media-content" style="background-color: transparent">
     <div class="item-info">
       <div class="item-overlay bottom text-right">
-        <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="venue_{{ venue.id }}" data-url="{% url 'event:venue_bookmark' venue.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if venue in user.venues.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+        <a class="btn-favorite" {% if user.is_authenticated %}data-id="venue_{{ venue.id }}" data-url="{% url 'event:venue_bookmark' venue.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if venue in user.venues.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
       </div>
       <div class="item-title text-ellipsis">
           {{ venue.name }}

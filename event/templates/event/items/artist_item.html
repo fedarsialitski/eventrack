@@ -9,7 +9,7 @@
     <div class="item-info {% if rounded %}text-center{% endif %}">
       {% if not rounded %}
         <div class="item-overlay bottom text-right">
-          <a class="btn-favorite" {% if user.is_authenticated.value %}data-id="artist_{{ artist.id }}" data-url="{% url 'event:artist_bookmark' artist.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if artist in user.artists.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+          <a class="btn-favorite" {% if user.is_authenticated %}data-id="artist_{{ artist.id }}" data-url="{% url 'event:artist_bookmark' artist.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if artist in user.artists.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
         </div>
       {% endif %}
       <div class="item-title text-ellipsis">

@@ -1,6 +1,7 @@
-Django==1.11.12
-psycopg2==2.7.4 --no-binary psycopg2
-uWSGI==2.0.17
-channels==1.1.8
-asgi_redis==1.4.3
+Django==2.0.7
+psycopg2>=2.7.5,<2.8 --no-binary psycopg2
+uWSGI==2.0.17.1
+asgiref==2.3.2
+channels==2.1.2
+channels_redis==2.2.1
 dj-database-url==0.5.0

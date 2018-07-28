@@ -1,8 +1,8 @@
-from channels.routing import route
-from user.consumers import ws_connect, ws_disconnect
+from django.conf.urls import url
+
+from user.consumers import UserConsumer
 
 
-channel_routing = [
-    route('websocket.connect', ws_connect),
-    route('websocket.disconnect', ws_disconnect),
+websocket_urlpatterns = [
+    url(r'^ws$', UserConsumer),
 ]
