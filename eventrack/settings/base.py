@@ -14,7 +14,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'artist.apps.ArtistConfig',
     'event.apps.EventConfig',
+    'venue.apps.VenueConfig',
     'user.apps.UserConfig',
     'channels',
 ]

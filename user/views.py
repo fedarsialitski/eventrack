@@ -5,8 +5,8 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
-from .forms import SignupForm, SigninForm, UpdateForm
-from .models import User
+from user.forms import SignupForm, SigninForm, UpdateForm
+from user.models import User
 
 
 class ProfileView(LoginRequiredMixin, generic.ListView):

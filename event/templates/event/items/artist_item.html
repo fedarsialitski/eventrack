@@ -1,19 +1,19 @@
 <div id="artist_{{ artist.id }}" class="{% if admin %}col-xs-12{% else %}col-xs-4 col-sm-4 col-md-3{% endif %}">
   <div class="item {% if not rounded or admin %}r{% endif %}">
     <div class="item-media {% if rounded %}rounded{% endif %}">
-      <a href="{% if admin and perms.change_artist %}{% url 'event:artist_update' artist.id %}{% else %}{% url 'event:artist_detail' artist.id %}{% endif %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
+      <a href="{% if admin and perms.change_artist %}{% url 'artist:artist_update' artist.id %}{% else %}{% url 'artist:artist_detail' artist.id %}{% endif %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
     </div>
     {% if admin %}
-      <a href="{% if perms.change_artist %}{% url 'event:artist_update' artist.id %}{% else %}{% url 'event:artist_detail' artist.id %}{% endif %}" class="item-media-content" style="background-color: transparent">
+      <a href="{% if perms.change_artist %}{% url 'artist:artist_update' artist.id %}{% else %}{% url 'artist:artist_detail' artist.id %}{% endif %}" class="item-media-content" style="background-color: transparent">
     {% endif %}
     <div class="item-info {% if rounded %}text-center{% endif %}">
       {% if not rounded %}
         <div class="item-overlay bottom text-right">
-          <a class="btn-favorite" {% if user.is_authenticated %}data-id="artist_{{ artist.id }}" data-url="{% url 'event:artist_bookmark' artist.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if artist in user.artists.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+          <a class="btn-favorite" {% if user.is_authenticated %}data-id="artist_{{ artist.id }}" data-url="{% url 'artist:artist_bookmark' artist.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if artist in user.artists.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
         </div>
       {% endif %}
       <div class="item-title text-ellipsis">
-        <a href="{% url 'event:artist_detail' artist.id %}">{{artist.name}}</a>
+        <a href="{% url 'artist:artist_detail' artist.id %}">{{artist.name}}</a>
         {% if rounded %}
           <div class="text-sm text-muted">
             {% if artist.events.count %}
@@ -36,10 +36,10 @@
         {% if perms.change_artist or perms.delete_artist %}
           <div class="item-action visible-list m-t-sm">
             {% if perms.change_artist %}
-              <a href="{% url 'event:artist_update' artist.id %}" class="item btn m-l-0 btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;">Edit</a>
+              <a href="{% url 'artist:artist_update' artist.id %}" class="item btn m-l-0 btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;">Edit</a>
             {% endif %}
             {% if perms.delete_artist %}
-              <a href="{% url 'event:artist_delete' artist.id %}" class="item btn m-l-1 btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;" data-toggle="modal" data-target="#delete-modal">Delete</a>
+              <a href="{% url 'artist:artist_delete' artist.id %}" class="item btn m-l-1 btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;" data-toggle="modal" data-target="#delete-modal">Delete</a>
             {% endif %}
           </div>
         {% endif %}

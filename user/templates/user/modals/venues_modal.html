@@ -4,6 +4,6 @@
   {% endif %}
   <h6 class="text-muted m-b-md">Would you like to add a venue{% if not perms.add_venue %} to bookmarks{% endif %}?</h6>
   <a class="btn circle btn-outline b-primary m-b-lg p-x-md"
-    href="{% if perms.add_venue %}{% url 'event:venue_add' %}{% else %}{% url 'event:venue' %}{% endif %}"
+    href="{% if perms.add_venue %}{% url 'venue:venue_add' %}{% else %}{% url 'venue:venue' %}{% endif %}"
   >Add</a>
 </div>

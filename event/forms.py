@@ -1,21 +1,8 @@
 from django import forms
 
-from .models import Artist, Event, Venue
-
-
-class ArtistForm(forms.ModelForm):
-    name = forms.CharField(required=True)
-    image_url = forms.URLField(required=False, help_text='Optional')
-    thumb_url = forms.URLField(required=False, help_text='Optional')
-
-    class Meta:
-        model = Artist
-
-        fields = [
-            'name',
-            'image_url',
-            'thumb_url',
-        ]
+from artist.models import Artist
+from event.models import Event
+from venue.models import Venue
 
 
 class EventForm(forms.ModelForm):
@@ -31,21 +18,6 @@ class EventForm(forms.ModelForm):
             'title',
             'venue',
             'datetime',
-        ]
-
-
-class VenueForm(forms.ModelForm):
-    name = forms.CharField(required=True)
-    city = forms.CharField(required=False, help_text='Optional')
-    country = forms.CharField(required=False, help_text='Optional')
-
-    class Meta:
-        model = Venue
-
-        fields = [
-            'name',
-            'city',
-            'country',
         ]
 
 

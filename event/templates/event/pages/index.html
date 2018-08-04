@@ -37,7 +37,7 @@
                 {% include 'event/items/menu_item.html' with url=index_url icon="home" text="Home" %}
               </li>
               <li>
-                {% url 'event:artist' as artist_url %}
+                {% url 'artist:artist' as artist_url %}
                 {% include 'event/items/menu_item.html' with url=artist_url icon="account_box" text="Artist" %}
               </li>
               <li>
@@ -45,7 +45,7 @@
                 {% include 'event/items/menu_item.html' with url=event_url icon="event_note" text="Event" %}
               </li>
               <li>
-                {% url 'event:venue' as venue_url %}
+                {% url 'venue:venue' as venue_url %}
                 {% include 'event/items/menu_item.html' with url=venue_url icon="place" text="Venue" %}
               </li>
               <li>

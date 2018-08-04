@@ -1,4 +1,4 @@
-from .base import *  # NOQA
+from eventrack.settings.base import *  # NOQA
 
 
 # SECURITY WARNING: don't run with debug turned on in production!

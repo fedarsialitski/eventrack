@@ -54,7 +54,7 @@
               {% if forloop.counter <= 1 %}
                 <h6 class="m-b">
                   <span class="text-muted">by</span>
-                  <a href="{% url 'event:artist_detail' artist.id %}" data-pjax class="item-author _600">{{ artist.name }}</a>
+                  <a href="{% url 'artist:artist_detail' artist.id %}" data-pjax class="item-author _600">{{ artist.name }}</a>
                   <span class="text-muted text-sm">–
                     {% if artist.events.count %}
                       {{ artist.events.count }} event{{ artist.events.count|pluralize:"s" }}
@@ -85,7 +85,7 @@
             <div class="item-title text-ellipsis">
                 <div class="col-xs-1 text-muted">Name</div>
                 <div class="offset-xs-1">
-                  <a href="{% url 'event:venue_detail' event.venue.id %}">
+                  <a href="{% url 'venue:venue_detail' event.venue.id %}">
                     {{ event.venue.name }}
                   </a>
                 </div>

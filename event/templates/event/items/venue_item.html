@@ -1,14 +1,14 @@
 <div id="venue_{{ venue.id }}" class="col-xs-12">
   <div class="item r">
     {% if admin %}
-      <a href="{% if perms.change_venue %}{% url 'event:venue_update' venue.id %}{% else %}{% url 'event:venue_detail' venue.id %}{% endif %}" class="item-media-content" style="background-color: transparent">
+      <a href="{% if perms.change_venue %}{% url 'venue:venue_update' venue.id %}{% else %}{% url 'venue:venue_detail' venue.id %}{% endif %}" class="item-media-content" style="background-color: transparent">
     {% endif %}
     {% if not admin %}
     {% if venue.events.all %}
         {% for event in venue.events.all %}
           {% if forloop.counter <= 5 %}
             <div class="item-media ">
-              <a href="{% if admin and perms.change_venue %}{% url 'event:venue_update' venue.id %}{% else %}{% url 'event:venue_detail' venue.id %}{% endif %}" class="item-media-content" {% if event.artists.all.0.thumb_url %}style="background-image: url('{{ event.artists.all.0.thumb_url }}');"{% endif %}>
+              <a href="{% if admin and perms.change_venue %}{% url 'venue:venue_update' venue.id %}{% else %}{% url 'venue:venue_detail' venue.id %}{% endif %}" class="item-media-content" {% if event.artists.all.0.thumb_url %}style="background-image: url('{{ event.artists.all.0.thumb_url }}');"{% endif %}>
                 {% if not event.artists.all.0.thumb_url %}
                   <i class="material-icons md-36 center text-muted">
                     event
@@ -26,10 +26,10 @@
       </div>
     {% endif %}
     {% endif %}
-    <a href="{% if admin and perms.change_venue %}{% url 'event:venue_update' venue.id %}{% else %}{% url 'event:venue_detail' venue.id %}{% endif %}" class="item-media-content" style="background-color: transparent">
+    <a href="{% if admin and perms.change_venue %}{% url 'venue:venue_update' venue.id %}{% else %}{% url 'venue:venue_detail' venue.id %}{% endif %}" class="item-media-content" style="background-color: transparent">
     <div class="item-info">
       <div class="item-overlay bottom text-right">
-        <a class="btn-favorite" {% if user.is_authenticated %}data-id="venue_{{ venue.id }}" data-url="{% url 'event:venue_bookmark' venue.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if venue in user.venues.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+        <a class="btn-favorite" {% if user.is_authenticated %}data-id="venue_{{ venue.id }}" data-url="{% url 'venue:venue_bookmark' venue.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if venue in user.venues.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
       </div>
       <div class="item-title text-ellipsis">
           {{ venue.name }}
@@ -49,10 +49,10 @@
           {% if perms.change_venue or perms.delete_venue %}
             <div class="item-action visible-list m-t-md">
               {% if perms.change_venue %}
-                <a href="{% url 'event:venue_update' venue.id %}" class="item m-l-0 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;">Edit</a>
+                <a href="{% url 'venue:venue_update' venue.id %}" class="item m-l-0 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;">Edit</a>
               {% endif %}
               {% if perms.delete_venue %}
-                <a href="{% url 'event:venue_delete' venue.id %}" class="item m-l-1 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;" data-toggle="modal" data-target="#delete-modal">Delete</a>
+                <a href="{% url 'venue:venue_delete' venue.id %}" class="item m-l-1 btn btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;" data-toggle="modal" data-target="#delete-modal">Delete</a>
               {% endif %}
             </div>
           {% endif %}

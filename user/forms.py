@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
-from .models import User
+from user.models import User
 
 
 class SignupForm(UserCreationForm):

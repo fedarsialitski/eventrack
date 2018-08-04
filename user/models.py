@@ -7,7 +7,7 @@ class User(AbstractUser):
     thumb_url = models.URLField(blank=True)
 
     artists = models.ManyToManyField(
-        'event.Artist',
+        'artist.Artist',
         related_name='users',
         blank=True,
     )
@@ -19,7 +19,7 @@ class User(AbstractUser):
     )
 
     venues = models.ManyToManyField(
-        'event.Venue',
+        'venue.Venue',
         related_name='users',
         blank=True,
     )

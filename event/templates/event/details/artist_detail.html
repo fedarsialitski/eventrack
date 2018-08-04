@@ -25,7 +25,7 @@
           <div class="p-l-md no-padding-xs">
             <div class="page-title">
               <h2 class="inline">{{ artist.name }}</h2>
-              <a class="btn-favorite text-primary text-lg m-l-xs" {% if user.is_authenticated %}data-id="artist_{{ artist.id }}" data-url="{% url 'event:artist_bookmark' artist.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}>
+              <a class="btn-favorite text-primary text-lg m-l-xs" {% if user.is_authenticated %}data-id="artist_{{ artist.id }}" data-url="{% url 'artist:artist_bookmark' artist.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}>
                 <i class="fa {% if artist in user.artists.all %}fa-star{% else %}fa-star-o{% endif %}"></i>
               </a>
             </div>
