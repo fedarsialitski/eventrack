@@ -1,12 +1,12 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 app_name = 'user'
 urlpatterns = [
-    url(r'^signup$', views.signup, name='signup'),
-    url(r'^signin$', views.signin, name='signin'),
-    url(r'^signout$', views.signout, name='signout'),
-    url(r'^profile/$', views.ProfileView.as_view(), name='profile'),
-    url(r'^profile/update$', views.update, name='update'),
+    path('signup', views.signup, name='signup'),
+    path('signin', views.signin, name='signin'),
+    path('signout', views.signout, name='signout'),
+    path('profile/', views.ProfileView.as_view(), name='profile'),
+    path('profile/update', views.update, name='update'),
 ]

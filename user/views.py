@@ -17,7 +17,7 @@ class ProfileView(LoginRequiredMixin, generic.ListView):
 
 def signup(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('user:profile') + '#events')
+        return HttpResponseRedirect(reverse('user:profile'))
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
@@ -25,7 +25,7 @@ def signup(request):
             user = form.signin()
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(reverse('user:profile') + '#events')
+                return HttpResponseRedirect(reverse('user:profile'))
     else:
         form = SignupForm()
     return render(request, 'user/pages/signup.html', {'form': form})
@@ -33,14 +33,14 @@ def signup(request):
 
 def signin(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('user:profile') + '#events')
+        return HttpResponseRedirect(reverse('user:profile'))
     if request.method == 'POST':
         form = SigninForm(data=request.POST)
         if form.is_valid():
             user = form.signin()
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(reverse('user:profile') + '#events')
+                return HttpResponseRedirect(reverse('user:profile'))
     else:
         form = SigninForm()
     return render(request, 'user/pages/signin.html', {'form': form})
@@ -57,7 +57,7 @@ def update(request):
         form = UpdateForm(data=request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('user:profile') + '#events')
+            return HttpResponseRedirect(reverse('user:profile'))
     else:
         form = UpdateForm(instance=request.user)
     return render(request, 'user/pages/profile.html', {'form': form})

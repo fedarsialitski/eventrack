@@ -14,7 +14,7 @@ if 'CFG_ALLOWED_HOSTS' in os.environ:
 
 
 # Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
     'default': dj_database_url.config(
@@ -24,7 +24,7 @@ DATABASES = {
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.environ.get('CFG_STATIC_ROOT', os.path.join(BASE_DIR, 'static'))
@@ -34,6 +34,6 @@ MEDIA_ROOT = os.environ.get('CFG_MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
 
 
 # ManifestStaticFilesStorage
-# https://docs.djangoproject.com/en/1.11/ref/contrib/staticfiles/#manifeststaticfilesstorage
+# https://docs.djangoproject.com/en/2.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'

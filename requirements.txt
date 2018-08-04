@@ -1,4 +1,4 @@
-Django==2.0.7
+Django==2.1
 psycopg2>=2.7.5,<2.8 --no-binary psycopg2
 uWSGI==2.0.17.1
 asgiref==2.3.2

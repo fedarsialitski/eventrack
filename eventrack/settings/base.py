@@ -53,13 +53,13 @@ WSGI_APPLICATION = 'eventrack.wsgi.application'
 
 
 # User model
-# https://docs.djangoproject.com/en/1.11/ref/settings/#auth-user-model
+# https://docs.djangoproject.com/en/2.0/ref/settings/#auth-user-model
 
 AUTH_USER_MODEL = 'user.User'
 
 
 # Password validation
-# https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -78,13 +78,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Login URL
-# https://docs.djangoproject.com/en/1.11/ref/settings/#login-url
+# https://docs.djangoproject.com/en/2.0/ref/settings/#login-url
 
 LOGIN_URL = 'user:signin'
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/1.11/topics/i18n/
+# https://docs.djangoproject.com/en/2.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -98,7 +98,7 @@ USE_TZ = True
 
 
 # Logging
-# https://docs.djangoproject.com/en/1.11/topics/logging/#configuring-logging
+# https://docs.djangoproject.com/en/2.0/topics/logging/#configuring-logging
 
 LOGGING = {
     'version': 1,
@@ -139,7 +139,7 @@ LOGGING = {
     },
 }
 
-ASGI_APPLICATION = "eventrack.routing.application"
+ASGI_APPLICATION = 'eventrack.routing.application'
 
 CHANNEL_LAYERS = {
     'default': {
