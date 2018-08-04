@@ -1,16 +1,18 @@
 """
-ASGI config for eventrack project.
-
-It exposes the ASGI callable as a module-level variable named ``channel_layer``.
+ASGI entrypoint. Configures Django and then runs the application
+defined in the ASGI_APPLICATION setting.
 
 For more information on this file, see
-http://channels.readthedocs.io/en/1.1.8/deploying.html
+https://channels.readthedocs.io/en/stable/deploying.html
 """
 
 import os
+import django
 
-from channels.asgi import get_channel_layer
+from channels.routing import get_default_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "eventrack.settings.prod")
 
-channel_layer = get_channel_layer()
+django.setup()
+
+application = get_default_application()

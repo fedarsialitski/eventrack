@@ -53,7 +53,7 @@ services:
   # Daphne service
   eventrack_daphne:
     build: .
-    command: bash -c "daphne -b 0.0.0.0 -p 8000 eventrack.asgi:channel_layer"
+    command: bash -c "daphne -b 0.0.0.0 -p 8000 eventrack.asgi:application"
     ports:
       - "8000"
     env_file:
@@ -70,7 +70,7 @@ services:
   # Worker service
   eventrack_worker:
     build: .
-    command: bash -c "python manage.py runworker"
+    command: bash -c "python manage.py runworker channels"
     env_file:
       # You need to have this file to be able to work with docker
       - ~/.docker/secrets/eventrack.prod.env
