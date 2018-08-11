@@ -1,14 +1,12 @@
 from django.http import JsonResponse
-from django.urls import reverse_lazy
 from django.views import generic
 from django.utils import timezone
 from django.db.models import Count, Q
-from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
 
 from artist.models import Artist
 from event.models import Event
-from event.forms import EventForm, SearchForm
+from event.forms import SearchForm
 
 
 class IndexView(generic.ListView):
@@ -94,46 +92,6 @@ class EventListView(generic.ListView):
 class EventDetailView(generic.DetailView):
     model = Event
     template_name = 'event/details/event_detail.html'
-
-
-class EventCreateView(PermissionRequiredMixin, generic.CreateView):
-    model = Event
-    form_class = EventForm
-    success_url = reverse_lazy('user:profile')
-    template_name = 'event/forms/event_form.html'
-    raise_exception = True
-    permission_required = 'event.add_event'
-
-    def form_valid(self, form):
-        """
-        Create the event
-        """
-        self.request.user.events.add(form.save())
-        form.instance.artists.set(form.cleaned_data['artists'])
-        return super(EventCreateView, self).form_valid(form)
-
-
-class EventUpdateView(PermissionRequiredMixin, generic.UpdateView):
-    model = Event
-    form_class = EventForm
-    success_url = reverse_lazy('user:profile')
-    template_name = 'event/forms/event_form.html'
-    raise_exception = True
-    permission_required = 'event.change_event'
-
-    def form_valid(self, form):
-        """
-        Update the event
-        """
-        form.instance.artists.set(form.cleaned_data['artists'])
-        return super(EventUpdateView, self).form_valid(form)
-
-
-class EventDeleteView(PermissionRequiredMixin, generic.DeleteView):
-    model = Event
-    success_url = reverse_lazy('user:profile')
-    raise_exception = True
-    permission_required = 'event.delete_event'
 
 
 @login_required(redirect_field_name='redirect')
