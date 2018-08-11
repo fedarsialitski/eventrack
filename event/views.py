@@ -9,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 from artist.models import Artist
 from event.models import Event
 from event.forms import EventForm, SearchForm
-from venue.models import Venue
 
 
 class IndexView(generic.ListView):
