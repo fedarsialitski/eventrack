@@ -16,4 +16,3 @@ class VenueForm(forms.ModelForm):
             'city',
             'country',
         ]
-
