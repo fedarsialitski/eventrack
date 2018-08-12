@@ -18,4 +18,4 @@ class UserConsumer(JsonWebsocketConsumer):
         async_to_sync(self.channel_layer.group_discard)(group, self.channel_name)
 
     def event_change(self, event):
-        self.send_json(content=event['text'])
+        self.send_json(content=event['name'])

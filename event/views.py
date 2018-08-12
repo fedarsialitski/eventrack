@@ -67,10 +67,10 @@ class SearchView(generic.ListView):
         if form.is_valid():
             keyword = form.cleaned_data['keyword']
             return Event.objects.filter(
-                Q(title__search=keyword) |
+                Q(name__search=keyword) |
                 Q(venue__name__search=keyword) |
-                Q(venue__city__search=keyword) |
-                Q(venue__country__search=keyword) |
+                Q(venue__location__city__search=keyword) |
+                Q(venue__location__country__search=keyword) |
                 Q(artists__name__search=keyword)
             ).distinct()
         return Event.objects.all()

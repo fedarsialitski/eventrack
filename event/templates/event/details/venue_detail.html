@@ -14,8 +14,8 @@
           <div class="page-title">
             <h2 class="inline">{{ venue.name }}</h2>
             <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">
-              {% if venue.city %}{{ venue.city }}{% endif %}{% if venue.city and venue.country %}, {% endif %}
-              {% if venue.country %}{{ venue.country }}{% endif %}
+              {% if venue.location.city %}{{ venue.location.city }}{% endif %}{% if venue.location.city and venue.location.country %}, {% endif %}
+              {% if venue.location.country %}{{ venue.location.country }}{% endif %}
             </p>
           </div>
           <div class="item-action m-b">

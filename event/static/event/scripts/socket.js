@@ -7,7 +7,7 @@ function Socket(url, icon_url) {
 
   socket.addEventListener('message', function (event) {
     var data = JSON.parse(event.data),
-        title = data['date'] + ' ' + data['title'],
+        title = data['date'] + ' ' + data['name'],
         body = 'has been changed';
 
     notify(title, body, icon_url);

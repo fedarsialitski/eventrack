@@ -13,7 +13,7 @@ def post_save_event_signal_handler(instance, **kwargs):
             'type': 'event.change',
             'text': {
                 'id': instance.id,
-                'title': instance.title,
+                'name': instance.name,
                 'date': instance.datetime.strftime('%Y/%m/%d'),
             }
         }

@@ -23,15 +23,15 @@
       </div>
       {% if admin %}
         <div class="item-title text-ellipsis">
-          {{ event.title }} – {{ event.datetime|date:"l, d M Y – g:i A" }}
+          {{ event.name }} – {{ event.datetime|date:"l, d M Y – g:i A" }}
         </div>
         <div class="item-except visible-list text-sm h-3x m-t-sm">
           <div class="row m-l-0">Venue: {{ event.venue.name }}</div>
-          {% if event.venue.city %}
-            <div class="row m-l-0">City: {{ event.venue.city }}</div>
+          {% if event.venue.location.city %}
+            <div class="row m-l-0">City: {{ event.venue.location.city }}</div>
           {% endif %}
-          {% if event.venue.country %}
-            <div class="row m-l-0">Country: {{ event.venue.country }}</div>
+          {% if event.venue.location.country %}
+            <div class="row m-l-0">Country: {{ event.venue.location.country }}</div>
           {% endif %}
         </div>
         {% if perms.change_event or perms.delete_event %}
@@ -46,7 +46,7 @@
         {% endif %}
       {% else %}
       <div class="item-title text-ellipsis">
-        {{ event.title }}{% if not venue %} @ {{ event.venue.name }}, {{ event.venue.city }}, {{ event.venue.country }} {% endif %}
+        {{ event.name }}{% if not venue %} @ {{ event.venue.name }}, {{ event.venue.location.city }}, {{ event.venue.location.country }} {% endif %}
       </div>
       <div class="item-author text-sm text-ellipsis ">
         {{ event.datetime|date:"l, d M Y – g:i A" }}
