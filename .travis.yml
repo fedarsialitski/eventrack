@@ -14,13 +14,16 @@ services:
   - docker
 
 addons:
-  postgresql: 10
+  postgresql: "10"
   apt:
     packages:
+    - postgresql-10
+    - postgresql-client-10
     - postgresql-10-postgis-2.4
 
 env:
   global:
+    - PGPORT=5433
     - DJANGO_SETTINGS_MODULE=eventrack.settings.prod
     - DATABASE_URL=postgres://postgres@localhost/test_db
     - CFG_SECRET_KEY=iamnotsosecret
