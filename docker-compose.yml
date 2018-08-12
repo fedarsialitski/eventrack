@@ -35,7 +35,7 @@ services:
 
   # DB container
   eventrack_postgres:
-    image: postgres:9.5
+    image: postgres:10.5
     restart: always
     networks:
       - backend
@@ -45,7 +45,7 @@ services:
 
   # Redis container
   eventrack_redis:
-    image: redis:4.0.6
+    image: redis:4.0.11
     networks:
       - backend
 
