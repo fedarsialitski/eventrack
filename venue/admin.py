@@ -6,9 +6,9 @@ from venue.models import Venue
 
 class VenueAdmin(admin.ModelAdmin):
     inlines = [EventInline]
-    list_display = ['name', 'city', 'country']
-    list_filter = ['name', 'city', 'country']
-    search_fields = ['name', 'city', 'country']
+    list_display = ['name']
+    list_filter = ['name']
+    search_fields = ['name']
 
 
 admin.site.register(Venue, VenueAdmin)

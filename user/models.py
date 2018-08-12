@@ -3,9 +3,6 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    image_url = models.URLField(blank=True)
-    thumb_url = models.URLField(blank=True)
-
     artists = models.ManyToManyField(
         'artist.Artist',
         related_name='users',

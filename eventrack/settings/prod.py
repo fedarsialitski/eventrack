@@ -1,6 +1,6 @@
 import dj_database_url
 
-from eventrack.settings.base import *  # NOQA
+from .base import *  # NOQA
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -15,7 +15,7 @@ if 'CFG_ALLOWED_HOSTS' in os.environ:
 
 
 # Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
     'default': dj_database_url.config(
@@ -23,18 +23,20 @@ DATABASES = {
     ),
 }
 
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
+# https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.environ.get('CFG_STATIC_ROOT', os.path.join(BASE_DIR, 'static'))
+STATIC_ROOT = os.getenv('CFG_STATIC_ROOT', os.path.join(BASE_DIR, 'static'))
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.environ.get('CFG_MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
+MEDIA_ROOT = os.getenv('CFG_MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
 
 
 # ManifestStaticFilesStorage
-# https://docs.djangoproject.com/en/2.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
+# https://docs.djangoproject.com/en/2.1/ref/contrib/staticfiles/#manifeststaticfilesstorage
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'

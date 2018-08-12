@@ -1,15 +1,25 @@
 from django.db import models
 
+from event.models import Event
+
 
 class Artist(models.Model):
-    name = models.CharField(max_length=100)
-    image_url = models.URLField(blank=True)
-    thumb_url = models.URLField(blank=True)
+    songkick_id = models.PositiveIntegerField()
+    bandsintown_id = models.PositiveIntegerField()
+
+    mbid = models.UUIDField()
+    name = models.CharField(max_length=255)
+
+    image_url = models.URLField()
+    thumb_url = models.URLField()
+
+    facebook_url = models.URLField()
+    songkick_url = models.URLField()
+    bandsintown_url = models.URLField()
 
     events = models.ManyToManyField(
-        'event.Event',
-        related_name='artists',
-        blank=True,
+        Event,
+        related_name='artists'
     )
 
     class Meta:
