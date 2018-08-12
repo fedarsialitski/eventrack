@@ -35,7 +35,7 @@ services:
 
   # DB container
   eventrack_postgres:
-    image: postgres:10.5
+    image: postgres:9.6
     restart: always
     networks:
       - backend
