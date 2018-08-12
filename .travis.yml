@@ -1,13 +1,13 @@
 language: python
 python:
-  - 3.6
+  - 3.7
 
 cache:
   pip: true
 
 # Use container-based infrastructure
 dist: trusty
-sudo: required
+sudo: true
 
 services:
   - postgresql
