@@ -17,6 +17,7 @@ addons:
   postgresql: '10'
   apt:
     packages:
+    - PGPORT=5433
     - postgresql-10
     - postgresql-client-10
     - postgresql-10-postgis-2.4
