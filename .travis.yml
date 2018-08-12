@@ -6,7 +6,7 @@ cache:
   pip: true
 
 # Use container-based infrastructure
-dist: xenial
+dist: trusty
 sudo: true
 
 services:
