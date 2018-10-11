@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     # uWSGI needs mime-support to serve static files
     # with the correct content-type header
     mime-support \
+    binutils libproj-dev gdal-bin libgeoip1 python-gdal \
     --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory to /app
