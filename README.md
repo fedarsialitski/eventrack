@@ -9,10 +9,10 @@
 ## Requirements
 
 * Python 3.7.0
-* Django 2.1
-* Channels 2.1.2
+* Django 2.1.2
+* Channels 2.1.4
 * Psycopg 2.7.5
-* PostgreSQL 10.4
+* PostgreSQL 10.5
 
 ## Getting started
 
