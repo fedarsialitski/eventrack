@@ -28,7 +28,7 @@
       <div class="row item-list item-list-md item-list-li-by m-b">
         {% if venue.events.all %}
           {% for event in venue.events.all %}
-            {% include "event/items/event_item.html" with event=event overview=False profile=False admin=False %}
+            {% include "event/items/event_item.html" with event=event overview=False profile=False %}
           {% endfor %}
         {% else %}
           <div class="col-xs-12">

@@ -1,11 +1,8 @@
 <div id="artist_{{ artist.id }}" class="{% if admin %}col-xs-12{% else %}col-xs-4 col-sm-4 col-md-3{% endif %}">
   <div class="item {% if not rounded or admin %}r{% endif %}">
     <div class="item-media {% if rounded %}rounded{% endif %}">
-      <a href="{% if admin and perms.change_artist %}{% url 'artist:artist_update' artist.id %}{% else %}{% url 'artist:artist_detail' artist.id %}{% endif %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
+      <a href="{% url 'artist:artist_detail' artist.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
     </div>
-    {% if admin %}
-      <a href="{% if perms.change_artist %}{% url 'artist:artist_update' artist.id %}{% else %}{% url 'artist:artist_detail' artist.id %}{% endif %}" class="item-media-content" style="background-color: transparent">
-    {% endif %}
     <div class="item-info {% if rounded %}text-center{% endif %}">
       {% if not rounded %}
         <div class="item-overlay bottom text-right">
@@ -24,33 +21,12 @@
           </div>
         {% endif %}
       </div>
-      {% if admin %}
-        <div class="item-except visible-list text-sm h-2x m-t-sm {% if perms.change_artist or perms.delete_artist %}m-b-md{% endif %}">
-            {% if artist.events.count %}
-              <i class="material-icons md-24">event_note</i>
-              {{ artist.events.count }} event{{ artist.events.count|pluralize:"s" }}
-            {% else %}
-              No events
-            {% endif %}
+      {% if not rounded %}
+        <div class="item-meta text-sm text-muted">
+          <span class="item-meta-stats text-xs ">
+            {% if artist.users.count %}<i class="fa fa-star text-muted"></i> {{ artist.users.count }}{% else %}&nbsp{% endif %}
+          </span>
         </div>
-        {% if perms.change_artist or perms.delete_artist %}
-          <div class="item-action visible-list m-t-sm">
-            {% if perms.change_artist %}
-              <a href="{% url 'artist:artist_update' artist.id %}" class="item btn m-l-0 btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;">Edit</a>
-            {% endif %}
-            {% if perms.delete_artist %}
-              <a href="{% url 'artist:artist_delete' artist.id %}" class="item btn m-l-1 btn-xs white" style="padding-top: 0.1565rem; padding-right: 0.5rem; padding-bottom: 0.1565rem;padding-left: 0.5rem;" data-toggle="modal" data-target="#delete-modal">Delete</a>
-            {% endif %}
-          </div>
-        {% endif %}
-      {% else %}
-        {% if not rounded %}
-          <div class="item-meta text-sm text-muted">
-            <span class="item-meta-stats text-xs ">
-              {% if artist.users.count %}<i class="fa fa-star text-muted"></i> {{ artist.users.count }}{% else %}&nbsp{% endif %}
-            </span>
-          </div>
-        {% endif %}
       {% endif %}
     </div>
   </div>

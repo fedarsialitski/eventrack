@@ -24,7 +24,7 @@
     <div id="{% if past %}past_{% endif %}{{ key }}" {% if key in 'week, month, year' %}class="modal"{% endif %}>
     {% if events %}
       {% for event in events %}
-        {% include "event/items/event_item.html" with event=event overview=False profile=True admin=False %}
+        {% include "event/items/event_item.html" with event=event overview=False profile=True %}
       {% endfor %}
     {% else  %}
       <div class="col-xs-12">

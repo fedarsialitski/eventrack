@@ -1,7 +1,7 @@
 {% if user.artists.all %}
   <div id="row_artists" class="row item-list item-list-by m-b">
     {% for artist in user.artists.all %}
-      {% include "event/items/artist_item.html" with artist=artist rounded=False admin=True %}
+      {% include "event/items/artist_item.html" with artist=artist rounded=False %}
     {% endfor %}
     <div class="col-lg-12">
       {% include 'user/modals/artists_modal.html' with profile=True bookmarks=False %}

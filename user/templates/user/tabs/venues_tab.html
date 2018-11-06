@@ -1,7 +1,7 @@
 {% if user.venues.all %}
   <div id="row_venues" class="row item-list item-list-by m-b">
     {% for venue in user.venues.all %}
-      {% include "event/items/venue_item.html" with venue=venue admin=True %}
+      {% include "event/items/venue_item.html" with venue=venue %}
     {% endfor %}
     <div class="col-lg-12">
       {% include 'user/modals/venues_modal.html' with bookmarks=False %}

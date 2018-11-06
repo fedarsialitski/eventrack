@@ -2,7 +2,7 @@
 {% if user.events.all %}
   <div id="bookmark_events" class="row item-list item-list-md item-list-li-by m-b">
     {% for event in user.events.all%}
-      {% include "event/items/event_item.html" with event=event artist=event.artists.all|first overview=True profile=True admin=False %}
+      {% include "event/items/event_item.html" with event=event artist=event.artists.all|first overview=True profile=True %}
     {% endfor %}
   </div>
 {% else %}
@@ -14,7 +14,7 @@
 {% if user.artists.all %}
   <div id="bookmark_artists" class="row m-b">
     {% for artist in user.artists.all %}
-      {% include "event/items/artist_item.html" with artist=artist rounded=False admin=False %}
+      {% include "event/items/artist_item.html" with artist=artist rounded=False %}
     {% endfor %}
   </div>
 {% else %}

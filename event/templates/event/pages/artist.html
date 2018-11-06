@@ -29,12 +29,12 @@
         {% if artists %}
         <div id="by_name" class="row row-lg">
           {% for artist in artists %}
-            {% include "event/items/artist_item.html" with artist=artist rounded=True admin=False %}
+            {% include "event/items/artist_item.html" with artist=artist rounded=True %}
           {% endfor %}
         </div>
         <div id="by_events" class="row row-lg modal">
           {% for artist in artists|dictsortreversed:"events.count" %}
-            {% include "event/items/artist_item.html" with artist=artist rounded=True admin=False %}
+            {% include "event/items/artist_item.html" with artist=artist rounded=True %}
           {% endfor %}
         </div>
         {% else %}

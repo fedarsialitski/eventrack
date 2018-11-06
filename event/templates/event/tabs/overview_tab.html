@@ -2,7 +2,7 @@
 {% if upcoming_events.all %}
   <div class="row item-list item-list-md item-list-li-by m-b" id="upcoming_events">
     {% for upcoming_event in upcoming_events.all|slice:":4" %}
-      {% include "event/items/event_item.html" with event=upcoming_event overview=True profile=True admin=False %}
+      {% include "event/items/event_item.html" with event=upcoming_event overview=True profile=True %}
     {% endfor %}
   </div>
 {% else %}
@@ -14,7 +14,7 @@
 {% if past_events.all %}
 <div class="row item-list item-list-md item-list-li-by m-b" id="past_events">
   {% for past_event in past_events.all|slice:":4" %}
-      {% include "event/items/event_item.html" with event=past_event overview=True profile=True admin=False %}
+      {% include "event/items/event_item.html" with event=past_event overview=True profile=True %}
   {% endfor %}
 </div>
 {% else %}

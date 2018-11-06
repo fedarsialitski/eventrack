@@ -1,9 +1,7 @@
 <div class="{% if bookmarks %}p-a-{% if profile %}lg{% else %}xs{% endif %}{% else %}p-t-md{% endif %}">
   {% if bookmarks %}
-    <h2 class="m-y-{% if profile %}md{% else %}sm{% endif %}">No {% if perms.add_artist and profile %}added {% endif %}artists{% if not perms.add_artist or not profile %} in bookmarks{% endif %}</h2>
+    <h2 class="m-y-{% if profile %}md{% else %}sm{% endif %}">No {% if profile %}added {% endif %}artists{% if not profile %} in bookmarks{% endif %}</h2>
   {% endif %}
-  <h6 class="text-muted m-b-md">Would you like to add an artist{% if not perms.add_artist %} to bookmarks{% endif %}?</h6>
-  <a class="btn circle btn-outline b-primary m-b-lg p-x-md"
-    href="{% if perms.add_artist and profile %}{% url 'artist:artist_add' %}{% else %}{% url 'artist:artist' %}{% endif %}"
-  >Add</a>
+  <h6 class="text-muted m-b-md">Would you like to add an artist to bookmarks?</h6>
+  <a class="btn circle btn-outline b-primary m-b-lg p-x-md" href="{% url 'artist:artist' %}">Add</a>
 </div>
