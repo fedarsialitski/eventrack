@@ -1,16 +1,16 @@
-<div id="artist_{{ artist.id }}" class="{% if admin %}col-xs-12{% else %}col-xs-4 col-sm-4 col-md-3{% endif %}">
+<div id="artist_{{ artist.pk }}" class="{% if admin %}col-xs-12{% else %}col-xs-4 col-sm-4 col-md-3{% endif %}">
   <div class="item {% if not rounded or admin %}r{% endif %}">
     <div class="item-media {% if rounded %}rounded{% endif %}">
-      <a href="{% url 'artist:artist_detail' artist.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
+      <a href="{% url 'artist:artist_detail' artist.pk %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
     </div>
     <div class="item-info {% if rounded %}text-center{% endif %}">
       {% if not rounded %}
         <div class="item-overlay bottom text-right">
-          <a class="btn-favorite" {% if user.is_authenticated %}data-id="artist_{{ artist.id }}" data-url="{% url 'artist:artist_bookmark' artist.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if artist in user.artists.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+          <a class="btn-favorite" {% if user.is_authenticated %}data-id="artist_{{ artist.pk }}" data-url="{% url 'artist:artist_bookmark' artist.pk %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if artist in user.artists.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
         </div>
       {% endif %}
       <div class="item-title text-ellipsis">
-        <a href="{% url 'artist:artist_detail' artist.id %}">{{artist.name}}</a>
+        <a href="{% url 'artist:artist_detail' artist.pk %}">{{artist.name}}</a>
         {% if rounded %}
           <div class="text-sm text-muted">
             {% if artist.events.count %}

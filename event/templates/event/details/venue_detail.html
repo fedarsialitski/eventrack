@@ -9,7 +9,7 @@
   <div class="page-content">
     <div class="padding">
       <div class="row-col b-b">
-        <div id="venue_{{ venue.id }}" class="col-sm">
+        <div id="venue_{{ venue.pk }}" class="col-sm">
           <div class="p-l-xs no-padding-xs">
           <div class="page-title">
             <h2 class="inline">{{ venue.name }}</h2>
@@ -19,7 +19,7 @@
             </p>
           </div>
           <div class="item-action m-b">
-            <a class="btn btn-icon rounded btn-favorite" {% if user.is_authenticated %}data-id="venue_{{ venue.id }}" data-url="{% url 'venue:venue_bookmark' venue.id %}"{% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if venue in user.venues.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+            <a class="btn btn-icon rounded btn-favorite" {% if user.is_authenticated %}data-id="venue_{{ venue.pk }}" data-url="{% url 'venue:venue_bookmark' venue.pk %}"{% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if venue in user.venues.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
               <span class="item-meta-stats text-muted">{% if venue.users.count %} {{ venue.users.count }}{% endif %}</span>
             </div>
           </div>

@@ -15,19 +15,18 @@ if 'CFG_ALLOWED_HOSTS' in os.environ:
 
 
 # Database
-# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+# https://docs.djangoproject.com/en/stable/ref/settings/#databases
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://postgres:postgres@postgres/postgres'
+        engine='postgis',
+        default='postgis://postgis:postgis@postgis/postgis',
     ),
 }
 
-DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
-
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.1/howto/static-files/
+# https://docs.djangoproject.com/en/stable/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.getenv('CFG_STATIC_ROOT', os.path.join(BASE_DIR, 'static'))
@@ -37,6 +36,6 @@ MEDIA_ROOT = os.getenv('CFG_MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
 
 
 # ManifestStaticFilesStorage
-# https://docs.djangoproject.com/en/2.1/ref/contrib/staticfiles/#manifeststaticfilesstorage
+# https://docs.djangoproject.com/en/stable/ref/contrib/staticfiles/#manifeststaticfilesstorage
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'

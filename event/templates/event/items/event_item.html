@@ -1,22 +1,22 @@
-<div id="event_{{ event.id }}" class="{% if overview %}col-md-12 col-lg-6{% else %}col-xs-12{% endif %}">
+<div id="event_{{ event.pk }}" class="{% if overview %}col-md-12 col-lg-6{% else %}col-xs-12{% endif %}">
   <div class="item r">
     {% if event.artists.all and not overview and not profile %}
       {% for artist in event.artists.all %}
         {% if forloop.counter <= 5 %}
           <div class="item-media ">
-            <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url('{{ artist.thumb_url|default:default_url }}');"></a>
+            <a href="{% url 'event:event_detail' event.pk %}" class="item-media-content" style="background-image: url('{{ artist.thumb_url|default:default_url }}');"></a>
           </div>
         {% endif %}
       {% endfor %}
     {% else %}
       <div class="item-media ">
-        <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
+        <a href="{% url 'event:event_detail' event.pk %}" class="item-media-content" style="background-image: url({{ artist.thumb_url|default:default_url }});"></a>
       </div>
     {% endif %}
-    <a href="{% url 'event:event_detail' event.id %}" class="item-media-content" style="background-color: transparent">
+    <a href="{% url 'event:event_detail' event.pk %}" class="item-media-content" style="background-color: transparent">
     <div class="item-info">
       <div class="item-overlay bottom text-right">
-        <a class="btn-favorite" {% if user.is_authenticated %}data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+        <a class="btn-favorite" {% if user.is_authenticated %}data-id="event_{{ event.pk }}" data-url="{% url 'event:event_bookmark' event.pk %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
       </div>
       <div class="item-title text-ellipsis">
         {{ event.name }}{% if not venue %} @ {{ event.venue.name }}, {{ event.venue.location.city }}, {{ event.venue.location.country }} {% endif %}

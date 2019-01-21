@@ -4,17 +4,16 @@ from venue.models import Venue
 
 
 class Event(models.Model):
-    songkick_id = models.PositiveIntegerField()
-    bandsintown_id = models.PositiveIntegerField()
+    songkick_id = models.IntegerField(primary_key=True)
+    bandsintown_id = models.IntegerField(null=True)
 
     name = models.CharField(max_length=255)
-    type = models.CharField(max_length=255)
+    type = models.CharField(max_length=255, default='')
 
     datetime = models.DateTimeField()
-    description = models.TextField()
 
-    songkick_url = models.URLField()
-    bandsintown_url = models.URLField()
+    songkick_url = models.URLField(default='')
+    bandsintown_url = models.URLField(default='')
 
     venue = models.ForeignKey(
         Venue,

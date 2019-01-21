@@ -1,10 +1,10 @@
-<div id="venue_{{ venue.id }}" class="col-xs-12">
+<div id="venue_{{ venue.pk }}" class="col-xs-12">
   <div class="item r">
     {% if venue.events.all %}
         {% for event in venue.events.all %}
           {% if forloop.counter <= 5 %}
             <div class="item-media ">
-              <a href="{% url 'venue:venue_detail' venue.id %}" class="item-media-content" {% if event.artists.all.0.thumb_url %}style="background-image: url('{{ event.artists.all.0.thumb_url }}');"{% endif %}>
+              <a href="{% url 'venue:venue_detail' venue.pk %}" class="item-media-content" {% if event.artists.all.0.thumb_url %}style="background-image: url('{{ event.artists.all.0.thumb_url }}');"{% endif %}>
                 {% if not event.artists.all.0.thumb_url %}
                   <i class="material-icons md-36 center text-muted">
                     event
@@ -21,10 +21,10 @@
         </i>
       </div>
     {% endif %}
-    <a href="{% url 'venue:venue_detail' venue.id %}" class="item-media-content" style="background-color: transparent">
+    <a href="{% url 'venue:venue_detail' venue.pk %}" class="item-media-content" style="background-color: transparent">
     <div class="item-info">
       <div class="item-overlay bottom text-right">
-        <a class="btn-favorite" {% if user.is_authenticated %}data-id="venue_{{ venue.id }}" data-url="{% url 'venue:venue_bookmark' venue.id %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if venue in user.venues.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+        <a class="btn-favorite" {% if user.is_authenticated %}data-id="venue_{{ venue.pk }}" data-url="{% url 'venue:venue_bookmark' venue.pk %}" {% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if venue in user.venues.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
       </div>
       <div class="item-title text-ellipsis">
           {{ venue.name }}

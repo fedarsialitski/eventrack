@@ -33,13 +33,13 @@
         {% endif %}
       </div>
     </div>
-    <div id="event_{{ event.id }}" class="col-sm">
+    <div id="event_{{ event.pk }}" class="col-sm">
       <div class="p-l-md no-padding-xs">
         <div class="page-title">
           <h2 class="inline">{{ event.name }}</h2>
         </div>
         <div class="item-action m-b">
-          <a class="btn btn-icon rounded btn-favorite" {% if user.is_authenticated %}data-id="event_{{ event.id }}" data-url="{% url 'event:event_bookmark' event.id %}"{% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
+          <a class="btn btn-icon rounded btn-favorite" {% if user.is_authenticated %}data-id="event_{{ event.pk }}" data-url="{% url 'event:event_bookmark' event.pk %}"{% else %}data-toggle="modal" data-target="#sign-modal"{% endif %}><i class="fa {% if event in user.events.all %}fa-star{% else %}fa-star-o{% endif %}"></i></a>
           <span class="item-meta-stats text-muted">{% if event.users.count %} {{ event.users.count }}{% endif %}</span>
         </div>
       </div>
@@ -54,7 +54,7 @@
               {% if forloop.counter <= 1 %}
                 <h6 class="m-b">
                   <span class="text-muted">by</span>
-                  <a href="{% url 'artist:artist_detail' artist.id %}" data-pjax class="item-author _600">{{ artist.name }}</a>
+                  <a href="{% url 'artist:artist_detail' artist.pk %}" data-pjax class="item-author _600">{{ artist.name }}</a>
                   <span class="text-muted text-sm">–
                     {% if artist.events.count %}
                       {{ artist.events.count }} event{{ artist.events.count|pluralize:"s" }}
@@ -85,7 +85,7 @@
             <div class="item-title text-ellipsis">
                 <div class="col-xs-1 text-muted">Name</div>
                 <div class="offset-xs-1">
-                  <a href="{% url 'venue:venue_detail' event.venue.id %}">
+                  <a href="{% url 'venue:venue_detail' event.venue.pk %}">
                     {{ event.venue.name }}
                   </a>
                 </div>

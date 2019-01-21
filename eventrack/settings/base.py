@@ -1,5 +1,7 @@
 import os
 
+from celery.schedules import crontab
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -55,13 +57,13 @@ WSGI_APPLICATION = 'eventrack.wsgi.application'
 
 
 # User model
-# https://docs.djangoproject.com/en/2.1/ref/settings/#auth-user-model
+# https://docs.djangoproject.com/en/stable/ref/settings/#auth-user-model
 
 AUTH_USER_MODEL = 'user.User'
 
 
 # Password validation
-# https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/stable/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -80,13 +82,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Login URL
-# https://docs.djangoproject.com/en/2.1/ref/settings/#login-url
+# https://docs.djangoproject.com/en/stable/ref/settings/#login-url
 
 LOGIN_URL = 'user:signin'
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/2.1/topics/i18n/
+# https://docs.djangoproject.com/en/stable/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -100,7 +102,7 @@ USE_TZ = True
 
 
 # Logging
-# https://docs.djangoproject.com/en/2.1/topics/logging/#configuring-logging
+# https://docs.djangoproject.com/en/stable/topics/logging/#configuring-logging
 
 LOGGING = {
     'version': 1,
@@ -141,6 +143,9 @@ LOGGING = {
     },
 }
 
+
+# ASGI
+# https://channels.readthedocs.io/en/stable/deploying.html#configuring-the-asgi-application
 ASGI_APPLICATION = 'eventrack.routing.application'
 
 CHANNEL_LAYERS = {
@@ -151,3 +156,32 @@ CHANNEL_LAYERS = {
         },
     }
 }
+
+
+# Artists count
+ARTISTS_COUNT = 5
+
+
+# Celery
+# http://docs.celeryproject.org/en/stable/userguide/configuration.html
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+CELERY_BEAT_SCHEDULE = {
+    'fetch_similar_artists': {
+        'task': 'artist.tasks.fetch_similar_artists',
+        'schedule': crontab(minute=0, hour=0),
+    },
+}
+
+
+# Songkick API
+# https://www.songkick.com/developer
+SONGKICK_API_KEY = os.getenv('SONGKICK_API_KEY', 'YOUR_API_KEY')
+
+
+# Bandsintown API
+# https://app.swaggerhub.com/apis/Bandsintown/PublicAPI/3.0.0
+BANDSINTOWN_APP_ID = os.getenv('BANDSINTOWN_APP_ID', 'YOUR_APP_ID')
