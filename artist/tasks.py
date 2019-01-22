@@ -12,12 +12,18 @@ def fetch_similar_artists():
     artist_service = ArtistService()
 
     similar_artists = set()
+    related_artists = dict()
 
     for artist in artists:
-        similar_artists.update(artist_service.get_similar_artists(artist))
+        fetched_artists = artist_service.get_similar_artists(artist)
+        similar_artists |= fetched_artists
+        related_artists[artist.songkick_id] = fetched_artists
 
     ids = [similar_artist.songkick_id for similar_artist in similar_artists]
 
-    similar_artists.difference_update(Artist.objects.filter(songkick_id__in=ids))
+    similar_artists -= set(Artist.objects.filter(songkick_id__in=ids))
+    created_artists = set(Artist.objects.bulk_create(similar_artists))
 
-    Artist.objects.bulk_create(similar_artists)
+    for artist in artists:
+        unrelated_artists = created_artists ^ related_artists[artist.songkick_id]
+        artist.similar_artists.set(created_artists - unrelated_artists)
