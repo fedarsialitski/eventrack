@@ -19,7 +19,6 @@ if 'CFG_ALLOWED_HOSTS' in os.environ:
 
 DATABASES = {
     'default': dj_database_url.config(
-        engine='postgis',
         default='postgis://postgis:postgis@postgis/postgis',
     ),
 }

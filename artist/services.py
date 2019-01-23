@@ -20,7 +20,7 @@ class ArtistService(Service):
                 artists.add(Artist(
                     name=similar_artist.display_name,
                     songkick_id=similar_artist.id,
-                    songkick_url=similar_artist.songkick_uri,
+                    songkick_url=self.get_url(similar_artist.songkick_uri),
                 ))
 
         return artists
