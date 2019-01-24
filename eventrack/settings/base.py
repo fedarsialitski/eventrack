@@ -174,6 +174,10 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'artist.tasks.fetch_similar_artists',
         'schedule': crontab(minute=0, hour=0),
     },
+    'update_artists': {
+        'task': 'artist.tasks.update_artists',
+        'schedule': crontab(minute=0, hour='*/1'),
+    },
 }
 
 

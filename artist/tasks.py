@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.db import transaction
 
 from celery import task
 
@@ -27,3 +28,17 @@ def fetch_similar_artists():
     for artist in artists:
         unrelated_artists = created_artists ^ related_artists[artist.songkick_id]
         artist.similar_artists.set(created_artists - unrelated_artists)
+
+
+@task
+def update_artists():
+    artists = Artist.objects.select_for_update().filter(
+        bandsintown_id__isnull=True,
+    )[:settings.ARTISTS_COUNT]
+
+    artist_service = ArtistService()
+
+    with transaction.atomic():
+        for artist in artists:
+            artist = artist_service.update_artist(artist)
+            artist.save()

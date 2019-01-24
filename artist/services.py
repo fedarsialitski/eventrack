@@ -5,6 +5,9 @@ from eventrack.services import Service
 
 
 class ArtistService(Service):
+    def get_artist_data(self, artist):
+        return self.bandsintown.artists(artist.name) or {}
+
     def get_similar_artists(self, artist):
         artists = set()
 
@@ -24,3 +27,15 @@ class ArtistService(Service):
                 ))
 
         return artists
+
+    def update_artist(self, artist):
+        data = self.get_artist_data(artist)
+
+        data['bandsintown_id'] = data.pop('id', None)
+        data['bandsintown_url'] = self.get_url(data.pop('url', None))
+
+        for key, value in data.items():
+            if value:
+                setattr(artist, key, value)
+
+        return artist
