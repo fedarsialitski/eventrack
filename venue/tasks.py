@@ -15,8 +15,8 @@ def update_venues():
     ).exclude(
         ~Q(zip='') |
         ~Q(phone='') |
-        ~Q(description='') |
         ~Q(website='') |
+        ~Q(description='') |
         ~Q(capacity__isnull=True)
     )[:settings.VENUES_COUNT]
 

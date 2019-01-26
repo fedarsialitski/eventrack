@@ -13,17 +13,17 @@ def fetch_events():
     artists = Artist.objects.all()[:settings.ARTISTS_COUNT]
     event_service = EventService()
 
+    artist_events = dict()
     locations = set()
     venues = set()
     events = set()
-    artist_events = dict()
 
     for artist in artists:
         _events, _venues, _locations = event_service.get_events(artist)
+        artist_events[artist.pk] = _events
         locations |= _locations
         venues |= _venues
         events |= _events
-        artist_events[artist.pk] = _events
 
     location_ids = [location.pk for location in locations]
     venue_ids = [venue.pk for venue in venues]

@@ -29,7 +29,7 @@ def fetch_artists():
         unrelated_artists = created_artists ^ related_artists[artist.pk]
         similar_artists_set = created_artists - unrelated_artists
         if similar_artists_set:
-            artist.similar_artists.set(created_artists - unrelated_artists)
+            artist.similar_artists.set(similar_artists_set)
 
 
 @task
