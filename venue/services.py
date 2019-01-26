@@ -1,10 +1,28 @@
 from django.contrib.gis.geos import Point
 
+from songkick.exceptions import SongkickDecodeError, SongkickRequestError
+
 from eventrack.services import Service
 from venue.models import Venue, Location
 
 
 class VenueService(Service):
+    def get_venue_data(self, venue):
+        try:
+            data = next(self.songkick.venue_details.query(venue_id=venue.pk))
+        except (SongkickDecodeError, SongkickRequestError, StopIteration):
+            data = None
+
+        return data
+
+    def update_venue(self, venue):
+        data = self.get_venue_data(venue)
+
+        if data:
+            venue = self.update(venue, getattr(data, '_data', {}))
+
+        return venue
+
     def create_venue(self, event):
         return Venue(
             pk=event.venue.id,

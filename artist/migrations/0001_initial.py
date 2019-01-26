@@ -27,8 +27,5 @@ class Migration(migrations.Migration):
                 ('events', models.ManyToManyField(related_name='artists', to='event.Event')),
                 ('similar_artists', models.ManyToManyField(related_name='_artist_similar_artists_+', to='artist.Artist')),
             ],
-            options={
-                'ordering': ['name'],
-            },
         ),
     ]

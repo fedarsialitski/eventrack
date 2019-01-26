@@ -10,9 +10,6 @@ class Location(models.Model):
 
     coordinates = models.PointField(null=True)
 
-    class Meta:
-        ordering = ['country', 'city']
-
     def __str__(self):
         return '{}, {}'.format(self.city, self.country)
 
@@ -39,9 +36,6 @@ class Venue(models.Model):
         related_name='venues',
         on_delete=models.CASCADE,
     )
-
-    class Meta:
-        ordering = ['name']
 
     def __str__(self):
         return '{} @ {}'.format(self.name, self.location)

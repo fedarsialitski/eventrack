@@ -22,9 +22,6 @@ class Migration(migrations.Migration):
                 ('country', models.CharField(max_length=255)),
                 ('coordinates', django.contrib.gis.db.models.fields.PointField(null=True, srid=4326)),
             ],
-            options={
-                'ordering': ['country', 'city'],
-            },
         ),
         migrations.CreateModel(
             name='Venue',
@@ -41,8 +38,5 @@ class Migration(migrations.Migration):
                 ('songkick_url', models.URLField(default='')),
                 ('location', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='venues', to='venue.Location')),
             ],
-            options={
-                'ordering': ['name'],
-            },
         ),
     ]

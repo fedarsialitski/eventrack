@@ -161,6 +161,9 @@ CHANNEL_LAYERS = {
 # Artists count
 ARTISTS_COUNT = 5
 
+# Venues count
+VENUES_COUNT = 5
+
 
 # Celery
 # http://docs.celeryproject.org/en/stable/userguide/configuration.html
@@ -181,6 +184,10 @@ CELERY_BEAT_SCHEDULE = {
     'fetch_events': {
         'task': 'event.tasks.fetch_events',
         'schedule': crontab(minute=0, hour='*/12'),
+    },
+    'update_venues': {
+        'task': 'venue.tasks.update_venues',
+        'schedule': crontab(minute=0, hour='*/2'),
     },
 }
 

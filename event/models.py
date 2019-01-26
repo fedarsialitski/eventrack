@@ -28,8 +28,5 @@ class Event(models.Model):
         on_delete=models.CASCADE,
     )
 
-    class Meta:
-        ordering = ['start']
-
     def __str__(self):
         return self.name

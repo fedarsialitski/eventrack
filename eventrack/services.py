@@ -14,3 +14,11 @@ class Service:
     @staticmethod
     def get_url(url):
         return furl(url).remove(args=True, fragment=True).url
+
+    @staticmethod
+    def update(instance, data):
+        for key, value in data.items():
+            if value:
+                setattr(instance, key, value)
+
+        return instance

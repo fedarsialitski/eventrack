@@ -25,8 +25,5 @@ class Migration(migrations.Migration):
                 ('venue', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='events', to='venue.Venue')),
                 ('location', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='events', to='venue.Location')),
             ],
-            options={
-                'ordering': ['start'],
-            },
         ),
     ]
