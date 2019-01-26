@@ -43,10 +43,10 @@ class IndexView(generic.ListView):
             context['discover'] = context['discover'].exclude(pk__in=user_artists)
 
             # Get upcoming events by a user's favorite artists
-            context['recommend'] = events.filter(artists__in=user_artists, datetime__gte=now)
+            context['recommend'] = events.filter(artists__in=user_artists, start__gte=now)
             # Exclude events already followed by a current user
             context['recommend'] = context['recommend'].exclude(users__in=[user_id]).annotate(user_count=user_count)
-            context['recommend'] = context['recommend'].order_by('datetime', '-user_count')[:recommend_count]
+            context['recommend'] = context['recommend'].order_by('start', '-user_count')[:recommend_count]
 
         context['discover'] = context['discover'][:discover_count]
         return context
@@ -86,7 +86,7 @@ class EventListView(generic.ListView):
         """
         Return the upcoming events
         """
-        return super().get_queryset().filter(datetime__gte=timezone.now())
+        return super().get_queryset().filter(start__gte=timezone.now())
 
 
 class EventDetailView(generic.DetailView):

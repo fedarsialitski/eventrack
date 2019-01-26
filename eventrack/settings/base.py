@@ -170,13 +170,17 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
 CELERY_BEAT_SCHEDULE = {
-    'fetch_similar_artists': {
-        'task': 'artist.tasks.fetch_similar_artists',
+    'fetch_artists': {
+        'task': 'artist.tasks.fetch_artists',
         'schedule': crontab(minute=0, hour=0),
     },
     'update_artists': {
         'task': 'artist.tasks.update_artists',
         'schedule': crontab(minute=0, hour='*/1'),
+    },
+    'fetch_events': {
+        'task': 'event.tasks.fetch_events',
+        'schedule': crontab(minute=0, hour='*/12'),
     },
 }
 

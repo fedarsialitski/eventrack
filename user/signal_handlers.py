@@ -14,7 +14,7 @@ def post_save_event_signal_handler(instance, **kwargs):
             'text': {
                 'id': instance.id,
                 'name': instance.name,
-                'date': instance.datetime.strftime('%Y/%m/%d'),
+                'date': instance.start.strftime('%Y/%m/%d'),
             }
         }
         async_to_sync(channel_layer.group_send)(group, message)

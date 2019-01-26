@@ -31,16 +31,16 @@ class ArtistDetailView(generic.DetailView):
         context = super(ArtistDetailView, self).get_context_data(**kwargs)
 
         context['upcoming_events'] = {}
-        context['upcoming_events'].update({'week': events.filter(datetime__gte=now, datetime__week=week).order_by('datetime')})
-        context['upcoming_events'].update({'month': events.filter(datetime__gte=now, datetime__month=month).order_by('datetime')})
-        context['upcoming_events'].update({'year': events.filter(datetime__gte=now, datetime__year=year).order_by('datetime')})
-        context['upcoming_events'].update({'all': events.filter(datetime__gte=now).order_by('datetime')})
+        context['upcoming_events'].update({'week': events.filter(start__gte=now, start__week=week).order_by('start')})
+        context['upcoming_events'].update({'month': events.filter(start__gte=now, start__month=month).order_by('start')})
+        context['upcoming_events'].update({'year': events.filter(start__gte=now, start__year=year).order_by('start')})
+        context['upcoming_events'].update({'all': events.filter(start__gte=now).order_by('start')})
 
         context['past_events'] = {}
-        context['past_events'].update({'week': events.filter(datetime__lte=now, datetime__week=week).order_by('-datetime')})
-        context['past_events'].update({'month': events.filter(datetime__lte=now, datetime__month=month).order_by('-datetime')})
-        context['past_events'].update({'year': events.filter(datetime__lte=now, datetime__year=year).order_by('-datetime')})
-        context['past_events'].update({'all': events.filter(datetime__lte=now).order_by('-datetime')})
+        context['past_events'].update({'week': events.filter(start__lte=now, start__week=week).order_by('-start')})
+        context['past_events'].update({'month': events.filter(start__lte=now, start__month=month).order_by('-start')})
+        context['past_events'].update({'year': events.filter(start__lte=now, start__year=year).order_by('-start')})
+        context['past_events'].update({'all': events.filter(start__lte=now).order_by('-start')})
         return context
 
 

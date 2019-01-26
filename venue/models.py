@@ -10,8 +10,6 @@ class Location(models.Model):
 
     coordinates = models.PointField(null=True)
 
-    songkick_url = models.URLField(default='')
-
     class Meta:
         ordering = ['country', 'city']
 
@@ -37,6 +35,7 @@ class Venue(models.Model):
 
     location = models.ForeignKey(
         Location,
+        null=True,
         related_name='venues',
         on_delete=models.CASCADE,
     )

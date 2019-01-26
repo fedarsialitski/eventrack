@@ -13,9 +13,9 @@ class Artist(models.Model):
     image_url = models.URLField(default='')
     thumb_url = models.URLField(default='')
 
-    facebook_url = models.URLField(default='')
     songkick_url = models.URLField(default='')
     bandsintown_url = models.URLField(default='')
+    facebook_page_url = models.URLField(default='')
 
     events = models.ManyToManyField(
         Event,

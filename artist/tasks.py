@@ -8,7 +8,7 @@ from artist.services import ArtistService
 
 
 @task
-def fetch_similar_artists():
+def fetch_artists():
     artists = Artist.objects.all()[:settings.ARTISTS_COUNT]
     artist_service = ArtistService()
 
@@ -18,16 +18,18 @@ def fetch_similar_artists():
     for artist in artists:
         fetched_artists = artist_service.get_similar_artists(artist)
         similar_artists |= fetched_artists
-        related_artists[artist.songkick_id] = fetched_artists
+        related_artists[artist.pk] = fetched_artists
 
-    ids = [similar_artist.songkick_id for similar_artist in similar_artists]
+    ids = [similar_artist.pk for similar_artist in similar_artists]
 
-    similar_artists -= set(Artist.objects.filter(songkick_id__in=ids))
+    similar_artists -= set(Artist.objects.filter(pk__in=ids))
     created_artists = set(Artist.objects.bulk_create(similar_artists))
 
     for artist in artists:
-        unrelated_artists = created_artists ^ related_artists[artist.songkick_id]
-        artist.similar_artists.set(created_artists - unrelated_artists)
+        unrelated_artists = created_artists ^ related_artists[artist.pk]
+        similar_artists_set = created_artists - unrelated_artists
+        if similar_artists_set:
+            artist.similar_artists.set(created_artists - unrelated_artists)
 
 
 @task

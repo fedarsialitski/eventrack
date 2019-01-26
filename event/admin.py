@@ -16,9 +16,9 @@ class EventInline(admin.StackedInline):
 
 class EventAdmin(admin.ModelAdmin):
     inlines = [EventArtistsInline]
-    list_display = ['name', 'datetime', 'venue']
-    list_filter = ['name', 'datetime', 'venue__name']
-    search_fields = ['name', 'datetime', 'venue__name']
+    list_display = ['name', 'start', 'venue']
+    list_filter = ['name', 'start', 'venue__name']
+    search_fields = ['name', 'start', 'venue__name']
 
 
 admin.site.register(Event, EventAdmin)
