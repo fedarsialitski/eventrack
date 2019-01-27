@@ -11,16 +11,15 @@ class ArtistService(Service):
     def get_similar_artists(self, artist):
         artists = set()
 
-        if artist.pk:
-            try:
-                similar_artists = list(self.songkick.artists_similar.query(
-                    artist_id=artist.pk,
-                ))
-            except (SongkickDecodeError, SongkickRequestError):
-                similar_artists = []
+        try:
+            similar_artists = list(self.songkick.artists_similar.query(
+                artist_id=artist.pk,
+            ))
+        except (SongkickDecodeError, SongkickRequestError):
+            similar_artists = []
 
-            for similar_artist in similar_artists:
-                artists.add(self.create_artist(similar_artist))
+        for similar_artist in similar_artists:
+            artists.add(self.create_artist(similar_artist))
 
         return artists
 
