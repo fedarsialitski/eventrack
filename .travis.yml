@@ -1,28 +1,28 @@
 language: python
 python:
-  - 3.6
+  - 3.7
 
 cache:
   pip: true
 
 # Use container-based infrastructure
-dist: trusty
-sudo: required
+dist: xenial
+sudo: true
 
 services:
   - postgresql
   - docker
 
 addons:
-  postgresql: '9.6'
+  postgresql: '10'
   apt:
     packages:
-    - postgresql-9.6-postgis-2.3
+    - postgresql-10-postgis-2.4
 
 env:
   global:
     - DJANGO_SETTINGS_MODULE=eventrack.settings.prod
-    - DATABASE_URL=postgres://postgres@localhost/test_db
+    - DATABASE_URL=postgis://postgres@localhost/test_db
     - CFG_SECRET_KEY=iamnotsosecret
     - CFG_ALLOWED_HOSTS=localhost
 

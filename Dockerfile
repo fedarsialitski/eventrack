@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.6
+FROM python:3.7
 
 # Install non-python dependencies
 RUN apt-get update && apt-get install -y \
