@@ -1,8 +1,9 @@
 asgiref==2.3.2
 celery==4.2.1
-channels==2.1.6
+channels==2.1.7
 channels_redis==2.3.3
-Django==2.1.5
+Django==2.1.7
+djangorestframework==3.9.1
 dj-database-url==0.5.0
 flower==0.9.2
 furl==2.0.0
@@ -10,4 +11,4 @@ git+https://github.com/FedorSelitsky/python-songkick.git
 psycopg2>=2.7.5,<2.8 --no-binary psycopg2
 python-bandsintown==1.0.0
 requests==2.21.0
-uWSGI==2.0.17.1
+uWSGI==2.0.18

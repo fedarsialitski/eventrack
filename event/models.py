@@ -4,8 +4,6 @@ from venue.models import Venue, Location
 
 
 class Event(models.Model):
-    songkick_id = models.IntegerField(primary_key=True)
-
     name = models.CharField(max_length=255)
     type = models.CharField(max_length=255, default='')
 

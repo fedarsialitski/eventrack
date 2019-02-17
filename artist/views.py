@@ -3,7 +3,15 @@ from django.views import generic
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
+from rest_framework.viewsets import ReadOnlyModelViewSet
+
 from artist.models import Artist
+from artist.serializers import ArtistSerializer
+
+
+class ArtistViewSet(ReadOnlyModelViewSet):
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer
 
 
 class ArtistListView(generic.ListView):

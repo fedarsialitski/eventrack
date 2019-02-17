@@ -20,12 +20,15 @@ INSTALLED_APPS = [
     'event.apps.EventConfig',
     'venue.apps.VenueConfig',
     'user.apps.UserConfig',
+    'rest_framework',
+    'corsheaders',
     'channels',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -155,6 +158,25 @@ CHANNEL_LAYERS = {
             'hosts': [os.getenv('REDIS_HOST', 'redis://localhost:6379')],
         },
     }
+}
+
+
+# CORS
+# https://github.com/ottoyiu/django-cors-headers#configuration
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_URLS_REGEX = r'^/api/.*$'
+CORS_ALLOW_METHODS = (
+    'GET',
+    'HEAD',
+    'OPTIONS',
+)
+
+
+# Django REST Framework
+# https://www.django-rest-framework.org/api-guide/pagination/#pagenumberpagination
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'eventrack.pagination.PagePagination',
+    'PAGE_SIZE': 50
 }
 
 

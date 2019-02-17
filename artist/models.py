@@ -4,7 +4,6 @@ from event.models import Event
 
 
 class Artist(models.Model):
-    songkick_id = models.IntegerField(primary_key=True)
     bandsintown_id = models.IntegerField(null=True)
 
     mbid = models.UUIDField(null=True)

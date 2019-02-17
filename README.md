@@ -2,15 +2,17 @@
 
 # Eventrack
 
-[![Eventrack logo](https://github.com/FedorSelitsky/eventrack/blob/master/event/static/event/images/logo.png)](http://eventrack.org/)
+[![Eventrack logo](https://github.com/FedorSelitsky/eventrack/blob/master/event/static/event/images/logo.png)](https://eventrack.org/)
 
-[Eventrack](http://eventrack.org/) is a concert tracking application. Eventrack allows users to track their favorite artists and discover concerts. It also allows users to submit events, contributing to archives of upcoming and past shows. Users can bookmark their favorite artists and receive recommendations about their upcoming events.
+[Eventrack](https://eventrack.org/) is a concert tracking application. Eventrack allows users to track their favorite artists and discover concerts.  
+Users can bookmark their favorite artists and receive recommendations about their upcoming events.
 
 ## Requirements
 
 * Python 3.7.2
-* Django 2.1.5
-* Channels 2.1.6
+* Django 2.1.7
+* Django REST Framework 3.9.1
+* Channels 2.1.7
 * Psycopg 2.7.6
 * PostgreSQL 10.6
 

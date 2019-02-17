@@ -2,8 +2,6 @@ from django.contrib.gis.db import models
 
 
 class Location(models.Model):
-    songkick_id = models.IntegerField(primary_key=True)
-
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255, default='')
     country = models.CharField(max_length=255)
@@ -15,8 +13,6 @@ class Location(models.Model):
 
 
 class Venue(models.Model):
-    songkick_id = models.IntegerField(primary_key=True)
-
     zip = models.CharField(max_length=255, default='')
     name = models.CharField(max_length=255, default='')
     phone = models.CharField(max_length=255, default='')
