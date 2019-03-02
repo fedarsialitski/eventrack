@@ -9,8 +9,8 @@ class Artist(models.Model):
     mbid = models.UUIDField(null=True)
     name = models.CharField(max_length=255)
 
-    image_url = models.URLField(default='')
-    thumb_url = models.URLField(default='')
+    image_url = models.URLField(default='https://s3.amazonaws.com/bit-photos/artistLarge.jpg')
+    thumb_url = models.URLField(default='https://s3.amazonaws.com/bit-photos/artistThumb.jpg')
 
     songkick_url = models.URLField(default='')
     bandsintown_url = models.URLField(default='')

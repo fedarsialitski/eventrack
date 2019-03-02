@@ -13,7 +13,6 @@ Users can bookmark their favorite artists and receive recommendations about thei
 * Django 2.1.7
 * Django REST Framework 3.9.1
 * Channels 2.1.7
-* Psycopg 2.7.6
 * PostgreSQL 10.6
 
 ## Getting started
