@@ -4,9 +4,18 @@ from django.utils import timezone
 from django.db.models import Count, Q
 from django.contrib.auth.decorators import login_required
 
+from rest_framework.viewsets import ReadOnlyModelViewSet
+
 from artist.models import Artist
 from event.models import Event
 from event.forms import SearchForm
+
+from event.serializers import EventSerializer
+
+
+class EventViewSet(ReadOnlyModelViewSet):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
 
 
 class IndexView(generic.ListView):

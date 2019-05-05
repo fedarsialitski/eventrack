@@ -9,11 +9,11 @@ Users can bookmark their favorite artists and receive recommendations about thei
 
 ## Requirements
 
-* Python 3.7.2
-* Django 2.1.7
-* Django REST Framework 3.9.1
-* Channels 2.1.7
-* PostgreSQL 10.6
+* Python 3.7.3
+* Django 2.2.1
+* Django REST Framework 3.9.3
+* Channels 2.2.0
+* PostgreSQL 10.7
 
 ## Getting started
 
