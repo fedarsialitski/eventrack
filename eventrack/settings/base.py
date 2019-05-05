@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'channels',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -222,3 +223,11 @@ SONGKICK_API_KEY = os.getenv('SONGKICK_API_KEY', 'YOUR_API_KEY')
 # Bandsintown API
 # https://app.swaggerhub.com/apis/Bandsintown/PublicAPI/3.0.0
 BANDSINTOWN_APP_ID = os.getenv('BANDSINTOWN_APP_ID', 'YOUR_APP_ID')
+
+
+# ReDoc
+# https://drf-yasg.readthedocs.io/en/stable/settings.html#redoc-settings
+REDOC_SETTINGS = {
+    'HIDE_HOSTNAME': True,
+    'REQUIRED_PROPS_FIRST': True,
+}

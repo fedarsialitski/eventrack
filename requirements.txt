@@ -6,6 +6,7 @@ Django==2.2.1
 django-cors-headers==2.5.3
 djangorestframework==3.9.3
 dj-database-url==0.5.0
+drf-yasg===1.15.0
 flower==0.9.3
 furl==2.0.0
 git+https://github.com/FedorSelitsky/python-songkick.git
